@@ -1,0 +1,10 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class SceneSwitcher : MonoBehaviour
+{
+    public void SwitchScene(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
+}
