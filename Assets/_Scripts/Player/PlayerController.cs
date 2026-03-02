@@ -16,7 +16,7 @@ namespace _Scripts
         private Camera _camera;
 
         private Vector3 _moveDirection;
-        private Vector3 _movement;
+        private Vector3 _movementDirection;
         private Vector3 _rotateDirection;
         private Vector3 _lookDirection = Vector3.zero;
 
@@ -42,9 +42,11 @@ namespace _Scripts
 
 		private void Move(Vector2 dir)
         {
-            _moveDirection = new Vector3(dir.x * _camera.transform.forward.x, 0, dir.y * _camera.transform.forward.z).normalized;
+            _moveDirection.x = dir.y;
+            _moveDirection.z = dir.x;
+            _moveDirection.y = 0;
 
-            Debug.Log(_moveDirection);
+            //Debug.Log(_moveDirection);
         }
 
         private void Rotate(Vector2 dir)
@@ -52,6 +54,7 @@ namespace _Scripts
             _lookDirection.x = -dir.y;
             _lookDirection.y = dir.x;
             _rotateDirection += _lookDirection * _playerData.MouseSpeed;
+            _rotateDirection.x = Mathf.Clamp(_rotateDirection.x, -90.0f, 90f);
         }
 
         private void Use() 
@@ -77,15 +80,15 @@ namespace _Scripts
             _camera = GetComponentInChildren<Camera>();
         }
 
+        void Update() 
+        {
+            CameraRotate();
+		}
+
 
         void FixedUpdate()
         {
-
-            // This makes the player move
-            //_rb.AddForce(_movement * _playerData.MovementSpeed);
-            
-            // This should probably be changed in the furture the movement keys do not follow the camera with this set up.
-            _camera.transform.rotation = Quaternion.Euler(_rotateDirection.x, _rotateDirection.y, 0);
+            _rb.AddForce(Movement() * _playerData.MovementSpeed);
 
         }
 
@@ -95,7 +98,23 @@ namespace _Scripts
             _rb.linearDamping = _playerData.MovementSpeed / 10; // Important for making the player stop again.
         }
 
-        #endregion
+		#endregion
+
+		private Vector3 crossVector = Vector3.zero;
+		private Vector3 forward = Vector3.zero;
+		private Vector3 Movement() 
+        {
+			forward.x = _camera.transform.forward.x;
+			forward.z = _camera.transform.forward.z;
+			forward = forward.normalized;
+			crossVector = Vector3.Cross(transform.up, forward).normalized;
+			return forward * _moveDirection.x + crossVector * _moveDirection.z;
+		}
+
+        private void CameraRotate() 
+        {
+			_camera.transform.rotation = Quaternion.Euler(_rotateDirection.x, _rotateDirection.y, 0);
+		}
 
 	}
 }
