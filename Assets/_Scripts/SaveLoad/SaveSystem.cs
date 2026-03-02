@@ -1,44 +1,65 @@
 using System;
 using System.IO;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class SaveSystem : Singleton<SaveSystem>
 {
     [Header("Events")]
+    [SerializeField] private ActionEventSO _saveAllEvent;
     [SerializeField] private SaveDataEventSO _saveDataEvent;
     [SerializeField] private LoadDataEventSO _loadDataEvent;
 
-    private string saveFolderLocation;
+
+    private string _saveFolderLocation;
+
+    private List<ISavableData> _savables = new List<ISavableData>(); 
 
     protected override void Awake()
     {
         base.Awake();
-        saveFolderLocation = Path.Combine(Application.persistentDataPath, "saves");
+        _saveFolderLocation = Path.Combine(Application.persistentDataPath, "saves");
+        EnsureFolderExist(_saveFolderLocation);
     }
 
     private void OnEnable()
     {
-        _saveDataEvent.OnSave += SaveData;
+        _saveAllEvent.OnRaise += SaveAll;
+        _saveDataEvent.OnSave += Register;
         _loadDataEvent.OnLoad += LoadData;
     }
 
     private void OnDisable()
     {
-        _saveDataEvent.OnSave -= SaveData;
+        _saveAllEvent.OnRaise -= SaveAll;
+        _saveDataEvent.OnSave -= Register;
         _loadDataEvent.OnLoad -= LoadData;
     }
 
-    private void EnsureFolderExist(string folderPath)
+    #region Registration
+    private void Register(ISavableData savable)
     {
-        if (!Directory.Exists(folderPath))
+        if (!_savables.Contains(savable))
         {
-            Directory.CreateDirectory(folderPath);
+            _savables.Add(savable);
+            SaveData(savable); // Save it first time we register
+        }
+    }
+
+    #endregion
+
+    private void SaveAll()
+    {
+        foreach (ISavableData savable in _savables)
+        {
+            SaveData(savable);
         }
     }
 
     private void SaveData(ISavableData data) // Called by event
     {
-        string folderPath = Path.Combine(saveFolderLocation, data.SaveSubFolder);
+        string folderPath = Path.Combine(_saveFolderLocation, data.SaveSubFolder);
+
         EnsureFolderExist(folderPath);
 
         string fullPath = Path.Combine(folderPath, $"{data.SaveFileName}.json");
@@ -51,7 +72,7 @@ public class SaveSystem : Singleton<SaveSystem>
 
     private ISavableData LoadData(string fileName, string subFolder, Type type) // Called by event
     {
-        string folderPath = Path.Combine(saveFolderLocation, subFolder);
+        string folderPath = Path.Combine(_saveFolderLocation, subFolder);
         string fullPath = Path.Combine(folderPath, $"{fileName}.json");
 
         if (!File.Exists(fullPath))
@@ -62,5 +83,13 @@ public class SaveSystem : Singleton<SaveSystem>
 
         string json = File.ReadAllText(fullPath);
         return JsonUtility.FromJson(json, type) as ISavableData;
+    }
+
+    private void EnsureFolderExist(string folderPath)
+    {
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
     }
 }
