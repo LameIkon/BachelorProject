@@ -16,9 +16,12 @@ namespace _Scripts
         private Camera _camera;
 
         private Vector3 _moveDirection;
+        private Vector3 _movement;
         private Vector3 _rotateDirection;
+        private Vector3 _lookDirection = Vector3.zero;
 
-        private bool _isMoving;
+        private bool _isMovingForward;
+        private bool _isMovingSideward;
 
 		#region Inputs
         private void OnEnable()
@@ -38,14 +41,17 @@ namespace _Scripts
         }
 
 		private void Move(Vector2 dir)
-        { 
-            _moveDirection.x = dir.x;
-            _moveDirection.z = dir.y;
+        {
+            _moveDirection = new Vector3(dir.x * _camera.transform.forward.x, 0, dir.y * _camera.transform.forward.z).normalized;
+
+            Debug.Log(_moveDirection);
         }
 
-        private void Rotate(Vector2 dir) 
+        private void Rotate(Vector2 dir)
         {
-            _rotateDirection += new Vector3(dir.x, -dir.y, 0) * _playerData.MouseSpeed;
+            _lookDirection.x = -dir.y;
+            _lookDirection.y = dir.x;
+            _rotateDirection += _lookDirection * _playerData.MouseSpeed;
         }
 
         private void Use() 
@@ -76,10 +82,10 @@ namespace _Scripts
         {
 
             // This makes the player move
-            _rb.AddForce(_moveDirection * _playerData.MovementSpeed);
+            //_rb.AddForce(_movement * _playerData.MovementSpeed);
             
             // This should probably be changed in the furture the movement keys do not follow the camera with this set up.
-            _camera.GetComponent<Transform>().rotation = Quaternion.Euler(_rotateDirection.y, _rotateDirection.x, 0);
+            _camera.transform.rotation = Quaternion.Euler(_rotateDirection.x, _rotateDirection.y, 0);
 
         }
 
@@ -89,6 +95,7 @@ namespace _Scripts
             _rb.linearDamping = _playerData.MovementSpeed / 10; // Important for making the player stop again.
         }
 
-		#endregion
+        #endregion
+
 	}
 }
