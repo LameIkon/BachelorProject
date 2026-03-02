@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 230dbdcb17f256743972102535bcfefd, type: 3}
   m_Name: PlayerTest
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  _movementSpeed: 20
+  _movementSpeed: 200
   _maxMovementSpeed: 100
-  _mouseSpeed: 10
+  _mouseSpeed: 185
