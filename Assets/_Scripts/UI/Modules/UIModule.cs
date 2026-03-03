@@ -44,12 +44,13 @@ public class UIModule : MonoBehaviour, IUISystem
 
         if (!_pageContainer) return;
 
+        // If we have a pageContainer we will create a method to switch pages
         _pageModule = new PageUIModule(_pageContainer);
         SetupButtons();
 
     }
 
-    private void SetupButtons()
+    private void SetupButtons() // Find all buttons 
     {
         foreach (Button button in _canvas.GetComponentsInChildren<Button>(true))
         {
