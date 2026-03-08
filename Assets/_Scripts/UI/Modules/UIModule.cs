@@ -16,7 +16,6 @@ public class UIModule : MonoBehaviour, IUISystem
 
     private CanvasUIModule _canvasModule;
     private PageUIModule _pageModule;
-    private PageUIOverrideModule _overridePageModule;
     
     public UIType UIType => _config.uiType;
 

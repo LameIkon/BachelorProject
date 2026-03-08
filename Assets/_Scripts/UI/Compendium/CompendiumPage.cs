@@ -1,36 +1,60 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 /// <summary>
 /// Page for the compendium. CompendiumContent to hold the data such as text, while CompendiumUIReferences holds the ui references
 /// </summary>
 public class CompendiumPage : MonoBehaviour
 {
+    [Header("Events")]
+    [SerializeField] private SwitchLanguageSO _switchLanguageSO;
+
+    [Header("References")]
     [SerializeField] private CompendiumContentSO _compendiumData;
-    [SerializeField] private CompendiumUIReferences _references;
+    private CompendiumUIReferences _references;
 
     private void Awake()
     {
         FindUIReferences();
+        SetContent(Language.English); // Initially set to English.
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        if (GameManager.s_language == Language.Danish)
-        {
-            _references.image.sprite = _compendiumData.image;
-            _references.title.text = _compendiumData.content._danishSerialization.title;
-            _references.description.text = _compendiumData.content._danishSerialization.description;
-        }
-        else
-        {
-            _references.image.sprite = _compendiumData.image;
-            _references.title.text = _compendiumData.content._englishSerialization.title;
-            _references.description.text = _compendiumData.content._englishSerialization.description;
-        }
-
-
+        _switchLanguageSO.OnRaise += SetLanguage;
     }
+    private void OnDisable()
+    {
+        _switchLanguageSO.OnRaise -= SetLanguage;
+    }
+
+    private void SetContent(Language language)
+    {
+        _references.image.sprite = _compendiumData.image;
+        SetLanguage(language);
+    }
+
+    /// <summary>
+    /// Get the content based on language. 
+    /// </summary>
+    /// <param name="language"></param>
+    private void SetLanguage(Language language)
+    {
+        switch (language)
+        {
+            case Language.English:
+                _references.title.text = _compendiumData.content._englishSerialization.title;
+                _references.description.text = _compendiumData.content._englishSerialization.description;
+                break;
+            case Language.Danish:
+                _references.title.text = _compendiumData.content._danishSerialization.title;
+                _references.description.text = _compendiumData.content._danishSerialization.description;
+                break;
+        }
+    }
+
+    #region Initialize
 
     /// <summary>
     /// Hardcoded to find specific location in hierarchy. A Page consist of two children. 
@@ -39,8 +63,11 @@ public class CompendiumPage : MonoBehaviour
     /// </summary>
     private void FindUIReferences()
     {
+        _references = new CompendiumUIReferences();
         _references.image = transform.GetChild(0).transform.GetChild(0).GetComponent<Image>();
         _references.title = transform.GetChild(1).transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
         _references.description = transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
+
+    #endregion
 }

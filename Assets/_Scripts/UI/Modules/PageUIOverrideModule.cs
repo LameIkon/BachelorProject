@@ -9,19 +9,16 @@ using UnityEngine.UI;
 public class PageUIOverrideModule
 {
     private readonly GameObject _pageContainer;
-    private readonly Image _image;
-    private readonly TextMeshProUGUI _textBody;
-    private readonly TextMeshProUGUI _title;
+    private readonly CompendiumPage _page;
 
     private readonly Dictionary<int, GameObject> _pages;
     private readonly PageHelper _pageHelper;
 
-    public PageUIOverrideModule(GameObject pageContainer, Image image, TextMeshProUGUI textBody, TextMeshProUGUI title)
+    public PageUIOverrideModule(GameObject pageContainer, CompendiumPage compendiumPage)
     {
         _pageContainer = pageContainer;
-        _image = image;
-        _textBody = textBody;
-        _title = title;
+        _page = compendiumPage;
+
 
         _pageHelper = new PageHelper();
         _pages = _pageHelper.InitializePages(_pageContainer);

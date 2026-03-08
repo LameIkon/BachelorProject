@@ -13,7 +13,7 @@ public class CloseButton : MonoBehaviour
         }
     }
 
-    public void CloseUI()
+    private void CloseUI()
     {
         _closeUI.Raise();
     }
