@@ -21,6 +21,8 @@ namespace _Scripts
         private Vector3 _rotateDirection;
         private Vector3 _lookDirection = Vector3.zero;
 
+        private Vector2 MousePos { set { MousePos = value; } }
+
 		#region Inputs
 		private void OnEnable()
         {
@@ -62,19 +64,30 @@ namespace _Scripts
         }
 
         /// <summary>
-        /// Inputs for Use, Currently not assigned.
+        /// Inputs for Use, takes the position of the mouse on the screen. 
         /// </summary>
-        private void Use() 
+        private void Interact(Vector2 pos) // This position could potentially be a const value, because the mouse is fixed to the middle of the screen. But it could be usefull in the future if the functionality should change.
         {
-            throw new NotImplementedException();
+            RaycastHit hit;
+            Ray ray = _camera.ScreenPointToRay(pos);
+
+            if (Physics.Raycast(ray, out hit)) 
+            {
+                if (hit.collider != null) 
+                {
+                    hit.collider.GetComponent<IInteractable>()?.Interact();
+                }
+            }
+            
+
         }
 
         /// <summary>
         /// Inputs for Interact, Currently not assigned.
         /// </summary>
-        private void Interact() 
+        private void Use() 
         {
-            throw new NotImplementedException();
+            Debug.Log("Use");
         }
 
         #endregion
@@ -85,6 +98,8 @@ namespace _Scripts
         {
             _rb = GetComponent<Rigidbody>();
             _camera = GetComponentInChildren<Camera>();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = true;
             Reset();
         }
 

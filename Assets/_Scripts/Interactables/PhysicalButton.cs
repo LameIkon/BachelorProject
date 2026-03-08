@@ -1,28 +1,31 @@
 using UnityEngine;
+using System;
 
 public sealed class PhysicalButton : MonoBehaviour, IInteractable
 {
 
-    #region Unity Methods
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    #endregion
+    [SerializeField] private ButtonType _buttonType;
+    public Action<ButtonType> OnButtonClicked;
 
     #region Interact interface
+
+    /// <summary>
+    /// The button invokes an event with the button type currently assigned to it.
+    /// </summary>
     public void Interact()
     {
-        throw new System.NotImplementedException();
+        OnButtonClicked?.Invoke(_buttonType);
     }
 
     #endregion
+}
+
+/// <summary>
+/// The different types a button can be.
+/// </summary>
+public enum ButtonType : byte
+{
+    Reset,
+    Start,
+    Stop
 }

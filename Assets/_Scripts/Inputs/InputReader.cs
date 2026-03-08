@@ -8,9 +8,11 @@ public class InputReader : ScriptableObject, Inputs.IGameActions
     private static InputState _state;
 
     public static event Action<Vector2> s_OnMoveEvent;
-    public static event Action s_OnInteractEvent;
+    public static event Action<Vector2> s_OnInteractEvent;
     public static event Action<Vector2> s_OnLookEvent;
     public static event Action s_OnUseEvent;
+
+    private Vector2 MousePos;
    
     
     #region Unity Methods
@@ -49,7 +51,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed) s_OnInteractEvent?.Invoke();
+        if (context.phase == InputActionPhase.Performed) s_OnInteractEvent?.Invoke(MousePos);
     }
 
     public void OnLook(InputAction.CallbackContext context)
@@ -61,11 +63,16 @@ public class InputReader : ScriptableObject, Inputs.IGameActions
     {
         if (context.phase == InputActionPhase.Performed) s_OnUseEvent?.Invoke();
     }
-    
+
+    public void OnMousePosition(InputAction.CallbackContext context) 
+    {
+        MousePos = context.ReadValue<Vector2>();
+    }
+
     #endregion
 }
 
-public enum InputState
+public enum InputState : byte
 {
    Game,
    UI
