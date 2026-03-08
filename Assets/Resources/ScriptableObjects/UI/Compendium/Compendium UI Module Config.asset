@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19dd319e3059f5d47b0003b1460cddd7, type: 3}
+  m_Name: Compendium UI Module Config
+  m_EditorClassIdentifier: Assembly-CSharp::UIModuleConfigSO
+  uiType: 1
+  updateUIEvent: {fileID: 11400000, guid: c54ccdb0f5f8ea74fbc0f4561e9856d9, type: 2}
+  registerUIEvent: {fileID: 11400000, guid: 319ac0f259220da44a591b150786b908, type: 2}
+  toggleUIEvent: {fileID: 11400000, guid: 894a28015934eb348b9191ac390e4c99, type: 2}

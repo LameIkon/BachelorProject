@@ -1,21 +1,28 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// This class is for ui systems to know what canvas to work with and which pages can be found assigned to a dictionary
-/// to compare the page with a key for buttons to find that page
+/// This is work in progress
 /// </summary>
-
-public class PageUIModule
+public class PageUIOverrideModule
 {
     private readonly GameObject _pageContainer;
+    private readonly Image _image;
+    private readonly TextMeshProUGUI _textBody;
+    private readonly TextMeshProUGUI _title;
+
     private readonly Dictionary<int, GameObject> _pages;
     private readonly PageHelper _pageHelper;
 
-    public PageUIModule(GameObject pageContainer)
+    public PageUIOverrideModule(GameObject pageContainer, Image image, TextMeshProUGUI textBody, TextMeshProUGUI title)
     {
         _pageContainer = pageContainer;
+        _image = image;
+        _textBody = textBody;
+        _title = title;
+
         _pageHelper = new PageHelper();
         _pages = _pageHelper.InitializePages(_pageContainer);
         SetupButtons();
@@ -23,6 +30,7 @@ public class PageUIModule
 
     public void SwitchPage(int pageKey)
     {
+        //_pageHelper.OverridePage(_pages, pageKey);
         _pageHelper.SwitchToPage(_pages, pageKey);
     }
 

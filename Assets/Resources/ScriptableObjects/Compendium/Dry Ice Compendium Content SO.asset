@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Dry Ice Compendium Content SO
+  m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
+  content:
+    _danishSerialization:
+      title: "t\xF8ris"
+      description: "beskrivelse her\t\t\t\t"
+    _englishSerialization:
+      dk_title: Dry ice
+      dk_description: description here

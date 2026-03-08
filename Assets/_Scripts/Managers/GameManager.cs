@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private InputReader _input;
+    public static Language s_language = Language.English;
 
     void Awake()
     {
