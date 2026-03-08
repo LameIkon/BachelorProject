@@ -1,7 +1,7 @@
 using System;
 
 /// <summary>
-/// Static class to handle language in the game. It contains variable for currentLanguage and a method to set Language.
+/// Static class to handle language in the game. It contains a variable for currentLanguage and a method to set Language.
 /// When language changes it will send an event to tell language change.
 /// </summary>
 public static class LanguageUtility

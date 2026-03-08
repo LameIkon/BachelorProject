@@ -27,6 +27,11 @@ public class CompendiumPage : MonoBehaviour
         LanguageUtility.OnLanguageChanged -= SetLanguage;
     }
 
+    /// <summary>
+    /// This is technically not needed to set language and is just a safety mechanic to ensure data will be shown in
+    /// cases that LanguageUtility script is not existing.
+    /// </summary>
+    /// <param name="language"></param>
     private void SetContent(Language language)
     {
         _references.image.sprite = _compendiumData.image;

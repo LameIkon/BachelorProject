@@ -37,7 +37,6 @@ public class UIModule : MonoBehaviour, IUISystem
 
     private void Start()
     {
-        
         _config.registerUIEvent.Raise(this);
     }
 
@@ -64,7 +63,7 @@ public class UIModule : MonoBehaviour, IUISystem
                 _pageModule = new PageUIModule(_pageSettings);                
                 return;
 
-            case PageMode.OverridePage:   
+            case PageMode.OverridePage: // Override is not an option and is still under consideration for implementation   
                 //_overridePageModule = new PageUIOverrideModule(_pageSettings.pageContainer);
                 return;
         }

@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +10,7 @@ using UnityEngine.UI;
 public class PageUIModule
 {
     private readonly PageSettings _pageSettings;
-    private readonly Dictionary<int, GameObject> _pages;
+    private readonly Dictionary<int, GameObject> _pages; // index of a page (like a page in a book)
     private readonly PageHelper _pageHelper;
 
     public PageUIModule(PageSettings settings)
