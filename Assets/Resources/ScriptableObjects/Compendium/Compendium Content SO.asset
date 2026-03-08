@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Dry Ice Compendium Content SO
+  m_Script: {fileID: 11500000, guid: 7233e5a4c7fbad641a68ba8a90e8d91c, type: 3}
+  m_Name: Compendium Content SO
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
   content:
     _danishSerialization:
       title: "t\xF8ris"
-      description: "beskrivelse her\t\t\t\t"
+      description: "beskrivelse her\t"
     _englishSerialization:
-      dk_title: Dry ice
-      dk_description: description here
+      title: dry ice
+      description: description here
+  image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
