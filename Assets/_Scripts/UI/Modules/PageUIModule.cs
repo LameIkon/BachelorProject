@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,15 +10,15 @@ using UnityEngine.UI;
 
 public class PageUIModule
 {
-    private readonly GameObject _pageContainer;
+    private readonly PageSettings _pageSettings;
     private readonly Dictionary<int, GameObject> _pages;
     private readonly PageHelper _pageHelper;
 
-    public PageUIModule(GameObject pageContainer)
+    public PageUIModule(PageSettings settings)
     {
-        _pageContainer = pageContainer;
+        _pageSettings = settings;
         _pageHelper = new PageHelper();
-        _pages = _pageHelper.InitializePages(_pageContainer);
+        _pages = _pageHelper.InitializePages(_pageSettings.pageContainer);
         SetupButtons();
     }
 
@@ -28,7 +29,18 @@ public class PageUIModule
 
     private void SetupButtons() // Find all buttons 
     {
-        foreach (Button button in _pageContainer.GetComponentsInChildren<Button>(true))
+        foreach (Button button in _pageSettings.pageContainer.GetComponentsInChildren<Button>(true))
+        {
+            if (button.TryGetComponent(out PageButton pageButton)) // If button have the PageButton script
+            {
+                int pageKey = pageButton.pageIndex;
+                button.onClick.AddListener(() => SwitchPage(pageKey));
+            }
+        }
+
+        if (!_pageSettings.buttonContainer) return; // Return if we did not assign optional buttoncontainer
+
+        foreach (Button button in _pageSettings.buttonContainer.GetComponentsInChildren<Button>(true))
         {
             if (button.TryGetComponent(out PageButton pageButton)) // If button have the PageButton script
             {

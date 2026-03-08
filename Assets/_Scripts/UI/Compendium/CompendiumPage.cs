@@ -7,9 +7,6 @@ using UnityEngine.UI;
 /// </summary>
 public class CompendiumPage : MonoBehaviour
 {
-    [Header("Events")]
-    [SerializeField] private SwitchLanguageSO _switchLanguageSO;
-
     [Header("References")]
     [SerializeField] private CompendiumContentSO _compendiumData;
     private CompendiumUIReferences _references;
@@ -22,11 +19,12 @@ public class CompendiumPage : MonoBehaviour
 
     private void OnEnable()
     {
-        _switchLanguageSO.OnRaise += SetLanguage;
+        LanguageUtility.OnLanguageChanged += SetLanguage;
+        SetLanguage(LanguageUtility.CurrentLanguage);
     }
     private void OnDisable()
     {
-        _switchLanguageSO.OnRaise -= SetLanguage;
+        LanguageUtility.OnLanguageChanged -= SetLanguage;
     }
 
     private void SetContent(Language language)

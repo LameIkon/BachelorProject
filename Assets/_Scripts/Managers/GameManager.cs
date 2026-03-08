@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Events")]
-    [SerializeField] private SwitchLanguageSO _switchLanguageSO;
-    
 
     private InputReader _input;
 
@@ -20,8 +17,6 @@ public class GameManager : MonoBehaviour
         {
             _input = ScriptableObject.CreateInstance<InputReader>();
         } 
-
-        _switchLanguageSO.Raise(Language.English);
     }
 
     // Update is called once per frame

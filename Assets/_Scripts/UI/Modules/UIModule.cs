@@ -60,8 +60,8 @@ public class UIModule : MonoBehaviour, IUISystem
                 Debug.LogWarning($"Current mode: {PageMode.None}, has been assigned to {_pageSettings.pageContainer.name}. It will therefore not initialize any page container");
                 return;
             case PageMode.MultiplePages:
-                // If we have a pageContainer we will create a method to switch pages
-                _pageModule = new PageUIModule(_pageSettings.pageContainer);                
+                // If we have a pageSetting we will create a method to switch pages
+                _pageModule = new PageUIModule(_pageSettings);                
                 return;
 
             case PageMode.OverridePage:   
