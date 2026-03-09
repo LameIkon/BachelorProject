@@ -8,6 +8,7 @@ namespace _Scripts
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayerData _playerData;
+        [SerializeField] private float _interactDistance;
 
         private Rigidbody _rb;
         private Camera _camera;
@@ -78,12 +79,10 @@ namespace _Scripts
                     hit.collider.GetComponent<IInteractable>()?.Interact();
                 }
             }
-            
-
         }
 
         /// <summary>
-        /// Inputs for Interact, Currently not assigned.
+        /// Inputs for Use, Currently not assigned.
         /// </summary>
         private void Use() 
         {

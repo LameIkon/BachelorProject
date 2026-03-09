@@ -27,5 +27,6 @@ public enum ButtonType : byte
 {
     Reset,
     Start,
-    Stop
+    Stop,
+    Speed
 }
