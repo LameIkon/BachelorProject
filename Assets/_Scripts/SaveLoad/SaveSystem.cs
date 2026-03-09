@@ -6,8 +6,8 @@ using System.Collections.Generic;
 public class SaveSystem : Singleton<SaveSystem>
 {
     [Header("Events")]
-    [SerializeField] private ActionEventSO _saveAllEvent;
-    [SerializeField] private SaveDataEventSO _saveDataEvent;
+    [SerializeField] private SaveAllDataEventSO _saveAllEvent;
+    [SerializeField] private RegisterSaveDataEventSO _saveDataEvent;
     [SerializeField] private LoadDataEventSO _loadDataEvent;
 
 

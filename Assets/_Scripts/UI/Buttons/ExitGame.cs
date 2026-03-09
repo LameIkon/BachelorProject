@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ExitGame : MonoBehaviour
 {
-    [SerializeField] private ActionEventSO _saveAllData;
+    [SerializeField] private SaveAllDataEventSO _saveAllData;
 
     public void ExitGameButton()
     {

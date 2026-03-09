@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class PageHelper
 {
+    /// <summary>
+    /// The Gameobject is sequential in order of the hierarchy. eg meaning if we assign a Pagebutton 
+    /// with the value of 3 it will look for the order of 3 
+    /// </summary>
+    /// <param name="container"></param>
+    /// <returns></returns>
     public Dictionary<int, GameObject> InitializePages(GameObject container)
     {
         Dictionary<int, GameObject> pages = new Dictionary<int, GameObject>();
@@ -17,6 +23,11 @@ public class PageHelper
         SwitchToPage(pages, 0); // Initialize to show first page
         return pages;
     }
+
+    //public void OverridePage(Dictionary<int, GameObject> pages, int key)
+    //{
+    //    if (!pages.ContainsKey(key)) return;
+    //}
     
     public void SwitchToPage(Dictionary<int, GameObject> pages, int key)
     {

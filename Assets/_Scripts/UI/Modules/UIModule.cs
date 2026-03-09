@@ -1,6 +1,10 @@
+using System;
 using UnityEngine;
-using UnityEngine.UI;
 
+/// <summary>
+/// All related to ui should use this script. It's designed mostly for dynamic ui that changes over time but also
+/// for static ui that never change, to enable ot disable.
+/// </summary>
 public class UIModule : MonoBehaviour, IUISystem
 {
     [Header("Required")]
@@ -8,7 +12,7 @@ public class UIModule : MonoBehaviour, IUISystem
     [SerializeField] private UIModuleConfigSO _config;
 
     [Header("Optional")]
-    [SerializeField] private GameObject _pageContainer;
+    [SerializeField] private PageSettings _pageSettings;
 
     private CanvasUIModule _canvasModule;
     private PageUIModule _pageModule;
@@ -33,7 +37,6 @@ public class UIModule : MonoBehaviour, IUISystem
 
     private void Start()
     {
-        
         _config.registerUIEvent.Raise(this);
     }
 
@@ -42,25 +45,30 @@ public class UIModule : MonoBehaviour, IUISystem
     {
         _canvasModule = new CanvasUIModule(_canvas);
 
-        if (!_pageContainer) return;
-
-        // If we have a pageContainer we will create a method to switch pages
-        _pageModule = new PageUIModule(_pageContainer);
-        SetupButtons();
+        InitializePageSettings();
 
     }
 
-    private void SetupButtons() // Find all buttons 
+    private void InitializePageSettings()
     {
-        foreach (Button button in _canvas.GetComponentsInChildren<Button>(true))
+        if (!_pageSettings.pageContainer) return;
+
+        switch (_pageSettings.pageMode)
         {
-            if (button.TryGetComponent(out PageButton pageButton))
-            {
-                int pageKey = pageButton.pageIndex;
-                button.onClick.AddListener(() => _pageModule.SwitchPage(pageKey));
-            }
+            case PageMode.None:
+                Debug.LogWarning($"Current mode: {PageMode.None}, has been assigned to {_pageSettings.pageContainer.name}. It will therefore not initialize any page container");
+                return;
+            case PageMode.MultiplePages:
+                // If we have a pageSetting we will create a method to switch pages
+                _pageModule = new PageUIModule(_pageSettings);                
+                return;
+
+            case PageMode.OverridePage: // Override is not an option and is still under consideration for implementation   
+                //_overridePageModule = new PageUIOverrideModule(_pageSettings.pageContainer);
+                return;
         }
     }
+
     #endregion
 
     #region Methods
