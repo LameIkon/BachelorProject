@@ -4,7 +4,7 @@ using UnityEngine;
 public class savetest1 : MonoBehaviour
 {
 
-    [SerializeField] private SaveDataEventSO registerSaveData;
+    [SerializeField] private RegisterSaveDataEventSO registerSaveData;
     [SerializeField] private LoadDataEventSO loadData;
 
     private void Start()

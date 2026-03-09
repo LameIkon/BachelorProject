@@ -4,7 +4,7 @@ using UnityEngine;
 public class PageHelper
 {
     /// <summary>
-    /// The Gameobject is sequential in order of the hierachy. eg meaning if we assign a Pagebutton 
+    /// The Gameobject is sequential in order of the hierarchy. eg meaning if we assign a Pagebutton 
     /// with the value of 3 it will look for the order of 3 
     /// </summary>
     /// <param name="container"></param>

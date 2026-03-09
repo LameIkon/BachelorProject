@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="Save Data Event SO", menuName = "ScriptableObject/Events/SaveLoad/Save")]
-public class SaveDataEventSO : ScriptableObject
+public class RegisterSaveDataEventSO : ScriptableObject
 {
     public event Action<ISavableData> OnSave;
 

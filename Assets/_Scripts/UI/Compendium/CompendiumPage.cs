@@ -14,7 +14,8 @@ public class CompendiumPage : MonoBehaviour
     private void Awake()
     {
         FindUIReferences();
-        SetContent(Language.English); // Initially set to English.
+
+        _references.image.sprite = _compendiumData.image;
     }
 
     private void OnEnable()
@@ -28,33 +29,15 @@ public class CompendiumPage : MonoBehaviour
     }
 
     /// <summary>
-    /// This is technically not needed to set language and is just a safety mechanic to ensure data will be shown in
-    /// cases that LanguageUtility script is not existing.
-    /// </summary>
-    /// <param name="language"></param>
-    private void SetContent(Language language)
-    {
-        _references.image.sprite = _compendiumData.image;
-        SetLanguage(language);
-    }
-
-    /// <summary>
     /// Get the content based on language. 
     /// </summary>
     /// <param name="language"></param>
     private void SetLanguage(Language language)
     {
-        switch (language)
-        {
-            case Language.English:
-                _references.title.text = _compendiumData.content._englishSerialization.title;
-                _references.description.text = _compendiumData.content._englishSerialization.description;
-                break;
-            case Language.Danish:
-                _references.title.text = _compendiumData.content._danishSerialization.title;
-                _references.description.text = _compendiumData.content._danishSerialization.description;
-                break;
-        }
+        LocalizedContent data = _compendiumData.content.Get(language); // Get context in the selected language
+
+        _references.title.text = data.title;
+        _references.description.text = data.description;
     }
 
     #region Initialize

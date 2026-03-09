@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
   image: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   content:
-    _danishSerialization:
-      title: Ovn
-      description: "beskrivelse her\t"
-    _englishSerialization:
-      title: Oven
-      description: description here
+    _danish:
+      title: ovn
+      description: beskrivelse om ovn her
+    _english:
+      title: oven
+      description: description about oven here

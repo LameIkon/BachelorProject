@@ -808,7 +808,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ad7b6c72bad0d42b38d0cf01c0a02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  _switchLanguageSO: {fileID: 11400000, guid: cdfc361d29fafd44d997739b35abf235, type: 2}
 --- !u!4 &206902676
 Transform:
   m_ObjectHideFlags: 0
@@ -876,7 +875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925dd8858d60cde429211957ec83b831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumPage
-  _switchLanguageSO: {fileID: 11400000, guid: cdfc361d29fafd44d997739b35abf235, type: 2}
   _compendiumData: {fileID: 11400000, guid: 57e2cb418eb5a104788dfcf19678abe2, type: 2}
 --- !u!114 &284008224
 MonoBehaviour:
@@ -3150,7 +3148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925dd8858d60cde429211957ec83b831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumPage
-  _switchLanguageSO: {fileID: 11400000, guid: cdfc361d29fafd44d997739b35abf235, type: 2}
   _compendiumData: {fileID: 11400000, guid: 57e2cb418eb5a104788dfcf19678abe2, type: 2}
 --- !u!1 &741253067
 GameObject:
@@ -3548,51 +3545,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
   m_VerticalFit: 2
---- !u!1 &965510633
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 965510635}
-  - component: {fileID: 965510634}
-  m_Layer: 0
-  m_Name: CompendiumManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &965510634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 965510633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99210f63532fb704e8cad95fc1a65db2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CompendiumManager
-  _compendiumUIReferences: []
---- !u!4 &965510635
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 965510633}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 997.847, y: -0, z: 4726.347}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1004471931
 GameObject:
   m_ObjectHideFlags: 0
@@ -6146,7 +6098,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925dd8858d60cde429211957ec83b831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumPage
-  _switchLanguageSO: {fileID: 11400000, guid: cdfc361d29fafd44d997739b35abf235, type: 2}
   _compendiumData: {fileID: 11400000, guid: 72c225d37b5fb9443bdaf2fc5b8bb444, type: 2}
 --- !u!114 &1687290390
 MonoBehaviour:
@@ -8976,5 +8927,4 @@ SceneRoots:
   - {fileID: 2114904598}
   - {fileID: 1502444962}
   - {fileID: 1004471933}
-  - {fileID: 965510635}
   - {fileID: 206902676}

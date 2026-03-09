@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7233e5a4c7fbad641a68ba8a90e8d91c, type: 3}
   m_Name: Dry Ice
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
-  content:
-    _danishSerialization:
-      title: "t\xF8ris"
-      description: "beskrivelse her\t"
-    _englishSerialization:
-      title: dry ice
-      description: description here
   image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  content:
+    _danish:
+      title: "t\xF8ris"
+      description: "beskrivelse om t\xF8ris her"
+    _english:
+      title: 'dry ice '
+      description: description about dry ice here
