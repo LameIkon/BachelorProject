@@ -15,7 +15,7 @@ public class UIModule : MonoBehaviour, IUISystem
     [SerializeField] private PageSettings _pageSettings;
 
     private CanvasUIModule _canvasModule;
-    private PageUIModule _pageModule;
+    public PageUIModule pageModule {get; private set;}
     
     public UIType UIType => _config.uiType;
 
@@ -60,7 +60,7 @@ public class UIModule : MonoBehaviour, IUISystem
                 return;
             case PageMode.MultiplePages:
                 // If we have a pageSetting we will create a method to switch pages
-                _pageModule = new PageUIModule(_pageSettings);                
+                pageModule = new PageUIModule(_pageSettings);                
                 return;
 
             case PageMode.OverridePage: // Override is not an option and is still under consideration for implementation   
@@ -76,7 +76,7 @@ public class UIModule : MonoBehaviour, IUISystem
     {
         IsOpen = !IsOpen;
         _canvasModule.Toggle();
-        _pageModule?.SwitchPage(0);
+        pageModule?.SwitchPage(0);
 
        
         _config.updateUIEvent.Raise(this);

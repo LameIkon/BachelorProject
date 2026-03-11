@@ -26,14 +26,17 @@ public class PageUIModule
         _pageHelper.SwitchToPage(_pages, pageKey);
     }
 
-    private void SetupButtons() // Find all buttons 
+    public void SetupButtons() // Find all buttons 
     {
         foreach (Button button in _pageSettings.pageContainer.GetComponentsInChildren<Button>(true))
         {
             if (button.TryGetComponent(out PageButton pageButton)) // If button have the PageButton script
             {
                 int pageKey = pageButton.pageIndex;
-                button.onClick.AddListener(() => SwitchPage(pageKey));
+                button.onClick.AddListener(() => { 
+                    SwitchPage(pageKey);
+                    Debug.Log(pageKey);
+                    });
             }
         }
 
@@ -44,7 +47,10 @@ public class PageUIModule
             if (button.TryGetComponent(out PageButton pageButton)) // If button have the PageButton script
             {
                 int pageKey = pageButton.pageIndex;
-                button.onClick.AddListener(() => SwitchPage(pageKey));
+                button.onClick.AddListener(() => { 
+                    SwitchPage(pageKey);
+                    Debug.Log(pageKey);
+                    }); 
             }
         }
     }

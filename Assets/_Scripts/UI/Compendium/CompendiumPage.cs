@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,16 +8,29 @@ using UnityEngine.UI;
 /// </summary>
 public class CompendiumPage : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Data")]
     [SerializeField] private CompendiumContentSO _compendiumData;
-    private CompendiumUIReferences _references;
+
+    [Header("Button UI")]
+    private TextMeshProUGUI _buttonTitle;
+    public GameObject buttonObject {get; private set;} // to be changed
+    
+    [Header("Page UI")]
+    //[SerializeField] private Image _image;
+    //[SerializeField] private TextMeshProUGUI _title;
+    //[SerializeField] private TextMeshProUGUI _description;
+    CompendiumUIReferences _references;
+
+    //public event Action<string> OnTitleChanged;
+
+    public string title {get; private set; } = "Unasigned";
 
     private void Awake()
     {
         FindUIReferences();
-
-        _references.image.sprite = _compendiumData.image;
     }
+
+   
 
     private void OnEnable()
     {
@@ -38,6 +52,21 @@ public class CompendiumPage : MonoBehaviour
 
         _references.title.text = data.title;
         _references.description.text = data.description;
+        title = data.title;
+
+        UpdateButtonText(title);
+    }
+
+    private void UpdateButtonText(string title)
+    {
+        if (_buttonTitle == null) return;
+
+        _buttonTitle.text = (title);
+    }
+
+    public void ToggleButton(bool state)
+    {
+        buttonObject.gameObject.SetActive(state);
     }
 
     #region Initialize
@@ -47,6 +76,15 @@ public class CompendiumPage : MonoBehaviour
     /// First child is the imageContainer and second is the text container.
     /// In These containers we need to find the image and the text fields to populate the CompendiumUIReferences
     /// </summary>
+    public void Initialize(GameObject button)
+    {
+        buttonObject = button;
+        _buttonTitle = buttonObject.GetComponentInChildren<TextMeshProUGUI>();
+        _references.image.sprite = _compendiumData.image;
+
+        UpdateButtonText(title);
+    }
+
     private void FindUIReferences()
     {
         _references = new CompendiumUIReferences();
@@ -54,6 +92,5 @@ public class CompendiumPage : MonoBehaviour
         _references.title = transform.GetChild(1).transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
         _references.description = transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
-
     #endregion
 }
