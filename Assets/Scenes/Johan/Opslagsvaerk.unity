@@ -2532,12 +2532,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumManager
   _inputField: {fileID: 1298200804}
+  _buttonPrefab: {fileID: 8560674832566553612, guid: f585e5cde09afa24c9cfd45522692d48, type: 3}
+  _buttonList: {fileID: 925320461}
   entries:
   - {fileID: 709525054}
   - {fileID: 597792204}
   - {fileID: 1140623274}
-  _buttonPrefab: {fileID: 8560674832566553612, guid: f585e5cde09afa24c9cfd45522692d48, type: 3}
-  _buttonList: {fileID: 925320461}
   _UIModule: {fileID: 741253069}
 --- !u!4 &1966202072
 Transform:

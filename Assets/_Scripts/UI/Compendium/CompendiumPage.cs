@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +12,7 @@ public class CompendiumPage : MonoBehaviour
 
     [Header("Button UI")]
     private TextMeshProUGUI _buttonTitle;
-    public GameObject buttonObject {get; private set;} // to be changed
+    private GameObject _buttonObject; // to be changed
     
     [Header("Page UI")]
     //[SerializeField] private Image _image;
@@ -30,7 +29,6 @@ public class CompendiumPage : MonoBehaviour
         FindUIReferences();
     }
 
-   
 
     private void OnEnable()
     {
@@ -66,7 +64,7 @@ public class CompendiumPage : MonoBehaviour
 
     public void ToggleButton(bool state)
     {
-        buttonObject.gameObject.SetActive(state);
+        _buttonObject.gameObject.SetActive(state);
     }
 
     #region Initialize
@@ -78,8 +76,8 @@ public class CompendiumPage : MonoBehaviour
     /// </summary>
     public void Initialize(GameObject button)
     {
-        buttonObject = button;
-        _buttonTitle = buttonObject.GetComponentInChildren<TextMeshProUGUI>();
+        _buttonObject = button;
+        _buttonTitle = _buttonObject.GetComponentInChildren<TextMeshProUGUI>();
         _references.image.sprite = _compendiumData.image;
 
         UpdateButtonText(title);
