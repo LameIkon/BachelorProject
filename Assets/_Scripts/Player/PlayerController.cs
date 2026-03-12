@@ -31,6 +31,7 @@ namespace _Scripts
             InputReader.s_OnLookEvent += Rotate;
             InputReader.s_OnUseEvent += Use;
             InputReader.s_OnInteractEvent += Interact;
+            InputReader.s_ToggleEscape += TestMethod;
         }
 
         private void OnDisable()
@@ -39,6 +40,12 @@ namespace _Scripts
             InputReader.s_OnLookEvent -= Rotate;
             InputReader.s_OnUseEvent -= Use;
             InputReader.s_OnInteractEvent -= Interact;
+            InputReader.s_ToggleEscape -= TestMethod;
+        }
+
+        private void TestMethod()
+        {
+            Debug.Log("escape");
         }
 
         /// <summary>
@@ -98,7 +105,7 @@ namespace _Scripts
             _rb = GetComponent<Rigidbody>();
             _camera = GetComponentInChildren<Camera>();
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = true;
+            //Cursor.visible = true;
             Reset();
         }
 
