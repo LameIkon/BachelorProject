@@ -4,29 +4,20 @@ using System;
 public sealed class PhysicalButton : MonoBehaviour, IInteractable
 {
 
-    [SerializeField] private ButtonType _buttonType;
+    [SerializeField] private ButtonData _buttonData;
     public Action<ButtonType> OnButtonClicked;
 
-    #region Interact interface
+    #region Interactable interface
 
     /// <summary>
     /// The button invokes an event with the button type currently assigned to it.
     /// </summary>
     public void Interact()
     {
-        OnButtonClicked?.Invoke(_buttonType);
+        OnButtonClicked?.Invoke(_buttonData.Type);
     }
 
     #endregion
 }
 
-/// <summary>
-/// The different types a button can be.
-/// </summary>
-public enum ButtonType : byte
-{
-    Reset,
-    Start,
-    Stop,
-    Speed
-}
+
