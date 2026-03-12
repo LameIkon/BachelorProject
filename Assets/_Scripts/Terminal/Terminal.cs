@@ -6,30 +6,35 @@ public class Terminal : MonoBehaviour
 
     [SerializeField] private TerminalData _data;
     [SerializeField] private TerminalEventSO _onTerminalEvent;
-
-    public static Action<ButtonType, TerminalType> OnTerminalButtonPress;
+    [SerializeField] private TerminalStartEventSO _onTerminalStartEvent;
+    [SerializeField] private ButtonEventSO _onButtonEvent;
     
     public Action<bool> OnSpeedChange;
-    public static Action<Terminal> OnTerminalStart;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        OnTerminalStart?.Invoke(this);
+        _onTerminalStartEvent.Raise(this);
+        /*
         // Assigns the ChangeStatus to all the Action from buttons that are children of the parent object.
         foreach (PhysicalButton button in GetComponentsInChildren<PhysicalButton>()) 
         {
-            button.OnButtonClicked += ChangeStatus;
+            _onButtonEvent.OnRaise += ChangeStatus;
         }
+        */
+        _onButtonEvent.OnRaise += ChangeStatus;
     }
 
     void OnDisable() 
     {
+        /*
         // Removes the Action again for the buttons, this ensures that there are no leaks.
         foreach (PhysicalButton button in GetComponentsInChildren<PhysicalButton>())
         {
-            button.OnButtonClicked -= ChangeStatus;
+            _onButtonEvent.OnRaise -= ChangeStatus;
         }
+        */
+        _onButtonEvent.OnRaise -= ChangeStatus; 
     }
 
 

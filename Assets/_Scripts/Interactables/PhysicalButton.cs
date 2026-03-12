@@ -5,7 +5,8 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
 {
 
     [SerializeField] private ButtonData _buttonData;
-    public Action<ButtonType> OnButtonClicked;
+    public event Action<ButtonType> OnButtonClicked;
+    [SerializeField] private ButtonEventSO _onButtonEvent;
 
     #region Interactable interface
 
@@ -15,6 +16,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
     public void Interact()
     {
         OnButtonClicked?.Invoke(_buttonData.Type);
+        _onButtonEvent.Raise(_buttonData.Type);
     }
 
     #endregion

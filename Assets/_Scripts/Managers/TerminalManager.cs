@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 public class TerminalManager : Singleton<TerminalManager>
 {
+    [SerializeField] private TerminalEventSO _terminalEvent;
+    [SerializeField] private TerminalStartEventSO _terminalStartEvent;
+
     [SerializeField] private List<Terminal> _terminals;
     [SerializeField] private MachineStatus _machineStatus;
     [SerializeField] private bool _isLeaverUp;
-    [SerializeField] private TerminalEventSO _terminalEvent;
 
 
     protected override void Awake() 
@@ -15,14 +17,14 @@ public class TerminalManager : Singleton<TerminalManager>
         base.Awake();
         _terminals = new List<Terminal>();
         _isLeaverUp = true;
-        Terminal.OnTerminalStart += AddTerminal;
+        _terminalStartEvent.OnRaise += AddTerminal;
         _terminalEvent.OnRaise += ChangeStatus;
     }
 
 	private void OnDisable()
 	{
         _terminalEvent.OnRaise -= ChangeStatus;
-		Terminal.OnTerminalStart -= AddTerminal;
+		_terminalStartEvent.OnRaise -= AddTerminal;
         _terminals.Clear();
 	}
 

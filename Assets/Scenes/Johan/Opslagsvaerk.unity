@@ -1658,6 +1658,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5183302799926387987, guid: f22ae7886c631184ea4bc2fa3a2cc967, type: 3}
+      propertyPath: _compendiumData
+      value: 
+      objectReference: {fileID: 11400000, guid: 525abcc490aaf2b4eaa9e92e828f6919, type: 2}
     - target: {fileID: 6276788754035106516, guid: f22ae7886c631184ea4bc2fa3a2cc967, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1732,17 +1736,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 183094948518619983, guid: f22ae7886c631184ea4bc2fa3a2cc967, type: 3}
   m_PrefabInstance: {fileID: 1140623272}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1140623274 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5183302799926387987, guid: f22ae7886c631184ea4bc2fa3a2cc967, type: 3}
-  m_PrefabInstance: {fileID: 1140623272}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 925dd8858d60cde429211957ec83b831, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CompendiumPage
 --- !u!1 &1241554936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,7 +1818,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1015039318}
   m_HandleRect: {fileID: 1015039317}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2537,7 +2530,6 @@ MonoBehaviour:
   entries:
   - {fileID: 709525054}
   - {fileID: 597792204}
-  - {fileID: 1140623274}
   _UIModule: {fileID: 741253069}
 --- !u!4 &1966202072
 Transform:
