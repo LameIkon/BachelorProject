@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[CreateAssetMenu(menuName = "Data/Player")]
+[CreateAssetMenu(menuName = "ScriptableObject/Data/Player")]
 public class PlayerData : ScriptableObject 
 {
     [SerializeField] private float _movementSpeed;
