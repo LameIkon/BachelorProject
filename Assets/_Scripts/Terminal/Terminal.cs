@@ -15,25 +15,11 @@ public class Terminal : MonoBehaviour
     void Start()
     {
         _onTerminalStartEvent.Raise(this);
-        /*
-        // Assigns the ChangeStatus to all the Action from buttons that are children of the parent object.
-        foreach (PhysicalButton button in GetComponentsInChildren<PhysicalButton>()) 
-        {
-            _onButtonEvent.OnRaise += ChangeStatus;
-        }
-        */
         _onButtonEvent.OnRaise += ChangeStatus;
     }
 
     void OnDisable() 
     {
-        /*
-        // Removes the Action again for the buttons, this ensures that there are no leaks.
-        foreach (PhysicalButton button in GetComponentsInChildren<PhysicalButton>())
-        {
-            _onButtonEvent.OnRaise -= ChangeStatus;
-        }
-        */
         _onButtonEvent.OnRaise -= ChangeStatus; 
     }
 

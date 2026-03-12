@@ -10,6 +10,9 @@ public class TerminalManager : Singleton<TerminalManager>
     [SerializeField] private List<Terminal> _terminals;
     [SerializeField] private MachineStatus _machineStatus;
     [SerializeField] private bool _isLeaverUp;
+    [SerializeField] private bool _isResetTermialInWarning;
+
+    [SerializeField] private int _machineSpeed;
 
 
     protected override void Awake() 
@@ -17,6 +20,7 @@ public class TerminalManager : Singleton<TerminalManager>
         base.Awake();
         _terminals = new List<Terminal>();
         _isLeaverUp = true;
+        _isResetTermialInWarning = false;
         _terminalStartEvent.OnRaise += AddTerminal;
         _terminalEvent.OnRaise += ChangeStatus;
     }
@@ -43,18 +47,33 @@ public class TerminalManager : Singleton<TerminalManager>
         if (!_isLeaverUp)
         { 
             _machineStatus = MachineStatus.Warning;
+            _machineSpeed = 0;
+            _isResetTermialInWarning = true;
             return; 
         }
 
+        if (terminalType == TerminalType.Reset1) 
+        {
+            _isResetTermialInWarning = false;
+        }
+
+        if (_isResetTermialInWarning) return;
+
+        if (terminalType != TerminalType.Main) return;
         switch (_machineStatus) 
         {
             case MachineStatus.Warning:
+                if (buttonType == ButtonType.Reset) _machineStatus = MachineStatus.Off;
                 break;
 
             case MachineStatus.Running:
+                if (buttonType == ButtonType.Stop) _machineStatus = MachineStatus.Off;
+                if (buttonType == ButtonType.SpeedDown) _machineSpeed--;
+                if (buttonType == ButtonType.SpeedUp) _machineSpeed++;
                 break;
 
             case MachineStatus.Off:
+                if (buttonType == ButtonType.Start) _machineStatus = MachineStatus.Running;
                 break;
 
         }
