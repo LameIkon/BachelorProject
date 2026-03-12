@@ -5,8 +5,10 @@ public class Terminal : MonoBehaviour
 {
 
     [SerializeField] private TerminalData _data;
+    [SerializeField] private TerminalEventSO _onTerminalEvent;
 
     public static Action<ButtonType, TerminalType> OnTerminalButtonPress;
+    
     public Action<bool> OnSpeedChange;
     public static Action<Terminal> OnTerminalStart;
 
@@ -37,7 +39,7 @@ public class Terminal : MonoBehaviour
     /// <param name="type">The type of button that was pressed.</param>
     private void ChangeStatus(ButtonType type) 
     {
-        OnTerminalButtonPress?.Invoke(type, _data.Type);
+        _onTerminalEvent.Raise(type, _data.Type);
     }
 
     

@@ -6,20 +6,22 @@ public class TerminalManager : Singleton<TerminalManager>
 {
     [SerializeField] private List<Terminal> _terminals;
     [SerializeField] private MachineStatus _machineStatus;
-    private bool _isLeaverUp;
+    [SerializeField] private bool _isLeaverUp;
+    [SerializeField] private TerminalEventSO _terminalEvent;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     protected override void Awake() 
     {
         base.Awake();
         _terminals = new List<Terminal>();
+        _isLeaverUp = true;
         Terminal.OnTerminalStart += AddTerminal;
-        Terminal.OnTerminalButtonPress += ChangeStatus;
+        _terminalEvent.OnRaise += ChangeStatus;
     }
 
 	private void OnDisable()
 	{
-        Terminal.OnTerminalButtonPress -= ChangeStatus;
+        _terminalEvent.OnRaise -= ChangeStatus;
 		Terminal.OnTerminalStart -= AddTerminal;
         _terminals.Clear();
 	}
@@ -34,9 +36,13 @@ public class TerminalManager : Singleton<TerminalManager>
         if (terminalType == TerminalType.Leaver) 
         {
             _isLeaverUp = !_isLeaverUp;
-            _machineStatus = MachineStatus.Warning;
         }
-        if (!_isLeaverUp) return;
+
+        if (!_isLeaverUp)
+        { 
+            _machineStatus = MachineStatus.Warning;
+            return; 
+        }
 
         switch (_machineStatus) 
         {

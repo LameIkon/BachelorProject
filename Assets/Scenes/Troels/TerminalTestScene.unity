@@ -1709,6 +1709,10 @@ PrefabInstance:
       propertyPath: _data
       value: 
       objectReference: {fileID: 11400000, guid: cc8bc5901ee972d4f8bc1dfa928a4c38, type: 2}
+    - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: _onTerminalEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 69baff98591f6dc4eb20daa0a65b1de1, type: 2}
     - target: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_Name
       value: Reset Terminal
@@ -1795,6 +1799,10 @@ PrefabInstance:
       propertyPath: _data
       value: 
       objectReference: {fileID: 11400000, guid: 4e697f29cb5a7614fb3f82750235a065, type: 2}
+    - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: _onTerminalEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 69baff98591f6dc4eb20daa0a65b1de1, type: 2}
     - target: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_Name
       value: Leaver Terminal
@@ -2009,6 +2017,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TerminalManager
   _terminals: []
   _machineStatus: 0
+  _isLeaverUp: 0
+  _terminalEvent: {fileID: 11400000, guid: 69baff98591f6dc4eb20daa0a65b1de1, type: 2}
 --- !u!1001 &7254934592214303037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2073,6 +2083,10 @@ PrefabInstance:
       propertyPath: _data
       value: 
       objectReference: {fileID: 11400000, guid: 4a973d0139e4aac44a40f46ce745f6fe, type: 2}
+    - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: _onTerminalEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 69baff98591f6dc4eb20daa0a65b1de1, type: 2}
     - target: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_Name
       value: Terminal
