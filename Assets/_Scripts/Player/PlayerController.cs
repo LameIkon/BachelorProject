@@ -9,6 +9,7 @@ namespace _Scripts
     {
         [SerializeField] private PlayerData _playerData;
         [SerializeField] private float _interactDistance;
+        [SerializeField] private Transform _pickUpPoint;
 
         private Rigidbody _rb;
         private Camera _camera;
@@ -76,7 +77,7 @@ namespace _Scripts
             {
                 if (hit.collider != null) 
                 {
-                    hit.collider.GetComponent<IInteractable>()?.Interact();
+                    hit.collider.GetComponent<IInteractable>()?.Interact(_pickUpPoint);
                 }
             }
         }

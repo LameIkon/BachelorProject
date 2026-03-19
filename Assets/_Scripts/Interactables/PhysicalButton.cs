@@ -13,7 +13,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
     /// <summary>
     /// The button invokes an event with the button type currently assigned to it.
     /// </summary>
-    public void Interact()
+    public void Interact(Transform transform)
     {
         OnButtonClicked?.Invoke(_buttonData.Type);
         _onButtonEvent.Raise(_buttonData.Type);
