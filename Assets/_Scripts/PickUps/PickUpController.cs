@@ -4,8 +4,8 @@ using UnityEngine;
 public class PickUpController : MonoBehaviour, IInteractable
 {
 
-	Transform _playerTransform;
-	bool _isPickedUp;
+	private Transform _playerTransform;
+	private bool _isPickedUp;
 
 	#region Unity Methods
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
