@@ -5,12 +5,14 @@ using System;
 public class InputReader : ScriptableObject, Inputs.IGameActions
 {
     private static Inputs _input;
-    private static InputState _state;
+    public static InputState s_State;
 
     public static event Action<Vector2> s_OnMoveEvent;
     public static event Action<Vector2> s_OnInteractEvent;
     public static event Action<Vector2> s_OnLookEvent;
     public static event Action s_OnUseEvent;
+    public static event Action s_ToggleCompendium;
+    public static event Action s_ToggleEscape;
 
     private Vector2 MousePos;
    
@@ -67,6 +69,16 @@ public class InputReader : ScriptableObject, Inputs.IGameActions
     public void OnMousePosition(InputAction.CallbackContext context) 
     {
         MousePos = context.ReadValue<Vector2>();
+    }
+
+    public void OnEscape(InputAction.CallbackContext context)
+    {
+        if (context.started) s_ToggleEscape?.Invoke();
+    }
+
+    public void OnCompendium(InputAction.CallbackContext context)
+    {
+        s_ToggleCompendium?.Invoke();
     }
 
     #endregion
