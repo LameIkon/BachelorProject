@@ -7035,6 +7035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ad7b6c72bad0d42b38d0cf01c0a02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  _input: {fileID: 11400000, guid: 784258960135e874ba9da4f3ff031120, type: 2}
 --- !u!4 &2092084446
 Transform:
   m_ObjectHideFlags: 0

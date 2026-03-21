@@ -2,8 +2,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-public class InputReader : ScriptableObject, Inputs.IGameActions
+[CreateAssetMenu(fileName ="InputReader SO", menuName = "ScriptableObject/InputReader")]
+public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActions
 {
+    [Header("UI Toggles")] // More to be implemented later
+    [SerializeField] private UIToggleEventSO _compendiumToggleEvent;
+
     private static Inputs _input;
     public static InputState s_State;
 
@@ -13,7 +17,6 @@ public class InputReader : ScriptableObject, Inputs.IGameActions
     public static event Action<Vector2> s_OnInteractEvent;
     public static event Action<Vector2> s_OnLookEvent;
     public static event Action s_OnUseEvent;
-    public static event Action s_ToggleCompendium;
     public static event Action s_ToggleEscape;
 
     private Vector2 MousePos;
@@ -25,10 +28,18 @@ public class InputReader : ScriptableObject, Inputs.IGameActions
         if (_input == null)
         {
             _input = new Inputs();
+            _input.UI.SetCallbacks(this);
             _input.Game.SetCallbacks(this);
+
             SetState(InputState.Game);
             Debug.Log("Inputs started");
         }
+    }
+
+    private void OnDisable()
+    {
+        _input.Game.Disable();
+        _input.UI.Disable();        
     }
 
     #endregion
@@ -36,26 +47,17 @@ public class InputReader : ScriptableObject, Inputs.IGameActions
     #region InputState
     public static void SetState(InputState state)
     {
-        // Disable previous
-        switch (s_State)
-        {
-            case InputState.Game:
-                _input.Game.Disable();
-                break;
-            case InputState.UI:
-                _input.UI.Disable();
-                break;
-        }
+        // Always keep UI enabled
+        _input.UI.Enable();
 
-        // Enable new
-        switch (state)
+        // Enable/disable Game input based on state
+        if (state == InputState.Game)
         {
-            case InputState.Game:
-                _input.Game.Enable();
-                break;
-            case InputState.UI:
-                _input.UI.Enable();
-                break;
+            _input.Game.Enable();
+        }
+        else
+        {
+            _input.Game.Disable();
         }
 
         // Update state and notify listeners
@@ -97,7 +99,8 @@ public class InputReader : ScriptableObject, Inputs.IGameActions
 
     public void OnCompendium(InputAction.CallbackContext context)
     {
-        if (context.started) s_ToggleCompendium?.Invoke();
+        Debug.Log("try Toggle Compendium");
+        if (context.started) _compendiumToggleEvent.Raise();
     }
 
     #endregion

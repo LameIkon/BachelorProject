@@ -3,14 +3,14 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
 
-    private InputReader _input;
+    [SerializeField] private InputReader _input;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {     
         if (_input == null)
         {
-            _input = ScriptableObject.CreateInstance<InputReader>();
+            //_input = ScriptableObject.CreateInstance<InputReader>();
         } 
     }
 
