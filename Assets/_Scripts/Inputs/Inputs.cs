@@ -136,24 +136,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Escape"",
-                    ""type"": ""Button"",
-                    ""id"": ""0c51cfdd-0087-4457-97dd-764438a57112"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Compendium"",
-                    ""type"": ""Button"",
-                    ""id"": ""c8e034eb-aa87-4197-aa3b-c39ae2ccbd5c"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -255,28 +237,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6b4784cf-9d4f-4c33-8824-79872c307aeb"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Escape"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2b8cfe08-e518-4e2e-82c4-f4a94c1d91e1"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Compendium"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -285,9 +245,18 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             ""id"": ""78b13b0c-f9d6-4484-8c0d-7184442620b2"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""Compendium"",
                     ""type"": ""Button"",
                     ""id"": ""088039ea-c5c3-40f1-82d0-b4f5f937bb64"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""a058f332-fbc2-4101-a7ae-0f960312ebda"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -298,6 +267,45 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f970df35-ceb4-436b-8cee-a4a014be0250"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Compendium"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ee7f91e-24d1-407d-a918-ec411c21570b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Main Menu"",
+            ""id"": ""151dbe49-5f6d-400e-9d9b-0b333dcf6459"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""4165f2dd-df6f-4d1a-98c2-2b7b06a36e1a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""931ee532-378f-4909-ae46-3aeed6b3cf81"",
                     ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
@@ -318,17 +326,20 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         m_Game_Look = m_Game.FindAction("Look", throwIfNotFound: true);
         m_Game_Use = m_Game.FindAction("Use", throwIfNotFound: true);
         m_Game_MousePosition = m_Game.FindAction("MousePosition", throwIfNotFound: true);
-        m_Game_Escape = m_Game.FindAction("Escape", throwIfNotFound: true);
-        m_Game_Compendium = m_Game.FindAction("Compendium", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
+        m_UI_Compendium = m_UI.FindAction("Compendium", throwIfNotFound: true);
+        m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
+        // Main Menu
+        m_MainMenu = asset.FindActionMap("Main Menu", throwIfNotFound: true);
+        m_MainMenu_Newaction = m_MainMenu.FindAction("New action", throwIfNotFound: true);
     }
 
     ~@Inputs()
     {
         UnityEngine.Debug.Assert(!m_Game.enabled, "This will cause a leak and performance issues, Inputs.Game.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, Inputs.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_MainMenu.enabled, "This will cause a leak and performance issues, Inputs.MainMenu.Disable() has not been called.");
     }
 
     /// <summary>
@@ -409,8 +420,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Game_Look;
     private readonly InputAction m_Game_Use;
     private readonly InputAction m_Game_MousePosition;
-    private readonly InputAction m_Game_Escape;
-    private readonly InputAction m_Game_Compendium;
     /// <summary>
     /// Provides access to input actions defined in input action map "Game".
     /// </summary>
@@ -442,14 +451,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Game/MousePosition".
         /// </summary>
         public InputAction @MousePosition => m_Wrapper.m_Game_MousePosition;
-        /// <summary>
-        /// Provides access to the underlying input action "Game/Escape".
-        /// </summary>
-        public InputAction @Escape => m_Wrapper.m_Game_Escape;
-        /// <summary>
-        /// Provides access to the underlying input action "Game/Compendium".
-        /// </summary>
-        public InputAction @Compendium => m_Wrapper.m_Game_Compendium;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -491,12 +492,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
-            @Escape.started += instance.OnEscape;
-            @Escape.performed += instance.OnEscape;
-            @Escape.canceled += instance.OnEscape;
-            @Compendium.started += instance.OnCompendium;
-            @Compendium.performed += instance.OnCompendium;
-            @Compendium.canceled += instance.OnCompendium;
         }
 
         /// <summary>
@@ -523,12 +518,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
-            @Escape.started -= instance.OnEscape;
-            @Escape.performed -= instance.OnEscape;
-            @Escape.canceled -= instance.OnEscape;
-            @Compendium.started -= instance.OnCompendium;
-            @Compendium.performed -= instance.OnCompendium;
-            @Compendium.canceled -= instance.OnCompendium;
         }
 
         /// <summary>
@@ -566,7 +555,8 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Newaction;
+    private readonly InputAction m_UI_Compendium;
+    private readonly InputAction m_UI_Escape;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -579,9 +569,13 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         /// </summary>
         public UIActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "UI/Newaction".
+        /// Provides access to the underlying input action "UI/Compendium".
         /// </summary>
-        public InputAction @Newaction => m_Wrapper.m_UI_Newaction;
+        public InputAction @Compendium => m_Wrapper.m_UI_Compendium;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/Escape".
+        /// </summary>
+        public InputAction @Escape => m_Wrapper.m_UI_Escape;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -608,9 +602,12 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @Compendium.started += instance.OnCompendium;
+            @Compendium.performed += instance.OnCompendium;
+            @Compendium.canceled += instance.OnCompendium;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
         }
 
         /// <summary>
@@ -622,9 +619,12 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         /// <seealso cref="UIActions" />
         private void UnregisterCallbacks(IUIActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @Compendium.started -= instance.OnCompendium;
+            @Compendium.performed -= instance.OnCompendium;
+            @Compendium.canceled -= instance.OnCompendium;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
         }
 
         /// <summary>
@@ -658,6 +658,102 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="UIActions" /> instance referencing this action map.
     /// </summary>
     public UIActions @UI => new UIActions(this);
+
+    // Main Menu
+    private readonly InputActionMap m_MainMenu;
+    private List<IMainMenuActions> m_MainMenuActionsCallbackInterfaces = new List<IMainMenuActions>();
+    private readonly InputAction m_MainMenu_Newaction;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Main Menu".
+    /// </summary>
+    public struct MainMenuActions
+    {
+        private @Inputs m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public MainMenuActions(@Inputs wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "MainMenu/Newaction".
+        /// </summary>
+        public InputAction @Newaction => m_Wrapper.m_MainMenu_Newaction;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="MainMenuActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(MainMenuActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="MainMenuActions" />
+        public void AddCallbacks(IMainMenuActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MainMenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MainMenuActionsCallbackInterfaces.Add(instance);
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="MainMenuActions" />
+        private void UnregisterCallbacks(IMainMenuActions instance)
+        {
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MainMenuActions.UnregisterCallbacks(IMainMenuActions)" />.
+        /// </summary>
+        /// <seealso cref="MainMenuActions.UnregisterCallbacks(IMainMenuActions)" />
+        public void RemoveCallbacks(IMainMenuActions instance)
+        {
+            if (m_Wrapper.m_MainMenuActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="MainMenuActions.AddCallbacks(IMainMenuActions)" />
+        /// <seealso cref="MainMenuActions.RemoveCallbacks(IMainMenuActions)" />
+        /// <seealso cref="MainMenuActions.UnregisterCallbacks(IMainMenuActions)" />
+        public void SetCallbacks(IMainMenuActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MainMenuActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MainMenuActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="MainMenuActions" /> instance referencing this action map.
+    /// </summary>
+    public MainMenuActions @MainMenu => new MainMenuActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Game" which allows adding and removing callbacks.
     /// </summary>
@@ -700,20 +796,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMousePosition(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Escape" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnEscape(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Compendium" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnCompendium(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -721,6 +803,28 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
     /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
     public interface IUIActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Compendium" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCompendium(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Escape" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEscape(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Main Menu" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="MainMenuActions.AddCallbacks(IMainMenuActions)" />
+    /// <seealso cref="MainMenuActions.RemoveCallbacks(IMainMenuActions)" />
+    public interface IMainMenuActions
     {
         /// <summary>
         /// Method invoked when associated input action "New action" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.

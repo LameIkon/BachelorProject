@@ -17,6 +17,7 @@ public class MouseUtility
         _crosshairUI = staticCursor;
 
         InputReader.s_OnInputStateChangedEvent += SetCursorState;
+        SetCursorState(InputReader.s_State);
     }
 
     /// <summary>

@@ -12,16 +12,6 @@ public class CompendiumManager : MonoBehaviour
     [SerializeField] private UIModule _UIModule;
     [SerializeField] private CompendiumPage[] _entries;
 
-    private void OnEnable()
-    {
-        InputReader.s_ToggleCompendium += ToggleCompendium;
-    }
-
-    private void OnDisable()
-    {
-        InputReader.s_ToggleCompendium -= ToggleCompendium;
-    }
-
     private void Start()
     {
         Initialize();
@@ -57,11 +47,5 @@ public class CompendiumManager : MonoBehaviour
 
             entry.ToggleButton(match);
         }
-    }
-
-
-    private void ToggleCompendium()
-    {
-        _UIModule.ToggleUI();
     }
 }

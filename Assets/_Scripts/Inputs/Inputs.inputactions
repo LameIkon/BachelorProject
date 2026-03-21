@@ -50,24 +50,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Escape",
-                    "type": "Button",
-                    "id": "0c51cfdd-0087-4457-97dd-764438a57112",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Compendium",
-                    "type": "Button",
-                    "id": "c8e034eb-aa87-4197-aa3b-c39ae2ccbd5c",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -169,28 +151,6 @@
                     "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6b4784cf-9d4f-4c33-8824-79872c307aeb",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Escape",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2b8cfe08-e518-4e2e-82c4-f4a94c1d91e1",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Compendium",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -199,9 +159,18 @@
             "id": "78b13b0c-f9d6-4484-8c0d-7184442620b2",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Compendium",
                     "type": "Button",
                     "id": "088039ea-c5c3-40f1-82d0-b4f5f937bb64",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "a058f332-fbc2-4101-a7ae-0f960312ebda",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -212,6 +181,45 @@
                 {
                     "name": "",
                     "id": "f970df35-ceb4-436b-8cee-a4a014be0250",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Compendium",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ee7f91e-24d1-407d-a918-ec411c21570b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Main Menu",
+            "id": "151dbe49-5f6d-400e-9d9b-0b333dcf6459",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "4165f2dd-df6f-4d1a-98c2-2b7b06a36e1a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "931ee532-378f-4909-ae46-3aeed6b3cf81",
                     "path": "",
                     "interactions": "",
                     "processors": "",
