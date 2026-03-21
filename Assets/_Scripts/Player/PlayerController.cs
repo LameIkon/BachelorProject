@@ -9,7 +9,9 @@ namespace _Scripts
     {
         [SerializeField] private PlayerData _playerData;
         [SerializeField] private float _interactDistance;
+
         [SerializeField] private Transform _pickUpPoint;
+        [SerializeField] private GameObject _staticMouseCanvas;
 
         private Rigidbody _rb;
         private Camera _camera;
@@ -23,10 +25,13 @@ namespace _Scripts
         private Vector3 _rotateDirection;
         private Vector3 _lookDirection = Vector3.zero;
 
+        // Used for mouse controls
+        private MouseUtility _mouseUtility;
+        private InteractionUtility _interactionUtility;
         private Vector2 MousePos { set { MousePos = value; } }
 
-		#region Inputs
-		private void OnEnable()
+        #region Inputs
+        private void OnEnable()
         {
             InputReader.s_OnMoveEvent += Move;
             InputReader.s_OnLookEvent += Rotate;
@@ -77,16 +82,8 @@ namespace _Scripts
         /// </summary>
         private void Interact(Vector2 pos) // This position could potentially be a const value, because the mouse is fixed to the middle of the screen. But it could be usefull in the future if the functionality should change.
         {
-            RaycastHit hit;
-            Ray ray = _camera.ScreenPointToRay(pos);
-
-            if (Physics.Raycast(ray, out hit)) 
-            {
-                if (hit.collider != null) 
-                {
-                    hit.collider.GetComponent<IInteractable>()?.Interact(_pickUpPoint);
-                }
-            }
+            Debug.Log("Try Interact");
+            _interactionUtility.Interact(pos);
         }
 
         /// <summary>
@@ -105,8 +102,9 @@ namespace _Scripts
         {
             _rb = GetComponent<Rigidbody>();
             _camera = GetComponentInChildren<Camera>();
-            Cursor.lockState = CursorLockMode.Locked;
-            //Cursor.visible = true;
+
+            _interactionUtility = new InteractionUtility(_camera, _pickUpPoint, _interactDistance);
+            _mouseUtility = new MouseUtility(_staticMouseCanvas);
             Reset();
         }
 

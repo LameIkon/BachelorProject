@@ -1,38 +1,47 @@
 using UnityEngine;
 
+/// <summary>
+/// A class designed to contain all logic related to the mouse. It depends on InputState and can change between Game and UI InputState
+/// If InputState is Game it will lock cursor to the center of screen. If the InputState is UI it will free the cursor to move wherever on the screen.
+/// </summary>
 public class MouseUtility
 {
-    private readonly Camera _camera;
-    private readonly GameObject _staticCursor;
-    public MouseUtility(Camera camera, GameObject staticCursor)
+    private readonly GameObject _crosshairUI;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="staticCursor"></param>
+    public MouseUtility(GameObject staticCursor)
     {
-        _camera = camera;
-        _staticCursor = staticCursor;
+        _crosshairUI = staticCursor;
+
+        InputReader.s_OnInputStateChangedEvent += SetCursorState;
     }
 
-    public void Interact(Vector2 pos) // This position could potentially be a const value, because the mouse is fixed to the middle of the screen. But it could be usefull in the future if the functionality should change.
+    /// <summary>
+    /// Call this method from the coupled script to disable events, when we don't need to listen anymore
+    /// </summary>
+    public void Dispose()
     {
-        RaycastHit hit;
-        Ray ray = _camera.ScreenPointToRay(pos);
-
-        if (Physics.Raycast(ray, out hit)) 
-        {
-            if (hit.collider != null) 
-            {
-                hit.collider.GetComponent<IInteractable>()?.Interact();
-            }
-        }
+        InputReader.s_OnInputStateChangedEvent -= SetCursorState;
     }
 
-    public void SetCursorState()
+    /// <summary>
+    /// Set input reading state. Can change between Game and UI mode
+    /// </summary>
+    private void SetCursorState(InputState state)
     {
-        switch (InputReader.s_State)
+        Debug.Log(state);
+        switch (state)
         {
             case InputState.Game:
                 Cursor.lockState = CursorLockMode.Locked;
+                _crosshairUI.SetActive(true);
                 break;
             case InputState.UI:
                 Cursor.lockState = CursorLockMode.None;
+                _crosshairUI.SetActive(false);
                 break;
         }
     }

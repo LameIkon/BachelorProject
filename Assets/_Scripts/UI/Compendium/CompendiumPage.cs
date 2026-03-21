@@ -15,19 +15,13 @@ public class CompendiumPage : MonoBehaviour
     private GameObject _buttonObject; // to be changed
     
     [Header("Page UI")]
-    //[SerializeField] private Image _image;
-    //[SerializeField] private TextMeshProUGUI _title;
-    //[SerializeField] private TextMeshProUGUI _description;
-    CompendiumUIReferences _references;
+    [SerializeField] private Image _image;
+    [SerializeField] private TextMeshProUGUI _title;
+    [SerializeField] private TextMeshProUGUI _description;
 
-    //public event Action<string> OnTitleChanged;
+
 
     public string title {get; private set; } = "Unasigned";
-
-    private void Awake()
-    {
-        FindUIReferences();
-    }
 
 
     private void OnEnable()
@@ -48,8 +42,8 @@ public class CompendiumPage : MonoBehaviour
     {
         LocalizedContent data = _compendiumData.content.Get(language); // Get context in the selected language
 
-        _references.title.text = data.title;
-        _references.description.text = data.description;
+        _title.text = data.title;
+        _description.text = data.description;
         title = data.title;
 
         UpdateButtonText(title);
@@ -78,17 +72,9 @@ public class CompendiumPage : MonoBehaviour
     {
         _buttonObject = button;
         _buttonTitle = _buttonObject.GetComponentInChildren<TextMeshProUGUI>();
-        _references.image.sprite = _compendiumData.image;
+        _image.sprite = _compendiumData.image;
 
         UpdateButtonText(title);
-    }
-
-    private void FindUIReferences()
-    {
-        _references = new CompendiumUIReferences();
-        _references.image = transform.GetChild(0).transform.GetChild(0).GetComponent<Image>();
-        _references.title = transform.GetChild(1).transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
-        _references.description = transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
     #endregion
 }

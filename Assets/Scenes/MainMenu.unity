@@ -753,7 +753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7ca7013591ea6a4ca9199f47c1264e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveSystem
-  _saveAllEvent: {fileID: 11400000, guid: e042eb13f4515ea44bdd34fa4ffc35f0, type: 2}
+  _saveAllEvent: {fileID: 11400000, guid: 24ead6912264ba24a959183a836aefdd, type: 2}
   _saveDataEvent: {fileID: 11400000, guid: 2819e618ef341944bbc0609adc53d035, type: 2}
   _loadDataEvent: {fileID: 11400000, guid: b0ecce12911dcc440a01786762ebda4c, type: 2}
 --- !u!1 &186469737
@@ -5048,6 +5048,7 @@ MonoBehaviour:
   _pageSettings:
     pageMode: 1
     pageContainer: {fileID: 693344844}
+    buttonContainer: {fileID: 0}
 --- !u!1 &1653687394
 GameObject:
   m_ObjectHideFlags: 0

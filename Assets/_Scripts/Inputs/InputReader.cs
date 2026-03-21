@@ -7,6 +7,8 @@ public class InputReader : ScriptableObject, Inputs.IGameActions
     private static Inputs _input;
     public static InputState s_State;
 
+    public static event Action<InputState> s_OnInputStateChangedEvent;
+
     public static event Action<Vector2> s_OnMoveEvent;
     public static event Action<Vector2> s_OnInteractEvent;
     public static event Action<Vector2> s_OnLookEvent;
@@ -28,22 +30,39 @@ public class InputReader : ScriptableObject, Inputs.IGameActions
             Debug.Log("Inputs started");
         }
     }
-    
+
     #endregion
 
-    private static void SetState(InputState state)
+    #region InputState
+    public static void SetState(InputState state)
     {
+        // Disable previous
+        switch (s_State)
+        {
+            case InputState.Game:
+                _input.Game.Disable();
+                break;
+            case InputState.UI:
+                _input.UI.Disable();
+                break;
+        }
+
+        // Enable new
         switch (state)
         {
             case InputState.Game:
                 _input.Game.Enable();
-                return;
+                break;
             case InputState.UI:
                 _input.UI.Enable();
-                return;
+                break;
         }
-        
+
+        // Update state and notify listeners
+        s_State = state;
+        s_OnInputStateChangedEvent?.Invoke(s_State); 
     }
+    #endregion
 
     #region Controls
     public void OnMove(InputAction.CallbackContext context)
@@ -78,7 +97,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions
 
     public void OnCompendium(InputAction.CallbackContext context)
     {
-        s_ToggleCompendium?.Invoke();
+        if (context.started) s_ToggleCompendium?.Invoke();
     }
 
     #endregion
