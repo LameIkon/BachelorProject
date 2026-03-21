@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public sealed class PhysicalButton : MonoBehaviour, IInteractable
+public sealed class PhysicalButton : MonoBehaviour, IInteractable 
 {
 
     [SerializeField] private ButtonData _buttonData;
