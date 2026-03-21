@@ -36,6 +36,7 @@ public class UIModule : MonoBehaviour, IUISystem
 
     private void Start()
     {
+        pageModule.SetupButtons();
         _config.registerUIEvent.Raise(this);
     }
 
@@ -67,7 +68,7 @@ public class UIModule : MonoBehaviour, IUISystem
                 return;
         }
 
-        pageModule.SetupButtons();
+        
     }
 
     #endregion

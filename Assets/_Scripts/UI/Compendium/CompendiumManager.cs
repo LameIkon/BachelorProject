@@ -20,12 +20,12 @@ public class CompendiumManager : MonoBehaviour
 
     private void Initialize()
     {
+        Debug.Log(_entries.Length);
         for (int i = 0; i < _entries.Length; i++)
         {
-            PageButton pageButton = _buttonPrefab.GetComponent<PageButton>();
-            pageButton.pageIndex = i; // Set index of button to corresponding page index
-
             GameObject button = Instantiate(_buttonPrefab, _buttonList);
+            PageButton pageButton = button.GetComponent<PageButton>();
+            pageButton.pageIndex = i; // Set index of button to corresponding page index
             _entries[i].Initialize(button);
         }
     }
