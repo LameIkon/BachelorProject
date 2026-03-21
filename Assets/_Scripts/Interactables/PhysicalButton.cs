@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public sealed class PhysicalButton : MonoBehaviour, IInteractable
+public sealed class PhysicalButton : MonoBehaviour, IInteractable 
 {
 
     [SerializeField] private ButtonData _buttonData;
@@ -16,7 +16,6 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
     {
         _onButtonEvent.Raise(_buttonData.Type);
     }
-
     #endregion
 }
 
