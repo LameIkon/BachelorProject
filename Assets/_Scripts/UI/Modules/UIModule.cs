@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 /// <summary>
@@ -23,10 +22,10 @@ public class UIModule : MonoBehaviour, IUISystem
 
     private void Awake()
     {
-        Initialize();
     }
     private void OnEnable()
     {
+        Initialize();
         _config.toggleUIEvent.OnRaise += ToggleUI;
     }
 
@@ -67,6 +66,8 @@ public class UIModule : MonoBehaviour, IUISystem
                 //_overridePageModule = new PageUIOverrideModule(_pageSettings.pageContainer);
                 return;
         }
+
+        pageModule.SetupButtons();
     }
 
     #endregion

@@ -38,12 +38,14 @@ public class UIManager : Singleton<UIManager>
         Debug.Log("handle UI Change");
         if (system.IsOpen)
         {
+            InputReader.SetState(InputState.UI);
             ApplyUIRules(system);
             _activeSystems.Add(system);
         }
         else
         {
             Debug.Log("Remove from active list");
+            InputReader.SetState(InputState.Game);
             _activeSystems.Remove(system);
         }
     }

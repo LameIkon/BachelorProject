@@ -6,11 +6,21 @@ public class CompendiumManager : MonoBehaviour
     [Header("UI Components")]
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private GameObject _buttonPrefab;
+    [SerializeField] private Transform _buttonList;
 
     [Header("Data")]
-    [SerializeField] private Transform _buttonList;
-    [SerializeField] private CompendiumPage[] entries;
     [SerializeField] private UIModule _UIModule;
+    [SerializeField] private CompendiumPage[] _entries;
+
+    private void OnEnable()
+    {
+        InputReader.s_ToggleCompendium += ToggleCompendium;
+    }
+
+    private void OnDisable()
+    {
+        InputReader.s_ToggleCompendium -= ToggleCompendium;
+    }
 
     private void Start()
     {
@@ -20,16 +30,14 @@ public class CompendiumManager : MonoBehaviour
 
     private void Initialize()
     {
-        for (int i = 0; i < entries.Length; i++)
+        for (int i = 0; i < _entries.Length; i++)
         {
             PageButton pageButton = _buttonPrefab.GetComponent<PageButton>();
             pageButton.pageIndex = i; // Set index of button to corresponding page index
 
             GameObject button = Instantiate(_buttonPrefab, _buttonList);
-            entries[i].Initialize(button);
+            _entries[i].Initialize(button);
         }
-
-        _UIModule.pageModule.SetupButtons(); // Register buttons
     }
 
     /// <summary>
@@ -41,7 +49,7 @@ public class CompendiumManager : MonoBehaviour
     {
         input = input.ToLower();
 
-        foreach (CompendiumPage entry in entries)
+        foreach (CompendiumPage entry in _entries)
         {
             string title = entry.title.ToLower();
 
@@ -49,5 +57,11 @@ public class CompendiumManager : MonoBehaviour
 
             entry.ToggleButton(match);
         }
+    }
+
+
+    private void ToggleCompendium()
+    {
+        _UIModule.ToggleUI();
     }
 }

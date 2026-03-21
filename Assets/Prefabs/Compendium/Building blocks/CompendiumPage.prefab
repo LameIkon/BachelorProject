@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6800656055911898550}
   - component: {fileID: 4684127257129371744}
   m_Layer: 5
-  m_Name: Background
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 1348506527595399760}
   - component: {fileID: 406060765358108031}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Title (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -521,10 +521,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumPage
   _compendiumData: {fileID: 11400000, guid: 57e2cb418eb5a104788dfcf19678abe2, type: 2}
-  buttonObject: {fileID: 0}
-  _image: {fileID: 0}
-  _title: {fileID: 0}
-  _description: {fileID: 0}
+  _image: {fileID: 4684127257129371744}
+  _title: {fileID: 406060765358108031}
+  _description: {fileID: 899646139857770364}
 --- !u!1 &8658812339469455021
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +536,7 @@ GameObject:
   - component: {fileID: 311369856165179133}
   - component: {fileID: 899646139857770364}
   m_Layer: 5
-  m_Name: Body_Text (TMP)
+  m_Name: Description (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
