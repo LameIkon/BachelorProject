@@ -2,25 +2,38 @@ using UnityEngine;
 
 public class Placeable : MonoBehaviour
 {
-    [SerializeField] private PickableType _pickableTypeHolder;
-    [SerializeField] private GameObject _highlightHolder;
-    [SerializeField] private GameObject _placed;
+    [SerializeField] private PickableType _pickableTypeHolder; 
+    [SerializeField] private Transform _visualModel;
+    [SerializeField] private Transform _snapPoint;
+    private bool _hasAssignedSlot;
 
-
-
-    private void Check(PickableType? type)
+    private void AssignToSlot(IPickable pickup)
     {
-        if (type == null) return;
+        if (!_hasAssignedSlot)
+        {
+            _hasAssignedSlot = true;
+
+            Transform pickupTransform = pickup.Transform;
+
+            // Parent it to this slot
+            pickupTransform.SetParent(_snapPoint);
+
+            // Snap into position
+            pickupTransform.localPosition = Vector3.zero;
+            pickupTransform.localRotation = Quaternion.identity;
+
+            Debug.Log("Assigned");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger entered");
         if (other.TryGetComponent(out IPickable pickup))
         {
             if (pickup.PickableType == _pickableTypeHolder)
             {
                 Debug.Log("this can be placed here");
+                AssignToSlot(pickup);
             }
             else
             {

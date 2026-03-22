@@ -5,6 +5,8 @@ using UnityEngine;
 public interface IPickable
 {
     void Interact(Transform transform);
+    void Drop();
 
     PickableType PickableType { get; }
+    Transform Transform { get; }
 }
