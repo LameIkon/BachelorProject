@@ -9,6 +9,17 @@ public class Placeable : MonoBehaviour
     private bool _hasAssignedSlot = false;
     private IPickable _pickupInTrigger; // The pickup currently inside this slot
 
+    [SerializeField] private Material _visualMaterial;
+
+    private void Awake()
+    {
+        if (_visualModel.TryGetComponent(out Renderer renderer))
+        {
+            _visualMaterial = renderer.material;
+        }
+    }
+
+
     # region Placement
     public void TryPlace(IPickable pickup)
     {
@@ -35,11 +46,15 @@ public class Placeable : MonoBehaviour
             pickupTransform.localRotation = Quaternion.identity;
 
 
-            // Stop physics
-            if (pickupTransform.TryGetComponent(out Rigidbody rb))
-            {
-                rb.isKinematic = true;
-            }
+            //// Stop physics
+            //if (pickupTransform.TryGetComponent(out Rigidbody rb))
+            //{
+            //    rb.isKinematic = true;
+            //}
+
+            // Disable visual indication
+            _visualModel.gameObject.SetActive(false);
+
             Debug.Log("Assigned");
         }
     }
@@ -71,7 +86,14 @@ public class Placeable : MonoBehaviour
         {
             if (_pickupInTrigger == pickup) // Compare if the same that entered
             {
+                _hasAssignedSlot = false;
                 _pickupInTrigger = null; // clear when leaving
+
+                // Disable visual indication
+                _visualModel.gameObject.SetActive(true);
+
+
+                Debug.Log("Pickup unassigned and can now be used again"); 
             }
         }        
     }

@@ -28,7 +28,6 @@ public class PickUpController : MonoBehaviour, IPickable
     {
         if (_isPickedUp)
 		{
-			Debug.Log("called");
 			Vector3 direction = _holdPoint.position - _rb.position;
 
 			float followSpeed = 20f;
@@ -53,9 +52,10 @@ public class PickUpController : MonoBehaviour, IPickable
 
 	private void PickUp(Transform holdPoint)
 	{
+		transform.SetParent(null);
 		_holdPoint = holdPoint;
         _isPickedUp = true;
-
+		
         _rb.useGravity = false;
         _rb.linearDamping = 10f;
 	}
@@ -67,7 +67,7 @@ public class PickUpController : MonoBehaviour, IPickable
 
         _rb.useGravity = true;
 		_rb.linearDamping = 0f;
-
+		Debug.Log("Drop");
 		_currentSlot?.TryPlace(this);
 	}
 
