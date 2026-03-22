@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Placeable : MonoBehaviour
+public class PlaceableSlot : MonoBehaviour
 {
     [SerializeField] private PickableType _pickableTypeHolder; 
     [SerializeField] private Transform _visualModel;
