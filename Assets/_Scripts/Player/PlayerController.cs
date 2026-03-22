@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace _Scripts
 {
@@ -103,8 +101,8 @@ namespace _Scripts
             _rb = GetComponent<Rigidbody>();
             _camera = GetComponentInChildren<Camera>();
 
-            _interactionUtility = new InteractionUtility(_camera, _pickUpPoint, _interactDistance);
-            _mouseUtility = new MouseUtility(_staticMouseCanvas);
+            _interactionUtility = new InteractionUtility(_camera, _pickUpPoint, _interactDistance, _staticMouseCanvas);
+            //_mouseUtility = new MouseUtility(_staticMouseCanvas);
             Reset();
         }
 

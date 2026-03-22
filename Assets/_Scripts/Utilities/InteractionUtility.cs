@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InteractionUtility
@@ -42,7 +43,17 @@ public class InteractionUtility
 
         if (Physics.Raycast(ray, out RaycastHit hit, _pickUpDistance, _interactionMask))
         {
-            hit.collider.GetComponent<IInteractable>()?.Interact(_pickUpPoint);
+            if (hit.collider.TryGetComponent(out IPickable pickable))
+            {
+                pickable.Interact(_pickUpPoint);
+                return;
+            }
+
+            if (hit.collider.TryGetComponent(out IInteractable interactable))
+            {
+                interactable.Interact();
+                return;
+            }
         }
     }
 

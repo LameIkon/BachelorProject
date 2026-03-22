@@ -1,15 +1,19 @@
 using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody), typeof(Collider))]
-public class PickUpController : MonoBehaviour, IInteractable
+public class PickUpController : MonoBehaviour, IPickable
 {
 
 	private Transform _playerTransform;
 	private bool _isPickedUp;
 
-	#region Unity Methods
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
-	void Start()
+	[SerializeField] private PickableType _pickableType;
+
+    public PickableType PickableType => _pickableType;
+
+    #region Unity Methods
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
         _isPickedUp = false;
     }

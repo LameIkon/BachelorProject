@@ -70,10 +70,8 @@ public class CompendiumPage : MonoBehaviour
     /// </summary>
     public void Initialize(GameObject button)
     {
-        Debug.Log("Initalized button for page");
         _buttonObject = button;
         _buttonTitle = _buttonObject.GetComponentInChildren<TextMeshProUGUI>();
-        Debug.Log(_buttonObject.GetComponentInChildren<TextMeshProUGUI>());
         _image.sprite = _compendiumData.image;
 
         UpdateButtonText(title);
