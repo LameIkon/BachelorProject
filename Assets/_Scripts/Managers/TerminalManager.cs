@@ -6,6 +6,7 @@ public class TerminalManager : Singleton<TerminalManager>
 {
     [SerializeField] private TerminalEventSO _terminalEvent;
     [SerializeField] private TerminalStartEventSO _terminalStartEvent;
+    [SerializeField] private OvenStateChangeEventSO _ovenstateChangeEvent;
 
     [SerializeField] private List<Terminal> _terminals;
     [SerializeField] private MachineStatus _machineStatus;
@@ -13,7 +14,7 @@ public class TerminalManager : Singleton<TerminalManager>
     [SerializeField] private bool _isResetTermialInWarning;
     [SerializeField] private ButtonData[] _buttonDatas;
 
-    [SerializeField] private int _machineSpeed;
+    [SerializeField] private float _machineSpeed;
 
 
     protected override void Awake() 
@@ -49,6 +50,7 @@ public class TerminalManager : Singleton<TerminalManager>
         { 
             _machineStatus = MachineStatus.Warning;
             _machineSpeed = 0;
+            _ovenstateChangeEvent.Raise(OvenStatus.Stop);
             _isResetTermialInWarning = true;
             return; 
         }
@@ -64,17 +66,37 @@ public class TerminalManager : Singleton<TerminalManager>
         switch (_machineStatus) 
         {
             case MachineStatus.Warning:
-                if (buttonType == ButtonType.Reset) _machineStatus = MachineStatus.Off;
+                if (buttonType == ButtonType.Reset)
+                {
+                    _ovenstateChangeEvent.Raise(OvenStatus.Stop);
+                    _machineStatus = MachineStatus.Off;
+                }
                 break;
 
             case MachineStatus.Running:
-                if (buttonType == ButtonType.Stop) _machineStatus = MachineStatus.Off;
-                if (buttonType == ButtonType.SpeedDown) _machineSpeed--;
-                if (buttonType == ButtonType.SpeedUp) _machineSpeed++;
+                if (buttonType == ButtonType.Stop)
+                {
+                    _machineStatus = MachineStatus.Off;
+                    _ovenstateChangeEvent.Raise(OvenStatus.Stop);
+
+                }
+                if (buttonType == ButtonType.SpeedDown)
+                {
+                    //_machineSpeed--;
+                    //_machineSpeed -= 0.1f; 
+                    _ovenstateChangeEvent.Raise(OvenStatus.Decrease);
+                }
+                if (buttonType == ButtonType.SpeedUp)
+                {
+                    _machineSpeed++;
+                    //_machineSpeed -= 0.1f; 
+                    _ovenstateChangeEvent.Raise(OvenStatus.Increase);
+                }
                 break;
 
             case MachineStatus.Off:
-                if (buttonType == ButtonType.Start) _machineStatus = MachineStatus.Running;
+                if (buttonType == ButtonType.Start)
+                    _machineStatus = MachineStatus.Running;
                 break;
 
         }
@@ -90,4 +112,12 @@ public enum MachineStatus
     Running,
     Off,
     Warning
+}
+
+
+public enum OvenStatus
+{
+    Stop,
+    Increase,
+    Decrease
 }
