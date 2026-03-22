@@ -11,7 +11,7 @@ public class PickUpController : MonoBehaviour, IPickable
 	[SerializeField] private PickableType _pickableType;
 
     public PickableType PickableType => _pickableType;
-	private Placeable _currentSlot;
+	private PlaceableSlot _currentSlot;
 
     public Transform Transform => transform;
 
@@ -73,7 +73,7 @@ public class PickUpController : MonoBehaviour, IPickable
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.TryGetComponent(out Placeable slot))
+		if (other.TryGetComponent(out PlaceableSlot slot))
 		{
 			_currentSlot = slot; // store the slot in the pickup
 		}
@@ -81,7 +81,7 @@ public class PickUpController : MonoBehaviour, IPickable
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.TryGetComponent(out Placeable slot))
+		if (other.TryGetComponent(out PlaceableSlot slot))
 		{
 			if (_currentSlot == slot) _currentSlot = null;
 		}
