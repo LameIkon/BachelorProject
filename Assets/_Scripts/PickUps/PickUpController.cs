@@ -6,16 +6,17 @@ public class PickUpController : MonoBehaviour, IPickable
 	private Transform _holdPoint;
 	private Rigidbody _rb;
 
-	private Transform _playerTransform;
 	private bool _isPickedUp;
 
 	[SerializeField] private PickableType _pickableType;
 
     public PickableType PickableType => _pickableType;
+	private Placeable _currentSlot;
 
     public Transform Transform => transform;
 
     #region Unity Methods
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,19 +24,11 @@ public class PickUpController : MonoBehaviour, IPickable
         _isPickedUp = false;
     }
 
-  //  // Update is called once per frame
-  //  void Update()
-  //  {
-		//if (_isPickedUp) 
-		//{
-		//	transform.position = _playerTransform.position;
-		//}
-  //  }
-
     private void FixedUpdate()
     {
         if (_isPickedUp)
 		{
+			Debug.Log("called");
 			Vector3 direction = _holdPoint.position - _rb.position;
 
 			float followSpeed = 20f;
@@ -56,8 +49,6 @@ public class PickUpController : MonoBehaviour, IPickable
 		{
 			Drop();
 		}
-		//_playerTransform = holdPoint;
-		//_isPickedUp = !_isPickedUp;
 	}
 
 	private void PickUp(Transform holdPoint)
@@ -76,6 +67,24 @@ public class PickUpController : MonoBehaviour, IPickable
 
         _rb.useGravity = true;
 		_rb.linearDamping = 0f;
+
+		_currentSlot?.TryPlace(this);
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.TryGetComponent(out Placeable slot))
+		{
+			_currentSlot = slot; // store the slot in the pickup
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.TryGetComponent(out Placeable slot))
+		{
+			if (_currentSlot == slot) _currentSlot = null;
+		}
 	}
 	#endregion
 
