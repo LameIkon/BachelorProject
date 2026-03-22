@@ -3,11 +3,41 @@ using UnityEngine;
 
 public class ConveyorBelt : MonoBehaviour
 {
-    [SerializeField] private float _beltSpeed;
+    [SerializeField] private OvenStateChangeEventSO _ovenstateChangeEvent;
+    [SerializeField] private float _beltSpeed = 0;
     [SerializeField] private Vector2 _direction;
     [SerializeField] private List<GameObject> _onBelt;
 
-    // Update is called once per frame
+    private float _maxSpeed = 0.25f;
+
+    private void OnEnable()
+    {
+        _ovenstateChangeEvent.OnRaise += Adjust;
+    }
+
+    private void OnDisable()
+    {
+        _ovenstateChangeEvent.OnRaise -= Adjust;
+    }
+
+    private void Adjust(OvenStatus status)
+    {
+        switch (status)
+        {
+            case OvenStatus.Stop:
+                _beltSpeed = 0;
+                break;
+            case OvenStatus.Increase:
+                if (_beltSpeed < _maxSpeed) _beltSpeed += 0.01f;
+                break;
+            case OvenStatus.Decrease:
+                if (_beltSpeed > 0) _beltSpeed -= 0.01f;
+                break;
+        }
+    }
+
+
+    #region Unity Methods
     void Update()
     {
         // Optimize later
@@ -23,6 +53,7 @@ public class ConveyorBelt : MonoBehaviour
         }
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         _onBelt.Add(other.gameObject);
@@ -32,4 +63,5 @@ public class ConveyorBelt : MonoBehaviour
     {
         _onBelt.Remove(other.gameObject);
     }
+    #endregion
 }
