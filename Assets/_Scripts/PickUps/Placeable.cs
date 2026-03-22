@@ -53,7 +53,7 @@ public class Placeable : MonoBehaviour
             //}
 
             // Disable visual indication
-            _visualModel.gameObject.SetActive(false);
+            //_visualModel.gameObject.SetActive(false);
 
             Debug.Log("Assigned");
         }
@@ -71,7 +71,9 @@ public class Placeable : MonoBehaviour
             {
                 Debug.Log("this can be placed here");
                 _pickupInTrigger = pickup; // Placable pickup detected
-                //AssignToSlot(pickup);
+
+                //_visualMaterial.SetFloat("_OutlineScale", 1.5f);
+                _visualMaterial.SetFloat("_Alpha", 0f);
             }
             else
             {
@@ -90,8 +92,8 @@ public class Placeable : MonoBehaviour
                 _pickupInTrigger = null; // clear when leaving
 
                 // Disable visual indication
-                _visualModel.gameObject.SetActive(true);
-
+                //_visualModel.gameObject.SetActive(true);
+                _visualMaterial.SetFloat("_Alpha", 1f);
 
                 Debug.Log("Pickup unassigned and can now be used again"); 
             }
