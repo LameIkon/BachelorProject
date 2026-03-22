@@ -20,7 +20,6 @@ public class CompendiumManager : MonoBehaviour
 
     private void Initialize()
     {
-        Debug.Log(_entries.Length);
         for (int i = 0; i < _entries.Length; i++)
         {
             GameObject button = Instantiate(_buttonPrefab, _buttonList);
