@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 
 /// <summary>
 /// A class designed to contain all logic related to the mouse. It depends on InputState and can change between Game and UI InputState
 /// If InputState is Game it will lock cursor to the center of screen. If the InputState is UI it will free the cursor to move wherever on the screen.
 /// </summary>
-public class MouseUtility
+public class MouseUtility : IDisposable
 {
     private readonly GameObject _crosshairUI;
 

@@ -1,7 +1,8 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class InteractionUtility
+public class InteractionUtility : IDisposable
 {
     private readonly Camera _camera;
     private readonly LayerMask _interactionMask;
