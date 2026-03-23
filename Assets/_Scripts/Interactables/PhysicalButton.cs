@@ -25,7 +25,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
 	/// <summary>
 	/// The button invokes an event with the button type currently assigned to it.
 	/// </summary>
-	public void Interact(Transform transform)
+	public void Interact()
     {
 		_buttonData.SetColor(true);
 		SetColorIndicator(_buttonData.Color);
