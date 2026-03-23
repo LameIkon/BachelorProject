@@ -102,7 +102,7 @@ namespace _Scripts
             _camera = GetComponentInChildren<Camera>();
 
 
-            using (_interactionUtility = new InteractionUtility(_camera, _pickUpPoint, _interactDistance, _staticMouseCanvas))
+            _interactionUtility = new InteractionUtility(_camera, _pickUpPoint, _interactDistance, _staticMouseCanvas);
             //_mouseUtility = new MouseUtility(_staticMouseCanvas);
             Reset();
         }
