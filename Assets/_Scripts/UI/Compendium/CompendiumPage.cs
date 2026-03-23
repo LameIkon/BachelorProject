@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.VisualScripting.Icons;
 
 /// <summary>
 /// Page for the compendium. CompendiumContent to hold the data such as text, while CompendiumUIReferences holds the ui references
@@ -73,6 +74,8 @@ public class CompendiumPage : MonoBehaviour
         _buttonObject = button;
         _buttonTitle = _buttonObject.GetComponentInChildren<TextMeshProUGUI>();
         _image.sprite = _compendiumData.image;
+
+        SetLanguage(LanguageUtility.CurrentLanguage);
 
         UpdateButtonText(title);
     }
