@@ -73,7 +73,7 @@ public class InteractionUtility : IDisposable
     /// </summary>
     private void SetCursorState(InputState state)
     {
-        Debug.Log(state);
+        //Debug.Log(state);
         switch (state)
         {
             case InputState.Game:

@@ -49,7 +49,7 @@ public class PageUIModule
                 int pageKey = pageButton.pageIndex;
                 button.onClick.AddListener(() => { 
                     SwitchPage(pageKey);
-                    Debug.Log(pageKey);
+                    //Debug.Log(pageKey);
                     }); 
             }
         }
