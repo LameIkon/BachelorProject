@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &794726481735253367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3197257392454913724}
+  - component: {fileID: 3174890390099246670}
+  - component: {fileID: 6172979900176519460}
+  - component: {fileID: 4337684681680034874}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &3197257392454913724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794726481735253367}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3174890390099246670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794726481735253367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ad7b6c72bad0d42b38d0cf01c0a02d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  _input: {fileID: 11400000, guid: 784258960135e874ba9da4f3ff031120, type: 2}
+--- !u!114 &6172979900176519460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794726481735253367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e253926faab3bf43bc23ca4b0385620, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TerminalManager
+  _terminalEvent: {fileID: 11400000, guid: 69baff98591f6dc4eb20daa0a65b1de1, type: 2}
+  _terminalStartEvent: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
+  _ovenstateChangeEvent: {fileID: 11400000, guid: 8a4dd22309d9c4d4f96f93db487852e2, type: 2}
+  _terminals: []
+  _machineStatus: 0
+  _isLeaverUp: 0
+  _isResetTermialInWarning: 0
+  _buttonDatas: []
+  _machineSpeed: 0
+--- !u!114 &4337684681680034874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794726481735253367}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a16fdbf9b0c5ac45b33cdd8eedc7061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TerminalStateMachine
+  _terminalEvent: {fileID: 11400000, guid: 69baff98591f6dc4eb20daa0a65b1de1, type: 2}
+  _terminalStartEvent: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
+  _ovenstateChangeEvent: {fileID: 11400000, guid: 8a4dd22309d9c4d4f96f93db487852e2, type: 2}
+  _terminals: []
+  _isLeaverUp: 0
+  _isResetTermialInWarning: 0
+  _machineSpeed: 0
+  machineStatus: 0
