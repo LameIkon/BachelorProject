@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: ResetButton
   m_EditorClassIdentifier: Assembly-CSharp::ButtonData
   _buttonType: 0
+  _onColor: {r: 0.16470589, g: 0.32156864, b: 1, a: 0}
+  _offColor: {r: 0.16470589, g: 0.32156864, b: 1, a: 0}

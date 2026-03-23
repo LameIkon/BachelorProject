@@ -226,6 +226,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5007026855318143134, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
   m_PrefabInstance: {fileID: 2025184155}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &196378609 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+  m_PrefabInstance: {fileID: 7254934592214303037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &196378610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196378609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fcf7e28af0745e4789c0861718af802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestGiver
+  _questGiveEventSO: {fileID: 11400000, guid: 05413bab4ed2105408f95bc51eed4ac9, type: 2}
+  _quest: {fileID: 11400000, guid: 4fe12e5aa2ad7d14ab8c0e4541489405, type: 2}
 --- !u!1 &426170117
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PhysicalButton
   _buttonData: {fileID: 11400000, guid: 73ddd115145618c42b57d40f09762077, type: 2}
   _onButtonEvent: {fileID: 11400000, guid: ab4116fc9b025c549a93be519ae6408a, type: 2}
+  _lightIndicator: {fileID: 0}
 --- !u!136 &656981262
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1109,6 +1129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PhysicalButton
   _buttonData: {fileID: 11400000, guid: a39fbd071500d5e478b3a3f81365260c, type: 2}
   _onButtonEvent: {fileID: 11400000, guid: ab4116fc9b025c549a93be519ae6408a, type: 2}
+  _lightIndicator: {fileID: 0}
 --- !u!136 &1428272001
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1515,6 +1536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.PlayerController
   _playerData: {fileID: 11400000, guid: 26b8981cec030484590c7ab34eb10690, type: 2}
   _interactDistance: 0
+  _pickUpPoint: {fileID: 0}
 --- !u!54 &1651201730
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1995,6 +2017,7 @@ GameObject:
   - component: {fileID: 2092084446}
   - component: {fileID: 2092084445}
   - component: {fileID: 2092084447}
+  - component: {fileID: 2092084448}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2046,6 +2069,28 @@ MonoBehaviour:
   _terminals: []
   _machineStatus: 0
   _isLeaverUp: 0
+  _isResetTermialInWarning: 0
+  _buttonDatas:
+  - {fileID: 11400000, guid: 603e2696bef3e9945947e7c53d7e6037, type: 2}
+  - {fileID: 11400000, guid: a39fbd071500d5e478b3a3f81365260c, type: 2}
+  - {fileID: 11400000, guid: 73ddd115145618c42b57d40f09762077, type: 2}
+  - {fileID: 11400000, guid: 5961ef5b9b81f8e47bc57e9765dc5e93, type: 2}
+  - {fileID: 11400000, guid: 9c2ca12ce86d7604ca6f07ec653007c6, type: 2}
+  _machineSpeed: 0
+--- !u!114 &2092084448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092084444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e731c2ebce9ec724b8be78b62949bb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestManager
+  _questEvent: {fileID: 11400000, guid: 05413bab4ed2105408f95bc51eed4ac9, type: 2}
+  _activeQuests: []
 --- !u!1001 &7254934592214303037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2150,7 +2195,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5007026855318143134, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 786432357}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 196378610}
   m_SourcePrefab: {fileID: 100100000, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

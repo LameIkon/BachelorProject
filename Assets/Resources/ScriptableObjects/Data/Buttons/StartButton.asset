@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: StartButton
   m_EditorClassIdentifier: Assembly-CSharp::ButtonData
   _buttonType: 1
+  _onColor: {r: 0.023584902, g: 1, b: 0.097420186, a: 0}
+  _offColor: {r: 0.023529414, g: 1, b: 0.098039225, a: 0}

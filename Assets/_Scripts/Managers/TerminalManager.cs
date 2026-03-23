@@ -11,6 +11,7 @@ public class TerminalManager : Singleton<TerminalManager>
     [SerializeField] private MachineStatus _machineStatus;
     [SerializeField] private bool _isLeaverUp;
     [SerializeField] private bool _isResetTermialInWarning;
+    [SerializeField] private ButtonData[] _buttonDatas;
 
     [SerializeField] private int _machineSpeed;
 

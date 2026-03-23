@@ -20,6 +20,7 @@ public class PickUpController : MonoBehaviour, IInteractable
 		if (_isPickedUp) 
 		{
 			transform.position = _playerTransform.position;
+			transform.rotation = _playerTransform.rotation;
 		}
     }
 	#endregion
