@@ -46,11 +46,12 @@ public class PlaceableSlot : MonoBehaviour
             pickupTransform.localRotation = Quaternion.identity;
 
 
-            //// Stop physics
-            //if (pickupTransform.TryGetComponent(out Rigidbody rb))
-            //{
-            //    rb.isKinematic = true;
-            //}
+            // Stop physics
+            if (pickupTransform.TryGetComponent(out Rigidbody rb))
+            {
+                rb.MovePosition(transform.position);
+                rb.MoveRotation(transform.rotation);
+            }
 
             // Disable visual indication
             //_visualModel.gameObject.SetActive(false);
