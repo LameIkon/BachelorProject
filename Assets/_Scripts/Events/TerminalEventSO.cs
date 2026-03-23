@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 /// <summary>
-/// Depricated script. Will probably be deleted at some point if we find no use for it.
+/// This sends a Terminal event.
 /// </summary>
 [CreateAssetMenu(fileName = "Terminal Event SO", menuName = "ScriptableObject/Events/Terminal")]
 public class TerminalEventSO : ScriptableObject
