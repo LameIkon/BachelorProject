@@ -72,7 +72,7 @@ namespace _Scripts
             _lookDirection.x = -dir.y; // These values have to be reassigned in a different way.
             _lookDirection.y = dir.x;
             _rotateDirection += _lookDirection * _playerData.MouseSpeed;
-            _rotateDirection.x = Mathf.Clamp(_rotateDirection.x, -90.0f, 90f); // This ensures that the camera only goes to the top and bottom of the view.
+            _rotateDirection.x = Mathf.Clamp(_rotateDirection.x, -89.9f, 89.9f); // This ensures that the camera only goes to the top and bottom of the view. Movement stops when looking directly up or down, there for it is clampd to 89.9. The cross product of two parallel vectors is 0;
         }
 
         /// <summary>
