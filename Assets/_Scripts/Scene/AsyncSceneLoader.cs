@@ -12,13 +12,12 @@ public class AsyncSceneLoader : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LoadScene(_loadScenes));
     }
 
     // The Coroutine for loading the scenes 
     private IEnumerator LoadScene(SceneField[] scenes)
     {
-        foreach (var scene in scenes) // looping over all the scenes in the array
+        foreach (SceneField scene in scenes) // looping over all the scenes in the array
         {
             if (!SceneManager.GetSceneByName(scene).isLoaded) // We check that the scene is not loaded such that it does not load already loaded scenes
             {
@@ -35,7 +34,7 @@ public class AsyncSceneLoader : MonoBehaviour
     private IEnumerator UnloadScene(SceneField[] scenes)
     {
 
-        foreach (var scene in scenes)
+        foreach (SceneField scene in scenes)
         {
             if (SceneManager.GetSceneByName(scene).isLoaded)
             {
