@@ -8,15 +8,32 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
     [SerializeField] private ButtonData _buttonData;
     [SerializeField] private ButtonEventSO _onButtonEvent;
     [SerializeField] private MeshRenderer _lightIndicator;
+	[SerializeField] private float _buttonPressSpeed;
 
-	#region Unity Methods
+    private Vector3 oldPosition;
+	private Vector3 newPosition;
 
-	private void Start() 
+
+    #region Unity Methods
+
+    private void Start() 
 	{
 		_lightIndicator = GetComponentInChildren<MeshRenderer>();
 		_buttonData.SetColor(false);
 		SetColorIndicator(_buttonData.Color);
-	}
+		_buttonPressSpeed = .1f;
+
+        Vector3 pos = transform.forward * .02f;
+        pos.x = pos.z;
+        pos.z = -pos.y;
+        pos.y = 0;
+
+        oldPosition = transform.position;
+        newPosition = transform.position;
+        newPosition += pos;
+        Debug.Log(pos);
+
+    }
 
 	#endregion
 
@@ -43,23 +60,14 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
 
 	public IEnumerator PressButton() 
 	{
-		Vector3 pos = transform.forward * .02f;
-		pos.x = pos.z;
-		pos.z = -pos.y;
-		pos.y = 0;
 
-		Vector3 oldPosition = transform.position;
-		Vector3 newPosition = transform.position;
-		newPosition += pos;
-		Debug.Log(pos);
-
-		for (float i = 0; i < 1; i += .01f)
+		for (float i = 0; i < 1; i += _buttonPressSpeed)
 		{
 			transform.position = Vector3.Lerp(oldPosition, newPosition, i);
 			yield return null;
 		}
 
-		for (float i = 0; i < 1; i += .01f)
+		for (float i = 0; i < 1; i += _buttonPressSpeed)
 		{
 			transform.position = Vector3.Lerp(newPosition, oldPosition, i);
 			yield return null;
