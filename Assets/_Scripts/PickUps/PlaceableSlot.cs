@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 public class PlaceableSlot : MonoBehaviour
 {
     [SerializeField] private PickableType _pickableTypeHolder; 
@@ -51,6 +52,8 @@ public class PlaceableSlot : MonoBehaviour
             {
                 rb.MovePosition(transform.position);
                 rb.MoveRotation(transform.rotation);
+                rb.angularVelocity = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)); // Polish makes cube jitter when placed;
+                rb.linearVelocity = Vector3.zero;
             }
 
             // Disable visual indication
