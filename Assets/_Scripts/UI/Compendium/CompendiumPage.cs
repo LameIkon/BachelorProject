@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static Unity.VisualScripting.Icons;
 
 /// <summary>
 /// Page for the compendium. CompendiumContent to hold the data such as text, while CompendiumUIReferences holds the ui references
