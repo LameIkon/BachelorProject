@@ -4657,7 +4657,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   - {fileID: 2100000, guid: c38a7a672c98f624592c5298c7e34d1a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4801,6 +4801,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3908952745269563482, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -7129,7 +7133,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7348,7 +7352,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7471,6 +7475,10 @@ PrefabInstance:
       propertyPath: _onButtonEvent
       value: 
       objectReference: {fileID: 11400000, guid: 13254ef1d187f4443a0d83639731fe31, type: 2}
+    - target: {fileID: 5958077097092709878, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: _data
       value: 
@@ -7624,6 +7632,10 @@ PrefabInstance:
       propertyPath: _buttonData
       value: 
       objectReference: {fileID: 11400000, guid: 603e2696bef3e9945947e7c53d7e6037, type: 2}
+    - target: {fileID: 5958077097092709878, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: _data
       value: 
@@ -7799,6 +7811,10 @@ PrefabInstance:
       propertyPath: _onButtonEvent
       value: 
       objectReference: {fileID: 11400000, guid: ab4116fc9b025c549a93be519ae6408a, type: 2}
+    - target: {fileID: 5958077097092709878, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: _data
       value: 
