@@ -51,7 +51,10 @@ public class UIManager : Singleton<UIManager>
             system.Close();
             _activeSystems.Remove(system);
             
-            InputReader.SetState(InputState.Game);
+            if (!_activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable))
+            {
+                InputReader.SetState(InputState.Game);
+            }
             Debug.Log("Remove from active list");
         }
         else
@@ -61,7 +64,10 @@ public class UIManager : Singleton<UIManager>
 
             _activeSystems.Add(system);
             
-            InputReader.SetState(InputState.UI);
+            if (system.RuleType == UIRuleType.Solo || system.RuleType == UIRuleType.Stackable)
+            {
+                InputReader.SetState(InputState.UI);
+            }
             Debug.Log("Add to active list");
         }
     }

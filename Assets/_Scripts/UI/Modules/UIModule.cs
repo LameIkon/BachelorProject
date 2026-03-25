@@ -24,7 +24,7 @@ public class UIModule : MonoBehaviour, IUISystem
     private void Start()
     {
         Initialize();
-        pageModule.SetupButtons();
+        pageModule?.SetupButtons();
         _config.registerUIEvent.Raise(this);
         pageModule?.SwitchPage(0);
     }

@@ -9,7 +9,6 @@ namespace _Scripts
         [SerializeField] private float _interactDistance;
 
         [SerializeField] private Transform _pickUpPoint;
-        [SerializeField] private GameObject _staticMouseCanvas;
 
         private Rigidbody _rb;
         private Camera _camera;
@@ -24,7 +23,6 @@ namespace _Scripts
         private Vector3 _lookDirection = Vector3.zero;
 
         // Used for mouse controls
-        private MouseUtility _mouseUtility;
         private InteractionUtility _interactionUtility;
         private Vector2 MousePos { set { MousePos = value; } }
 
@@ -102,7 +100,7 @@ namespace _Scripts
             _camera = GetComponentInChildren<Camera>();
 
 
-            _interactionUtility = new InteractionUtility(_camera, _pickUpPoint, _interactDistance, _staticMouseCanvas);
+            _interactionUtility = new InteractionUtility(_camera, _pickUpPoint, _interactDistance);
             //_mouseUtility = new MouseUtility(_staticMouseCanvas);
             Reset();
         }
