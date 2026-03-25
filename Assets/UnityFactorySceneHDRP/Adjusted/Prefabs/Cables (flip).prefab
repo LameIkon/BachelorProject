@@ -60,6 +60,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cables (flip)
       objectReference: {fileID: 0}
+    - target: {fileID: 3572361379670413974, guid: e3076a6b7113c5541b82f2abff5bc984, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ef23677b3ce03854c8d15401e4628bbf, type: 2}
+    - target: {fileID: 4732143971556663303, guid: e3076a6b7113c5541b82f2abff5bc984, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5fa30311e91a55749955354e35d56f5d, type: 2}
+    - target: {fileID: 7350884724192682611, guid: e3076a6b7113c5541b82f2abff5bc984, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ef23677b3ce03854c8d15401e4628bbf, type: 2}
+    - target: {fileID: 8205648147607614258, guid: e3076a6b7113c5541b82f2abff5bc984, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f533ed6fd962fe749969fb7933f3eac2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

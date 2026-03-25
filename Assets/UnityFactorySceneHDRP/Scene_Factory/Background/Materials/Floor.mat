@@ -25,7 +25,7 @@ Material:
   - TransparentBackface
   - RayTracingPrepass
   - MOTIONVECTORS
-  m_LockedProperties: _Detail_R_Tiling _Normal_Scale
+  m_LockedProperties: _Detail_R_Tiling _MainTex _Normal_Scale
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
