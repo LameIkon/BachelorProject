@@ -4,7 +4,7 @@ public class CanvasUIModule
 {
     private readonly GameObject _canvas;
 
-    public bool ActiveState { get; private set; }
+    //public bool ActiveState { get; private set; }
 
     public CanvasUIModule(GameObject canvas)
     {
@@ -12,5 +12,11 @@ public class CanvasUIModule
         //_canvas.SetActive(false);
     }
 
-    public void Toggle() => _canvas.SetActive(!_canvas.activeSelf);
+    /// <summary>
+    /// Set gameobject active if inactive and vice versa
+    /// </summary>
+    public void SetActive(bool state)
+    {
+        _canvas.SetActive(state);
+    }
 }

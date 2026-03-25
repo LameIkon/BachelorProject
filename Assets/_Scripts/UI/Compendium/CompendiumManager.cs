@@ -88,6 +88,9 @@ public class CompendiumManager : MonoBehaviour
         PrintNavigationHistory();
     }
 
+    /// <summary>
+    /// Display navigation history 
+    /// </summary>
     private void PrintNavigationHistory()
     {
         // Join each element in the stack by first reversing it to get the oldest value, then get its text for a name lastly join together with →  

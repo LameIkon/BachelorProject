@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d0dd7dc8ff32940975bd38ba891756, type: 3}
-  m_Name: InputReader SO
-  m_EditorClassIdentifier: Assembly-CSharp::InputReader
-  _toggleUI: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
+  m_Script: {fileID: 11500000, guid: 6e444ca1eea28c54d9d042f047fba987, type: 3}
+  m_Name: Crosshair UI Toggle Event SO
+  m_EditorClassIdentifier: Assembly-CSharp::UIToggleEventSO

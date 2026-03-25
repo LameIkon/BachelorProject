@@ -184,6 +184,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6147917137846298642, guid: 0d3419710b0fe2743a3fade9eee9e9b6, type: 3}
+      propertyPath: _uiToggleEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
     - target: {fileID: 6838466854162809996, guid: 0d3419710b0fe2743a3fade9eee9e9b6, type: 3}
       propertyPath: m_Name
       value: UIManager
@@ -797,6 +801,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -692.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8253526356716991785, guid: fc17a51aa87b7b64aba318f4a4ac492d, type: 3}
+      propertyPath: _toggleEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
     - target: {fileID: 8344093301778454804, guid: fc17a51aa87b7b64aba318f4a4ac492d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

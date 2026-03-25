@@ -6,7 +6,7 @@ using System;
 public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActions
 {
     [Header("UI Toggles")] // More to be implemented later
-    [SerializeField] private UIToggleEventSO _compendiumToggleEvent;
+    [SerializeField] private UIToggleEventSO _toggleUI;
 
     private static Inputs _input;
     public static InputState s_State;
@@ -100,7 +100,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public void OnCompendium(InputAction.CallbackContext context)
     {
         Debug.Log("try Toggle Compendium");
-        if (context.started) _compendiumToggleEvent.Raise();
+        if (context.started) _toggleUI.Raise(UIType.Compendium);
     }
 
     #endregion

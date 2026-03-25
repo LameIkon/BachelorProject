@@ -13,5 +13,7 @@ public class PageSettings
     [Header("Optional")]
     [Tooltip("An optional container can be set here, if pageContainer is not designed to hold buttons")]
     public GameObject buttonContainer;
+    [Tooltip("Decide if it should remember current page when opening again or go to first page again")]
+    public bool rememberPage;
 }
 
