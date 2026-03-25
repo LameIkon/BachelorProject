@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class InteractionUtility
@@ -7,8 +6,6 @@ public class InteractionUtility
     private readonly LayerMask _interactionMask;
     private readonly Transform _pickUpPoint;
     private readonly float _pickUpDistance;
-
-    //private readonly GameObject _crosshairUI;
 
     /// <summary>
     /// How to interact with interactables
@@ -24,6 +21,9 @@ public class InteractionUtility
         _pickUpDistance = interactRange;
         
         _interactionMask = LayerMask.GetMask("Interactable"); // Specific layer we can interact with
+
+        // Mouse position
+        InputReader.s_OnMouseMoveEvent += Hover;
     }
 
     /// <summary>
@@ -33,21 +33,53 @@ public class InteractionUtility
     {
         if (InputReader.s_State != InputState.Game) return; // Can't interact if we aren't in Game input state
 
-        Ray ray = _camera.ScreenPointToRay(pos);
+        if (RaycastInteractable(pos, out IPickable pickable, out IInteractable interactable))
+        {
+            pickable?.Interact(_pickUpPoint);
+            interactable?.Interact();
+        }
+    }
+
+    private void Hover(Vector2 pos)
+    {
+        if (InputReader.s_State != InputState.Game) return; // Can't interact if we aren't in Game input state
+
+        if (RaycastInteractable(pos, out IPickable pickable, out IInteractable interactable))
+        {
+            if (pickable != null)
+            {
+                Debug.Log(pickable);
+            }
+            if (interactable != null)
+            {
+                Debug.Log(interactable);
+            }
+        }
+    }
+
+    /// <summary>
+    /// A boolean detection for the interactable objects in the game the player can interact with. If any interactables found return true
+    /// And give out the interactable. Will only return one to work with. IPickable has priority
+    /// </summary>
+    /// <param name="ray">Raycast from center of camera</param>
+    /// <param name="pickable">Types that the player can pick up</param>
+    /// <param name="interactable">Types the player can interact with, eg. press a button</param>
+    /// <returns></returns>
+    private bool RaycastInteractable(Vector2 screenPos, out IPickable pickable, out IInteractable interactable)
+    {
+        Ray ray = _camera.ScreenPointToRay(screenPos);
+
+        pickable = null;
+        interactable = null;
 
         if (Physics.Raycast(ray, out RaycastHit hit, _pickUpDistance, _interactionMask))
         {
-            if (hit.collider.TryGetComponent(out IPickable pickable))
-            {
-                pickable.Interact(_pickUpPoint);
-                return;
-            }
+            pickable = hit.collider.GetComponent<IPickable>();
+            interactable = hit.collider.GetComponent<IInteractable>();
 
-            if (hit.collider.TryGetComponent(out IInteractable interactable))
-            {
-                interactable.Interact();
-                return;
-            }
+            return pickable != null || interactable != null;
         }
+
+        return false;
     }
 }

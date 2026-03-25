@@ -21,27 +21,24 @@ public class UIModule : MonoBehaviour, IUISystem
 
     public bool IsOpen { get; private set;}
 
+
     private void Start()
     {
         Initialize();
-        pageModule?.SetupButtons();
-        _config.registerUIEvent.Raise(this);
-        pageModule?.SwitchPage(0);
     }
 
     #region Initialize
     private void Initialize()
     {
         _canvasModule = new CanvasUIModule(_canvas);
-
         InitializePageSettings();
-
+        _config.registerUIEvent.Raise(this);    
     }
 
     private void InitializePageSettings()
     {
         if (!_pageSettings.pageContainer) return;
-
+        
         switch (_pageSettings.pageMode)
         {
             case PageMode.None:
@@ -49,15 +46,15 @@ public class UIModule : MonoBehaviour, IUISystem
                 return;
             case PageMode.MultiplePages:
                 // If we have a pageSetting we will create a method to switch pages
-                pageModule = new PageUIModule(_pageSettings);                
+                pageModule = new PageUIModule(_pageSettings);     
+                pageModule?.SetupButtons();
+                pageModule?.SwitchPage(0);
                 return;
 
             case PageMode.OverridePage: // Override is not an option and is still under consideration for implementation   
                 //_overridePageModule = new PageUIOverrideModule(_pageSettings.pageContainer);
                 return;
-        }
-
-        
+        }      
     }
 
     #endregion

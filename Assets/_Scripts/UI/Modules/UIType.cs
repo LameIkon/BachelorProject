@@ -2,5 +2,6 @@ public enum UIType
 {
     Compendium,
     Crosshair,
-    Pause
+    Pause,
+    InteractionPopUp,
 }
