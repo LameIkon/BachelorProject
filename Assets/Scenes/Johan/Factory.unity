@@ -13096,6 +13096,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SteelFrame
       objectReference: {fileID: 0}
+    - target: {fileID: 1449987364050948174, guid: 0c72202acbff7b54fac22fcac1660211, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
