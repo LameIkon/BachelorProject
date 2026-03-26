@@ -12,6 +12,8 @@ public class GameManager : Singleton<GameManager>
     private Dictionary<LevelName, LevelData> _levelsDict;
     private LevelName priviousLevelLoaded;
 
+    [SerializeField] private LevelName _firstSceneToLoad;
+
     #region Unity Method 
     protected override void Awake()
     {
@@ -24,8 +26,8 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         InitLevels();
-        priviousLevelLoaded = LevelName.MainMenu;
-        LoadScenes(LevelName.MainMenu);
+        priviousLevelLoaded = _firstSceneToLoad;
+        LoadScenes(_firstSceneToLoad);
 
     }
 
