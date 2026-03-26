@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private LevelData[] _levels;
     [SerializeField] private SceneLoadEventSO _sceneLoadEventSO;
 
-    private Dictionary<LevelName, SceneField[]> _levelsDict;
+    private Dictionary<LevelName, LevelData> _levelsDict;
     private LevelName priviousLevelLoaded;
 
     #region Unity Method 
@@ -49,11 +49,11 @@ public class GameManager : Singleton<GameManager>
 
     private void InitLevels() 
     {
-        _levelsDict = new Dictionary<LevelName, SceneField[]>();
+        _levelsDict = new Dictionary<LevelName, LevelData>();
 
-        foreach (LevelData levelData in _levels) 
+        foreach (LevelData data in _levels) 
         {
-            _levelsDict.Add(levelData.Name, levelData.Scenes);
+            _levelsDict.Add(data.Name, data);
         }
     }
 
@@ -62,10 +62,13 @@ public class GameManager : Singleton<GameManager>
     {
         if (!_levelsDict.ContainsKey(levelName)) return;
 
-        StartCoroutine(_sceneLoader.UnloadScenes(_levelsDict[priviousLevelLoaded]));
+        StartCoroutine(_sceneLoader.UnloadScenes(_levelsDict[priviousLevelLoaded].Scenes));
 
-        StartCoroutine(_sceneLoader.LoadScenes(_levelsDict[levelName]));
+        StartCoroutine(_sceneLoader.LoadScenes(_levelsDict[levelName].Scenes));
         priviousLevelLoaded = levelName;
+
+        InputState inputState = _levelsDict[levelName].GameState;
+        InputReader.SetState(inputState);
     }
 
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19dd319e3059f5d47b0003b1460cddd7, type: 3}
   m_Name: MainMenuUIModule
   m_EditorClassIdentifier: Assembly-CSharp::UIModuleConfigSO
-  uiType: 1
+  uiType: 4
+  uiRuleType: 3
   updateUIEvent: {fileID: 11400000, guid: c54ccdb0f5f8ea74fbc0f4561e9856d9, type: 2}
   registerUIEvent: {fileID: 11400000, guid: 319ac0f259220da44a591b150786b908, type: 2}
-  toggleUIEvent: {fileID: 11400000, guid: 3012e9465bc4aa543929ec0abf3ea38b, type: 2}

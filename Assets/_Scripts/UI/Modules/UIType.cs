@@ -4,4 +4,5 @@ public enum UIType
     Crosshair,
     Pause,
     InteractionPopUp,
+    MainMenu
 }

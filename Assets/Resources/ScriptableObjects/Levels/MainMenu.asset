@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MainMenu
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   _name: 0
+  _gameState: 1
   _scenes:
   - m_SceneAsset: {fileID: 102900000, guid: b69bc05314847584eb749daef80d5744, type: 3}
     m_SceneName: MainMenu
