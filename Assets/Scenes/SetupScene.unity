@@ -154,8 +154,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6e3aec3dbf2edc949bff9ba66721c556, type: 2}
   - {fileID: 11400000, guid: 12688494ff43e1a469b64bf8ff40899a, type: 2}
   - {fileID: 11400000, guid: d88d26cbc1c17de4bb4d312453ca2a64, type: 2}
+  - {fileID: 11400000, guid: 2ca8de69430df6a428e5ee5ac567ff7b, type: 2}
   _sceneLoadEventSO: {fileID: 11400000, guid: 42bc8ab227f1510428d86bd34ea40c58, type: 2}
-  _firstSceneToLoad: 0
+  _firstSceneToLoad: 1
 --- !u!4 &426925990
 Transform:
   m_ObjectHideFlags: 0

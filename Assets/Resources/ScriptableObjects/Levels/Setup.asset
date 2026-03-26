@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f97cbbaf9fefd6f458b119d76193f078, type: 3}
-  m_Name: Level3
+  m_Name: Setup
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  _name: 5
-  _inputState: 0
+  _name: 0
+  _inputState: 1
   _scenes:
-  - m_SceneAsset: {fileID: 102900000, guid: b69bc05314847584eb749daef80d5744, type: 3}
-    m_SceneName: MainMenu
+  - m_SceneAsset: {fileID: 102900000, guid: 2dba196369745084c8015c28e6b1dd5c, type: 3}
+    m_SceneName: SetupScene

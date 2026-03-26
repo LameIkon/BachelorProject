@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f97cbbaf9fefd6f458b119d76193f078, type: 3}
   m_Name: MainMenu
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  _name: 0
-  _gameState: 1
+  _name: 1
+  _inputState: 1
   _scenes:
   - m_SceneAsset: {fileID: 102900000, guid: b69bc05314847584eb749daef80d5744, type: 3}
     m_SceneName: MainMenu

@@ -1,30 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class AsyncSceneLoader : ISceneLoader
+public class AsyncSceneLoader
 {
-    private AsyncSceneLoader() { }
+    private readonly LevelData[] _levels;
 
-    private static AsyncSceneLoader _instance;
+    private readonly Dictionary<LevelName, LevelData> _levelsDict;
+    private readonly LevelName _previousLevelLoaded;
 
-    public static AsyncSceneLoader Instance 
+    public AsyncSceneLoader(LevelName firstSceneLoad, LevelData[] levels) 
     { 
-        get
+        _previousLevelLoaded = firstSceneLoad;
+        _levels = levels;
+
+        _levelsDict = new Dictionary<LevelName, LevelData>();
+        InitLevels();
+    }
+
+    private void InitLevels() 
+    {
+        foreach (LevelData data in _levels) 
         {
-            if (_instance == null) 
-            {
-                _instance = new AsyncSceneLoader();
-            }
-            return _instance;
+            _levelsDict.Add(data.Name, data);
         }
-    } 
+    }
 
 
     // The Coroutine for loading the scenes 
-    public IEnumerator LoadScenes(SceneField[] scenes)
+    public IEnumerator LoadScenes(LevelName level)
     {
+        SceneField[] scenes = _levelsDict[level].Scenes;
+
         foreach (SceneField scene in scenes) // looping over all the scenes in the array
         {
             if (!SceneManager.GetSceneByName(scene).isLoaded) // We check that the scene is not loaded such that it does not load already loaded scenes
@@ -37,15 +44,13 @@ public class AsyncSceneLoader : ISceneLoader
             }
         }
 
+
+        InputReader.SetState(_levelsDict[level].GameState);
     }
 
-    public IEnumerator LoadScenes(List<SceneField> scenes) 
+    public IEnumerator UnloadScenes()
     {
-        return LoadScenes(scenes.ToArray());
-    }
-
-    public IEnumerator UnloadScenes(SceneField[] scenes)
-    {
+        SceneField[] scenes = _levelsDict[_previousLevelLoaded].Scenes;
 
         foreach (SceneField scene in scenes)
         {
@@ -60,12 +65,6 @@ public class AsyncSceneLoader : ISceneLoader
 
         }
     }
-
-    public IEnumerator UnloadScenes(List<SceneField> scenes)
-    {
-        return UnloadScenes(scenes.ToArray());
-    }
-
 }
 
 public interface ISceneLoader 

@@ -1719,7 +1719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneSwitcher
   _onSceneLoad: {fileID: 11400000, guid: 42bc8ab227f1510428d86bd34ea40c58, type: 2}
-  _levelName: 2
+  _levelName: 3
 --- !u!1 &477785173
 GameObject:
   m_ObjectHideFlags: 0
