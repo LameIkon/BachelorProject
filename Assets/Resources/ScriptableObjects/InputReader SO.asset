@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d0dd7dc8ff32940975bd38ba891756, type: 3}
   m_Name: InputReader SO
   m_EditorClassIdentifier: Assembly-CSharp::InputReader
-  _compendiumToggleEvent: {fileID: 11400000, guid: 894a28015934eb348b9191ac390e4c99, type: 2}
+  _toggleUI: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}

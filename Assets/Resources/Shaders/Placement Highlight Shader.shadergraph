@@ -173,15 +173,35 @@
     "m_SubDatas": [],
     "m_ActiveTargets": [
         {
-            "m_Id": "db8da93ad19b432fa9c0ac5c00ea7548"
+            "m_Id": "02cc3dafc0e24bd9ae10817189298b1f"
         }
     ]
 }
 
 {
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.Rendering.BuiltIn.ShaderGraph.BuiltInUnlitSubTarget",
-    "m_ObjectId": "06d3265297f54d158bbb46eca1fca51d"
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalTarget",
+    "m_ObjectId": "02cc3dafc0e24bd9ae10817189298b1f",
+    "m_Datas": [],
+    "m_ActiveSubTarget": {
+        "m_Id": "4005a80766f843bc9354b7b6a2c93dc6"
+    },
+    "m_AllowMaterialOverride": false,
+    "m_SurfaceType": 1,
+    "m_ZTestMode": 4,
+    "m_ZWriteControl": 0,
+    "m_AlphaMode": 0,
+    "m_RenderFace": 2,
+    "m_AlphaClip": false,
+    "m_CastShadows": true,
+    "m_ReceiveShadows": true,
+    "m_DisableTint": false,
+    "m_Sort3DAs2DCompatible": false,
+    "m_AdditionalMotionVectorMode": 0,
+    "m_AlembicMotionVectors": false,
+    "m_SupportsLODCrossFade": false,
+    "m_CustomEditorGUI": "",
+    "m_SupportVFX": false
 }
 
 {
@@ -344,6 +364,15 @@
             "m_Id": "ffb9aab2e27e44d3a45cf19b2b8df3d5"
         }
     ]
+}
+
+{
+    "m_SGVersion": 2,
+    "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalUnlitSubTarget",
+    "m_ObjectId": "4005a80766f843bc9354b7b6a2c93dc6",
+    "m_KeepLightingVariants": false,
+    "m_DefaultDecalBlending": true,
+    "m_DefaultSSAO": true
 }
 
 {
@@ -956,24 +985,6 @@
     "m_Property": {
         "m_Id": "ffb9aab2e27e44d3a45cf19b2b8df3d5"
     }
-}
-
-{
-    "m_SGVersion": 2,
-    "m_Type": "UnityEditor.Rendering.BuiltIn.ShaderGraph.BuiltInTarget",
-    "m_ObjectId": "db8da93ad19b432fa9c0ac5c00ea7548",
-    "m_Datas": [],
-    "m_ActiveSubTarget": {
-        "m_Id": "06d3265297f54d158bbb46eca1fca51d"
-    },
-    "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 1,
-    "m_ZWriteControl": 0,
-    "m_ZTestMode": 4,
-    "m_AlphaMode": 0,
-    "m_RenderFace": 2,
-    "m_AlphaClip": false,
-    "m_CustomEditorGUI": ""
 }
 
 {

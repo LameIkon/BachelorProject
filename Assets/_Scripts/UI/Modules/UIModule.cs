@@ -2,7 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// All related to ui should use this script. It's designed mostly for dynamic ui that changes over time but also
-/// for static ui that never change, to enable ot disable.
+/// for static ui that never change, to enable or disable.
 /// </summary>
 public class UIModule : MonoBehaviour, IUISystem
 {
@@ -16,43 +16,29 @@ public class UIModule : MonoBehaviour, IUISystem
     private CanvasUIModule _canvasModule;
     public PageUIModule pageModule {get; private set;}
     
-    public UIType UIType => _config.uiType;
+    public UIType UIType => _config.uiType; 
+    public UIRuleType RuleType => _config.uiRuleType;
 
     public bool IsOpen { get; private set;}
 
-    private void Awake()
-    {
-    }
-    private void OnEnable()
-    {
-        Initialize();
-        _config.toggleUIEvent.OnRaise += ToggleUI;
-    }
-
-    private void OnDisable()
-    {
-       _config.toggleUIEvent.OnRaise -= ToggleUI; 
-    }
 
     private void Start()
     {
-        pageModule.SetupButtons();
-        _config.registerUIEvent.Raise(this);
+        Initialize();
     }
 
     #region Initialize
     private void Initialize()
     {
         _canvasModule = new CanvasUIModule(_canvas);
-
         InitializePageSettings();
-
+        _config.registerUIEvent.Raise(this);    
     }
 
     private void InitializePageSettings()
     {
         if (!_pageSettings.pageContainer) return;
-
+        
         switch (_pageSettings.pageMode)
         {
             case PageMode.None:
@@ -60,27 +46,29 @@ public class UIModule : MonoBehaviour, IUISystem
                 return;
             case PageMode.MultiplePages:
                 // If we have a pageSetting we will create a method to switch pages
-                pageModule = new PageUIModule(_pageSettings);                
+                pageModule = new PageUIModule(_pageSettings);     
+                pageModule?.SetupButtons();
+                pageModule?.SwitchPage(0);
                 return;
 
             case PageMode.OverridePage: // Override is not an option and is still under consideration for implementation   
                 //_overridePageModule = new PageUIOverrideModule(_pageSettings.pageContainer);
                 return;
-        }
-
-        
+        }      
     }
 
     #endregion
 
     #region Methods
-    public void ToggleUI()
+    public void Open()
     {
-        IsOpen = !IsOpen;
-        _canvasModule.Toggle();
-        pageModule?.SwitchPage(0);
+        if (IsOpen) return;
 
-       
+        IsOpen = true;
+        _canvasModule.SetActive(true);
+
+        if (_pageSettings.rememberPage) pageModule?.SwitchPage(0); // Reset to first page if setting set to true
+
         _config.updateUIEvent.Raise(this);
     }
 
@@ -89,7 +77,8 @@ public class UIModule : MonoBehaviour, IUISystem
         if (!IsOpen) return;
 
         IsOpen = false;
-        _canvasModule.Toggle();
+        _canvasModule.SetActive(false);
+
         _config.updateUIEvent.Raise(this);
     }
     #endregion

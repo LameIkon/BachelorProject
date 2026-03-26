@@ -4,9 +4,10 @@ using UnityEngine;
 public class UIModuleConfigSO : ScriptableObject
 {
     public UIType uiType;
+    public UIRuleType uiRuleType;
     
     [Header("Events")]
     public UISystemEventSO updateUIEvent;
     public UISystemEventSO registerUIEvent;
-    public UIToggleEventSO toggleUIEvent;
+    //public UIToggleEventSO toggleUIEvent;
 }

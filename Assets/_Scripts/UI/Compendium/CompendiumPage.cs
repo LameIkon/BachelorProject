@@ -74,6 +74,8 @@ public class CompendiumPage : MonoBehaviour
         _buttonTitle = _buttonObject.GetComponentInChildren<TextMeshProUGUI>();
         _image.sprite = _compendiumData.image;
 
+        SetLanguage(LanguageUtility.CurrentLanguage);
+
         UpdateButtonText(title);
     }
     #endregion

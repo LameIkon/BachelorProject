@@ -6,7 +6,7 @@ using System;
 public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActions
 {
     [Header("UI Toggles")] // More to be implemented later
-    [SerializeField] private UIToggleEventSO _compendiumToggleEvent;
+    [SerializeField] private UIToggleEventSO _toggleUI;
 
     private static Inputs _input;
     public static InputState s_State;
@@ -16,6 +16,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public static event Action<Vector2> s_OnMoveEvent;
     public static event Action<Vector2> s_OnInteractEvent;
     public static event Action<Vector2> s_OnLookEvent;
+    public static event Action<Vector2> s_OnMouseMoveEvent;
     public static event Action s_OnUseEvent;
     public static event Action s_ToggleEscape;
 
@@ -70,6 +71,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public void OnMove(InputAction.CallbackContext context)
     {
         s_OnMoveEvent?.Invoke(context.ReadValue<Vector2>());
+        s_OnMouseMoveEvent?.Invoke(MousePos);
     }
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -90,6 +92,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public void OnMousePosition(InputAction.CallbackContext context) 
     {
         MousePos = context.ReadValue<Vector2>();
+        s_OnMouseMoveEvent?.Invoke(MousePos);
     }
 
     public void OnEscape(InputAction.CallbackContext context)
@@ -100,7 +103,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public void OnCompendium(InputAction.CallbackContext context)
     {
         Debug.Log("try Toggle Compendium");
-        if (context.started) _compendiumToggleEvent.Raise();
+        if (context.started) _toggleUI.Raise(UIType.Compendium);
     }
 
     #endregion
