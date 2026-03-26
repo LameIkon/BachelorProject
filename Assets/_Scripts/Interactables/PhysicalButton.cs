@@ -13,6 +13,8 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
     private Vector3 oldPosition;
 	private Vector3 newPosition;
 
+	private OnHighlightUtility _onHoverUtility;
+
 
     #region Unity Methods
 
@@ -33,11 +35,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
         newPosition += pos;
         Debug.Log(pos);
 
-
-		_materials = GetComponent<MeshRenderer>().materials;
-		_highlightScale = _materials[1].GetFloat("_OutlineScale");
-		SetHighlight(false);
-
+		_onHoverUtility = new OnHighlightUtility(this.gameObject);
     }
 
 	#endregion
@@ -81,29 +79,16 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
 	}
 
     #region Hovering logic
-	// materials
-	private Material[] _materials;
-	private float _highlightScale;
-
-	/// <summary>
-	/// Indicate if you are hovering over an interactable 
-	/// </summary>
-	/// <param name="state">boolean to check state. True will activate and false to deactivate highlight</param>
-	public void SetHighlight(bool state)
-	{
-		_materials[1].SetFloat("_OutlineScale", state ? _highlightScale : 0f);
-	}
-
 
     public void OnHoverEnter()
 	{
-		SetHighlight(true);
+		_onHoverUtility.SetHighlight(true);
 	}
 
 
     public void OnHoverExit()
 	{
-		SetHighlight(false);
+		_onHoverUtility.SetHighlight(false);
 	}
     #endregion
 }

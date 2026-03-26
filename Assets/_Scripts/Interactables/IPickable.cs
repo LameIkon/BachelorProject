@@ -13,8 +13,6 @@ public interface IPickable
 
 public interface IHoverable
 {
-    void SetHighlight(bool state);
-
     void OnHoverEnter();
     void OnHoverExit();
 }

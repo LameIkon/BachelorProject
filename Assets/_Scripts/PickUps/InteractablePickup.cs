@@ -6,8 +6,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 	[SerializeField] private PickableType _pickableType;
 	
 	// materials
-	private Material[] _materials;
-	private float _highlightScale;
+	private OnHighlightUtility _onHoverUtility;
 	
 	private Transform _holdPoint;
 	private Rigidbody _rb;
@@ -25,14 +24,10 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 
     private void Awake()
     {
- 		_rb = GetComponent<Rigidbody>();
-		_materials = GetComponent<MeshRenderer>().materials;
-
-		_highlightScale = _materials[1].GetFloat("_OutlineScale");
-		_materials[1].SetFloat("_OutlineScale", 0f);
+		_rb = GetComponent<Rigidbody>();
+		_onHoverUtility = new OnHighlightUtility(this.gameObject);
 
         _isPickedUp = false;      
-		SetHighlight(_isPickedUp);
     }
 
     private void FixedUpdate()
@@ -63,7 +58,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 
 	private void PickUp(Transform holdPoint)
 	{
-		SetHighlight(false);
+		_onHoverUtility.SetHighlight(false);
 		transform.SetParent(null);
 		_holdPoint = holdPoint;
         _isPickedUp = true;
@@ -82,7 +77,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 		_rb.linearDamping = 0f;
 		Debug.Log("Drop");
 
-		if (_canBePickedUp) SetHighlight(true);; // Temporary
+		if (_canBePickedUp) _onHoverUtility.SetHighlight(true); // Temporary
 		_currentSlot?.TryPlace(this);
 	}
 
@@ -105,26 +100,16 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 
     #region Hovering logic
 
-	/// <summary>
-	/// Indicate if you are hovering over an interactable 
-	/// </summary>
-	/// <param name="state">boolean to check state. True will activate and false to deactivate highlight</param>
-	public void SetHighlight(bool state)
-	{
-		_materials[1].SetFloat("_OutlineScale", state ? _highlightScale : 0f);
-	}
-
-
     public void OnHoverEnter()
 	{
 		if (_isPickedUp) return;
-		SetHighlight(true);
+		_onHoverUtility.SetHighlight(true);
 	}
 
 
     public void OnHoverExit()
 	{
-		SetHighlight(false);
+		_onHoverUtility.SetHighlight(false);
 	}
     #endregion
 
