@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public sealed class PhysicalButton : MonoBehaviour, IInteractable 
+public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable 
 {
 
     [SerializeField] private ButtonData _buttonData;
@@ -32,6 +32,11 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
         newPosition = transform.position;
         newPosition += pos;
         Debug.Log(pos);
+
+
+		_materials = GetComponent<MeshRenderer>().materials;
+		_highlightScale = _materials[1].GetFloat("_OutlineScale");
+		SetHighlight(false);
 
     }
 
@@ -74,6 +79,33 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
 		}
 
 	}
+
+    #region Hovering logic
+	// materials
+	private Material[] _materials;
+	private float _highlightScale;
+
+	/// <summary>
+	/// Indicate if you are hovering over an interactable 
+	/// </summary>
+	/// <param name="state">boolean to check state. True will activate and false to deactivate highlight</param>
+	public void SetHighlight(bool state)
+	{
+		_materials[1].SetFloat("_OutlineScale", state ? _highlightScale : 0f);
+	}
+
+
+    public void OnHoverEnter()
+	{
+		SetHighlight(true);
+	}
+
+
+    public void OnHoverExit()
+	{
+		SetHighlight(false);
+	}
+    #endregion
 }
 
 

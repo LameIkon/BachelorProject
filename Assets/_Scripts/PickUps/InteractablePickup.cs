@@ -29,7 +29,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 		_materials = GetComponent<MeshRenderer>().materials;
 
 		_highlightScale = _materials[1].GetFloat("_OutlineScale");
-		_materials[1].SetFloat("", 0f);
+		_materials[1].SetFloat("_OutlineScale", 0f);
 
         _isPickedUp = false;      
 		SetHighlight(_isPickedUp);

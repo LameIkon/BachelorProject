@@ -16,6 +16,6 @@ MonoBehaviour:
   _inputState: 0
   _scenes:
   - m_SceneAsset: {fileID: 102900000, guid: 2fd846c7e1c4c844e9d9c338217c98bd, type: 3}
-    m_SceneName: Factory
+    m_SceneName: FactoryScene
   - m_SceneAsset: {fileID: 102900000, guid: c52955602ba279e43b7e91ce33e602a3, type: 3}
     m_SceneName: HUD
