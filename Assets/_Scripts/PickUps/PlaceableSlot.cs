@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 public class PlaceableSlot : MonoBehaviour
@@ -6,6 +7,7 @@ public class PlaceableSlot : MonoBehaviour
     [SerializeField] private PickableType _pickableTypeHolder; 
     [SerializeField] private Transform _visualModel;
     [SerializeField] private Transform _snapPoint;
+    [SerializeField] private float _wiggle;
     
     private bool _hasAssignedSlot = false;
     private IPickable _pickupInTrigger; // The pickup currently inside this slot
@@ -18,6 +20,7 @@ public class PlaceableSlot : MonoBehaviour
         {
             _visualMaterial = renderer.material;
         }
+        _wiggle = 1f;
     }
 
 
@@ -52,7 +55,7 @@ public class PlaceableSlot : MonoBehaviour
             {
                 rb.MovePosition(transform.position);
                 rb.MoveRotation(transform.rotation);
-                rb.angularVelocity = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)); // Polish makes cube jitter when placed;
+                rb.angularVelocity = new Vector3(RandomNumber(), 0, RandomNumber()); // Polish makes cube jitter when placed;
                 rb.linearVelocity = Vector3.zero;
             }
 
@@ -83,6 +86,11 @@ public class PlaceableSlot : MonoBehaviour
                 Debug.Log("This can not be placed here");
             }
         }
+    }
+
+    private float RandomNumber() 
+    {
+        return Random.Range(-_wiggle, _wiggle);
     }
 
     private void OnTriggerExit(Collider other)
