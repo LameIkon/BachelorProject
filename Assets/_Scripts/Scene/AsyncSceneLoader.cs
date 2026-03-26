@@ -2,20 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
 
-public class AsyncSceneLoader : MonoBehaviour
+public class AsyncSceneLoader : ISceneLoader
 {
+    private AsyncSceneLoader() { }
 
-    [SerializeField] private SceneField[] _loadScenes; // This is the array of scenes that get loaded
-    [SerializeField] private SceneField[] _unloadScenes; // This is the array of scenes that get unloaded
+    private static AsyncSceneLoader _instance;
 
-    private void Start()
-    {
-    }
+    public static AsyncSceneLoader Instance 
+    { 
+        get
+        {
+            if (_instance == null) 
+            {
+                _instance = new AsyncSceneLoader();
+            }
+            return _instance;
+        }
+    } 
+
 
     // The Coroutine for loading the scenes 
-    private IEnumerator LoadScene(SceneField[] scenes)
+    public IEnumerator LoadScenes(SceneField[] scenes)
     {
         foreach (SceneField scene in scenes) // looping over all the scenes in the array
         {
@@ -31,7 +39,12 @@ public class AsyncSceneLoader : MonoBehaviour
 
     }
 
-    private IEnumerator UnloadScene(SceneField[] scenes)
+    public IEnumerator LoadScenes(List<SceneField> scenes) 
+    {
+        return LoadScenes(scenes.ToArray());
+    }
+
+    public IEnumerator UnloadScenes(SceneField[] scenes)
     {
 
         foreach (SceneField scene in scenes)
@@ -46,7 +59,18 @@ public class AsyncSceneLoader : MonoBehaviour
             }
 
         }
-
     }
 
+    public IEnumerator UnloadScenes(List<SceneField> scenes)
+    {
+        return UnloadScenes(scenes.ToArray());
+    }
+
+}
+
+public interface ISceneLoader 
+{
+    IEnumerator LoadScenes(SceneField[] scenes);
+    IEnumerator UnloadScenes(SceneField[] scenes);
+    
 }

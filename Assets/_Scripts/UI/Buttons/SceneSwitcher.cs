@@ -3,8 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    public void SwitchScene(int index)
+    [SerializeField] private SceneLoadEventSO _onSceneLoad;
+    [SerializeField] private LevelName _levelName;
+
+    public void SwitchScene()
     {
-        SceneManager.LoadScene(index);
+        _onSceneLoad.Raise(_levelName);
     }
 }

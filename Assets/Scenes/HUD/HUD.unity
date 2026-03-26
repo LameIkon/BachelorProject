@@ -328,6 +328,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3174890390099246670, guid: 82f4cd9d0df915549872d6c0048e59ab, type: 3}
+      propertyPath: _hud.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174890390099246670, guid: 82f4cd9d0df915549872d6c0048e59ab, type: 3}
+      propertyPath: _hud.Array.data[0].m_SceneName
+      value: Factory
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174890390099246670, guid: 82f4cd9d0df915549872d6c0048e59ab, type: 3}
+      propertyPath: _hud.Array.data[0].m_SceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 2fd846c7e1c4c844e9d9c338217c98bd, type: 3}
     - target: {fileID: 3197257392454913724, guid: 82f4cd9d0df915549872d6c0048e59ab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 46.67727

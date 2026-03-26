@@ -32,7 +32,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
             _input.UI.SetCallbacks(this);
             _input.Game.SetCallbacks(this);
 
-            SetState(InputState.Game);
+            SetState(InputState.UI);
             Debug.Log("Inputs started");
         }
     }
