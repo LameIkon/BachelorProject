@@ -26,6 +26,13 @@ public class InteractionUtility
         InputReader.s_OnMouseMoveEvent += Hover;
     }
 
+    public void OnUpdate()
+    {
+        if (InputReader.s_State != InputState.Game) return;
+        Hover(InputReader.MousePos);
+    }
+
+
     /// <summary>
     /// Inputs for Use, takes the position of the mouse on the screen. 
     /// </summary>
@@ -40,20 +47,41 @@ public class InteractionUtility
         }
     }
 
+    private IHoverable _currentHovered;
+    private IHoverable _newHovered;
+
     private void Hover(Vector2 pos)
     {
         if (InputReader.s_State != InputState.Game) return; // Can't interact if we aren't in Game input state
 
+        _newHovered = null;
+
         if (RaycastInteractable(pos, out IPickable pickable, out IInteractable interactable))
         {
+            // Try detect object detected
             if (pickable != null)
             {
+                _newHovered = pickable as IHoverable;
                 Debug.Log(pickable);
             }
             if (interactable != null)
             {
+                _newHovered = interactable as IHoverable;
                 Debug.Log(interactable);
             }
+        }
+
+
+        if (_currentHovered != null && _currentHovered != _newHovered) // Exit old
+        {
+            _currentHovered.OnHoverExit();
+            _currentHovered = null;
+        }
+
+        if (_newHovered != null && _newHovered != _currentHovered) // Enter new
+        {
+            _newHovered.OnHoverEnter();
+            _currentHovered = _newHovered;
         }
     }
 

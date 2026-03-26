@@ -20,7 +20,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public static event Action s_OnUseEvent;
     public static event Action s_ToggleEscape;
 
-    private Vector2 MousePos;
+    public static Vector2 MousePos;
    
     
     #region Unity Methods
@@ -71,7 +71,6 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public void OnMove(InputAction.CallbackContext context)
     {
         s_OnMoveEvent?.Invoke(context.ReadValue<Vector2>());
-        s_OnMouseMoveEvent?.Invoke(MousePos);
     }
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -92,7 +91,6 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public void OnMousePosition(InputAction.CallbackContext context) 
     {
         MousePos = context.ReadValue<Vector2>();
-        s_OnMouseMoveEvent?.Invoke(MousePos);
     }
 
     public void OnEscape(InputAction.CallbackContext context)

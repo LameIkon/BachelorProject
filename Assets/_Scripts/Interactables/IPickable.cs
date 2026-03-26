@@ -10,3 +10,12 @@ public interface IPickable
     PickableType PickableType { get; }
     Transform Transform { get; }
 }
+
+public interface IHoverable
+{
+    void SetHighlight(bool state);
+
+    void OnHoverEnter();
+    void OnHoverExit();
+}
+

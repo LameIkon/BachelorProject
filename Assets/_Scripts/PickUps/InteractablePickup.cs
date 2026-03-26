@@ -1,14 +1,20 @@
 using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody), typeof(Collider))]
-public class PickUpController : MonoBehaviour, IPickable
+public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 {
+	[SerializeField] private PickableType _pickableType;
+	
+	// materials
+	private Material[] _materials;
+	private float _highlightScale;
+	
 	private Transform _holdPoint;
 	private Rigidbody _rb;
 
 	private bool _isPickedUp;
+	private bool _canBePickedUp = true;
 
-	[SerializeField] private PickableType _pickableType;
 
     public PickableType PickableType => _pickableType;
 	private PlaceableSlot _currentSlot;
@@ -17,11 +23,16 @@ public class PickUpController : MonoBehaviour, IPickable
 
     #region Unity Methods
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
-		_rb = GetComponent<Rigidbody>();
-        _isPickedUp = false;
+ 		_rb = GetComponent<Rigidbody>();
+		_materials = GetComponent<MeshRenderer>().materials;
+
+		_highlightScale = _materials[1].GetFloat("_OutlineScale");
+		_materials[1].SetFloat("", 0f);
+
+        _isPickedUp = false;      
+		SetHighlight(_isPickedUp);
     }
 
     private void FixedUpdate()
@@ -52,6 +63,7 @@ public class PickUpController : MonoBehaviour, IPickable
 
 	private void PickUp(Transform holdPoint)
 	{
+		SetHighlight(false);
 		transform.SetParent(null);
 		_holdPoint = holdPoint;
         _isPickedUp = true;
@@ -62,12 +74,15 @@ public class PickUpController : MonoBehaviour, IPickable
 
 	public void Drop()
 	{
+
         _isPickedUp = false;
         _holdPoint = null;
 
         _rb.useGravity = true;
 		_rb.linearDamping = 0f;
 		Debug.Log("Drop");
+
+		if (_canBePickedUp) SetHighlight(true);; // Temporary
 		_currentSlot?.TryPlace(this);
 	}
 
@@ -87,5 +102,30 @@ public class PickUpController : MonoBehaviour, IPickable
 		}
 	}
 	#endregion
+
+    #region Hovering logic
+
+	/// <summary>
+	/// Indicate if you are hovering over an interactable 
+	/// </summary>
+	/// <param name="state">boolean to check state. True will activate and false to deactivate highlight</param>
+	public void SetHighlight(bool state)
+	{
+		_materials[1].SetFloat("_OutlineScale", state ? _highlightScale : 0f);
+	}
+
+
+    public void OnHoverEnter()
+	{
+		if (_isPickedUp) return;
+		SetHighlight(true);
+	}
+
+
+    public void OnHoverExit()
+	{
+		SetHighlight(false);
+	}
+    #endregion
 
 }
