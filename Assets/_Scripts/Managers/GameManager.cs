@@ -9,20 +9,20 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private LevelData[] _levels;
     [SerializeField] private SceneLoadEventSO _sceneLoadEventSO;
 
-    [SerializeField] private LevelName _firstSceneToLoad;
+    [SerializeField] private LevelData _firstSceneToLoad;
 
     #region Unity Method 
     protected override void Awake()
     {
         base.Awake();
         _crosshairHandler = new CrosshairHandler();
-        _sceneLoader = new AsyncSceneLoader(_firstSceneToLoad, _levels);
+        _sceneLoader = new AsyncSceneLoader(_firstSceneToLoad.Id, _levels);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        LoadScenes(_firstSceneToLoad);
+        LoadScenes(_firstSceneToLoad.Id);
     }
 
     private void OnEnable()
@@ -43,11 +43,11 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    private void LoadScenes(LevelName levelName) 
+    private void LoadScenes(int levelId) 
     {
         StartCoroutine(_sceneLoader.UnloadScenes());
 
-        StartCoroutine(_sceneLoader.LoadScenes(levelName));
+        StartCoroutine(_sceneLoader.LoadScenes(levelId));
     }
 
 }
