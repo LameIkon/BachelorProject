@@ -20,6 +20,9 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public static event Action s_OnUseEvent;
     public static event Action s_ToggleEscape;
 
+    public static event Action s_TogglePopUp;
+
+
     public static Vector2 MousePos;
    
     
@@ -88,6 +91,14 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     {
         if (context.phase == InputActionPhase.Performed) s_OnUseEvent?.Invoke();
     }
+    public void OnRightClick(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("right click");            
+            s_TogglePopUp?.Invoke();
+        }
+    }
 
     public void OnMousePosition(InputAction.CallbackContext context) 
     {
@@ -104,6 +115,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
         Debug.Log("try Toggle Compendium");
         if (context.started) _toggleUI.Raise(UIType.Compendium);
     }
+
 
     #endregion
 }

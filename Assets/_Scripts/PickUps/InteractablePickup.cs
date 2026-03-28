@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent (typeof(Rigidbody), typeof(Collider))]
 public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 {
+	[SerializeField] private UIToggleEventSO _uiToggleEvent;
 	[SerializeField] private PickableType _pickableType;
 	
 	// materials
@@ -25,7 +26,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
     private void Awake()
     {
 		_rb = GetComponent<Rigidbody>();
-		_onHoverUtility = new OnHighlightUtility(this.gameObject);
+		_onHoverUtility = new OnHighlightUtility(this.gameObject, _uiToggleEvent);
 
         _isPickedUp = false;      
     }
@@ -59,6 +60,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 	private void PickUp(Transform holdPoint)
 	{
 		_onHoverUtility.SetHighlight(false);
+		_onHoverUtility.isSelected = true;
 		transform.SetParent(null);
 		_holdPoint = holdPoint;
         _isPickedUp = true;
@@ -78,6 +80,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 		Debug.Log("Drop");
 
 		if (_canBePickedUp) _onHoverUtility.SetHighlight(true); // Temporary
+		_onHoverUtility.isSelected = false;
 		_currentSlot?.TryPlace(this);
 	}
 

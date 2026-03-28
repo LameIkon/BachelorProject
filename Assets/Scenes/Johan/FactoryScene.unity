@@ -3109,6 +3109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf2355bb78647e4ba4d0d9c2c98b9c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickUpController
+  _uiToggleEvent: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
   _pickableType: 3
 --- !u!54 &536146068
 Rigidbody:
@@ -3492,6 +3493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce403f6ffbc29b149bf5238d12542200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhysicalButton
+  _uiToggleEvent: {fileID: 0}
   _buttonData: {fileID: 11400000, guid: 73ddd115145618c42b57d40f09762077, type: 2}
   _onButtonEvent: {fileID: 11400000, guid: ab4116fc9b025c549a93be519ae6408a, type: 2}
   _lightIndicator: {fileID: 0}
@@ -5895,6 +5897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf2355bb78647e4ba4d0d9c2c98b9c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickUpController
+  _uiToggleEvent: {fileID: 0}
   _pickableType: 3
 --- !u!54 &1028459531
 Rigidbody:
@@ -13075,6 +13078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce403f6ffbc29b149bf5238d12542200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhysicalButton
+  _uiToggleEvent: {fileID: 0}
   _buttonData: {fileID: 11400000, guid: a39fbd071500d5e478b3a3f81365260c, type: 2}
   _onButtonEvent: {fileID: 11400000, guid: ab4116fc9b025c549a93be519ae6408a, type: 2}
   _lightIndicator: {fileID: 0}

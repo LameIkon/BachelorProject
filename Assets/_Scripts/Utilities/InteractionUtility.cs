@@ -7,6 +7,9 @@ public class InteractionUtility
     private readonly Transform _pickUpPoint;
     private readonly float _pickUpDistance;
 
+    private IHoverable _currentHovered;
+    private IHoverable _newHovered;
+
     /// <summary>
     /// How to interact with interactables
     /// </summary>
@@ -47,8 +50,6 @@ public class InteractionUtility
         }
     }
 
-    private IHoverable _currentHovered;
-    private IHoverable _newHovered;
 
     private void Hover(Vector2 pos)
     {

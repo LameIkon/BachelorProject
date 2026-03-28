@@ -4,7 +4,7 @@ using System.Collections;
 
 public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable 
 {
-
+	[SerializeField] private UIToggleEventSO _uiToggleEvent;
     [SerializeField] private ButtonData _buttonData;
     [SerializeField] private ButtonEventSO _onButtonEvent;
     [SerializeField] private MeshRenderer _lightIndicator;
@@ -35,7 +35,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
         newPosition += pos;
         Debug.Log(pos);
 
-		_onHoverUtility = new OnHighlightUtility(this.gameObject);
+		_onHoverUtility = new OnHighlightUtility(this.gameObject, _uiToggleEvent);
     }
 
 	#endregion
@@ -82,12 +82,14 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
 
     public void OnHoverEnter()
 	{
+		Debug.Log("Set to true");
 		_onHoverUtility.SetHighlight(true);
 	}
 
 
     public void OnHoverExit()
 	{
+		Debug.Log("Set to false");
 		_onHoverUtility.SetHighlight(false);
 	}
     #endregion
