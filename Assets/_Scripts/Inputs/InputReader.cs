@@ -37,6 +37,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
         }
     }
 
+
     private void OnDisable()
     {
         _input.Game.Disable();
