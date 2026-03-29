@@ -13,7 +13,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
     private Vector3 oldPosition;
 	private Vector3 newPosition;
 
-	private OnHighlightUtility _onHoverUtility;
+	private HighlightHandler _onHoverUtility;
 
 
     #region Unity Methods
@@ -35,7 +35,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
         newPosition += pos;
         Debug.Log(pos);
 
-		_onHoverUtility = new OnHighlightUtility(this.gameObject, _uiToggleEvent);
+		_onHoverUtility = new HighlightHandler(this.gameObject);
     }
 
 	#endregion

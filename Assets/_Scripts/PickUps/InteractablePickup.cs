@@ -7,7 +7,8 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 	[SerializeField] private PickableType _pickableType;
 	
 	// materials
-	private OnHighlightUtility _onHoverUtility;
+	private HighlightHandler _highlightHandler;
+	private InteractionPopupHandler _interactionUIHandler;
 	
 	private Transform _holdPoint;
 	private Rigidbody _rb;
@@ -26,7 +27,8 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
     private void Awake()
     {
 		_rb = GetComponent<Rigidbody>();
-		_onHoverUtility = new OnHighlightUtility(this.gameObject, _uiToggleEvent);
+		_highlightHandler = new HighlightHandler(this.gameObject);
+		_interactionUIHandler = new InteractionPopupHandler(_uiToggleEvent);
 
         _isPickedUp = false;      
     }
@@ -59,8 +61,11 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 
 	private void PickUp(Transform holdPoint)
 	{
-		_onHoverUtility.SetHighlight(false);
-		_onHoverUtility.isSelected = true;
+		if (_highlightHandler != null)
+		{
+			_highlightHandler.SetHighlight(false);
+		}
+
 		transform.SetParent(null);
 		_holdPoint = holdPoint;
         _isPickedUp = true;
@@ -79,8 +84,12 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 		_rb.linearDamping = 0f;
 		Debug.Log("Drop");
 
-		if (_canBePickedUp) _onHoverUtility.SetHighlight(true); // Temporary
-		_onHoverUtility.isSelected = false;
+
+		if (_highlightHandler != null && _canBePickedUp)
+		{
+			_highlightHandler.SetHighlight(true);
+		}
+
 		_currentSlot?.TryPlace(this);
 	}
 
@@ -102,17 +111,28 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 	#endregion
 
     #region Hovering logic
-
     public void OnHoverEnter()
 	{
 		if (_isPickedUp) return;
-		_onHoverUtility.SetHighlight(true);
+		_interactionUIHandler.OnHoverState(true);
+		_highlightHandler.SetHighlight(true);
 	}
 
 
     public void OnHoverExit()
 	{
-		_onHoverUtility.SetHighlight(false);
+		if (_isPickedUp) return;
+		Debug.Log("exit hover");
+		_interactionUIHandler.OnHoverState(false);
+		_highlightHandler.SetHighlight(false);
+	}
+    #endregion
+
+
+    #region Cleanup
+	private void OnDestroy()
+	{
+		_interactionUIHandler?.Dispose();
 	}
     #endregion
 

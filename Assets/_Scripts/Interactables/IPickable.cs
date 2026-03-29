@@ -11,9 +11,3 @@ public interface IPickable
     Transform Transform { get; }
 }
 
-public interface IHoverable
-{
-    void OnHoverEnter();
-    void OnHoverExit();
-}
-
