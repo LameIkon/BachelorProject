@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +22,7 @@ public class CompendiumManager : MonoBehaviour
     private PageButton _currentPage;
     private int _historyLimit = 20;
 
+    private Dictionary<CompendiumTitles, CompendiumPage> _pageLookup; // TBD
 
     private void Start()
     {
@@ -80,7 +80,6 @@ public class CompendiumManager : MonoBehaviour
         {
             PushToStack(_backStack, _currentPage);
             _forwardStack.Clear(); // Clear forward stack on new navigation
-            
         }
 
         _currentPage = pageButton;

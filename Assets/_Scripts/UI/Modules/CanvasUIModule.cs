@@ -4,8 +4,6 @@ public class CanvasUIModule
 {
     private readonly GameObject _canvas;
 
-    //public bool ActiveState { get; private set; }
-
     public CanvasUIModule(GameObject canvas, bool state)
     {
         _canvas = canvas;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Page for the compendium. CompendiumContent to hold the data such as text, while CompendiumUIReferences holds the ui references
 /// </summary>
-public class CompendiumPage : MonoBehaviour
+public class CompendiumPage : MonoBehaviour, ILanguage
 {
     [Header("Data")]
     [SerializeField] private CompendiumContentSO _compendiumData;
@@ -20,9 +20,8 @@ public class CompendiumPage : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _description;
 
 
-
     public string title {get; private set; } = "Unasigned";
-
+    public Button button {get; private set; } // Access from outside to call button 
 
     private void OnEnable()
     {
@@ -38,7 +37,7 @@ public class CompendiumPage : MonoBehaviour
     /// Get the content based on language. 
     /// </summary>
     /// <param name="language"></param>
-    private void SetLanguage(Language language)
+    public void SetLanguage(Language language)
     {
         LocalizedContent data = _compendiumData.content.Get(language); // Get context in the selected language
 
@@ -56,6 +55,10 @@ public class CompendiumPage : MonoBehaviour
         _buttonTitle.text = title;
     }
 
+    /// <summary>
+    /// Enable or disable button
+    /// </summary>
+    /// <param name="state"></param>
     public void ToggleButton(bool state)
     {
         _buttonObject.gameObject.SetActive(state);
@@ -71,6 +74,7 @@ public class CompendiumPage : MonoBehaviour
     public void Initialize(GameObject button)
     {
         _buttonObject = button;
+        this.button =  _buttonObject.GetComponentInChildren<Button>();
         _buttonTitle = _buttonObject.GetComponentInChildren<TextMeshProUGUI>();
         _image.sprite = _compendiumData.image;
 

@@ -1251,6 +1251,7 @@ GameObject:
   - component: {fileID: 1377199270}
   - component: {fileID: 1377199273}
   - component: {fileID: 1377199274}
+  - component: {fileID: 1377199275}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1357,6 +1358,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PopUpHandler
   _toggleEvent: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
   _exitDelay: 1
+--- !u!114 &1377199275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377199269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14daf67ae1b87040ba6e6e1a4a764ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionMenu
+  _toggleUI: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
+  _title: {fileID: 999957814}
+  _toCompendiumButton: {fileID: 294809156}
 --- !u!1 &1446435026
 GameObject:
   m_ObjectHideFlags: 0
