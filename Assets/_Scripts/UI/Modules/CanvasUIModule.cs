@@ -6,10 +6,11 @@ public class CanvasUIModule
 
     //public bool ActiveState { get; private set; }
 
-    public CanvasUIModule(GameObject canvas)
+    public CanvasUIModule(GameObject canvas, bool state)
     {
         _canvas = canvas;
-        //_canvas.SetActive(false);
+        Debug.Log(state);
+        _canvas.SetActive(state);
     }
 
     /// <summary>
