@@ -1,10 +1,10 @@
 using UnityEngine;
-using System;
 using System.Collections;
 
 public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable 
 {
-	[SerializeField] private UIToggleEventSO _uiToggleEvent;
+	[SerializeField] private UIToggleEventSO _uiToggleEvent; // To toggle interaction Menu
+
     [SerializeField] private ButtonData _buttonData;
     [SerializeField] private ButtonEventSO _onButtonEvent;
     [SerializeField] private MeshRenderer _lightIndicator;
@@ -13,7 +13,9 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
     private Vector3 oldPosition;
 	private Vector3 newPosition;
 
+	// Handlers
 	private HighlightHandler _onHoverUtility;
+	private InteractionMenuHandler _interactionMenuHandler;
 
 
     #region Unity Methods
@@ -21,7 +23,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
     private void Start() 
 	{
 		_lightIndicator = GetComponentInChildren<MeshRenderer>();
-		_buttonData.SetColor(false);
+		_buttonData?.SetColor(false);
 		SetColorIndicator(_buttonData.Color);
 		_buttonPressSpeed = .1f;
 
@@ -36,6 +38,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
         Debug.Log(pos);
 
 		_onHoverUtility = new HighlightHandler(this.gameObject);
+		_interactionMenuHandler = new InteractionMenuHandler(_uiToggleEvent);
     }
 
 	#endregion
@@ -47,11 +50,11 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
 	/// </summary>
 	public void Interact()
     {
-		_buttonData.SetColor(true);
+		_buttonData?.SetColor(true);
 		SetColorIndicator(_buttonData.Color);
 		StartCoroutine(PressButton());
 
-        _onButtonEvent.Raise(_buttonData.Type);
+        _onButtonEvent?.Raise(_buttonData.Type);
     }
 
 	#endregion
@@ -83,14 +86,17 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
     public void OnHoverEnter()
 	{
 		Debug.Log("Set to true");
-		_onHoverUtility.SetHighlight(true);
+		_interactionMenuHandler?.OnHoverState(true);
+		_onHoverUtility?.SetHighlight(true);
+
 	}
 
 
     public void OnHoverExit()
 	{
 		Debug.Log("Set to false");
-		_onHoverUtility.SetHighlight(false);
+		_interactionMenuHandler?.OnHoverState(false);
+		_onHoverUtility?.SetHighlight(false);
 	}
     #endregion
 }

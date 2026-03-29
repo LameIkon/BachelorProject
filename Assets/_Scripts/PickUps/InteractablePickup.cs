@@ -6,9 +6,9 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 	[SerializeField] private UIToggleEventSO _uiToggleEvent;
 	[SerializeField] private PickableType _pickableType;
 	
-	// materials
+	// Handlers
 	private HighlightHandler _highlightHandler;
-	private InteractionPopupHandler _interactionUIHandler;
+	private InteractionMenuHandler _interactionMenuHandler;
 	
 	private Transform _holdPoint;
 	private Rigidbody _rb;
@@ -28,7 +28,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
     {
 		_rb = GetComponent<Rigidbody>();
 		_highlightHandler = new HighlightHandler(this.gameObject);
-		_interactionUIHandler = new InteractionPopupHandler(_uiToggleEvent);
+		_interactionMenuHandler = new InteractionMenuHandler(_uiToggleEvent);
 
         _isPickedUp = false;      
     }
@@ -114,8 +114,8 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
     public void OnHoverEnter()
 	{
 		if (_isPickedUp) return;
-		_interactionUIHandler.OnHoverState(true);
-		_highlightHandler.SetHighlight(true);
+		_interactionMenuHandler?.OnHoverState(true);
+		_highlightHandler?.SetHighlight(true);
 	}
 
 
@@ -123,8 +123,8 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 	{
 		if (_isPickedUp) return;
 		Debug.Log("exit hover");
-		_interactionUIHandler.OnHoverState(false);
-		_highlightHandler.SetHighlight(false);
+		_interactionMenuHandler?.OnHoverState(false);
+		_highlightHandler?.SetHighlight(false);
 	}
     #endregion
 
@@ -132,7 +132,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
     #region Cleanup
 	private void OnDestroy()
 	{
-		_interactionUIHandler?.Dispose();
+		_interactionMenuHandler?.Dispose();
 	}
     #endregion
 

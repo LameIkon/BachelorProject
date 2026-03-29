@@ -23,7 +23,7 @@ public class InteractionMenu : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        _title.text = _currentPage != null ?  _currentPage?.title : "No page selected";
+        _title.text = _compendiumManager != null ?  _currentPage?.title : "No data found";
     }
 
     private void OnDisable()

@@ -4,13 +4,13 @@ using UnityEngine;
 /// <summary>
 /// A handler that depends on hover state and is used to toggle ui
 /// </summary>
-public class InteractionPopupHandler : IDisposable
+public class InteractionMenuHandler : IDisposable
 {
     private readonly UIToggleEventSO _uiToggleEvent;
     
     private bool _isSelected;
 
-    public InteractionPopupHandler(UIToggleEventSO uiToggleEvent)
+    public InteractionMenuHandler(UIToggleEventSO uiToggleEvent)
     {
         _uiToggleEvent = uiToggleEvent;
         InputReader.s_TogglePopUp += TogglePopUp;
