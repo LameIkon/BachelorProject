@@ -3,8 +3,8 @@ using System.Collections;
 
 public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable 
 {
-	[SerializeField] private UIToggleEventSO _uiToggleEvent; // To toggle interaction Menu
-	[SerializeField] private CompendiumPageRequestEventSO _pageRequestEvent;
+	[Header("Settings")]
+	[SerializeField] private InteractionMenuContent _interactionMenuContent;
 
     [SerializeField] private ButtonData _buttonData;
     [SerializeField] private ButtonEventSO _onButtonEvent;
@@ -14,10 +14,8 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
     private Vector3 oldPosition;
 	private Vector3 newPosition;
 
-	// Handlers
 	private HighlightHandler _onHoverUtility;
-	private InteractionMenuHandler _interactionMenuHandler;
-	[SerializeField] private CompendiumID _compendiumID;
+
 
 
     #region Unity Methods
@@ -40,7 +38,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
         Debug.Log(pos);
 
 		_onHoverUtility = new HighlightHandler(this.gameObject);
-		_interactionMenuHandler = new InteractionMenuHandler(_uiToggleEvent, _pageRequestEvent, _compendiumID);
+		_interactionMenuContent.Initialize();
     }
 
 	#endregion
@@ -89,7 +87,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
     public void OnHoverEnter()
 	{
 		Debug.Log("Set to true");
-		_interactionMenuHandler?.OnHoverState(true);
+		_interactionMenuContent.InteractionMenuHandler?.OnHoverState(true);
 		_onHoverUtility?.SetHighlight(true);
 
 	}
@@ -98,7 +96,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
     public void OnHoverExit()
 	{
 		Debug.Log("Set to false");
-		_interactionMenuHandler?.OnHoverState(false);
+		_interactionMenuContent.InteractionMenuHandler?.OnHoverState(false);
 		_onHoverUtility?.SetHighlight(false);
 	}
     #endregion

@@ -3,17 +3,11 @@ using UnityEngine;
 [RequireComponent (typeof(Rigidbody), typeof(Collider))]
 public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 {
-	[Header("Events")]
-	[SerializeField] private UIToggleEventSO _uiToggleEvent;
-	[SerializeField] private CompendiumPageRequestEventSO _pageRequestEvent;
-
-	[Header("Data type")]
+	[Header("Settings")]
+	[SerializeField] private InteractionMenuContent _interactionMenu;
 	[SerializeField] private PickableType _pickableType;
-	[SerializeField] private CompendiumID _compendiumID;
 	
-	// Handlers
 	private HighlightHandler _highlightHandler;
-	private InteractionMenuHandler _interactionMenuHandler;
 	
 	private Transform _holdPoint;
 	private Rigidbody _rb;
@@ -35,7 +29,8 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
     {
 		_rb = GetComponent<Rigidbody>();
 		_highlightHandler = new HighlightHandler(this.gameObject);
-		_interactionMenuHandler = new InteractionMenuHandler(_uiToggleEvent, _pageRequestEvent, _compendiumID);
+
+		_interactionMenu.Initialize();
 
         _isPickedUp = false;      
     }
@@ -121,7 +116,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
     public void OnHoverEnter()
 	{
 		if (_isPickedUp) return;
-		_interactionMenuHandler?.OnHoverState(true);
+		_interactionMenu.InteractionMenuHandler?.OnHoverState(true);
 		_highlightHandler?.SetHighlight(true);
 	}
 
@@ -130,7 +125,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 	{
 		if (_isPickedUp) return;
 		Debug.Log("exit hover");
-		_interactionMenuHandler?.OnHoverState(false);
+		_interactionMenu.InteractionMenuHandler?.OnHoverState(false);
 		_highlightHandler?.SetHighlight(false);
 	}
     #endregion
@@ -139,7 +134,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
     #region Cleanup
 	private void OnDestroy()
 	{
-		_interactionMenuHandler?.Dispose();
+		_interactionMenu.InteractionMenuHandler?.Dispose();
 	}
     #endregion
 
