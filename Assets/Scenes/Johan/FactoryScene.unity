@@ -1849,55 +1849,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 941378182709471635, guid: 45ca3eb05a86bdd4bae413190653ef9a, type: 3}
   m_PrefabInstance: {fileID: 362477905}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &396578706 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 367659718046310332, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
-  m_PrefabInstance: {fileID: 636099408}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &396578710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396578706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_AllowHDROutput: 1
-  m_UseScreenCoordOverride: 0
-  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
-  m_Version: 2
 --- !u!1 &419356153
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,36 +3342,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1322482228698620613, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
-      propertyPath: _staticMouseCanvas
-      value: 
-      objectReference: {fileID: 707958376}
     - target: {fileID: 2188616589692227097, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2188616589692227097, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3908952745269563482, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-    - target: {fileID: 8404148525531348517, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
-      propertyPath: m_Name
-      value: CrosshairCanvas
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8404148525531348517, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 367659718046310332, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 396578710}
-    - targetCorrespondingSourceObject: {fileID: 8404148525531348517, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 707958381}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
 --- !u!1 &646639497 stripped
 GameObject:
@@ -4238,31 +4168,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703409782}
   m_CullTransparentMesh: 1
---- !u!1 &707958376 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8404148525531348517, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
-  m_PrefabInstance: {fileID: 636099408}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &707958381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 707958376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ac9d66c0f256954fbc99cf2541c1630, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIModule
-  _canvas: {fileID: 2138637442}
-  _config: {fileID: 11400000, guid: e55fb41e0f0691c47a844fed1601fe50, type: 2}
-  _enableUIAtStart: 1
-  _pageSettings:
-    pageMode: 0
-    pageContainer: {fileID: 0}
-    buttonContainer: {fileID: 0}
-    rememberPage: 0
 --- !u!1 &718003742
 GameObject:
   m_ObjectHideFlags: 0
@@ -16586,11 +16491,6 @@ Transform:
   - {fileID: 1210754807}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2138637442 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 337577824678129405, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
-  m_PrefabInstance: {fileID: 636099408}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2145419320
 GameObject:
   m_ObjectHideFlags: 0

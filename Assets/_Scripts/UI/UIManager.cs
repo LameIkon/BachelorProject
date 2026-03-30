@@ -31,9 +31,16 @@ public class UIManager : Singleton<UIManager>
     {
         _uiSystems.Add(system); // Add to registrated systems
 
+        Debug.Log(system);
         if (!_systemLookup.ContainsKey(system.UIType)) // Add a reference to it for lookup from outside by just asking for UIType
         {
             _systemLookup.Add(system.UIType, system);
+
+            if (system.IsOpen) // If the uiModule is aleady active, add it
+            {
+                Debug.Log($"active system: {system}");
+                _activeSystems.Add(system);
+            }
         }
     }
 
@@ -83,7 +90,7 @@ public class UIManager : Singleton<UIManager>
             switch (openedSystem.RuleType) // Our opened system type
             {
                 case UIRuleType.Solo:
-                    if (system.RuleType == UIRuleType.Solo || system.RuleType == UIRuleType.Stackable)  // If our opened system is an exlusive type then we will close all of that 
+                    if (system.RuleType == UIRuleType.Solo || system.RuleType == UIRuleType.Stackable || system.RuleType == UIRuleType.Overlay)  // If our opened system is an exlusive type then we will close all of that 
                     {
                         system.Close();
                         _activeSystems.Remove(system);
@@ -97,12 +104,19 @@ public class UIManager : Singleton<UIManager>
                         _activeSystems.Remove(system);
                     }
                     break;
-
+                case UIRuleType.Overlay:
+                    break;
                 default:
                     break;
             }
         }   
     }
+
+    private void EvaluateOverlayState()
+    {
+
+    }
+
     #endregion
 
 }
