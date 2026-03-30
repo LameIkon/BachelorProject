@@ -1,11 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable 
+public sealed class PhysicalButton : HoverableInteractable, IInteractable 
 {
-	[Header("Settings")]
-	[SerializeField] private InteractionMenuContent _interactionMenuContent;
-
+	[Header("Button Settings")]
     [SerializeField] private ButtonData _buttonData;
     [SerializeField] private ButtonEventSO _onButtonEvent;
     [SerializeField] private MeshRenderer _lightIndicator;
@@ -13,9 +11,6 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
 
     private Vector3 oldPosition;
 	private Vector3 newPosition;
-
-	private HighlightHandler _onHoverUtility;
-
 
 
     #region Unity Methods
@@ -36,9 +31,6 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
         newPosition = transform.position;
         newPosition += pos;
         Debug.Log(pos);
-
-		_onHoverUtility = new HighlightHandler(this.gameObject);
-		_interactionMenuContent.Initialize();
     }
 
 	#endregion
@@ -81,23 +73,4 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
 		}
 
 	}
-
-    #region Hovering logic
-
-    public void OnHoverEnter()
-	{
-		Debug.Log("Set to true");
-		_interactionMenuContent.InteractionMenuHandler?.OnHoverState(true);
-		_onHoverUtility?.SetHighlight(true);
-
-	}
-
-
-    public void OnHoverExit()
-	{
-		Debug.Log("Set to false");
-		_interactionMenuContent.InteractionMenuHandler?.OnHoverState(false);
-		_onHoverUtility?.SetHighlight(false);
-	}
-    #endregion
 }

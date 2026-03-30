@@ -1,13 +1,11 @@
 using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody), typeof(Collider))]
-public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
+public class InteractablePickup : HoverableInteractable, IPickable
 {
-	[Header("Settings")]
-	[SerializeField] private InteractionMenuContent _interactionMenu;
+	[Header("Pickup Settings")]
 	[SerializeField] private PickableType _pickableType;
 	
-	private HighlightHandler _highlightHandler;
 	
 	private Transform _holdPoint;
 	private Rigidbody _rb;
@@ -25,13 +23,11 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 
     #region Unity Methods
 
-    private void Awake()
+    protected override void Awake()
     {
+		base.Awake();
+
 		_rb = GetComponent<Rigidbody>();
-		_highlightHandler = new HighlightHandler(this.gameObject);
-
-		_interactionMenu.Initialize();
-
         _isPickedUp = false;      
     }
 
@@ -63,11 +59,8 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 
 	private void PickUp(Transform holdPoint)
 	{
-		if (_highlightHandler != null)
-		{
-			_highlightHandler.SetHighlight(false);
-		}
-
+		_highlightHandler?.SetHighlight(false);
+		
 		transform.SetParent(null);
 		_holdPoint = holdPoint;
         _isPickedUp = true;
@@ -78,7 +71,6 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 
 	public void Drop()
 	{
-
         _isPickedUp = false;
         _holdPoint = null;
 
@@ -87,10 +79,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 		Debug.Log("Drop");
 
 
-		if (_highlightHandler != null && _canBePickedUp)
-		{
-			_highlightHandler.SetHighlight(true);
-		}
+		if (_canBePickedUp) _highlightHandler?.SetHighlight(true);
 
 		_currentSlot?.TryPlace(this);
 	}
@@ -113,29 +102,17 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 	#endregion
 
     #region Hovering logic
-    public void OnHoverEnter()
+    public override void OnHoverEnter()
 	{
 		if (_isPickedUp) return;
-		_interactionMenu.InteractionMenuHandler?.OnHoverState(true);
-		_highlightHandler?.SetHighlight(true);
+		base.OnHoverEnter();
 	}
 
 
-    public void OnHoverExit()
+    public override void OnHoverExit()
 	{
 		if (_isPickedUp) return;
-		Debug.Log("exit hover");
-		_interactionMenu.InteractionMenuHandler?.OnHoverState(false);
-		_highlightHandler?.SetHighlight(false);
+		base.OnHoverExit();
 	}
     #endregion
-
-
-    #region Cleanup
-	private void OnDestroy()
-	{
-		_interactionMenu.InteractionMenuHandler?.Dispose();
-	}
-    #endregion
-
 }
