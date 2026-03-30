@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="Compendium Page Provider SO", menuName = "ScriptableObject/Compendium/Get compendium")]
+[CreateAssetMenu(fileName ="Compendium Page Provider SO", menuName = "ScriptableObject/Compendium/Page func provider")]
 public class CompendiumPageProviderSO : ScriptableObject
 {
     private Func<CompendiumID, CompendiumPage> _provider;

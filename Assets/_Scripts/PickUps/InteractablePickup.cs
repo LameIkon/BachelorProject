@@ -3,8 +3,13 @@ using UnityEngine;
 [RequireComponent (typeof(Rigidbody), typeof(Collider))]
 public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 {
+	[Header("Events")]
 	[SerializeField] private UIToggleEventSO _uiToggleEvent;
+	[SerializeField] private CompendiumPageRequestEventSO _pageRequestEvent;
+
+	[Header("Data type")]
 	[SerializeField] private PickableType _pickableType;
+	[SerializeField] private CompendiumID _compendiumID;
 	
 	// Handlers
 	private HighlightHandler _highlightHandler;
@@ -18,9 +23,11 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
 
 
     public PickableType PickableType => _pickableType;
+
 	private PlaceableSlot _currentSlot;
 
     public Transform Transform => transform;
+
 
     #region Unity Methods
 
@@ -28,7 +35,7 @@ public class InteractablePickup : MonoBehaviour, IPickable, IHoverable
     {
 		_rb = GetComponent<Rigidbody>();
 		_highlightHandler = new HighlightHandler(this.gameObject);
-		_interactionMenuHandler = new InteractionMenuHandler(_uiToggleEvent);
+		_interactionMenuHandler = new InteractionMenuHandler(_uiToggleEvent, _pageRequestEvent, _compendiumID);
 
         _isPickedUp = false;      
     }

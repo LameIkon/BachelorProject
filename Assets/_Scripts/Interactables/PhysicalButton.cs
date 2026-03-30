@@ -4,6 +4,7 @@ using System.Collections;
 public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable 
 {
 	[SerializeField] private UIToggleEventSO _uiToggleEvent; // To toggle interaction Menu
+	[SerializeField] private CompendiumPageRequestEventSO _pageRequestEvent;
 
     [SerializeField] private ButtonData _buttonData;
     [SerializeField] private ButtonEventSO _onButtonEvent;
@@ -16,6 +17,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
 	// Handlers
 	private HighlightHandler _onHoverUtility;
 	private InteractionMenuHandler _interactionMenuHandler;
+	[SerializeField] private CompendiumID _compendiumID;
 
 
     #region Unity Methods
@@ -38,7 +40,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
         Debug.Log(pos);
 
 		_onHoverUtility = new HighlightHandler(this.gameObject);
-		_interactionMenuHandler = new InteractionMenuHandler(_uiToggleEvent);
+		_interactionMenuHandler = new InteractionMenuHandler(_uiToggleEvent, _pageRequestEvent, _compendiumID);
     }
 
 	#endregion
@@ -48,8 +50,9 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
 	/// <summary>
 	/// The button invokes an event with the button type currently assigned to it.
 	/// </summary>
-	public void Interact()
+	public void Interact(Transform transform)
     {
+		Debug.Log("interact with button");
 		_buttonData?.SetColor(true);
 		SetColorIndicator(_buttonData.Color);
 		StartCoroutine(PressButton());
@@ -100,5 +103,3 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable, IHoverable
 	}
     #endregion
 }
-
-

@@ -43,10 +43,9 @@ public class InteractionUtility
     {
         if (InputReader.s_State != InputState.Game) return; // Can't interact if we aren't in Game input state
 
-        if (RaycastInteractable(pos, out IPickable pickable, out IInteractable interactable))
+        if (RaycastInteractable(pos, out IInteractable interactable))
         {
-            pickable?.Interact(_pickUpPoint);
-            interactable?.Interact();
+            interactable?.Interact(_pickUpPoint);
         }
     }
 
@@ -57,19 +56,10 @@ public class InteractionUtility
 
         _newHovered = null;
 
-        if (RaycastInteractable(pos, out IPickable pickable, out IInteractable interactable))
+        if (RaycastInteractable(pos, out IInteractable interactable))
         {
-            // Try detect object detected
-            if (pickable != null)
-            {
-                _newHovered = pickable as IHoverable;
-                Debug.Log(pickable);
-            }
-            if (interactable != null)
-            {
-                _newHovered = interactable as IHoverable;
-                Debug.Log(interactable);
-            }
+            _newHovered = interactable as IHoverable;
+            Debug.Log(interactable);
         }
 
 
@@ -94,19 +84,32 @@ public class InteractionUtility
     /// <param name="pickable">Types that the player can pick up</param>
     /// <param name="interactable">Types the player can interact with, eg. press a button</param>
     /// <returns></returns>
-    private bool RaycastInteractable(Vector2 screenPos, out IPickable pickable, out IInteractable interactable)
+    private bool RaycastInteractable(Vector2 screenPos, out IInteractable interactable)
     {
         Ray ray = _camera.ScreenPointToRay(screenPos);
 
-        pickable = null;
         interactable = null;
 
         if (Physics.Raycast(ray, out RaycastHit hit, _pickUpDistance, _interactionMask))
         {
-            pickable = hit.collider.GetComponent<IPickable>();
-            interactable = hit.collider.GetComponent<IInteractable>();
+            // Try get IPickable first
+            IPickable pickable = hit.collider.GetComponent<IPickable>();
+            if (pickable != null)
+            {
+                interactable = pickable;
 
-            return pickable != null || interactable != null;
+                return true;
+
+
+            }
+
+            // Otherwise get IInteractable
+            IInteractable normalInteractable = hit.collider.GetComponent<IInteractable>();
+            if (normalInteractable != null)
+            {
+                interactable = normalInteractable;
+                return true;
+            }
         }
 
         return false;

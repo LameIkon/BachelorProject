@@ -11,6 +11,7 @@ public class InteractionMenu : MonoBehaviour
     [Header("Events")]
     [SerializeField] private UIToggleEventSO _toggleUI;
     [SerializeField] private CompendiumPageProviderSO _pageProvider;
+    [SerializeField] private CompendiumPageRequestEventSO _request;
 
     [Header("Required Components")]
     [SerializeField] private TextMeshProUGUI _title;
@@ -24,9 +25,16 @@ public class InteractionMenu : MonoBehaviour
         _toCompendiumButton.onClick.AddListener(() => GoToCompendiumPage());
     }
 
+    private void OnEnable()
+    {
+        _request.OnRaise += SetPage;
+    }
+
+
     private void OnDisable()
     {
-        _currentPage = null;
+        _request.OnRaise -= SetPage;
+        //_currentPage = null;
     }
 
     public void SetPage(CompendiumID id)

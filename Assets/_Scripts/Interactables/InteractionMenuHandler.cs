@@ -7,13 +7,19 @@ using UnityEngine;
 public class InteractionMenuHandler : IDisposable
 {
     private readonly UIToggleEventSO _uiToggleEvent;
+    private readonly CompendiumPageRequestEventSO _compendiumPageEvent;
+    private readonly CompendiumID _compendiumID;  
     
     private bool _isSelected;
 
-    public InteractionMenuHandler(UIToggleEventSO uiToggleEvent)
+    public InteractionMenuHandler(UIToggleEventSO uiToggleEvent, CompendiumPageRequestEventSO compendiumPageRequestEventSO, CompendiumID compendiumID)
     {
         _uiToggleEvent = uiToggleEvent;
+        _compendiumPageEvent = compendiumPageRequestEventSO;
+        _compendiumID = compendiumID;
+
         InputReader.s_TogglePopUp += TogglePopUp;
+
     }
 
     public void OnHoverState(bool state)
@@ -31,6 +37,7 @@ public class InteractionMenuHandler : IDisposable
         if (_isSelected)
         {
             Debug.Log("Toggle");
+            _compendiumPageEvent.Raise(_compendiumID);
             _uiToggleEvent.Raise(UIType.InteractionPopUp);
         }
     }
