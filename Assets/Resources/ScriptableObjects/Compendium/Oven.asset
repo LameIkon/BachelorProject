@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7233e5a4c7fbad641a68ba8a90e8d91c, type: 3}
   m_Name: Oven
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
+  compendiumID: 1
   image: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   content:
     _danish:

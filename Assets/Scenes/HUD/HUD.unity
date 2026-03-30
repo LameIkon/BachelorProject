@@ -1371,6 +1371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractionMenu
   _toggleUI: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
+  _pageProvider: {fileID: 11400000, guid: f4666f6433815ab40881357cc901b4c8, type: 2}
   _title: {fileID: 999957814}
   _toCompendiumButton: {fileID: 294809156}
 --- !u!1 &1446435026
@@ -2221,6 +2222,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -740.24
       objectReference: {fileID: 0}
+    - target: {fileID: 6532907691364848486, guid: fc17a51aa87b7b64aba318f4a4ac492d, type: 3}
+      propertyPath: _compendiumProvider
+      value: 
+      objectReference: {fileID: 11400000, guid: f4666f6433815ab40881357cc901b4c8, type: 2}
     - target: {fileID: 6532907691364848486, guid: fc17a51aa87b7b64aba318f4a4ac492d, type: 3}
       propertyPath: _entries.Array.size
       value: 3

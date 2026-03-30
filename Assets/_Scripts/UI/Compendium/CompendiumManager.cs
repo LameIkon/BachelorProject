@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -22,7 +23,19 @@ public class CompendiumManager : MonoBehaviour
     private PageButton _currentPage;
     private int _historyLimit = 20;
 
-    private Dictionary<CompendiumTitles, CompendiumPage> _pageLookup; // TBD
+    [Header("Page provider")]
+    [SerializeField] private CompendiumPageProviderSO _compendiumProvider;
+    private Dictionary<CompendiumID, CompendiumPage> _pageLookup;
+
+    private void OnEnable()
+    {
+        _compendiumProvider.Register(GetPage);
+    }
+
+    private void OnDisable()
+    {
+        _compendiumProvider.Unregister(GetPage);
+    }
 
     private void Start()
     {
@@ -32,6 +45,7 @@ public class CompendiumManager : MonoBehaviour
 
     private void Initialize()
     {
+        // Initialize pages
         for (int i = 0; i < _entries.Length; i++)
         {
             GameObject button = Instantiate(_buttonPrefab, _buttonList);
@@ -50,7 +64,18 @@ public class CompendiumManager : MonoBehaviour
             }
             _entries[i].Initialize(button);
         }
+
+        // Initialize dictionary
+        _pageLookup = new Dictionary<CompendiumID, CompendiumPage>();
+
+        foreach (CompendiumPage page in _entries)
+        {
+            _pageLookup.Add(page.id, page);
+        }
+
     }
+
+    #region Search Methods
 
     /// <summary>
     /// Search the list of buttons by looking at the text in the text field. If any combination of letters matches any of the words on the buttons
@@ -70,6 +95,17 @@ public class CompendiumManager : MonoBehaviour
             entry.ToggleButton(match);
         }
     }
+
+    private CompendiumPage GetPage(CompendiumID id)
+    {
+        if (_pageLookup == null) return null;
+
+        _pageLookup.TryGetValue(id, out CompendiumPage page);
+
+        return page;
+    }
+
+    #endregion
 
     #region Navigation Remembering Logic
     private void NavigateTo(PageButton pageButton)

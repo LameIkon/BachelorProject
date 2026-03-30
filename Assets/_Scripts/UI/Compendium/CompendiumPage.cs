@@ -22,6 +22,7 @@ public class CompendiumPage : MonoBehaviour, ILanguage
 
     public string title {get; private set; } = "Unasigned";
     public Button button {get; private set; } // Access from outside to call button 
+    public CompendiumID id {get; private set; }
 
     private void OnEnable()
     {
@@ -73,6 +74,8 @@ public class CompendiumPage : MonoBehaviour, ILanguage
     /// </summary>
     public void Initialize(GameObject button)
     {
+        Debug.Log("page initialized");
+        id = _compendiumData.compendiumID;
         _buttonObject = button;
         this.button =  _buttonObject.GetComponentInChildren<Button>();
         _buttonTitle = _buttonObject.GetComponentInChildren<TextMeshProUGUI>();
