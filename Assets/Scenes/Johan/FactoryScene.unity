@@ -2491,7 +2491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 487715924}
-  - component: {fileID: 487715925}
+  - component: {fileID: 487715926}
   m_Layer: 0
   m_Name: TerminalManager
   m_TagString: Untagged
@@ -2514,7 +2514,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 505777290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &487715925
+--- !u!114 &487715926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2523,20 +2523,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 487715923}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e253926faab3bf43bc23ca4b0385620, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a16fdbf9b0c5ac45b33cdd8eedc7061, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TerminalManager
+  m_EditorClassIdentifier: Assembly-CSharp::TerminalStateMachine
   _terminalEvent: {fileID: 11400000, guid: 69baff98591f6dc4eb20daa0a65b1de1, type: 2}
   _terminalStartEvent: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
   _ovenstateChangeEvent: {fileID: 11400000, guid: 8a4dd22309d9c4d4f96f93db487852e2, type: 2}
   _terminals:
-  - {fileID: 7254934592214303038}
   - {fileID: 2025184156}
   - {fileID: 1829980279}
-  _machineStatus: 0
-  _isLeaverUp: 0
-  _isResetTermialInWarning: 0
-  _buttonDatas: []
+  - {fileID: 7254934592214303038}
   _machineSpeed: 0
 --- !u!1 &491663686
 GameObject:
@@ -12796,9 +12792,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 44438420}
   - {fileID: 134641720}
   - {fileID: 737501382}
+  - {fileID: 44438420}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1426971991
@@ -15105,9 +15101,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e461a1b09011ed44da587ced0ddeaef8, type: 2}
     - target: {fileID: 5958077097092709878, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958077097092709878, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+    - target: {fileID: 5958077097092709878, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c38a7a672c98f624592c5298c7e34d1a, type: 2}
     - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: _data
       value: 
@@ -15124,6 +15128,14 @@ PrefabInstance:
       propertyPath: _onTerminalStartEvent
       value: 
       objectReference: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
+    - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: _interactionMenu._uiToggleEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
+    - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: _interactionMenu._pageRequestEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: e461a1b09011ed44da587ced0ddeaef8, type: 2}
     - target: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_Name
       value: Reset Terminal
@@ -15758,7 +15770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5007026855318143134, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.3499994
+      value: -3.3499985
       objectReference: {fileID: 0}
     - target: {fileID: 5007026855318143134, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15801,9 +15813,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 603e2696bef3e9945947e7c53d7e6037, type: 2}
     - target: {fileID: 5958077097092709878, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958077097092709878, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+    - target: {fileID: 5958077097092709878, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c38a7a672c98f624592c5298c7e34d1a, type: 2}
     - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: _data
       value: 
@@ -15820,6 +15840,14 @@ PrefabInstance:
       propertyPath: _onTerminalStartEvent
       value: 
       objectReference: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
+    - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: _interactionMenu._uiToggleEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
+    - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: _interactionMenu._pageRequestEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: e461a1b09011ed44da587ced0ddeaef8, type: 2}
     - target: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_Name
       value: Leaver Terminal
@@ -16918,9 +16946,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e461a1b09011ed44da587ced0ddeaef8, type: 2}
     - target: {fileID: 5958077097092709878, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958077097092709878, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+    - target: {fileID: 5958077097092709878, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c38a7a672c98f624592c5298c7e34d1a, type: 2}
     - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: _data
       value: 
@@ -16937,6 +16973,14 @@ PrefabInstance:
       propertyPath: _onTerminalStartEvent
       value: 
       objectReference: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
+    - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: _interactionMenu._uiToggleEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
+    - target: {fileID: 6329787745264393515, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: _interactionMenu._pageRequestEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: e461a1b09011ed44da587ced0ddeaef8, type: 2}
     - target: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_Name
       value: Terminal

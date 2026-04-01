@@ -4,7 +4,7 @@ public class RunningState : BaseState
 
     public override void OnEnter()
     {
-        manager.machineStatus = MachineStatus.Running;
+        manager.TurnOnConveyor();
     }
 
     public override void HandleInput(ButtonType button, TerminalType terminal)
@@ -14,17 +14,15 @@ public class RunningState : BaseState
         switch (button)
         {
             case ButtonType.Stop:
-                manager.SetState(new OffState(manager));
-                manager.SetSpeed(0);
-                manager.SetOvenState(OvenStatus.Stop);
+                manager.SetState(manager.OffState);
                 break;
 
             case ButtonType.SpeedUp:
-                manager.ChangeSpeed(0.01f);
+                manager.ChangeSpeed(true);
                 break;
 
             case ButtonType.SpeedDown:
-                manager.ChangeSpeed(-0.01f);
+                manager.ChangeSpeed(false);
                 break;
         }
     }

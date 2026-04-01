@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TerminalStateMachine : MonoBehaviour
@@ -9,8 +10,6 @@ public class TerminalStateMachine : MonoBehaviour
 
     [SerializeField] private List<Terminal> _terminals;
     //[SerializeField] private MachineStatus _machineStatus;
-    [SerializeField] private bool _isLeaverUp;
-    [SerializeField] private bool _isResetTermialInWarning;
 
     private StateMachine _stateMachine;
 
@@ -18,21 +17,16 @@ public class TerminalStateMachine : MonoBehaviour
 
 
     // Terminal States
-    public MachineStatus machineStatus; // Just to show in inspector the state
-    public bool IsLeverUp => _isLeaverUp;
     public RunningState RunningState { get; private set; }
     public OffState OffState { get; private set; }
     public WarningState WarningState { get; private set; }
+    public LeverWarningState LeverWarningState { get; private set; }
 
     private void Awake() 
     {
         //base.Awake();
         _terminals = new List<Terminal>();
-        _isLeaverUp = true;
         //_isResetTermialInWarning = false;
-        //_terminalStartEvent.OnRaise += AddTerminal;
-        //_terminalEvent.OnRaise += ChangeStatus;
-
         CreateStateMachine();
     }
 
@@ -41,7 +35,13 @@ public class TerminalStateMachine : MonoBehaviour
         SetState(OffState);
     }
 
-    private void OnDisable()
+	private void OnEnable()
+	{
+        _terminalStartEvent.OnRaise += AddTerminal;
+        _terminalEvent.OnRaise += ChangeStatus;
+	}
+
+	private void OnDisable()
 	{
         _terminalEvent.OnRaise -= ChangeStatus;
 		_terminalStartEvent.OnRaise -= AddTerminal;
@@ -55,13 +55,11 @@ public class TerminalStateMachine : MonoBehaviour
 
     private void ChangeStatus(ButtonType buttonType, TerminalType terminalType)
     {
-        if (terminalType == TerminalType.Leaver)
+        if (terminalType == TerminalType.Lever)
         {
-            _isLeaverUp = !_isLeaverUp;
-
-            if (!_isLeaverUp)
+            if (_stateMachine.CurrentState != LeverWarningState)
             {
-                SetState(WarningState);
+                SetState(LeverWarningState);
                 return;
             }
         }
@@ -77,6 +75,7 @@ public class TerminalStateMachine : MonoBehaviour
         RunningState = new RunningState(this);
         OffState = new OffState(this);
         WarningState = new WarningState(this);
+        LeverWarningState = new LeverWarningState(this);
     }
 
 
@@ -85,21 +84,29 @@ public class TerminalStateMachine : MonoBehaviour
         _stateMachine.SetState(newState);
     }
 
-    public void ChangeSpeed(float amount)
+	/// <summary>
+	/// Changes the speed up and down, though a boolean. <c>True</c> turns the speed up by one and <c>false</c> turns it down by one.
+	/// </summary>
+	/// <param name="up"><c>True</c> for up and <c>false</c> for down</param>
+	public void ChangeSpeed(bool up)
     {
+        float amount = up ? 0.01f : -0.01f;
+
         _machineSpeed = Mathf.Clamp(_machineSpeed + amount, 0f, 0.25f);
-        _ovenstateChangeEvent.Raise(amount > 0 ? OvenStatus.Increase : OvenStatus.Decrease);
+        Debug.Log($"Machine Speed: {_machineSpeed}");
+        _ovenstateChangeEvent.Raise(_machineSpeed);
     }
 
-    public void SetSpeed(float value)
+    public void TurnOnConveyor()
     {
-        _machineSpeed = value;
+        _ovenstateChangeEvent.Raise(_machineSpeed);
     }
 
-    public void SetOvenState(OvenStatus status)
+    public void TurnOffConveyor() 
     {
-        _ovenstateChangeEvent.Raise(status);
+        _ovenstateChangeEvent.Raise(0);
     }
+
 
     public float GetSpeed() => _machineSpeed;
     #endregion 

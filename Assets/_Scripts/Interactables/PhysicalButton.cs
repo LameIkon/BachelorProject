@@ -42,7 +42,7 @@ public sealed class PhysicalButton : HoverableInteractable, IInteractable
 	/// </summary>
 	public void Interact(Transform transform)
     {
-		Debug.Log("interact with button");
+		//Debug.Log("interact with button");
 		_buttonData?.SetColor(true);
 		SetColorIndicator(_buttonData.Color);
 		StartCoroutine(PressButton());

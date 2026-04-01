@@ -16,7 +16,6 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public static event Action<Vector2> s_OnMoveEvent;
     public static event Action<Vector2> s_OnInteractEvent;
     public static event Action<Vector2> s_OnLookEvent;
-    public static event Action<Vector2> s_OnMouseMoveEvent;
     public static event Action s_OnUseEvent;
     public static event Action s_ToggleEscape;
 

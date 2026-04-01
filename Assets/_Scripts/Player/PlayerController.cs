@@ -78,7 +78,7 @@ namespace _Scripts
         /// </summary>
         private void Interact(Vector2 pos) // This position could potentially be a const value, because the mouse is fixed to the middle of the screen. But it could be usefull in the future if the functionality should change.
         {
-            Debug.Log("Try Interact");
+            //Debug.Log("Try Interact");
             _interactionUtility.Interact(pos);
         }
 
@@ -87,7 +87,7 @@ namespace _Scripts
         /// </summary>
         private void Use() 
         {
-            Debug.Log("Use");
+            //Debug.Log("Use");
         }
 
         #endregion

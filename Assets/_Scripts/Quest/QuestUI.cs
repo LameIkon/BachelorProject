@@ -44,7 +44,7 @@ public class QuestUI : MonoBehaviour
     {
         _quest.Completed();
         SetUpQuest(_quest);
-        Debug.Log("Quest added");
+        //Debug.Log("Quest added");
     }
 
     private void SetUpQuest(Quest quest) 

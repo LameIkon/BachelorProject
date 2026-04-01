@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class Terminal : MonoBehaviour
+public class Terminal : HoverableInteractable, IInteractable
 {
 
     [SerializeField] private TerminalData _data;
@@ -33,8 +33,9 @@ public class Terminal : MonoBehaviour
         _onTerminalEvent.Raise(type, _data.Type);
     }
 
-    
-
+	public void Interact(Transform transform = null)
+	{
+	}
 }
 
 

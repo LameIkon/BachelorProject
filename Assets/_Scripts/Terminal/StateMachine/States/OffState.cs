@@ -6,19 +6,16 @@ public class OffState : BaseState
 
     public override void OnEnter()
     {
-        Debug.Log("Entered off State");
-        manager.machineStatus = MachineStatus.Off;
-        manager.SetOvenState(OvenStatus.Stop);
+        manager.TurnOffConveyor();
     }
 
     public override void HandleInput(ButtonType button, TerminalType terminal)
     {
-        if (terminal != TerminalType.Main) return;
-
-        if (button == ButtonType.Start)
+        if (terminal == TerminalType.Main && button == ButtonType.Start) 
         {
             manager.SetState(manager.RunningState);
         }
+
     }
 
     public override void OnExit()

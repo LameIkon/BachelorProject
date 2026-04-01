@@ -25,8 +25,6 @@ public class InteractionUtility
         
         _interactionMask = LayerMask.GetMask("Interactable"); // Specific layer we can interact with
 
-        // Mouse position
-        InputReader.s_OnMouseMoveEvent += Hover;
     }
 
     public void OnUpdate()
@@ -58,6 +56,7 @@ public class InteractionUtility
 
         if (RaycastInteractable(pos, out IInteractable interactable))
         {
+            Debug.Log(interactable);
             _newHovered = interactable as IHoverable;
             Debug.Log(interactable);
         }

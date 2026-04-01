@@ -117,7 +117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIModule
   _canvas: {fileID: 5762625233179855813}
-  _config: {fileID: 11400000, guid: 725f4d90c527cc44d90ca2d94222652c, type: 2}
+  _config: {fileID: 11400000, guid: 4f3387c0cfc066141b3cb8e4708763b6, type: 2}
+  _setCanvasActiveAtStart: 1
   _pageSettings:
     pageMode: 0
     pageContainer: {fileID: 0}

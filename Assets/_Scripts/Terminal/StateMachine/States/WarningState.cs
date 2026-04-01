@@ -4,20 +4,26 @@ public class WarningState : BaseState
 {
     public WarningState(TerminalStateMachine manager) : base(manager){}
 
+    private bool _isResetTerminalPressed;
+
     public override void OnEnter()
     {
-        Debug.Log("Entered Warning State");
-        manager.machineStatus = MachineStatus.Warning;
-        manager.SetSpeed(0);
-        manager.SetOvenState(OvenStatus.Stop);
+        manager.TurnOffConveyor();
+        _isResetTerminalPressed = false;
     }
 
     public override void HandleInput(ButtonType button, TerminalType terminal)
     {
         Debug.Log("Try fix issue");
-        if (terminal == TerminalType.Reset1 && button == ButtonType.Reset && manager.IsLeverUp)
+
+        if (terminal == TerminalType.Reset1 && button == ButtonType.Reset)
+        {
+            _isResetTerminalPressed = true;
+        }
+        if (terminal == TerminalType.Main && button == ButtonType.Reset && _isResetTerminalPressed) 
         {
             manager.SetState(manager.OffState);
         }
+
     }
 }
