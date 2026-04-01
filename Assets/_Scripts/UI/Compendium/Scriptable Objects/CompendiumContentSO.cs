@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class CompendiumContentSO : ScriptableObject
 {
+    public CompendiumID compendiumID;
     public Sprite image;
     public CompendiumContent content;
 }

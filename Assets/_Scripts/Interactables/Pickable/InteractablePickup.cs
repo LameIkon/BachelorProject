@@ -1,27 +1,34 @@
 using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody), typeof(Collider))]
-public class PickUpController : MonoBehaviour, IPickable
+public class InteractablePickup : HoverableInteractable, IPickable
 {
+	[Header("Pickup Settings")]
+	[SerializeField] private PickableType _pickableType;
+	
+	
 	private Transform _holdPoint;
 	private Rigidbody _rb;
 
 	private bool _isPickedUp;
+	private bool _canBePickedUp = true;
 
-	[SerializeField] private PickableType _pickableType;
 
     public PickableType PickableType => _pickableType;
+
 	private PlaceableSlot _currentSlot;
 
     public Transform Transform => transform;
 
+
     #region Unity Methods
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Awake()
     {
+		base.Awake();
+
 		_rb = GetComponent<Rigidbody>();
-        _isPickedUp = false;
+        _isPickedUp = false;      
     }
 
     private void FixedUpdate()
@@ -52,6 +59,8 @@ public class PickUpController : MonoBehaviour, IPickable
 
 	private void PickUp(Transform holdPoint)
 	{
+		_highlightHandler?.SetHighlight(false);
+		
 		transform.SetParent(null);
 		_holdPoint = holdPoint;
         _isPickedUp = true;
@@ -68,6 +77,10 @@ public class PickUpController : MonoBehaviour, IPickable
         _rb.useGravity = true;
 		_rb.linearDamping = 0f;
 		Debug.Log("Drop");
+
+
+		if (_canBePickedUp) _highlightHandler?.SetHighlight(true);
+
 		_currentSlot?.TryPlace(this);
 	}
 
@@ -88,4 +101,18 @@ public class PickUpController : MonoBehaviour, IPickable
 	}
 	#endregion
 
+    #region Hovering logic
+    public override void OnHoverEnter()
+	{
+		if (_isPickedUp) return;
+		base.OnHoverEnter();
+	}
+
+
+    public override void OnHoverExit()
+	{
+		if (_isPickedUp) return;
+		base.OnHoverExit();
+	}
+    #endregion
 }

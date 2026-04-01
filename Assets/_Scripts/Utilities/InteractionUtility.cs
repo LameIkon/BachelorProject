@@ -7,6 +7,9 @@ public class InteractionUtility
     private readonly Transform _pickUpPoint;
     private readonly float _pickUpDistance;
 
+    private IHoverable _currentHovered;
+    private IHoverable _newHovered;
+
     /// <summary>
     /// How to interact with interactables
     /// </summary>
@@ -26,6 +29,13 @@ public class InteractionUtility
         InputReader.s_OnMouseMoveEvent += Hover;
     }
 
+    public void OnUpdate()
+    {
+        if (InputReader.s_State != InputState.Game) return;
+        Hover(InputReader.MousePos);
+    }
+
+
     /// <summary>
     /// Inputs for Use, takes the position of the mouse on the screen. 
     /// </summary>
@@ -33,27 +43,36 @@ public class InteractionUtility
     {
         if (InputReader.s_State != InputState.Game) return; // Can't interact if we aren't in Game input state
 
-        if (RaycastInteractable(pos, out IPickable pickable, out IInteractable interactable))
+        if (RaycastInteractable(pos, out IInteractable interactable))
         {
-            pickable?.Interact(_pickUpPoint);
-            interactable?.Interact();
+            interactable?.Interact(_pickUpPoint);
         }
     }
+
 
     private void Hover(Vector2 pos)
     {
         if (InputReader.s_State != InputState.Game) return; // Can't interact if we aren't in Game input state
 
-        if (RaycastInteractable(pos, out IPickable pickable, out IInteractable interactable))
+        _newHovered = null;
+
+        if (RaycastInteractable(pos, out IInteractable interactable))
         {
-            if (pickable != null)
-            {
-                Debug.Log(pickable);
-            }
-            if (interactable != null)
-            {
-                Debug.Log(interactable);
-            }
+            _newHovered = interactable as IHoverable;
+            Debug.Log(interactable);
+        }
+
+
+        if (_currentHovered != null && _currentHovered != _newHovered) // Exit old
+        {
+            _currentHovered.OnHoverExit();
+            _currentHovered = null;
+        }
+
+        if (_newHovered != null && _newHovered != _currentHovered) // Enter new
+        {
+            _newHovered.OnHoverEnter();
+            _currentHovered = _newHovered;
         }
     }
 
@@ -65,19 +84,32 @@ public class InteractionUtility
     /// <param name="pickable">Types that the player can pick up</param>
     /// <param name="interactable">Types the player can interact with, eg. press a button</param>
     /// <returns></returns>
-    private bool RaycastInteractable(Vector2 screenPos, out IPickable pickable, out IInteractable interactable)
+    private bool RaycastInteractable(Vector2 screenPos, out IInteractable interactable)
     {
         Ray ray = _camera.ScreenPointToRay(screenPos);
 
-        pickable = null;
         interactable = null;
 
         if (Physics.Raycast(ray, out RaycastHit hit, _pickUpDistance, _interactionMask))
         {
-            pickable = hit.collider.GetComponent<IPickable>();
-            interactable = hit.collider.GetComponent<IInteractable>();
+            // Try get IPickable first
+            IPickable pickable = hit.collider.GetComponent<IPickable>();
+            if (pickable != null)
+            {
+                interactable = pickable;
 
-            return pickable != null || interactable != null;
+                return true;
+
+
+            }
+
+            // Otherwise get IInteractable
+            IInteractable normalInteractable = hit.collider.GetComponent<IInteractable>();
+            if (normalInteractable != null)
+            {
+                interactable = normalInteractable;
+                return true;
+            }
         }
 
         return false;

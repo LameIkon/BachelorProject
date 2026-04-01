@@ -11,6 +11,7 @@ public class UIModule : MonoBehaviour, IUISystem
     [SerializeField] private UIModuleConfigSO _config;
 
     [Header("Optional")]
+    [SerializeField] private bool _setCanvasActiveAtStart;
     [SerializeField] private PageSettings _pageSettings;
 
     private CanvasUIModule _canvasModule;
@@ -30,7 +31,8 @@ public class UIModule : MonoBehaviour, IUISystem
     #region Initialize
     private void Initialize()
     {
-        _canvasModule = new CanvasUIModule(_canvas);
+        _canvasModule = new CanvasUIModule(_canvas, _setCanvasActiveAtStart);
+        IsOpen = _setCanvasActiveAtStart;
         InitializePageSettings();
         _config.registerUIEvent.Raise(this);    
     }

@@ -1,10 +1,9 @@
 using UnityEngine;
-using System;
 using System.Collections;
 
-public sealed class PhysicalButton : MonoBehaviour, IInteractable 
+public sealed class PhysicalButton : HoverableInteractable, IInteractable 
 {
-
+	[Header("Button Settings")]
     [SerializeField] private ButtonData _buttonData;
     [SerializeField] private ButtonEventSO _onButtonEvent;
     [SerializeField] private MeshRenderer _lightIndicator;
@@ -19,7 +18,7 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
     private void Start() 
 	{
 		_lightIndicator = GetComponentInChildren<MeshRenderer>();
-		_buttonData.SetColor(false);
+		_buttonData?.SetColor(false);
 		SetColorIndicator(_buttonData.Color);
 		_buttonPressSpeed = .1f;
 
@@ -32,7 +31,6 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
         newPosition = transform.position;
         newPosition += pos;
         Debug.Log(pos);
-
     }
 
 	#endregion
@@ -42,13 +40,14 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
 	/// <summary>
 	/// The button invokes an event with the button type currently assigned to it.
 	/// </summary>
-	public void Interact()
+	public void Interact(Transform transform)
     {
-		_buttonData.SetColor(true);
+		Debug.Log("interact with button");
+		_buttonData?.SetColor(true);
 		SetColorIndicator(_buttonData.Color);
 		StartCoroutine(PressButton());
 
-        _onButtonEvent.Raise(_buttonData.Type);
+        _onButtonEvent?.Raise(_buttonData.Type);
     }
 
 	#endregion
@@ -75,5 +74,3 @@ public sealed class PhysicalButton : MonoBehaviour, IInteractable
 
 	}
 }
-
-

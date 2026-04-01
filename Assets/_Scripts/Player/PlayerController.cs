@@ -108,6 +108,7 @@ namespace _Scripts
         void Update() 
         {
             CameraRotate(); // Needs to be called here.
+            _interactionUtility.OnUpdate();
 		}
 
 

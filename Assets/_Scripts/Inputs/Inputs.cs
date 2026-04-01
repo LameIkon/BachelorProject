@@ -93,24 +93,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             ""id"": ""477fd54e-50b2-48cb-ab56-09dfc4bfb0c7"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""037d8e98-2de4-481b-bc39-c8049ec0549a"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""5dcb5b54-d172-48d4-bc35-4db433d548a3"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Look"",
                     ""type"": ""Value"",
                     ""id"": ""162e1b90-8f46-4da5-aad9-6579c86df373"",
@@ -136,75 +118,27 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""4bd4a54e-ebdc-494f-b550-fb89ba59b078"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""rightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""1502f53b-73df-4125-bf37-7b83f0ef475f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""33088df1-5677-489f-aa1f-bc406e72b489"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""074a24de-846c-4e3e-983f-9a95375ab441"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""527d53a3-e449-4f1b-9067-1dd4591b8a28"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""5d9799e7-89a2-49c1-8a07-a8dcc1dfaf7a"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""87d232ac-d0e2-4cc9-9ca2-ae1e1769e352"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9ec03bb8-3d08-4e96-89ee-04266ba6844a"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""5c954607-2492-4444-8313-70d7f0a3d0fa"",
@@ -237,6 +171,72 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""e6e63439-282b-45bd-ba31-7e0b54a67057"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""f4363009-f6d6-4618-9995-17b60572ed91"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""c19f9ec9-43d4-442b-9232-21f337651064"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""1fa86cf4-8bba-481c-b2c9-818a68c72507"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""8eab02be-6bef-4a93-be59-87059c24a5a9"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36d3e7de-f08a-4cc7-a8a4-ffb24b35b86a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""rightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -245,18 +245,27 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             ""id"": ""78b13b0c-f9d6-4484-8c0d-7184442620b2"",
             ""actions"": [
                 {
-                    ""name"": ""Compendium"",
+                    ""name"": ""Escape"",
                     ""type"": ""Button"",
-                    ""id"": ""088039ea-c5c3-40f1-82d0-b4f5f937bb64"",
+                    ""id"": ""a058f332-fbc2-4101-a7ae-0f960312ebda"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Escape"",
+                    ""name"": ""Compendium"",
                     ""type"": ""Button"",
-                    ""id"": ""a058f332-fbc2-4101-a7ae-0f960312ebda"",
+                    ""id"": ""f2e78d57-b452-44e2-bec5-00322eb23e48"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""8aa1da00-dbca-442c-a55c-46fe906f8ea0"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -266,7 +275,18 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""f970df35-ceb4-436b-8cee-a4a014be0250"",
+                    ""id"": ""0ee7f91e-24d1-407d-a918-ec411c21570b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bba05fd8-8a1a-4b6e-975f-e0e3d1791bcb"",
                     ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -277,12 +297,12 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0ee7f91e-24d1-407d-a918-ec411c21570b"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""adf00b41-2e1a-4cb7-9e4c-e78f70e8f6fc"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Escape"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -321,15 +341,16 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
 }");
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
-        m_Game_Move = m_Game.FindAction("Move", throwIfNotFound: true);
-        m_Game_Interact = m_Game.FindAction("Interact", throwIfNotFound: true);
         m_Game_Look = m_Game.FindAction("Look", throwIfNotFound: true);
         m_Game_Use = m_Game.FindAction("Use", throwIfNotFound: true);
         m_Game_MousePosition = m_Game.FindAction("MousePosition", throwIfNotFound: true);
+        m_Game_Move = m_Game.FindAction("Move", throwIfNotFound: true);
+        m_Game_rightClick = m_Game.FindAction("rightClick", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Compendium = m_UI.FindAction("Compendium", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
+        m_UI_Compendium = m_UI.FindAction("Compendium", throwIfNotFound: true);
+        m_UI_Interact = m_UI.FindAction("Interact", throwIfNotFound: true);
         // Main Menu
         m_MainMenu = asset.FindActionMap("Main Menu", throwIfNotFound: true);
         m_MainMenu_Newaction = m_MainMenu.FindAction("New action", throwIfNotFound: true);
@@ -415,11 +436,11 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     // Game
     private readonly InputActionMap m_Game;
     private List<IGameActions> m_GameActionsCallbackInterfaces = new List<IGameActions>();
-    private readonly InputAction m_Game_Move;
-    private readonly InputAction m_Game_Interact;
     private readonly InputAction m_Game_Look;
     private readonly InputAction m_Game_Use;
     private readonly InputAction m_Game_MousePosition;
+    private readonly InputAction m_Game_Move;
+    private readonly InputAction m_Game_rightClick;
     /// <summary>
     /// Provides access to input actions defined in input action map "Game".
     /// </summary>
@@ -432,14 +453,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         /// </summary>
         public GameActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Game/Move".
-        /// </summary>
-        public InputAction @Move => m_Wrapper.m_Game_Move;
-        /// <summary>
-        /// Provides access to the underlying input action "Game/Interact".
-        /// </summary>
-        public InputAction @Interact => m_Wrapper.m_Game_Interact;
-        /// <summary>
         /// Provides access to the underlying input action "Game/Look".
         /// </summary>
         public InputAction @Look => m_Wrapper.m_Game_Look;
@@ -451,6 +464,14 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Game/MousePosition".
         /// </summary>
         public InputAction @MousePosition => m_Wrapper.m_Game_MousePosition;
+        /// <summary>
+        /// Provides access to the underlying input action "Game/Move".
+        /// </summary>
+        public InputAction @Move => m_Wrapper.m_Game_Move;
+        /// <summary>
+        /// Provides access to the underlying input action "Game/rightClick".
+        /// </summary>
+        public InputAction @rightClick => m_Wrapper.m_Game_rightClick;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -477,12 +498,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GameActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GameActionsCallbackInterfaces.Add(instance);
-            @Move.started += instance.OnMove;
-            @Move.performed += instance.OnMove;
-            @Move.canceled += instance.OnMove;
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
@@ -492,6 +507,12 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @rightClick.started += instance.OnRightClick;
+            @rightClick.performed += instance.OnRightClick;
+            @rightClick.canceled += instance.OnRightClick;
         }
 
         /// <summary>
@@ -503,12 +524,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         /// <seealso cref="GameActions" />
         private void UnregisterCallbacks(IGameActions instance)
         {
-            @Move.started -= instance.OnMove;
-            @Move.performed -= instance.OnMove;
-            @Move.canceled -= instance.OnMove;
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
@@ -518,6 +533,12 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @rightClick.started -= instance.OnRightClick;
+            @rightClick.performed -= instance.OnRightClick;
+            @rightClick.canceled -= instance.OnRightClick;
         }
 
         /// <summary>
@@ -555,8 +576,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Compendium;
     private readonly InputAction m_UI_Escape;
+    private readonly InputAction m_UI_Compendium;
+    private readonly InputAction m_UI_Interact;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -569,13 +591,17 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         /// </summary>
         public UIActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         /// <summary>
+        /// Provides access to the underlying input action "UI/Escape".
+        /// </summary>
+        public InputAction @Escape => m_Wrapper.m_UI_Escape;
+        /// <summary>
         /// Provides access to the underlying input action "UI/Compendium".
         /// </summary>
         public InputAction @Compendium => m_Wrapper.m_UI_Compendium;
         /// <summary>
-        /// Provides access to the underlying input action "UI/Escape".
+        /// Provides access to the underlying input action "UI/Interact".
         /// </summary>
-        public InputAction @Escape => m_Wrapper.m_UI_Escape;
+        public InputAction @Interact => m_Wrapper.m_UI_Interact;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -602,12 +628,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @Compendium.started += instance.OnCompendium;
-            @Compendium.performed += instance.OnCompendium;
-            @Compendium.canceled += instance.OnCompendium;
             @Escape.started += instance.OnEscape;
             @Escape.performed += instance.OnEscape;
             @Escape.canceled += instance.OnEscape;
+            @Compendium.started += instance.OnCompendium;
+            @Compendium.performed += instance.OnCompendium;
+            @Compendium.canceled += instance.OnCompendium;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         /// <summary>
@@ -619,12 +648,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         /// <seealso cref="UIActions" />
         private void UnregisterCallbacks(IUIActions instance)
         {
-            @Compendium.started -= instance.OnCompendium;
-            @Compendium.performed -= instance.OnCompendium;
-            @Compendium.canceled -= instance.OnCompendium;
             @Escape.started -= instance.OnEscape;
             @Escape.performed -= instance.OnEscape;
             @Escape.canceled -= instance.OnEscape;
+            @Compendium.started -= instance.OnCompendium;
+            @Compendium.performed -= instance.OnCompendium;
+            @Compendium.canceled -= instance.OnCompendium;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         /// <summary>
@@ -762,20 +794,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     public interface IGameActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMove(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnInteract(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "Look" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -796,6 +814,20 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMousePosition(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "rightClick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRightClick(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -805,6 +837,13 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     public interface IUIActions
     {
         /// <summary>
+        /// Method invoked when associated input action "Escape" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEscape(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "Compendium" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -812,12 +851,12 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCompendium(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Escape" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnEscape(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Main Menu" which allows adding and removing callbacks.

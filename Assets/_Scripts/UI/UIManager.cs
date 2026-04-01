@@ -31,9 +31,16 @@ public class UIManager : Singleton<UIManager>
     {
         _uiSystems.Add(system); // Add to registrated systems
 
+        Debug.Log(system);
         if (!_systemLookup.ContainsKey(system.UIType)) // Add a reference to it for lookup from outside by just asking for UIType
         {
             _systemLookup.Add(system.UIType, system);
+
+            if (system.IsOpen) // If the uiModule is aleady active, add it
+            {
+                Debug.Log($"active system: {system}");
+                _activeSystems.Add(system);
+            }
         }
     }
 
@@ -56,6 +63,8 @@ public class UIManager : Singleton<UIManager>
                 InputReader.SetState(InputState.Game);
             }
             Debug.Log("Remove from active list");
+
+            EvaluateOverlayState();
         }
         else
         {
@@ -69,6 +78,8 @@ public class UIManager : Singleton<UIManager>
                 InputReader.SetState(InputState.UI);
             }
             Debug.Log("Add to active list");
+
+            EvaluateOverlayState();
         }
     }
 
@@ -97,12 +108,38 @@ public class UIManager : Singleton<UIManager>
                         _activeSystems.Remove(system);
                     }
                     break;
-
                 default:
                     break;
             }
         }   
     }
+
+    /// <summary>
+    /// Evaluate everytime we open and close ui. Overlay will try to open when no solo or stackable ui elements are active
+    /// </summary>
+    private void EvaluateOverlayState()
+    {
+        bool hasBlockingUI = _activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable);
+
+        Debug.Log(hasBlockingUI);
+
+        foreach (IUISystem system in _uiSystems)
+        {
+            if (system.RuleType != UIRuleType.Overlay) continue;
+            
+            if (hasBlockingUI)
+            {
+                if (system.IsOpen)
+                    system.Close();
+            }
+            else
+            {
+                if (!system.IsOpen)
+                    system.Open();
+            }
+        }
+    }
+
     #endregion
 
 }

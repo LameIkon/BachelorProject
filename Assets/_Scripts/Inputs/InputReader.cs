@@ -20,7 +20,10 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public static event Action s_OnUseEvent;
     public static event Action s_ToggleEscape;
 
-    private Vector2 MousePos;
+    public static event Action s_TogglePopUp;
+
+
+    public static Vector2 MousePos;
    
     
     #region Unity Methods
@@ -36,6 +39,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
             Debug.Log("Inputs started");
         }
     }
+
 
     private void OnDisable()
     {
@@ -71,7 +75,6 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public void OnMove(InputAction.CallbackContext context)
     {
         s_OnMoveEvent?.Invoke(context.ReadValue<Vector2>());
-        s_OnMouseMoveEvent?.Invoke(MousePos);
     }
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -88,11 +91,18 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     {
         if (context.phase == InputActionPhase.Performed) s_OnUseEvent?.Invoke();
     }
+    public void OnRightClick(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("right click");            
+            s_TogglePopUp?.Invoke();
+        }
+    }
 
     public void OnMousePosition(InputAction.CallbackContext context) 
     {
         MousePos = context.ReadValue<Vector2>();
-        s_OnMouseMoveEvent?.Invoke(MousePos);
     }
 
     public void OnEscape(InputAction.CallbackContext context)
@@ -105,6 +115,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
         Debug.Log("try Toggle Compendium");
         if (context.started) _toggleUI.Raise(UIType.Compendium);
     }
+
 
     #endregion
 }
