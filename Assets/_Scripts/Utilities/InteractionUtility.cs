@@ -96,17 +96,13 @@ public class InteractionUtility
             {
                 result.Hoverable = foundHoverable;
             }
-
-            // Try get IPickable first
-            IPickable pickable = hit.collider.GetComponent<IPickable>();
-            if (pickable != null)
+            
+            // Try get interactable interface
+            if (hit.collider.TryGetComponent(out IPickable pickable)) // Try get IPickable first
             {
                 result.Interactable = pickable;
             }
-
-            // Otherwise get IInteractable
-            IInteractable normalInteractable = hit.collider.GetComponent<IInteractable>();
-            if (normalInteractable != null)
+            else if (hit.collider.TryGetComponent(out IInteractable normalInteractable)) // Otherwise get IInteractable
             {
                 result.Interactable = normalInteractable;
             }
