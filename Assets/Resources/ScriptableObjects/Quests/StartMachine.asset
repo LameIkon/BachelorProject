@@ -12,5 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af11e7f5d8b9d2e4681e3b5bd0aea108, type: 3}
   m_Name: StartMachine
   m_EditorClassIdentifier: Assembly-CSharp::Quest
-  _title: Start Machine
-  _description: Start the machine
+  _parts:
+  - _isComplete: 1
+    _description: Part nr. 1
+  - _isComplete: 1
+    _description: Part nr. 1
+  - _isComplete: 1
+    _description: Part nr. 1
+  - _isComplete: 1
+    _description: Part nr. 1
+  - _isComplete: 1
+    _description: Part nr. 1
+  - _isComplete: 1
+    _description: Part nr. 1
+  - _isComplete: 1
+    _description: Part nr. 1

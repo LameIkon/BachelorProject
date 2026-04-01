@@ -6,15 +6,15 @@ public class AsyncSceneLoader
 {
     private readonly LevelData[] _levels;
 
-    private readonly Dictionary<LevelName, LevelData> _levelsDict;
-    private readonly LevelName _previousLevelLoaded;
+    private readonly Dictionary<int, LevelData> _levelsDict;
+    private readonly int _previousLevelLoaded;
 
-    public AsyncSceneLoader(LevelName firstSceneLoad, LevelData[] levels) 
+    public AsyncSceneLoader(int firstSceneLoad, LevelData[] levels) 
     { 
         _previousLevelLoaded = firstSceneLoad;
         _levels = levels;
 
-        _levelsDict = new Dictionary<LevelName, LevelData>();
+        _levelsDict = new Dictionary<int, LevelData>();
         InitLevels();
     }
 
@@ -22,15 +22,15 @@ public class AsyncSceneLoader
     {
         foreach (LevelData data in _levels) 
         {
-            _levelsDict.Add(data.Name, data);
+            _levelsDict.Add(data.Id, data);
         }
     }
 
 
     // The Coroutine for loading the scenes 
-    public IEnumerator LoadScenes(LevelName level)
+    public IEnumerator LoadScenes(int levelId)
     {
-        SceneField[] scenes = _levelsDict[level].Scenes;
+        SceneField[] scenes = _levelsDict[levelId].Scenes;
 
         foreach (SceneField scene in scenes) // looping over all the scenes in the array
         {
@@ -45,7 +45,7 @@ public class AsyncSceneLoader
         }
 
 
-        InputReader.SetState(_levelsDict[level].GameState);
+        InputReader.SetState(_levelsDict[levelId].GameState);
     }
 
     public IEnumerator UnloadScenes()
