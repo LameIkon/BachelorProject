@@ -15140,6 +15140,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reset Terminal
       objectReference: {fileID: 0}
+    - target: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6529266913030797314, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2
@@ -15851,6 +15855,10 @@ PrefabInstance:
     - target: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_Name
       value: Leaver Terminal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7554672580540381602, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_Layer
@@ -16984,6 +16992,10 @@ PrefabInstance:
     - target: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_Name
       value: Terminal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523635452332190815, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6529266913030797314, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
       propertyPath: m_Materials.Array.size

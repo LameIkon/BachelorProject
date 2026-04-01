@@ -41,9 +41,9 @@ public class InteractionUtility
     {
         if (InputReader.s_State != InputState.Game) return; // Can't interact if we aren't in Game input state
 
-        if (RaycastInteractable(pos, out IInteractable interactable))
+        if (RaycastInteractable(pos, out RaycastResult result))
         {
-            interactable?.Interact(_pickUpPoint);
+            result.Interactable?.Interact(_pickUpPoint);
         }
     }
 
@@ -54,11 +54,10 @@ public class InteractionUtility
 
         _newHovered = null;
 
-        if (RaycastInteractable(pos, out IInteractable interactable))
+        if (RaycastInteractable(pos, out RaycastResult result))
         {
-            Debug.Log(interactable);
-            _newHovered = interactable as IHoverable;
-            Debug.Log(interactable);
+            Debug.Log(result.Hoverable);
+            _newHovered = result.Hoverable;
         }
 
 
@@ -83,34 +82,45 @@ public class InteractionUtility
     /// <param name="pickable">Types that the player can pick up</param>
     /// <param name="interactable">Types the player can interact with, eg. press a button</param>
     /// <returns></returns>
-    private bool RaycastInteractable(Vector2 screenPos, out IInteractable interactable)
+    private bool RaycastInteractable(Vector2 screenPos, out RaycastResult result)
     {
         Ray ray = _camera.ScreenPointToRay(screenPos);
 
-        interactable = null;
+        result = new RaycastResult();
 
         if (Physics.Raycast(ray, out RaycastHit hit, _pickUpDistance, _interactionMask))
         {
+            
+            // Optional Ihoverable detection found
+            if (hit.collider.TryGetComponent(out IHoverable foundHoverable))
+            {
+                result.Hoverable = foundHoverable;
+            }
+
             // Try get IPickable first
             IPickable pickable = hit.collider.GetComponent<IPickable>();
             if (pickable != null)
             {
-                interactable = pickable;
-
-                return true;
-
-
+                result.Interactable = pickable;
             }
 
             // Otherwise get IInteractable
             IInteractable normalInteractable = hit.collider.GetComponent<IInteractable>();
             if (normalInteractable != null)
             {
-                interactable = normalInteractable;
-                return true;
+                result.Interactable = normalInteractable;
             }
         }
 
-        return false;
+        return result.Interactable != null || result.Hoverable != null;
+    }
+
+    /// <summary>
+    /// Used for Raycast Detection to store Ihoverable and IInterable interfaces
+    /// </summary>
+    private struct RaycastResult
+    {
+        public IInteractable Interactable;
+        public IHoverable Hoverable;
     }
 }
