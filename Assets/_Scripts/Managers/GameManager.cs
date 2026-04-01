@@ -8,6 +8,7 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private LevelData[] _levels;
     [SerializeField] private SceneLoadEventSO _sceneLoadEventSO;
+    [SerializeField] private QuestGiveEventSO _questGiveEventSO;
 
     [SerializeField] private LevelData _firstSceneToLoad;
 
@@ -22,17 +23,17 @@ public class GameManager : Singleton<GameManager>
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        LoadScenes(_firstSceneToLoad.Id);
+        LoadLevel(_firstSceneToLoad.Id);
     }
 
     private void OnEnable()
     {
-        _sceneLoadEventSO.OnRaise += LoadScenes;
+        _sceneLoadEventSO.OnRaise += LoadLevel;
     }
 
     private void OnDisable()
     {
-        _sceneLoadEventSO.OnRaise -= LoadScenes;
+        _sceneLoadEventSO.OnRaise -= LoadLevel;
     }
 
     #endregion
@@ -43,11 +44,14 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    private void LoadScenes(int levelId) 
+    private void LoadLevel(int levelId) 
     {
         StartCoroutine(_sceneLoader.UnloadScenes());
 
         StartCoroutine(_sceneLoader.LoadScenes(levelId));
+        
+        // TODO: Send Quest data through the QuestGiveEventSO, would like to refactor this so it
+        // uses the LevelData as a parameter instead of the levelId.
     }
 
 }

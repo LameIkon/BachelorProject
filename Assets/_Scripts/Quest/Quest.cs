@@ -1,17 +1,57 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Quest Object", menuName = "ScriptableObject/Quest")]
 public class Quest : ScriptableObject
 {
-	private bool _isComplete = false;
-	[SerializeField] private string _title;
-	[SerializeField] private string _description;
+	[SerializeField] private List<Part> _parts;
+	private int _index;
 
-	public bool IsComplete {
-		get {return _isComplete;}
-		set { _isComplete = value;}
+
+	[Serializable]
+	public class Part 
+	{
+		[SerializeField] private bool _isComplete;
+		[SerializeField] private string _description;
+
+		public void Init() 
+		{
+			_isComplete = false;
+		}
+
+		public void CompletePart() 
+		{
+			_isComplete = true;
+		}
+
+		public bool IsPartComplete => _isComplete;
+
+		public string Description => _description;
+
 	}
-	public string Title { get { return _title; } }
-	public string Description { get { return _description; } }
+
+	public void Init() 
+	{
+		_index = 0;
+		foreach (Part p in _parts) 
+		{
+			p.Init();
+		}
+	}
+
+	public void Completed() 
+	{
+		if (_index > _parts.Count - 1) return;
+		_parts[_index++].CompletePart();
+	}
+
+	public List<Part> Parts  
+	{
+		get 
+		{
+			return _parts;
+		}
+	}
 
 }
