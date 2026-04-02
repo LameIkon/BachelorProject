@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Industrial Oven Layout
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
   compendiumID: 3
-  image: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  image: {fileID: 21300000, guid: 1a96ab5f501a8e84c9016458682e1ccb, type: 3}
   content:
     _danish:
       title: Industri ovn layout

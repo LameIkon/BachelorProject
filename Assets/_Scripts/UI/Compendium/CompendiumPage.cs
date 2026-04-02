@@ -79,7 +79,11 @@ public class CompendiumPage : MonoBehaviour, ILanguage
         _buttonObject = button;
         this.button =  _buttonObject.GetComponentInChildren<Button>();
         _buttonTitle = _buttonObject.GetComponentInChildren<TextMeshProUGUI>();
-        _image.sprite = _compendiumData.image;
+
+        if (_compendiumData.image != null)
+        {
+            _image.sprite = _compendiumData.image;
+        }
 
         SetLanguage(LanguageUtility.CurrentLanguage);
 
