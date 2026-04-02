@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7233e5a4c7fbad641a68ba8a90e8d91c, type: 3}
-  m_Name: Dry Ice
+  m_Name: StopProtocol
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
-  compendiumID: 2
+  compendiumID: 3
   image: {fileID: 0}
   content:
     _danish:
-      title: "t\xF8ris"
-      description: "beskrivelse om t\xF8ris her"
+      title: ovn
+      description: "P\xE5 hovedterminalen tryk p\xE5 den r\xF8de knap for at stoppe
+        ovnen."
     _english:
-      title: 'dry ice '
-      description: description about dry ice here
+      title: oven
+      description: description about oven here

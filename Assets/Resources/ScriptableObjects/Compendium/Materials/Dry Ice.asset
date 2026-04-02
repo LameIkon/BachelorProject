@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7233e5a4c7fbad641a68ba8a90e8d91c, type: 3}
-  m_Name: Oven
+  m_Name: Dry Ice
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
-  compendiumID: 1
+  compendiumID: 12
   image: {fileID: 0}
   content:
     _danish:
-      title: ovn
-      description: beskrivelse om ovn her
+      title: "t\xF8ris"
+      description: "beskrivelse om t\xF8ris her"
     _english:
-      title: oven
-      description: description about oven here
+      title: 'dry ice '
+      description: description about dry ice here

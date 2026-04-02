@@ -6,7 +6,7 @@ using System;
 /// </summary>
 public static class LanguageUtility
 {
-    public static Language CurrentLanguage { get; private set; } = Language.English; // Default set to english
+    public static Language CurrentLanguage { get; private set; } = Language.Danish; // Default set to english
 
     public static event Action<Language> OnLanguageChanged;
 

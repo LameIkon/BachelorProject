@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,7 +12,9 @@ public class CompendiumManager : MonoBehaviour
 
     [Header("Data")]
     [SerializeField] private UIModule _UIModule;
-    [SerializeField] private CompendiumPage[] _entries;
+    [SerializeField] private Transform _entriesContainer;
+    
+    private List<CompendiumPage> _entries;
 
     [Header("Navigation Tracking")]
     [SerializeField] private TextMeshProUGUI _historyNavigationContainer;
@@ -45,8 +46,19 @@ public class CompendiumManager : MonoBehaviour
 
     private void Initialize()
     {
+        // Get Pages
+        _entries = new();
+        foreach (Transform child in _entriesContainer)
+        {
+            if (child.TryGetComponent(out CompendiumPage page))
+            {
+                _entries.Add(page);
+            }
+        }
+
+
         // Initialize pages
-        for (int i = 0; i < _entries.Length; i++)
+        for (int i = 0; i < _entries.Count; i++)
         {
             GameObject button = Instantiate(_buttonPrefab, _buttonList);
             PageButton pageButton = button.GetComponent<PageButton>();
