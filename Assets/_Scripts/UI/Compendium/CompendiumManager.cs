@@ -5,16 +5,20 @@ using UnityEngine.UI;
 
 public class CompendiumManager : MonoBehaviour
 {
+    [Header("Prefabs")]
+    [SerializeField] private GameObject _buttonPrefab;
+    [SerializeField] private GameObject _compendiumPagePrefab;
+
     [Header("UI Components")]
     [SerializeField] private TMP_InputField _inputField;
-    [SerializeField] private GameObject _buttonPrefab;
     [SerializeField] private Transform _buttonList;
 
     [Header("Data")]
     [SerializeField] private UIModule _UIModule;
     [SerializeField] private Transform _entriesContainer;
     
-    private List<CompendiumPage> _entries;
+    [SerializeField] private List<CompendiumContentSO> _entries;
+    private List<CompendiumPage> _pages;
 
     [Header("Navigation Tracking")]
     [SerializeField] private TextMeshProUGUI _historyNavigationContainer;
@@ -46,19 +50,19 @@ public class CompendiumManager : MonoBehaviour
 
     private void Initialize()
     {
-        // Get Pages
-        _entries = new();
-        foreach (Transform child in _entriesContainer)
+        // Initialize Pages
+        _pages = new();
+        foreach (CompendiumContentSO content in _entries)
         {
-            if (child.TryGetComponent(out CompendiumPage page))
-            {
-                _entries.Add(page);
-            }
+            GameObject page = Instantiate(_compendiumPagePrefab, _entriesContainer);
+            CompendiumPage pageData = page.GetComponent<CompendiumPage>();
+            pageData.SetCompendiumData(content);
+            _pages.Add(pageData);
         }
 
 
-        // Initialize pages
-        for (int i = 0; i < _entries.Count; i++)
+        // Initialize Button to pages
+        for (int i = 0; i < _pages.Count; i++)
         {
             GameObject button = Instantiate(_buttonPrefab, _buttonList);
             PageButton pageButton = button.GetComponent<PageButton>();
@@ -74,15 +78,22 @@ public class CompendiumManager : MonoBehaviour
                     NavigateTo(pageButton);
                 });
             }
-            _entries[i].Initialize(button);
+            _pages[i].Initialize(button);
         }
 
         // Initialize dictionary
         _pageLookup = new Dictionary<CompendiumID, CompendiumPage>();
 
-        foreach (CompendiumPage page in _entries)
+        foreach (CompendiumPage page in _pages)
         {
-            _pageLookup.Add(page.id, page);
+            if (!_pageLookup.ContainsKey(page.id))
+            {
+                _pageLookup.Add(page.id, page);
+            }
+            else
+            {
+                Debug.LogWarning($"Duplicate CompendiumID: {page.id}");
+            }
         }
 
     }
@@ -98,7 +109,7 @@ public class CompendiumManager : MonoBehaviour
     {
         input = input.ToLower();
 
-        foreach (CompendiumPage entry in _entries)
+        foreach (CompendiumPage entry in _pages)
         {
             string title = entry.title.ToLower();
 

@@ -520,7 +520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925dd8858d60cde429211957ec83b831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumPage
-  _compendiumData: {fileID: 11400000, guid: 57e2cb418eb5a104788dfcf19678abe2, type: 2}
   _image: {fileID: 4684127257129371744}
   _title: {fileID: 406060765358108031}
   _description: {fileID: 899646139857770364}

@@ -16,8 +16,8 @@ MonoBehaviour:
   image: {fileID: 0}
   content:
     _danish:
-      title: 
-      description: 
+      title: "H\xE5ndtag"
+      description: asdasdasd
     _english:
-      title: 
+      title: Lever
       description: 

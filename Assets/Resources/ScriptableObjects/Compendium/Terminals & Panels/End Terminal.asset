@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7233e5a4c7fbad641a68ba8a90e8d91c, type: 3}
   m_Name: End Terminal
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
-  compendiumID: 3
+  compendiumID: 5
   image: {fileID: 0}
   content:
     _danish:

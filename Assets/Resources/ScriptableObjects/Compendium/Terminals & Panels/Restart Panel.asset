@@ -16,8 +16,8 @@ MonoBehaviour:
   image: {fileID: 0}
   content:
     _danish:
-      title: 
-      description: 
+      title: Restart Panel
+      description: beskrivelse her
     _english:
-      title: 
-      description: 
+      title: Restart Panel
+      description: Description here

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 /// </summary>
 public class CompendiumPage : MonoBehaviour, ILanguage
 {
-    [Header("Data")]
     [SerializeField] private CompendiumContentSO _compendiumData;
 
     [Header("Button UI")]
@@ -34,12 +33,21 @@ public class CompendiumPage : MonoBehaviour, ILanguage
         LanguageUtility.OnLanguageChanged -= SetLanguage;
     }
 
+    public void SetCompendiumData(CompendiumContentSO content)
+    {
+        _compendiumData = content;
+        SetLanguage(LanguageUtility.CurrentLanguage);
+    }
+
+
     /// <summary>
     /// Get the content based on language. 
     /// </summary>
     /// <param name="language"></param>
     public void SetLanguage(Language language)
     {
+        if (_compendiumData == null) return;
+
         LocalizedContent data = _compendiumData.content.Get(language); // Get context in the selected language
 
         _title.text = data.title;
