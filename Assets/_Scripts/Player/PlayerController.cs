@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Scripts
 {
-    [RequireComponent(typeof(Collider), typeof(Rigidbody), typeof(AudioSource))]
+    [RequireComponent(typeof(Collider), typeof(CharacterController), typeof(AudioSource))]
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayerData _playerData;
@@ -12,6 +12,7 @@ namespace _Scripts
 
         private Rigidbody _rb;
         private Camera _camera;
+        private CharacterController _controller;
 
         // Used for the movement.
         private Vector3 _moveDirection;
@@ -108,26 +109,26 @@ namespace _Scripts
         void Update() 
         {
             CameraRotate(); // Needs to be called here.
+            _controller.Move(Movement() * _playerData.MovementSpeed); // Moves the player, needs to be in update else it jitters.
             _interactionUtility.OnUpdate();
 		}
 
 
         void FixedUpdate()
         {
-            // This makes the player move.
-            _rb.AddForce(Movement() * _playerData.MovementSpeed);
+            if (!_controller.isGrounded) _controller.Move(Vector3.down); // Moves the player to the ground
         }
 
         private void Reset() 
         {
-            _rb = GetComponent<Rigidbody>();
-            _rb.linearDamping = _playerData.MovementSpeed / 20; // Important for making the player stop again.
+            //_rb = GetComponent<Rigidbody>();
+            //_rb.linearDamping = _playerData.MovementSpeed / 20; // Important for making the player stop again.
+            _controller = GetComponent<CharacterController>();
         }
 
         #endregion
 
         #region Own Method
-
 
         /// <summary>
         /// Calculates the direction of the movement and returns it.
