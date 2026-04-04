@@ -39,8 +39,6 @@ public class InteractionMenu : MonoBehaviour
 
     public void SetPage(CompendiumID id)
     {
-        Debug.Log(id);
-        Debug.Log(_pageProvider?.GetPage(id));
         _currentPage = _pageProvider?.GetPage(id);
         _title.text = _currentPage != null ?  _currentPage?.title : "No data found";
     }

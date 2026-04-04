@@ -10,7 +10,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             Instance = this as T;
             gameObject.transform.SetParent(null); // needed if we want to ensure gameobject wont be destroyed as it is a child otherwise
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else if (Instance != this)
         {

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -16,6 +15,7 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
+        DontDestroyOnLoad(gameObject);
         _crosshairHandler = new CrosshairHandler();
         _sceneLoader = new AsyncSceneLoader(_firstSceneToLoad.Id, _levels);
     }

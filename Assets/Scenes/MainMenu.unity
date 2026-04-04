@@ -509,19 +509,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 131565191}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 131565193}
-        m_TargetAssemblyTypeName: ExitGame, Assembly-CSharp
-        m_MethodName: ExitGameButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &131565191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,7 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f951766008e4a1649a1c46ed155f6b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExitGame
-  _saveAllData: {fileID: 11400000, guid: e042eb13f4515ea44bdd34fa4ffc35f0, type: 2}
+  _saveAllData: {fileID: 11400000, guid: 24ead6912264ba24a959183a836aefdd, type: 2}
 --- !u!1 &177075108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,19 +1643,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 395330265}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 395330267}
-        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
-        m_MethodName: SwitchScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &395330265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1719,7 +1695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneSwitcher
   _onSceneLoad: {fileID: 11400000, guid: 42bc8ab227f1510428d86bd34ea40c58, type: 2}
-  _levelName: 3
+  _levelToLoad: {fileID: 11400000, guid: f1831a170f200bc4b92006b0e251259f, type: 2}
 --- !u!1 &477785173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,6 +1707,7 @@ GameObject:
   - component: {fileID: 477785176}
   - component: {fileID: 477785175}
   - component: {fileID: 477785174}
+  - component: {fileID: 477785177}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1812,6 +1789,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 122862657}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &477785177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477785173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &655919217
 GameObject:
   m_ObjectHideFlags: 0

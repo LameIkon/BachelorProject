@@ -7,7 +7,7 @@ public class AsyncSceneLoader
     private readonly LevelData[] _levels;
 
     private readonly Dictionary<int, LevelData> _levelsDict;
-    private readonly int _previousLevelLoaded;
+    private int _previousLevelLoaded;
 
     public AsyncSceneLoader(int firstSceneLoad, LevelData[] levels) 
     { 
@@ -44,7 +44,7 @@ public class AsyncSceneLoader
             }
         }
 
-
+        _previousLevelLoaded = levelId; // Set it to be the previus scene in line to be unloaded
         InputReader.SetState(_levelsDict[levelId].GameState);
     }
 
