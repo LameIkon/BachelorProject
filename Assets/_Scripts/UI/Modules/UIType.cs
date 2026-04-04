@@ -1,5 +1,6 @@
 public enum UIType
 {
+    None,
     Compendium,
     Crosshair,
     Pause,

@@ -17,12 +17,14 @@ public class UIManager : Singleton<UIManager>
     {
         _registerUIEvent.OnRaise += RegisterUISystem;
         _uiToggleEvent.OnRaise += HandleToggleRequest;
+        InputReader.s_ToggleEscape += HandleEscapeRequest;
     }
 
     private void OnDisable()
     {
         _registerUIEvent.OnRaise -= RegisterUISystem;
         _uiToggleEvent.OnRaise -= HandleToggleRequest;
+        InputReader.s_ToggleEscape -= HandleEscapeRequest;
     }
 
 
@@ -40,6 +42,7 @@ public class UIManager : Singleton<UIManager>
             {
                 Debug.Log($"active system: {system}");
                 _activeSystems.Add(system);
+                //HandleToggleRequest(system.UIType);
             }
         }
     }
@@ -137,6 +140,30 @@ public class UIManager : Singleton<UIManager>
                 if (!system.IsOpen)
                     system.Open();
             }
+        }
+    }
+
+
+    private void HandleEscapeRequest()
+    {
+        IUISystem systemToRemove = null;
+        foreach (IUISystem system in _activeSystems.Reverse()) // Reverse it to get the newest ui systems first
+        {
+            if (system.RuleType == UIRuleType.HUD || system.RuleType == UIRuleType.Overlay) continue; // don't consider the HUD or Overlay types
+
+            // Close the newest ui and stop the process
+            systemToRemove = system;
+            break;
+        }
+
+        if (systemToRemove != null) // Remove the system
+        {
+            _uiToggleEvent.Raise(systemToRemove.UIType);
+            _activeSystems.Remove(systemToRemove);
+        }
+        else if (systemToRemove == null) // if there are no sytem to removen then open the pause menu
+        {
+            _uiToggleEvent.Raise(UIType.Pause);
         }
     }
 
