@@ -3059,7 +3059,7 @@ MonoBehaviour:
   _interactionMenu:
     _uiToggleEvent: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
     _pageRequestEvent: {fileID: 11400000, guid: e461a1b09011ed44da587ced0ddeaef8, type: 2}
-    _compendiumID: 1
+    _compendiumID: 4
   _pickableType: 3
 --- !u!54 &536146068
 Rigidbody:
@@ -5808,7 +5808,7 @@ MonoBehaviour:
   _interactionMenu:
     _uiToggleEvent: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
     _pageRequestEvent: {fileID: 11400000, guid: e461a1b09011ed44da587ced0ddeaef8, type: 2}
-    _compendiumID: 2
+    _compendiumID: 5
   _pickableType: 3
 --- !u!54 &1028459531
 Rigidbody:

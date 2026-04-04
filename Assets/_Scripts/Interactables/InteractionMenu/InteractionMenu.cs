@@ -39,12 +39,15 @@ public class InteractionMenu : MonoBehaviour
 
     public void SetPage(CompendiumID id)
     {
+        Debug.Log(id);
+        Debug.Log(_pageProvider?.GetPage(id));
         _currentPage = _pageProvider?.GetPage(id);
         _title.text = _currentPage != null ?  _currentPage?.title : "No data found";
     }
 
     private void GoToCompendiumPage()
     {
+        Debug.Log("Try go to compendium");
         if (_currentPage == null) return;
         _toggleUI.Raise(UIType.Compendium); // Open compendium
         _currentPage.button?.onClick?.Invoke(); // Open compendium to the right page

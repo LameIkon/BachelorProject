@@ -121,7 +121,11 @@ public class CompendiumManager : MonoBehaviour
 
     private CompendiumPage GetPage(CompendiumID id)
     {
-        if (_pageLookup == null) return null;
+        if (_pageLookup == null)
+        {
+            Debug.LogWarning("No page lookup created!");
+           return null;
+        }
 
         _pageLookup.TryGetValue(id, out CompendiumPage page);
 

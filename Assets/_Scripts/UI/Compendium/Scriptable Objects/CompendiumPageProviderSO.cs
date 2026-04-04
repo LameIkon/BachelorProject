@@ -18,8 +18,11 @@ public class CompendiumPageProviderSO : ScriptableObject
 
     public CompendiumPage GetPage(CompendiumID id)
     {
-        if (_provider == null) return null;
-
+        if (_provider == null)
+        {
+            Debug.LogWarning("No provider registered!");
+            return null;
+        }    
         return _provider.Invoke(id);
     }
 }
