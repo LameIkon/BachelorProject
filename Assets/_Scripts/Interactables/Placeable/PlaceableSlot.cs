@@ -1,18 +1,27 @@
-using System;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
+
 public class PlaceableSlot : MonoBehaviour
 {
+    [Header("Required")]
     [SerializeField] private PickableType _pickableTypeHolder; 
     [SerializeField] private Transform _visualModel;
     [SerializeField] private Transform _snapPoint;
-    [SerializeField] private float _wiggle;
+    [SerializeField] private float _wiggleStrenght;
     
-    private bool _hasAssignedSlot = false;
     private IPickable _pickupInTrigger; // The pickup currently inside this slot
+    private IPickable _placedPickup; // The pickup placed
 
-    [SerializeField] private Material _visualMaterial;
+    private Material _visualMaterial;
+
+    [Header("Options")]
+    [SerializeField] private bool _canPlaceOnce;
+    [SerializeField] private bool _setToKinematic;
+
+    private bool _canPlace;
+    //private bool _isOccupied;
+
+    private bool IsOccupied => _placedPickup != null;
 
     private void Awake()
     {
@@ -20,14 +29,15 @@ public class PlaceableSlot : MonoBehaviour
         {
             _visualMaterial = renderer.material;
         }
-        _wiggle = 1f;
+        _wiggleStrenght = 1f;
+        _canPlace = true;
     }
 
 
     # region Placement
     public void TryPlace(IPickable pickup)
     {
-        if (_hasAssignedSlot) return;
+        if (!_canPlace || IsOccupied) return;
 
         if (pickup == _pickupInTrigger)
         {
@@ -36,79 +46,128 @@ public class PlaceableSlot : MonoBehaviour
     }
     private void AssignToSlot(IPickable pickup)
     {
-        if (!_hasAssignedSlot)
+        Transform pickupTransform = pickup.Transform;
+
+        // Parent it to this slot
+        pickupTransform.SetParent(_snapPoint);
+
+        // Snap into position
+        pickupTransform.localPosition = Vector3.zero;
+        pickupTransform.localRotation = Quaternion.identity;
+
+
+        // Adjust physics
+        if (pickupTransform.TryGetComponent(out Rigidbody rb))
         {
-            _hasAssignedSlot = true;
+            rb.MovePosition(transform.position);
+            rb.MoveRotation(transform.rotation);
+            rb.angularVelocity = new Vector3(RandomNumber(), 0, RandomNumber()); // Polish makes cube jitter when placed
+            rb.linearVelocity = Vector3.zero;
 
-            Transform pickupTransform = pickup.Transform;
+            if (_setToKinematic) rb.isKinematic = true;
+        }
 
-            // Parent it to this slot
-            pickupTransform.SetParent(_snapPoint);
+        // Disable visual indication
+        SetVisualAlpha(0f);
 
-            // Snap into position
-            pickupTransform.localPosition = Vector3.zero;
-            pickupTransform.localRotation = Quaternion.identity;
+        // Set states
+        _placedPickup = pickup;
 
+        if (_canPlaceOnce)
+        {
+            _canPlace = false;
+        }
 
-            // Stop physics
-            if (pickupTransform.TryGetComponent(out Rigidbody rb))
-            {
-                rb.MovePosition(transform.position);
-                rb.MoveRotation(transform.rotation);
-                rb.angularVelocity = new Vector3(RandomNumber(), 0, RandomNumber()); // Polish makes cube jitter when placed;
-                rb.linearVelocity = Vector3.zero;
-            }
+        Debug.Log("Assigned");
+        
+    }
 
-            // Disable visual indication
-            //_visualModel.gameObject.SetActive(false);
-            _visualMaterial.SetFloat("_Alpha", 0f);
+    private void RemoveFromSlot()
+    {
+        if (!IsOccupied) return;
 
-            Debug.Log("Assigned");
+        // Enable physics
+        if (_setToKinematic && _placedPickup.Transform.TryGetComponent(out Rigidbody rb))
+        {
+            rb.isKinematic = false;
+        }
+        
+        _placedPickup = null;
+
+        if (_canPlaceOnce)
+        {
+            _canPlace = false;
+            SetVisualAlpha(0f);
+        }
+        else
+        {
+            _canPlace = true;
+            SetVisualAlpha(0.25f);
+
         }
     }
 
     #endregion
+
+    #region Helpers
+    private float RandomNumber() 
+    {
+        return Random.Range(-_wiggleStrenght, _wiggleStrenght);
+    }
+
+    public void EnableCanPlace(bool canPlace, bool canPlaceOne = true) // Called from outside if we want to adjust the settings
+    {
+        _canPlace = canPlace;
+        _canPlaceOnce = canPlaceOne;
+
+        if (!IsOccupied && _pickupInTrigger == null)
+        {
+            // Dim visual indication
+            SetVisualAlpha(0.25f);
+        }
+
+    }
+
+    private void SetVisualAlpha(float value)
+    {
+        if (_visualMaterial == null) return;
+
+        _visualMaterial.SetFloat("_Alpha", value);
+    }
+
+    #endregion
+
     #region Trigger methods
+
     private void OnTriggerEnter(Collider other)
     {
-        if (_hasAssignedSlot) return; // slot already occupied
+        if (IsOccupied || !_canPlace) return;
 
         if (other.TryGetComponent(out IPickable pickup))
         {
             if (pickup.PickableType == _pickableTypeHolder)
             {
-                Debug.Log("this can be placed here");
                 _pickupInTrigger = pickup; // Placable pickup detected
-                _visualMaterial.SetFloat("_Alpha", 0.4f);
-            }
-            else
-            {
-                Debug.Log("This can not be placed here");
+                SetVisualAlpha(0.4f);
             }
         }
     }
 
-    private float RandomNumber() 
-    {
-        return Random.Range(-_wiggle, _wiggle);
-    }
-
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out IPickable pickup))
+        if (!other.TryGetComponent(out IPickable pickup)) return;
+
+        if (_placedPickup == pickup) // Compare if the placed pickup that exited
         {
-            if (_pickupInTrigger == pickup) // Compare if the same that entered
-            {
-                _hasAssignedSlot = false;
-                _pickupInTrigger = null; // clear when leaving
+            RemoveFromSlot();
+            return;
+        }
 
-                // Disable visual indication
-                //_visualModel.gameObject.SetActive(true);
-                _visualMaterial.SetFloat("_Alpha", 0.25f);
-
-                Debug.Log("Pickup unassigned and can now be used again"); 
-            }
-        }        
+        if (_pickupInTrigger == pickup) // If it is an canditate that never got placed but entered
+        {
+            _pickupInTrigger = null;
+            if (!IsOccupied && _canPlace) SetVisualAlpha(0.25f);
+        }       
     }
     #endregion
 }

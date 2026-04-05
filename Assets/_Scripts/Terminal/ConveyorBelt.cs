@@ -8,8 +8,6 @@ public class ConveyorBelt : MonoBehaviour
     [SerializeField] private Vector2 _direction;
     [SerializeField] private List<Rigidbody> _onBelt;
 
-    private float _maxSpeed = 0.25f;
-
     private void OnEnable()
     {
         _ovenstateChangeEvent.OnRaise += Adjust;
