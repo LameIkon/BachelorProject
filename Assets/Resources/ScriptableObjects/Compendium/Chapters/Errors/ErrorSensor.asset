@@ -14,17 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
   compendiumID: 11
   image: {fileID: 0}
-  content:
-    _danish:
-      title: Sensor Error
-      description: "Procedure:\r\nG\xE5 til slutterminalen.\r\nTjek status og pr\xF8v
-        at genstart.\r\nEr genstart en succes,\_henvis til [Ovn fejl procedure],
-        og forts\xE6t men den procedure.\r\nFejler genstart og n\xE6vner objekt ikke
-        fundet, skal rulleb\xE5ndet s\xE6nkes\_indtil det ikke kan mere og h\xE6ves
-        op indtil objekt er fundet.\r\nEfter objekt er fundet, skal reset knappen
-        trykkes.\r\nAktivere derefter scanning.\r\nEr genstart en succes og scanning
-        startet p\xE5 slutterminalen,\_henvis til [Ovn fejl procedure], og forts\xE6t
-        men den procedure.\_\_ \r\n"
-    _english:
-      title: 
-      description: 
+  content: {fileID: 11400000, guid: 951bea43c337e5c49a52fe97543f339d, type: 2}

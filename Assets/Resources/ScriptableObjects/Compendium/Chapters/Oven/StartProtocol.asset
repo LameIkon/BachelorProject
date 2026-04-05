@@ -14,14 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
   compendiumID: 2
   image: {fileID: 0}
-  content:
-    _danish:
-      title: ovn
-      description: "Trykkes der p\xE5 den gr\xF8nne start knap, vil der starte en
-        sekvens, der indeholder tre lyd-indikationer. Efter det sidste indikation,
-        skal der trykkes p\xE5 start knappen igen for at starte ovnen. Fejler man
-        at trykke p\xE5 start knappen kort efter sidste lyd-indikation, vil der ikke
-        ske noget og man skal starte sekvensen forfra.\_ \u200B\u200B"
-    _english:
-      title: oven
-      description: description about oven here
+  content: {fileID: 11400000, guid: 9cd6a6e55c8b89c49adfd37036f70600, type: 2}

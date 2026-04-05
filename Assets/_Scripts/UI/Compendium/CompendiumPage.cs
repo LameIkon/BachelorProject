@@ -48,11 +48,14 @@ public class CompendiumPage : MonoBehaviour, ILanguage
     {
         if (_compendiumData == null) return;
 
-        LocalizedText data = _compendiumData.content.Get(language); // Get context in the selected language
+        LocalizedText data = _compendiumData.content?.Get(language); // Get context in the selected language
 
-        _title.text = data.title;
-        _description.text = data.description;
-        title = data.title;
+        if (data != null)
+        {
+            _title.text = data.title;
+            _description.text = data.description;
+            title = data.title;
+        }
 
         UpdateButtonText(title);
     }

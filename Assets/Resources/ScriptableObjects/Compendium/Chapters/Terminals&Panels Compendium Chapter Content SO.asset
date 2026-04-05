@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10e823d974e8bd4d974de2035d7cc9e, type: 3}
   m_Name: Terminals&Panels Compendium Chapter Content SO
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumChapterContentSO
-  chapterTitle: 
+  chapterTitle: Terminals & Panels
   compendiumContentSO:
   - {fileID: 11400000, guid: 18247dc1e4727df4da030b48ef082a41, type: 2}
   - {fileID: 11400000, guid: 56794bc2816fc784097edaced1a4fd0a, type: 2}

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92fd489913b24b74d90186ca3b43101e, type: 3}
+  m_Name: localized Occurrence Of Error
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedContentSO
+  entries:
+  - language: 0
+    title: "Opst\xE5else af fejl"
+    description: "N\xE5r en ovn ikke kan starte, skal der identificere hvor problemet
+      er opst\xE5et ved disse trin:\r\n\r\nTjek om problemet kan l\xF8ses hurtigt
+      ved at trykke reset knappen ved hovedterminalen og se om ovnen kan starte igen.
+      Hvis det ikke virker fors\xE6t med nedenst\xE5ende:\r\nTjek om warning lyset
+      lige ved indgangen i forenden af ovnen lyser. Hvis det g\xF8r, er det indikation
+      p\xE5 at h\xE5ndtaget er trukket ved. Juster h\xE5ndtaget indtil lyset forsvinder.
+      Henvis herefter til proceduren [ovn fejl procedure]. Hvis det ikke virker fors\xE6t
+      med nedenst\xE5ende:\r\nTjek om n\xF8dknappen er trykket. F\xF8lg [ovn fejl
+      procedure]\r\nTjek status ved slutterminalen [Sensor fejl procedure]\_\r\n"
+  - language: 1
+    title: 
+    description: 

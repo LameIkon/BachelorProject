@@ -14,12 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
   compendiumID: 1
   image: {fileID: 0}
-  content:
-    _danish:
-      title: Ovn Layout
-      description: "En ovn har to kontrolpaneler langs sin side. Ovnen\_g\xF8r brug
-        af en slutterminal i bagenden af ovnen og har en hovedterminal ved forenden.
-        Et genstartpanel lige ved \xE5bningen i bagenden. \r\n"
-    _english:
-      title: oven
-      description: description about oven here
+  content: {fileID: 11400000, guid: aa0b372711a12bb48a0217fa6aaf73fa, type: 2}

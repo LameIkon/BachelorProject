@@ -14,11 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
   compendiumID: 3
   image: {fileID: 0}
-  content:
-    _danish:
-      title: ovn
-      description: "P\xE5 hovedterminalen tryk p\xE5 den r\xF8de knap for at stoppe
-        ovnen."
-    _english:
-      title: oven
-      description: description about oven here
+  content: {fileID: 11400000, guid: 4d8c9cbd5763c484289ae25d26939fad, type: 2}

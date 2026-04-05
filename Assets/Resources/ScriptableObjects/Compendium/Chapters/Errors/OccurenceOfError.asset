@@ -14,15 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
   compendiumID: 9
   image: {fileID: 0}
-  content:
-    _danish:
-      title: 'Occurence of error '
-      description: "Procedure:\r\nTryk p\xE5 reset knappen p\xE5 hovedterminalen.\r\nTryk
-        p\xE5 start knappen p\xE5 hovedterminalen.\r\nTryk p\xE5 reset knappen p\xE5
-        genstartpanelet.\_\r\nEfter du har trykket p\xE5 reset knappen p\xE5 genstartpanelet
-        burde lyset forsvinde. Hvis ikke, betyder det at en anden fejl er overset.\r\nEr
-        lyset p\xE5 genstartpanelet forsvundet; g\xE5 tilbage til hovedpanelet og
-        tryk p\xE5 reset og fejlen er l\xF8st.\r\n"
-    _english:
-      title: 
-      description: 
+  content: {fileID: 11400000, guid: 1db4253c55f971747b7c8763c6274092, type: 2}
