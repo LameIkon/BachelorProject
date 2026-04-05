@@ -48,7 +48,7 @@ public class CompendiumPage : MonoBehaviour, ILanguage
     {
         if (_compendiumData == null) return;
 
-        LocalizedContent data = _compendiumData.content.Get(language); // Get context in the selected language
+        LocalizedText data = _compendiumData.content.Get(language); // Get context in the selected language
 
         _title.text = data.title;
         _description.text = data.description;

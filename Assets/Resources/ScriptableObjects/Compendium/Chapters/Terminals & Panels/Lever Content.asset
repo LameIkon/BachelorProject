@@ -10,14 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7233e5a4c7fbad641a68ba8a90e8d91c, type: 3}
-  m_Name: Lever
+  m_Name: Lever Content
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
   compendiumID: 6
   image: {fileID: 0}
-  content:
-    _danish:
-      title: "H\xE5ndtag"
-      description: asdasdasd
-    _english:
-      title: Lever
-      description: 
+  content: {fileID: 11400000, guid: 9fc0e5b4c519b1b48a80c1e7f0851703, type: 2}

@@ -17,7 +17,7 @@ public class CompendiumManager : MonoBehaviour
     [SerializeField] private UIModule _UIModule;
     [SerializeField] private Transform _entriesContainer;
     
-    [SerializeField] private List<CompendiumContentSO> _entries;
+    [SerializeField] private List<CompendiumChapterContentSO> _entries;
     private List<CompendiumPage> _pages;
 
     [Header("Navigation Tracking")]
@@ -52,12 +52,15 @@ public class CompendiumManager : MonoBehaviour
     {
         // Initialize Pages
         _pages = new();
-        foreach (CompendiumContentSO content in _entries)
+        foreach (CompendiumChapterContentSO chapter in _entries)
         {
-            GameObject page = Instantiate(_compendiumPagePrefab, _entriesContainer);
-            CompendiumPage pageData = page.GetComponent<CompendiumPage>();
-            pageData.SetCompendiumData(content);
-            _pages.Add(pageData);
+            foreach (CompendiumContentSO content in chapter.compendiumContentSO)
+            {
+                GameObject page = Instantiate(_compendiumPagePrefab, _entriesContainer);
+                CompendiumPage pageData = page.GetComponent<CompendiumPage>();
+                pageData.SetCompendiumData(content);
+                _pages.Add(pageData);
+            }
         }
 
 

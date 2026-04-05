@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92fd489913b24b74d90186ca3b43101e, type: 3}
+  m_Name: Localized Main Terminal
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedContentSO
+  entries:
+  - language: 0
+    title: Hovedterminal
+    description: "Hovedterminalen er den prim\xE6re terminal, der bruges til at styre
+      ovnen. Terminalen befinder sig i forenden af ovnen. Knapper der bruges er:\r\n\vInputs:\r\nEn
+      gr\xF8n start knap for at starte ovnen\r\nEn r\xF8d slut knap for at stoppe
+      ovnen\_\r\nEn bl\xE5 reset knap for at genstarte oven i tilf\xE6lde af problemer\r\nEn
+      r\xF8d n\xF8dstop knap til at stoppe hele maskinen"
+  - language: 1
+    title: 'No title '
+    description: Description here
