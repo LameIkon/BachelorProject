@@ -5,7 +5,7 @@ public class InteractablePickup : HoverableInteractable, IPickable
 {
 	[Header("Pickup Settings")]
 	[SerializeField] private PickableType _pickableType;
-	
+	[SerializeField] private bool _disablePickupOnPlacement;
 	
 	private Transform _holdPoint;
 	private Rigidbody _rb;
@@ -47,6 +47,8 @@ public class InteractablePickup : HoverableInteractable, IPickable
     #region Interactable interface
     public void Interact(Transform holdPoint)
 	{
+		if (!_canBePickedUp) return;
+
 		if (!_isPickedUp)
 		{
 			PickUp(holdPoint);
@@ -81,7 +83,13 @@ public class InteractablePickup : HoverableInteractable, IPickable
 
 		if (_canBePickedUp) _highlightHandler?.SetHighlight(true);
 
-		_currentSlot?.TryPlace(this);
+		bool? state = _currentSlot?.TryPlace(this);
+
+		if (state == true && _disablePickupOnPlacement)
+		{
+			base.OnHoverExit();
+			_canBePickedUp = false;
+		}
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -104,14 +112,14 @@ public class InteractablePickup : HoverableInteractable, IPickable
     #region Hovering logic
     public override void OnHoverEnter()
 	{
-		if (_isPickedUp) return;
+		if (_isPickedUp || !_canBePickedUp) return;
 		base.OnHoverEnter();
 	}
 
 
     public override void OnHoverExit()
 	{
-		if (_isPickedUp) return;
+		if (_isPickedUp || !_canBePickedUp) return;
 		base.OnHoverExit();
 	}
     #endregion

@@ -19,9 +19,8 @@ public class PlaceableSlot : MonoBehaviour
     [SerializeField] private bool _setToKinematic;
 
     private bool _canPlace;
-    //private bool _isOccupied;
 
-    private bool IsOccupied => _placedPickup != null;
+    private bool _isOccupied => _placedPickup != null;
 
     private void Awake()
     {
@@ -35,14 +34,16 @@ public class PlaceableSlot : MonoBehaviour
 
 
     # region Placement
-    public void TryPlace(IPickable pickup)
+    public bool TryPlace(IPickable pickup)
     {
-        if (!_canPlace || IsOccupied) return;
+        if (!_canPlace || _isOccupied) return false;
 
         if (pickup == _pickupInTrigger)
         {
             AssignToSlot(pickup);
+            return true;
         }
+        return false;
     }
     private void AssignToSlot(IPickable pickup)
     {
@@ -84,7 +85,7 @@ public class PlaceableSlot : MonoBehaviour
 
     private void RemoveFromSlot()
     {
-        if (!IsOccupied) return;
+        if (!_isOccupied) return;
 
         // Enable physics
         if (_setToKinematic && _placedPickup.Transform.TryGetComponent(out Rigidbody rb))
@@ -120,7 +121,7 @@ public class PlaceableSlot : MonoBehaviour
         _canPlace = canPlace;
         _canPlaceOnce = canPlaceOne;
 
-        if (!IsOccupied && _pickupInTrigger == null)
+        if (!_isOccupied && _pickupInTrigger == null)
         {
             // Dim visual indication
             SetVisualAlpha(0.25f);
@@ -141,7 +142,7 @@ public class PlaceableSlot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (IsOccupied || !_canPlace) return;
+        if (_isOccupied || !_canPlace) return;
 
         if (other.TryGetComponent(out IPickable pickup))
         {
@@ -166,7 +167,7 @@ public class PlaceableSlot : MonoBehaviour
         if (_pickupInTrigger == pickup) // If it is an canditate that never got placed but entered
         {
             _pickupInTrigger = null;
-            if (!IsOccupied && _canPlace) SetVisualAlpha(0.25f);
+            if (!_isOccupied && _canPlace) SetVisualAlpha(0.25f);
         }       
     }
     #endregion
