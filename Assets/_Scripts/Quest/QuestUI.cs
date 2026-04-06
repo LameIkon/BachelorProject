@@ -7,29 +7,32 @@ public class QuestUI : MonoBehaviour
     [SerializeField] private QuestManager _questManager;
     [SerializeField] private QuestCompleteEventSO _questCompleteEventSO;
     [SerializeField] private QuestGiveProviderSO _questProvider;
+    [SerializeField] private QuestGiveEventSO _questGiveEventSO;
 
     private TextMeshProUGUI _gui;
 
     #region Unity Methods
     void Start()
     {
-        _gui = GetComponentInChildren<TextMeshProUGUI>();
-        SetUpQuest(_questProvider.GetQuest());
+        _gui = GetComponentInChildren<TextMeshProUGUI>(true);
+        //SetUpQuest(_questProvider.GetQuest());
     }
 
     private void OnEnable()
     {
         _questCompleteEventSO.OnRaise += QuestComplete;
+        _questGiveEventSO.OnRaise += SetUpQuest;
     }
 
     private void OnDisable()
     {
         _questCompleteEventSO.OnRaise -= QuestComplete;
+        _questGiveEventSO.OnRaise -= SetUpQuest;
     }
     #endregion
 
     #region Own Methods
-    private void QuestComplete(string questTitle)
+    private void QuestComplete(QuestID questID)
     {
         SetUpQuest(_questProvider.GetQuest());
         Debug.Log("Quest complete");

@@ -29,14 +29,15 @@ public class QuestManager : Singleton<QuestManager>
 
 	private void AddQuest(Quest quest) 
     {
+        Debug.Log($"Quest added: {quest}");
         _activeQuest = quest;
         _activeQuest.Init();
+
     }
 
-    private void CompleteQuest(string questTitle) 
+    private void CompleteQuest(QuestID questId) 
     {
-        Debug.Log(questTitle);
-        _activeQuest.Completed(questTitle);
+        _activeQuest.Completed(questId);
     }
 
     private Quest GetQuest() 

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -46,14 +47,18 @@ public class GameManager : Singleton<GameManager>
 
     private void LoadLevel(LevelData levelData) 
     {
-        StartCoroutine(_sceneLoader.UnloadScenes());
+        StartCoroutine(LoadLevelCoroutine(levelData));
+    }
 
-        StartCoroutine(_sceneLoader.LoadScenes(levelData));
+    private IEnumerator LoadLevelCoroutine(LevelData levelData) 
+    {
+        yield return StartCoroutine(_sceneLoader.UnloadScenes());
+
+        yield return StartCoroutine(_sceneLoader.LoadScenes(levelData));
 
         // TODO: Send Quest data through the QuestGiveEventSO, would like to refactor this so it
         // uses the LevelData as a parameter instead of the levelId.
-
-        Debug.Log("Quest Give event");
+        Debug.Log($"Quest Give event: {levelData.LevelQuest}");
         _questGiveEventSO.Raise(levelData.LevelQuest);
     }
 
