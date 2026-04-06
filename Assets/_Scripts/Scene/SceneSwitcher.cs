@@ -8,6 +8,6 @@ public class SceneSwitcher : MonoBehaviour
 
     public void SwitchScene()
     {
-        _onSceneLoad.Raise(_levelToLoad.Id);
+        _onSceneLoad.Raise(_levelToLoad);
     }
 }

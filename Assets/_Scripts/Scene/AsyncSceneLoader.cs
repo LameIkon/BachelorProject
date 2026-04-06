@@ -4,35 +4,19 @@ using UnityEngine.SceneManagement;
 
 public class AsyncSceneLoader
 {
-    private readonly LevelData[] _levels;
+    private LevelData _previousLevelLoaded;
 
-    private readonly Dictionary<int, LevelData> _levelsDict;
-    private readonly int _previousLevelLoaded;
-
-    public AsyncSceneLoader(int firstSceneLoad, LevelData[] levels) 
+    public AsyncSceneLoader() 
     { 
-        _previousLevelLoaded = firstSceneLoad;
-        _levels = levels;
-
-        _levelsDict = new Dictionary<int, LevelData>();
-        InitLevels();
+        
     }
-
-    private void InitLevels() 
-    {
-        foreach (LevelData data in _levels) 
-        {
-            _levelsDict.Add(data.Id, data);
-        }
-    }
-
 
     // The Coroutine for loading the scenes 
-    public IEnumerator LoadScenes(int levelId)
+    public IEnumerator LoadScenes(LevelData levelData)
     {
-        SceneField[] scenes = _levelsDict[levelId].Scenes;
+        _previousLevelLoaded = levelData;
 
-        foreach (SceneField scene in scenes) // looping over all the scenes in the array
+        foreach (SceneField scene in levelData.Scenes) // looping over all the scenes in the array
         {
             if (!SceneManager.GetSceneByName(scene).isLoaded) // We check that the scene is not loaded such that it does not load already loaded scenes
             {
@@ -44,13 +28,13 @@ public class AsyncSceneLoader
             }
         }
 
-
-        InputReader.SetState(_levelsDict[levelId].GameState);
+        InputReader.SetState(levelData.GameState);
     }
 
     public IEnumerator UnloadScenes()
     {
-        SceneField[] scenes = _levelsDict[_previousLevelLoaded].Scenes;
+        if (_previousLevelLoaded == null) yield break; 
+        SceneField[] scenes = _previousLevelLoaded.Scenes;
 
         foreach (SceneField scene in scenes)
         {

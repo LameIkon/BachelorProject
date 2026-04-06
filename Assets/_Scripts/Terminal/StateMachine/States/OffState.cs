@@ -7,6 +7,7 @@ public class OffState : BaseState
     public override void OnEnter()
     {
         manager.TurnOffConveyor();
+        manager.CompleteQuest();
     }
 
     public override void HandleInput(ButtonType button, TerminalType terminal)

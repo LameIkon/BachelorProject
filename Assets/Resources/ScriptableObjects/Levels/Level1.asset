@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f97cbbaf9fefd6f458b119d76193f078, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  _name: 3
-  _inputState: 0
   _scenes:
   - m_SceneAsset: {fileID: 102900000, guid: 2fd846c7e1c4c844e9d9c338217c98bd, type: 3}
     m_SceneName: FactoryScene
   - m_SceneAsset: {fileID: 102900000, guid: c52955602ba279e43b7e91ce33e602a3, type: 3}
     m_SceneName: HUD
+  _inputState: 0
+  _levelQuest: {fileID: 11400000, guid: 4fe12e5aa2ad7d14ab8c0e4541489405, type: 2}

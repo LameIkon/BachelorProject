@@ -4,3 +4,8 @@ public interface IQuestGiver
 {
 	public void GiveQuest(Quest quest);
 }
+
+public interface IQuestCompleter 
+{
+	public QuestCompleteEventSO QuestComplete();
+}

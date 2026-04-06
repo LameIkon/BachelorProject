@@ -56,9 +56,9 @@ public class InteractionUtility
 
         if (RaycastInteractable(pos, out IInteractable interactable))
         {
-            Debug.Log(interactable);
+            //Debug.Log(interactable);
             _newHovered = interactable as IHoverable;
-            Debug.Log(interactable);
+            //Debug.Log(interactable);
         }
 
 
