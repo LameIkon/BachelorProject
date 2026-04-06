@@ -5,6 +5,7 @@ public class RunningState : BaseState
     public override void OnEnter()
     {
         manager.TurnOnConveyor();
+        manager.CompleteQuest();
     }
 
     public override void HandleInput(ButtonType button, TerminalType terminal)

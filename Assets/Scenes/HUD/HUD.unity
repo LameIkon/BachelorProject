@@ -368,6 +368,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 769030682467317145, guid: 4d8aa37bf5dc16b4799496254a948faa, type: 3}
+      propertyPath: _quest
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 769030682467317145, guid: 4d8aa37bf5dc16b4799496254a948faa, type: 3}
+      propertyPath: _questCompleteEventSO
+      value: 
+      objectReference: {fileID: 11400000, guid: ba00323a70b2e7b4a93d33abbe7f1819, type: 2}
     - target: {fileID: 899311176857878670, guid: 4d8aa37bf5dc16b4799496254a948faa, type: 3}
       propertyPath: m_Name
       value: TodoList

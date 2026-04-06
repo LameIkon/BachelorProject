@@ -17,13 +17,13 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         DontDestroyOnLoad(gameObject);
         _crosshairHandler = new CrosshairHandler();
-        _sceneLoader = new AsyncSceneLoader(_firstSceneToLoad.Id, _levels);
+        _sceneLoader = new AsyncSceneLoader();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        LoadLevel(_firstSceneToLoad.Id);
+        LoadLevel(_firstSceneToLoad);
     }
 
     private void OnEnable()
@@ -44,14 +44,17 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    private void LoadLevel(int levelId) 
+    private void LoadLevel(LevelData levelData) 
     {
         StartCoroutine(_sceneLoader.UnloadScenes());
 
-        StartCoroutine(_sceneLoader.LoadScenes(levelId));
-        
+        StartCoroutine(_sceneLoader.LoadScenes(levelData));
+
         // TODO: Send Quest data through the QuestGiveEventSO, would like to refactor this so it
         // uses the LevelData as a parameter instead of the levelId.
+
+        Debug.Log("Quest Give event");
+        _questGiveEventSO.Raise(levelData.LevelQuest);
     }
 
 }

@@ -4,39 +4,35 @@ using System.Collections.Generic;
 public class QuestManager : Singleton<QuestManager>
 {
     [SerializeField] private QuestGiveEventSO _questEvent;
-    [SerializeField] private List<Quest> _activeQuests;
-    private List<Quest> _completedQuests;
+    [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
+    [SerializeField] private Quest _activeQuest;
 
-    public List<Quest> ActiveQuests => _activeQuests;
-    public List<Quest> CompletedQuests => _completedQuests;
+    public Quest ActiveQuest => _activeQuest;
 
 	#region Unity Methods
 
-	void Start()
+	void OnEnable()
     {
-        _activeQuests = new List<Quest>();
-        _completedQuests = new List<Quest>();
         _questEvent.OnRaise += AddQuest;
+        _questCompleteEvent.OnRaise += CompleteQuest;
     }
 
 	private void OnDisable()
 	{
         _questEvent.OnRaise -= AddQuest;
+        _questCompleteEvent.OnRaise -= CompleteQuest;
 	}
 
 	#endregion
 
 	private void AddQuest(Quest quest) 
     {
-        _activeQuests.Add(quest);
+        _activeQuest = quest;
+        _activeQuest.Init();
     }
 
-    private void CompleteQuest(Quest quest) 
+    private void CompleteQuest() 
     {
-        if (_activeQuests.Contains(quest)) 
-        {
-            _activeQuests.Remove(quest);
-            _completedQuests.Add(quest);
-        }
+        _activeQuest.Completed();
     }
 }
