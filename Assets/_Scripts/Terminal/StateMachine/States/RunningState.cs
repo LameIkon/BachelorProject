@@ -5,7 +5,7 @@ public class RunningState : BaseState
     public override void OnEnter()
     {
         manager.TurnOnConveyor();
-        manager.CompleteQuest();
+        manager.TryCompleteQuest("Running State");
     }
 
     public override void HandleInput(ButtonType button, TerminalType terminal)
@@ -20,6 +20,7 @@ public class RunningState : BaseState
 
             case ButtonType.SpeedUp:
                 manager.ChangeSpeed(true);
+                manager.TryCompleteQuest("Speed Increase");
                 break;
 
             case ButtonType.SpeedDown:

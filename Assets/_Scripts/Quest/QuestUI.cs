@@ -4,19 +4,17 @@ using static Quest;
 
 public class QuestUI : MonoBehaviour
 {
-    [SerializeField] private Quest _quest;
     [SerializeField] private QuestManager _questManager;
     [SerializeField] private QuestCompleteEventSO _questCompleteEventSO;
+    [SerializeField] private QuestGiveProviderSO _questProvider;
 
     private TextMeshProUGUI _gui;
 
     #region Unity Methods
     void Start()
     {
-        _questManager = QuestManager.Instance;
-        _quest = _questManager.ActiveQuest;
         _gui = GetComponentInChildren<TextMeshProUGUI>();
-        SetUpQuest();
+        SetUpQuest(_questProvider.GetQuest());
     }
 
     private void OnEnable()
@@ -31,16 +29,16 @@ public class QuestUI : MonoBehaviour
     #endregion
 
     #region Own Methods
-    private void QuestComplete()
+    private void QuestComplete(string questTitle)
     {
-        SetUpQuest();
+        SetUpQuest(_questProvider.GetQuest());
         Debug.Log("Quest complete");
     }
 
-    private void SetUpQuest() 
+    private void SetUpQuest(Quest quest) 
     {
         _gui.text = string.Empty;
-        foreach (Part p in _quest.Parts)
+        foreach (Part p in quest.Parts)
         {
             if (!p.IsPartComplete)
             {

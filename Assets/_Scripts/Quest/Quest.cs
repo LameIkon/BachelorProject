@@ -13,6 +13,7 @@ public class Quest : ScriptableObject
 	public class Part 
 	{
 		[SerializeField] private bool _isComplete;
+		[SerializeField] private string _titel;
 		[SerializeField] private string _description;
 
 		public void Init() 
@@ -27,6 +28,7 @@ public class Quest : ScriptableObject
 
 		public bool IsPartComplete => _isComplete;
 
+		public string Title => _titel;
 		public string Description => _description;
 
 	}
@@ -40,9 +42,10 @@ public class Quest : ScriptableObject
 		}
 	}
 
-	public void Completed() 
+	public void Completed(string questTitle) 
 	{
 		if (_index > _parts.Count - 1) return;
+		if (_parts[_index].Title != questTitle) return; 
 		_parts[_index++].CompletePart();
 	}
 

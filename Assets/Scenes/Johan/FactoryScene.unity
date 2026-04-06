@@ -1166,6 +1166,7 @@ MonoBehaviour:
   _wiggleStrenght: 0
   _canPlaceOnce: 0
   _setToKinematic: 0
+  _questCompleter: {fileID: 0}
 --- !u!1001 &212214403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5581,6 +5582,7 @@ MonoBehaviour:
   _wiggleStrenght: 0
   _canPlaceOnce: 1
   _setToKinematic: 0
+  _questCompleter: {fileID: 11400000, guid: e64e4aba84991b646bd97bd402bdaf96, type: 2}
 --- !u!65 &946984399
 BoxCollider:
   m_ObjectHideFlags: 0

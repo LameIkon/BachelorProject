@@ -56,7 +56,7 @@ public class InteractionUtility
 
         if (RaycastInteractable(pos, out RaycastResult result))
         {
-            Debug.Log(result.Hoverable);
+            //Debug.Log(result.Hoverable);
             _newHovered = result.Hoverable;
         }
 

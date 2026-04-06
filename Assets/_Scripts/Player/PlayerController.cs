@@ -109,14 +109,14 @@ namespace _Scripts
         void Update() 
         {
             CameraRotate(); // Needs to be called here.
-            _controller.Move(Movement() * _playerData.MovementSpeed); // Moves the player, needs to be in update else it jitters.
+            _controller.Move(Movement() * _playerData.MovementSpeed * Time.deltaTime); // Moves the player, needs to be in update else it jitters.
             _interactionUtility.OnUpdate();
+            if (!_controller.isGrounded) _controller.Move(Vector3.down * _playerData.FallSpeed * Time.deltaTime); // Moves the player to the ground
 		}
 
 
         void FixedUpdate()
         {
-            if (!_controller.isGrounded) _controller.Move(Vector3.down); // Moves the player to the ground
         }
 
         private void Reset() 

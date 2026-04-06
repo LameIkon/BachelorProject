@@ -8,6 +8,9 @@ public class TerminalStateMachine : MonoBehaviour
     [SerializeField] private TerminalStartEventSO _terminalStartEvent;
     [SerializeField] private OvenStateChangeEventSO _ovenstateChangeEvent;
     [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
+    [SerializeField] private QuestCompleterSO _questStartMachine;
+    [SerializeField] private QuestCompleterSO _questStopMachine;
+    [SerializeField] private QuestCompleterSO _questIncreaseSpeed;
 
     [SerializeField] private List<Terminal> _terminals;
     //[SerializeField] private MachineStatus _machineStatus;
@@ -111,9 +114,9 @@ public class TerminalStateMachine : MonoBehaviour
 
     public float GetSpeed() => _machineSpeed;
 
-    public void CompleteQuest() 
+    public void TryCompleteQuest(string questTitle) 
     {
-        _questCompleteEvent.Raise();
+        _questCompleteEvent.Raise(questTitle);
     }
     #endregion 
 

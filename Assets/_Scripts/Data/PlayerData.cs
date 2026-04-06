@@ -7,6 +7,7 @@ public class PlayerData : ScriptableObject
 {
     [SerializeField] private float _movementSpeed;
     [SerializeField] private float _maxMovementSpeed;
+    [SerializeField] private float _fallSpeed;
 
     [SerializeField, Range(1, 1000)] private float _mouseSpeed;
 
@@ -15,6 +16,6 @@ public class PlayerData : ScriptableObject
     public float MovementSpeed => _movementSpeed;
     public float MaxMovementSpeed => _maxMovementSpeed;
     public float MouseSpeed => _mouseSpeed/5000f; // This is done becase the sensitivity, quickly changes.
-
+    public float FallSpeed => _fallSpeed;
 
 }

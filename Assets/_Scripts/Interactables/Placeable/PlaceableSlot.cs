@@ -17,6 +17,7 @@ public class PlaceableSlot : MonoBehaviour
     [Header("Options")]
     [SerializeField] private bool _canPlaceOnce;
     [SerializeField] private bool _setToKinematic;
+    [SerializeField] private QuestCompleterSO _questCompleter;
 
     private bool _canPlace;
 
@@ -80,6 +81,7 @@ public class PlaceableSlot : MonoBehaviour
         }
 
         Debug.Log("Assigned");
+        if(_questCompleter != null) _questCompleter.CompleteQuest();
         
     }
 
