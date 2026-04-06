@@ -157,7 +157,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2ca8de69430df6a428e5ee5ac567ff7b, type: 2}
   _sceneLoadEventSO: {fileID: 11400000, guid: 42bc8ab227f1510428d86bd34ea40c58, type: 2}
   _questGiveEventSO: {fileID: 11400000, guid: 05413bab4ed2105408f95bc51eed4ac9, type: 2}
-  _firstSceneToLoad: {fileID: 11400000, guid: f1831a170f200bc4b92006b0e251259f, type: 2}
+  _firstSceneToLoad: {fileID: 11400000, guid: 12688494ff43e1a469b64bf8ff40899a, type: 2}
 --- !u!4 &426925990
 Transform:
   m_ObjectHideFlags: 0

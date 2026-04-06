@@ -385,6 +385,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 05413bab4ed2105408f95bc51eed4ac9, type: 2}
     - target: {fileID: 769030682467317145, guid: 4d8aa37bf5dc16b4799496254a948faa, type: 3}
+      propertyPath: _updatedUIEventSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 389faa1ab6f0f2e4b82ff82a0affadba, type: 2}
+    - target: {fileID: 769030682467317145, guid: 4d8aa37bf5dc16b4799496254a948faa, type: 3}
       propertyPath: _questCompleteEventSO
       value: 
       objectReference: {fileID: 11400000, guid: ba00323a70b2e7b4a93d33abbe7f1819, type: 2}
@@ -709,7 +713,7 @@ MonoBehaviour:
   _questCompleteEvent: {fileID: 11400000, guid: ba00323a70b2e7b4a93d33abbe7f1819, type: 2}
   _questGiveProvider: {fileID: 11400000, guid: 6ee9389e7c8c98c42856298ec6e01407, type: 2}
   _activeQuest: {fileID: 0}
-  _register: {fileID: 11400000, guid: 6b792fc392c510e44b54ba4aef2267ed, type: 2}
+  _updateUIEvent: {fileID: 11400000, guid: 389faa1ab6f0f2e4b82ff82a0affadba, type: 2}
 --- !u!4 &1382867790
 Transform:
   m_ObjectHideFlags: 0
