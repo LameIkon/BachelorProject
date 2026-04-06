@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class savetest1 : MonoBehaviour
@@ -8,16 +9,23 @@ public class savetest1 : MonoBehaviour
 
     private void Start()
     {
-        Settings settings = new Settings();
-        MetaData metaData = new MetaData();
-        registerSaveData.Save(settings);
-        registerSaveData.Save(metaData);
+        OrganizedGameSessionRecord sessionRecord = new OrganizedGameSessionRecord()
+        {
+            session = "testSession",
+            overall = "overall",
+            levels = "levels"
+        };
+        registerSaveData.Save(sessionRecord);
+        //Settings settings = new Settings();
+        //MetaData metaData = new MetaData();
+        //registerSaveData.Save(settings);
+        //registerSaveData.Save(metaData);
 
-        var loadedSaves = loadData.Load<Settings>("Saves", "Settings");
-        var loadedSaves1 = loadData.Load<MetaData>("Data", "Settings");
+        //var loadedSaves = loadData.Load<Settings>("Saves", "Settings");
+        //var loadedSaves1 = loadData.Load<MetaData>("Data", "Settings");
 
-        Debug.Log(loadedSaves.Time);
-        Debug.Log(loadedSaves1.Time);
+        //Debug.Log(loadedSaves.Time);
+        //Debug.Log(loadedSaves1.Time);
     }
 }
 
@@ -28,6 +36,8 @@ public class Settings : ISavableData
 
     public string SaveSubFolder => "Settings";
 
+    public List<string> SaveFolders => throw new NotImplementedException();
+
     public float Time = 23f;
 }
 
@@ -37,6 +47,8 @@ public class MetaData : ISavableData
     public string SaveFileName => "Data";
 
     public string SaveSubFolder => "Settings";
+
+    public List<string> SaveFolders => throw new NotImplementedException();
 
     public string Time = "some time here";
 }

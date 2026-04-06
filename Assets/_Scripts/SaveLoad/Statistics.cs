@@ -81,10 +81,26 @@ public class Statistics : MonoBehaviour
 [Serializable]
 public class OrganizedGameSessionRecord : ISavableData
 {
-    public string SaveFileName => "Saves";
-    public string SaveSubFolder => "Session";
-    public string SaveSubSubFolder => "Overall";
-    public string SaveSubSubFolder1 => "Level";
+    public string SaveFileName => "SessionData";
+
+    List<string> ISavableData.SaveFolders => throw new NotImplementedException();
+
+    // Session folder
+    public string session; // Name of session. Child of Saves
+
+    // Subfolders
+    public string overall = "Overall"; // Child of session
+    public string levels = "Levels"; // Child of session
+
+    public List<string> SaveFolders(string targetFolder)
+    {
+        return new List<string>
+        {
+            overall,
+            levels
+        };
+    }
+
 
     public float totalTime;
     public List<OrganizedLevelRecord> levelRecords = new();

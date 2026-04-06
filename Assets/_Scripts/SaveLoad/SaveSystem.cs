@@ -58,9 +58,15 @@ public class SaveSystem : Singleton<SaveSystem>
 
     private void SaveData(ISavableData data) // Called by event
     {
-        string folderPath = Path.Combine(_saveFolderLocation, data.SaveSubFolder);
+        string folderPath = _saveFolderLocation;
 
-        EnsureFolderExist(folderPath);
+        foreach (string folder in data.SaveFolders)
+        {
+            folderPath = Path.Combine(folder, folder);
+            EnsureFolderExist(folderPath);
+        }
+            
+           
 
         string fullPath = Path.Combine(folderPath, $"{data.SaveFileName}.json");
 

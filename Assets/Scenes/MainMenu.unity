@@ -2301,6 +2301,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745800950}
   m_CullTransparentMesh: 1
+--- !u!1 &805692168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 805692170}
+  - component: {fileID: 805692169}
+  - component: {fileID: 805692171}
+  m_Layer: 0
+  m_Name: SaveTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &805692169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805692168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ca7013591ea6a4ca9199f47c1264e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveSystem
+  _saveAllEvent: {fileID: 11400000, guid: 24ead6912264ba24a959183a836aefdd, type: 2}
+  _saveDataEvent: {fileID: 11400000, guid: 2819e618ef341944bbc0609adc53d035, type: 2}
+  _loadDataEvent: {fileID: 11400000, guid: b0ecce12911dcc440a01786762ebda4c, type: 2}
+--- !u!4 &805692170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805692168}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 63.53864, y: -0, z: -72.34743}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &805692171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805692168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56220beb3b094504ebae15603d7fb652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::savetest1
+  registerSaveData: {fileID: 11400000, guid: 2819e618ef341944bbc0609adc53d035, type: 2}
+  loadData: {fileID: 11400000, guid: b0ecce12911dcc440a01786762ebda4c, type: 2}
 --- !u!1 &815229243
 GameObject:
   m_ObjectHideFlags: 0
@@ -6224,3 +6286,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 122862657}
   - {fileID: 693344845}
+  - {fileID: 805692170}
