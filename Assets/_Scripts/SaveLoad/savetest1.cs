@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class savetest1 : MonoBehaviour
 {
-
     [SerializeField] private RegisterSaveDataEventSO registerSaveData;
     [SerializeField] private LoadDataEventSO loadData;
 

@@ -8,31 +8,6 @@ public class Quest : ScriptableObject
 	[SerializeField] private List<Part> _parts;
 	private int _index;
 
-
-	[Serializable]
-	public class Part 
-	{
-		[SerializeField] private bool _isComplete;
-		[SerializeField] private QuestID _id;
-		[SerializeField] private string _description;
-
-		public void Init() 
-		{
-			_isComplete = false;
-		}
-
-		public void CompletePart() 
-		{
-			_isComplete = true;
-		}
-
-		public bool IsPartComplete => _isComplete;
-
-		public QuestID Id => _id;
-		public string Description => _description;
-
-	}
-
 	public void Init() 
 	{
 		_index = 0;
@@ -56,5 +31,30 @@ public class Quest : ScriptableObject
 			return _parts;
 		}
 	}
+
+}
+
+
+[Serializable]
+public class Part 
+{
+	[SerializeField] private bool _isComplete;
+	[SerializeField] private QuestID _id;
+	[SerializeField] private string _description;
+
+	public void Init() 
+	{
+		_isComplete = false;
+	}
+
+	public void CompletePart() 
+	{
+		_isComplete = true;
+	}
+
+	public bool IsPartComplete => _isComplete;
+
+	public QuestID Id => _id;
+	public string Description => _description;
 
 }
