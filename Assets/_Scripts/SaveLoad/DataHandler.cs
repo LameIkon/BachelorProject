@@ -10,10 +10,15 @@ public class DataHandler
     private GameSessionRecord _gameSessionRecords;
     private SessionOverallData _session;
 
+    private readonly PickableTracker _pickableTracker;
+
     public DataHandler(RegisterSaveDataEventSO registerSaveData, GetDataEventSO getData)
     {
         _registerDataEvent = registerSaveData;
         _getDataEvent = getData;
+
+        _pickableTracker = new PickableTracker();
+
 
         _getDataEvent.OnRaise += StoreData;
 
@@ -97,6 +102,33 @@ public class DataHandler
     {       
         _registerDataEvent.Save(_session);
     }
+
+    #region Trackers
+
+    protected class PickableTracker
+    {
+        private Dictionary<ButtonType, ButtonRecord> _records = new();
+
+        public void Add(ButtonType type, InteractionEvent context)
+        {
+            if (!_records.ContainsKey(type)) _records[type] = new ButtonRecord
+            {
+                type = type
+            };
+
+            context.buttonType
+
+            switch (context.eventType)
+            {
+                case EventType.Pickable:
+
+                    break;
+            }
+        }
+    }
+
+
+    #endregion
 }
 
 #region ISavable 
@@ -240,6 +272,7 @@ public enum TerminalState
 #endregion
 
 # region DataTracking methods
+[Serializable]
 public class TerminalStateRecord
 {
     public TerminalState state;

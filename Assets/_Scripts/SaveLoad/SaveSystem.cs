@@ -60,13 +60,13 @@ public class SaveSystem : Singleton<SaveSystem>
     {
         string folderPath = _saveFolderLocation;
 
-        foreach (string folder in data.SavePath)
+        foreach (string folder in data.SavePath) // Look for all folders that needs to exists
         {
             folderPath = Path.Combine(folderPath, folder);
-            EnsureFolderExist(folderPath);
+            EnsureFolderExist(folderPath); // Create folder path
         }         
 
-        string fullPath = Path.Combine(folderPath, $"{data.SaveFileName}.json");
+        string fullPath = Path.Combine(folderPath, $"{data.SaveFileName}.json"); // We expect the last folder path created is the location to store data
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(fullPath, json);
 
