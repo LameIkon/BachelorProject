@@ -21,7 +21,16 @@ public class DataHandler
 
     private void StoreData(InteractionEvent context)
     {
+        EventType eventType = context.eventType;
+        switch (eventType)
+        {
+            case EventType.Button:
 
+
+                break;
+            case EventType.Terminal:
+                break;
+        }
     }
 
 
