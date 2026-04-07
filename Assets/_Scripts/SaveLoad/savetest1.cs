@@ -9,13 +9,33 @@ public class savetest1 : MonoBehaviour
 
     private void Start()
     {
-        OrganizedGameSessionRecord sessionRecord = new OrganizedGameSessionRecord()
+        SessionOverallData sessionOverallData = new SessionOverallData()
         {
-            session = "testSession",
-            overall = "overall",
-            levels = "levels"
+            sessionInstance = "THETestSession",
+            totalTime = 20f,
+            totalCompendiumOpenedWithHotkey = 3,
+            totalCompendiumOpenedWithMenu = 12,
+            totalDistanceMoved = 123123f,
         };
-        registerSaveData.Save(sessionRecord);
+
+        LevelSaveData levelSaveData = new LevelSaveData()
+        {
+            sessionInstance = "THETestSession",
+            levelName = "level1",
+            levelRecord = new OrganizedLevelRecord
+            {
+                levelStarted = 3f,
+                levelFinished = 10f,
+                levelDuration = 7f
+            }
+        };
+
+        registerSaveData.Save(sessionOverallData);
+        registerSaveData.Save(levelSaveData);
+    }
+
+    private void SaveTestPrototype()
+    {
         //Settings settings = new Settings();
         //MetaData metaData = new MetaData();
         //registerSaveData.Save(settings);
@@ -29,6 +49,7 @@ public class savetest1 : MonoBehaviour
     }
 }
 
+
 [Serializable]
 public class Settings : ISavableData
 {
@@ -37,6 +58,8 @@ public class Settings : ISavableData
     public string SaveSubFolder => "Settings";
 
     public List<string> SaveFolders => throw new NotImplementedException();
+
+    public SaveFolder SaveFolder => throw new NotImplementedException();
 
     public float Time = 23f;
 }
@@ -49,6 +72,8 @@ public class MetaData : ISavableData
     public string SaveSubFolder => "Settings";
 
     public List<string> SaveFolders => throw new NotImplementedException();
+
+    public SaveFolder SaveFolder => throw new NotImplementedException();
 
     public string Time = "some time here";
 }

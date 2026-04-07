@@ -8,7 +8,7 @@ public class Statistics : MonoBehaviour
     [SerializeField] private LoadDataEventSO loadData;
 
     private GameSessionRecord _gameSessionRecords;
-    private OrganizedGameSessionRecord _session;
+    private SessionOverallData _session;
 
     /// <summary>
     /// Each time a level gets started, create a record for the level to track data
@@ -64,7 +64,7 @@ public class Statistics : MonoBehaviour
             }
 
             // Add level to organized record
-            _session.levelRecords.Add(organized);
+            //_session.levelRecords.Add(organized);
         }
 
         // Save after categorizing
@@ -78,33 +78,117 @@ public class Statistics : MonoBehaviour
 
 }
 
+/// <summary>
+/// Needs a uniq name for session instance... Info TBD
+/// </summary>
 [Serializable]
-public class OrganizedGameSessionRecord : ISavableData
+public class SessionOverallData : ISavableData
 {
+    // Folder Initialization
+    public string sessionInstance; // Name of current session
     public string SaveFileName => "SessionData";
 
-    List<string> ISavableData.SaveFolders => throw new NotImplementedException();
-
-    // Session folder
-    public string session; // Name of session. Child of Saves
-
-    // Subfolders
-    public string overall = "Overall"; // Child of session
-    public string levels = "Levels"; // Child of session
-
-    public List<string> SaveFolders(string targetFolder)
+    public SaveFolder SaveFolder
     {
-        return new List<string>
+        get
         {
-            overall,
-            levels
-        };
+            // Create rootfolder
+            SaveFolder sessionFolder = new SaveFolder("Session");
+
+            // Create session instance
+            SaveFolder instanceFolder = new SaveFolder(sessionInstance);
+
+            // Build folder hierachy
+            sessionFolder.Subfolders.Add(instanceFolder);
+
+            return sessionFolder;
+        }
+    }
+
+    // Data population
+
+    // Time
+    public float totalTime;
+
+    // Compendium
+    public int totalCompendiumOpenedWithHotkey;
+    public int totalCompendiumOpenedWithMenu;
+
+    // Player
+    public float totalDistanceMoved;
+}
+
+/// <summary>
+/// Need a name on the session instance the level entries should populate. Require sessionInstance and levelName and levelRecord
+/// </summary>
+[Serializable]
+public class LevelSaveData : ISavableData
+{
+    // Folder Initialization
+    public string sessionInstance; // Name of current session
+    public string levelName;
+    public string SaveFileName => levelName;
+
+    public SaveFolder SaveFolder
+    {
+        get
+        {
+            // Create rootfolder
+            SaveFolder sessionFolder = new SaveFolder("Session");
+
+            // Create session instance
+            SaveFolder instanceFolder = new SaveFolder(sessionInstance); // Will just print to folder if already exists
+
+            // Create subfolders
+            SaveFolder levelsFolder = new SaveFolder("Levels");
+
+            // Build folder hierachy
+            instanceFolder.Subfolders.Add(levelsFolder);
+            sessionFolder.Subfolders.Add(instanceFolder);
+
+            return sessionFolder;
+        }
     }
 
 
-    public float totalTime;
-    public List<OrganizedLevelRecord> levelRecords = new();
+    // Data population
+    public OrganizedLevelRecord levelRecord;
 }
+
+
+//[Serializable]
+//public class OrganizedGameSessionRecord : ISavableData
+//{
+//    // Folder data
+//    public string SaveFileName {get; set;} 
+//    public string sessionInstance; // Name of session
+
+
+//    public SaveFolder SaveFolder
+//    {
+//        get
+//        {
+//            // Create rootfolder
+//            SaveFolder sessionFolder = new SaveFolder("Session");
+
+//            // Create session instance
+//            SaveFolder instanceFolder = new SaveFolder(sessionInstance);
+
+//            // Create subfolders
+//            SaveFolder levelsFolder = new SaveFolder("Levels");
+
+//            // Build folder hierachy
+//            instanceFolder.Subfolders.Add(levelsFolder);
+//            sessionFolder.Subfolders.Add(instanceFolder);
+
+//            return sessionFolder;
+//        }
+//    }
+
+//    // The data
+//    public float totalTime;
+//    public List<OrganizedLevelRecord> levelRecords = new();
+//}
 
 [Serializable]
 public class OrganizedLevelRecord

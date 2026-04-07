@@ -48,6 +48,7 @@ public class SaveSystem : Singleton<SaveSystem>
 
     #endregion
 
+    # region Save method
     private void SaveAll()
     {
         foreach (ISavableData savable in _savables)
@@ -58,23 +59,18 @@ public class SaveSystem : Singleton<SaveSystem>
 
     private void SaveData(ISavableData data) // Called by event
     {
-        string folderPath = _saveFolderLocation;
 
-        foreach (string folder in data.SaveFolders)
-        {
-            folderPath = Path.Combine(folder, folder);
-            EnsureFolderExist(folderPath);
-        }
-            
-           
+        CreateFoldersAnPath(_saveFolderLocation, data.SaveFolder);           
 
-        string fullPath = Path.Combine(folderPath, $"{data.SaveFileName}.json");
-
+        string fullPath = Path.Combine(_saveFolderLocation, data.SaveFolder.Name, $"{data.SaveFileName}.json");
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(fullPath, json);
 
         Debug.Log($"Data saved to: {fullPath}");
     }
+    #endregion
+
+    #region Load Method
 
     private ISavableData LoadData(string fileName, string subFolder, Type type) // Called by event
     {
@@ -90,6 +86,21 @@ public class SaveSystem : Singleton<SaveSystem>
         string json = File.ReadAllText(fullPath);
         return JsonUtility.FromJson(json, type) as ISavableData;
     }
+    #endregion
+
+    #region Folder
+    private string CreateFoldersAnPath(string basePath, SaveFolder folder)
+    {
+        string currentPath = Path.Combine(basePath, folder.Name);
+        EnsureFolderExist(currentPath);
+
+        if (folder.Subfolders == null || folder.Subfolders.Count == 0)
+        {
+            return currentPath;
+        }
+
+        return CreateFoldersAnPath(currentPath, folder.Subfolders[0]);
+    }
 
     private void EnsureFolderExist(string folderPath)
     {
@@ -98,4 +109,6 @@ public class SaveSystem : Singleton<SaveSystem>
             Directory.CreateDirectory(folderPath);
         }
     }
+
+    #endregion
 }
