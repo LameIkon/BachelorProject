@@ -10,7 +10,6 @@ public class SaveSystem : Singleton<SaveSystem>
     [SerializeField] private RegisterSaveDataEventSO _saveDataEvent;
     [SerializeField] private LoadDataEventSO _loadDataEvent;
 
-
     private string _saveFolderLocation;
 
     private List<ISavableData> _savables = new List<ISavableData>(); 
@@ -59,10 +58,15 @@ public class SaveSystem : Singleton<SaveSystem>
 
     private void SaveData(ISavableData data) // Called by event
     {
+        string folderPath = _saveFolderLocation;
 
-        CreateFoldersAnPath(_saveFolderLocation, data.SaveFolder);           
+        foreach (string folder in data.SavePath)
+        {
+            folderPath = Path.Combine(folderPath, folder);
+            EnsureFolderExist(folderPath);
+        }         
 
-        string fullPath = Path.Combine(_saveFolderLocation, data.SaveFolder.Name, $"{data.SaveFileName}.json");
+        string fullPath = Path.Combine(folderPath, $"{data.SaveFileName}.json");
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(fullPath, json);
 
@@ -89,19 +93,6 @@ public class SaveSystem : Singleton<SaveSystem>
     #endregion
 
     #region Folder
-    private string CreateFoldersAnPath(string basePath, SaveFolder folder)
-    {
-        string currentPath = Path.Combine(basePath, folder.Name);
-        EnsureFolderExist(currentPath);
-
-        if (folder.Subfolders == null || folder.Subfolders.Count == 0)
-        {
-            return currentPath;
-        }
-
-        return CreateFoldersAnPath(currentPath, folder.Subfolders[0]);
-    }
-
     private void EnsureFolderExist(string folderPath)
     {
         if (!Directory.Exists(folderPath))

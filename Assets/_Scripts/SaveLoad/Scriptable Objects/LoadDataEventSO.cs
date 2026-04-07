@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="Load Data Event SO", menuName = "ScriptableObject/Events/SaveLoad/Load")]
+[CreateAssetMenu(fileName ="Load Data Event SO", menuName = "ScriptableObject/SaveLoad/Load")]
 public class LoadDataEventSO : ScriptableObject
 {
     public event Func<string, string, Type, ISavableData> OnLoad;

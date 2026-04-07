@@ -1,5 +1,7 @@
+using System.Collections.Generic;
+
 public interface ISavableData
 {
     public string SaveFileName { get; }
-    public SaveFolder SaveFolder { get; }
+    List<string> SavePath { get; }
 }

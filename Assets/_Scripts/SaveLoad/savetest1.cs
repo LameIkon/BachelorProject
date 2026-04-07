@@ -11,7 +11,7 @@ public class savetest1 : MonoBehaviour
     {
         SessionOverallData sessionOverallData = new SessionOverallData()
         {
-            sessionInstance = "THETestSession",
+            sessionInstanceName = "THETestSession",
             totalTime = 20f,
             totalCompendiumOpenedWithHotkey = 3,
             totalCompendiumOpenedWithMenu = 12,
@@ -32,6 +32,7 @@ public class savetest1 : MonoBehaviour
 
         registerSaveData.Save(sessionOverallData);
         registerSaveData.Save(levelSaveData);
+
     }
 
     private void SaveTestPrototype()
@@ -61,6 +62,8 @@ public class Settings : ISavableData
 
     public SaveFolder SaveFolder => throw new NotImplementedException();
 
+    public List<string> SavePath => throw new NotImplementedException();
+
     public float Time = 23f;
 }
 
@@ -74,6 +77,8 @@ public class MetaData : ISavableData
     public List<string> SaveFolders => throw new NotImplementedException();
 
     public SaveFolder SaveFolder => throw new NotImplementedException();
+
+    public List<string> SavePath => throw new NotImplementedException();
 
     public string Time = "some time here";
 }

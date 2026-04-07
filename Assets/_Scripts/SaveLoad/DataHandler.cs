@@ -2,19 +2,34 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Statistics : MonoBehaviour
+public class DataHandler
 {
-    [SerializeField] private RegisterSaveDataEventSO registerSaveData;
-    [SerializeField] private LoadDataEventSO loadData;
+    private readonly RegisterSaveDataEventSO _registerDataEvent;
+    private readonly GetDataEventSO _getDataEvent;
 
     private GameSessionRecord _gameSessionRecords;
     private SessionOverallData _session;
+
+    public DataHandler(RegisterSaveDataEventSO registerSaveData, GetDataEventSO getData)
+    {
+        _registerDataEvent = registerSaveData;
+        _getDataEvent = getData;
+
+        _getDataEvent.OnRaise += StoreData;
+
+    }
+
+    private void StoreData(InteractionEvent context)
+    {
+
+    }
+
 
     /// <summary>
     /// Each time a level gets started, create a record for the level to track data
     /// </summary>
     /// <param name="levelData">The level started</param>
-    public void StoreLevelData(LevelData levelData)
+    private void StoreLevelData(LevelData levelData)
     {
         LevelRecord levelRecord = new LevelRecord
         {
@@ -39,8 +54,6 @@ public class Statistics : MonoBehaviour
             levelRecords = new List<LevelRecord>()
         };
     }
-
-
     private void CategorizeData()
     {
         _session = new();
@@ -71,12 +84,13 @@ public class Statistics : MonoBehaviour
         SaveSession();
     }
 
-    private void SaveSession()
+    public void SaveSession()
     {       
-        registerSaveData.Save(_session);
+        _registerDataEvent.Save(_session);
     }
-
 }
+
+#region ISavable 
 
 /// <summary>
 /// Needs a uniq name for session instance... Info TBD
@@ -85,27 +99,14 @@ public class Statistics : MonoBehaviour
 public class SessionOverallData : ISavableData
 {
     // Folder Initialization
-    public string sessionInstance; // Name of current session
+    public string sessionInstanceName; // Name of current session
     public string SaveFileName => "SessionData";
 
-    public SaveFolder SaveFolder
+    public List<string> SavePath => new List<string>()
     {
-        get
-        {
-            // Create rootfolder
-            SaveFolder sessionFolder = new SaveFolder("Session");
-
-            // Create session instance
-            SaveFolder instanceFolder = new SaveFolder(sessionInstance);
-
-            // Build folder hierachy
-            sessionFolder.Subfolders.Add(instanceFolder);
-
-            return sessionFolder;
-        }
-    }
-
-    // Data population
+        "Session",
+        sessionInstanceName
+    };
 
     // Time
     public float totalTime;
@@ -129,66 +130,20 @@ public class LevelSaveData : ISavableData
     public string levelName;
     public string SaveFileName => levelName;
 
-    public SaveFolder SaveFolder
+    public List<string> SavePath => new List<string>()
     {
-        get
-        {
-            // Create rootfolder
-            SaveFolder sessionFolder = new SaveFolder("Session");
-
-            // Create session instance
-            SaveFolder instanceFolder = new SaveFolder(sessionInstance); // Will just print to folder if already exists
-
-            // Create subfolders
-            SaveFolder levelsFolder = new SaveFolder("Levels");
-
-            // Build folder hierachy
-            instanceFolder.Subfolders.Add(levelsFolder);
-            sessionFolder.Subfolders.Add(instanceFolder);
-
-            return sessionFolder;
-        }
-    }
-
+        "Session",
+        sessionInstance,
+        "Levels"
+    };
 
     // Data population
     public OrganizedLevelRecord levelRecord;
 }
 
+#endregion
 
-//[Serializable]
-//public class OrganizedGameSessionRecord : ISavableData
-//{
-//    // Folder data
-//    public string SaveFileName {get; set;} 
-//    public string sessionInstance; // Name of session
-
-
-//    public SaveFolder SaveFolder
-//    {
-//        get
-//        {
-//            // Create rootfolder
-//            SaveFolder sessionFolder = new SaveFolder("Session");
-
-//            // Create session instance
-//            SaveFolder instanceFolder = new SaveFolder(sessionInstance);
-
-//            // Create subfolders
-//            SaveFolder levelsFolder = new SaveFolder("Levels");
-
-//            // Build folder hierachy
-//            instanceFolder.Subfolders.Add(levelsFolder);
-//            sessionFolder.Subfolders.Add(instanceFolder);
-
-//            return sessionFolder;
-//        }
-//    }
-
-//    // The data
-//    public float totalTime;
-//    public List<OrganizedLevelRecord> levelRecords = new();
-//}
+# region Organized data Ready to Save
 
 [Serializable]
 public class OrganizedLevelRecord
@@ -219,7 +174,9 @@ public class OrganizedLevelRecord
 
 }
 
+#endregion
 
+# region Storing unsaved data methods
 
 [Serializable]
 public class GameSessionRecord
@@ -238,7 +195,9 @@ public class LevelRecord
     public List<InteractionEvent> entries;
 }
 
+#endregion
 
+# region Get Data Events
 
 [Serializable]
 public class InteractionEvent
@@ -269,6 +228,9 @@ public enum TerminalState
     LeverWarning
 }
 
+#endregion
+
+# region DataTracking methods
 public class TerminalStateRecord
 {
     public TerminalState state;
@@ -307,3 +269,5 @@ public class QuestPartRecord
     public Part part;
     public float time;
 }
+
+#endregion
