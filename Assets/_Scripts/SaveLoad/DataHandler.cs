@@ -1,16 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class DataHandler
+public class DataHandler : IDisposable
 {
     private readonly RegisterSaveDataEventSO _registerDataEvent;
     private readonly GetDataEventSO _getDataEvent;
     //private readonly SaveAllDataEventSO _saveDataEvent;
 
-    private SessionRecord _gameSessionRecords;
-    private SessionSaveData _session;
+    private SessionRecord _sessionRecords;
+    //private SessionSaveData _session;
 
     private readonly PickableDataTracker _pickableTracker;
     private readonly TerminalDataTracker _terminalTracker;
@@ -30,10 +28,19 @@ public class DataHandler
         //_pickableTracker = new PickableDataTracker();
         _terminalTracker = new TerminalDataTracker();
 
+        string temporary = "TBD";
+
+        _sessionRecords = new SessionRecord
+        {
+            sessionName = temporary
+        };
+
+
         _getDataEvent.OnRaise += StoreData;
 
     }
 
+    #region Data storing
     private void StoreData(InteractionEvent context)
     {
         EventType eventType = context.eventType;
@@ -50,54 +57,55 @@ public class DataHandler
         }
     }
 
+    public void TrackLevel(string levelName)
+    {
+        string uniqueName = GenerateUniqueName(levelName);
+
+        LevelRecord newLevelRecord = new LevelRecord()
+        {
+            name = uniqueName
+        };
+
+        _sessionRecords.levelRecords.Add(newLevelRecord);
+    }
+
+    private string GenerateUniqueName(string name)
+    {
+        string uniqueName = name;
+        int counter = 1;
+
+        while (_sessionRecords.levelRecords.Exists(levelRecord => levelRecord.name == uniqueName)) // If any by that name exist 
+        {
+            // Add the counter to the name and loop again to check
+            uniqueName = $"{uniqueName}_{counter}"; 
+            counter++;
+        }
+
+        return name;
+    }
+
+    #endregion
+
     public void CategorizeData()
     {
+        //foreach (LevelRecord level in _sessionRecords.levelRecords)
+        //{
+        //    LevelRecord organized = new();
+        //    organized.levelDuration = level.levelDuration; // Set time
+        //    _session.totalTime += level.levelDuration; // Add time to total
 
-        SessionSaveData sessionOverallData = new SessionSaveData()
-        {
-            sessionInstanceName = "THETestSession",
-            totalTime = 20f,
-            totalCompendiumOpenedWithHotkey = 3,
-            totalCompendiumOpenedWithMenu = 12,
-            totalDistanceMoved = 123123f,
-        };
+        //    foreach (InteractionEvent entries in level.entries)
+        //    {
+        //        switch (entries.eventType) // TBD
+        //        {
+        //            default:
+        //                break;
+        //        }
+        //    }
 
-        LevelSaveData levelSaveData = new LevelSaveData()
-        {
-            sessionInstance = "THETestSession",
-            levelName = "level1",
-            levelRecord = new LevelRecord
-            {
-                levelStarted = 3f,
-                levelFinished = 10f,
-                levelDuration = 7f
-            }
-        };
-
-
-        _session = new();
-
-        // Sum total time across all levels
-        _session.totalTime = 0;
-
-        foreach (LevelRecord level in _gameSessionRecords.levelRecords)
-        {
-            LevelRecord organized = new();
-            organized.levelDuration = level.levelDuration; // Set time
-            _session.totalTime += level.levelDuration; // Add time to total
-
-            foreach (InteractionEvent entries in level.entries)
-            {
-                switch (entries.eventType) // TBD
-                {
-                    default:
-                        break;
-                }
-            }
-
-            // Add level to organized record
-            //_session.levelRecords.Add(organized);
-        }
+        //    // Add level to organized record
+        //    //_session.levelRecords.Add(organized);
+        //}
 
         // Save after categorizing
         SaveSession();
@@ -105,7 +113,20 @@ public class DataHandler
 
     public void SaveSession()
     {       
-        _registerDataEvent.Save(_session);
+        //_registerDataEvent.Save(_sessionRecords);
+    }
+
+    /// <summary>
+    /// Create a new session here for testing purpose, so we don't have to close game and start again to begin new session
+    /// </summary>
+    public void NewSession()
+    {
+        // TBD
+    }
+
+    public void Dispose()
+    {
+        _getDataEvent.OnRaise -= StoreData;
     }
 
     ///// <summary>
@@ -293,6 +314,9 @@ public class LevelSaveData : ISavableData
 [Serializable]
 public class LevelRecord
 {
+    // Level Name
+    public string name;
+
     // Level Time
     public float levelStarted;
     public float levelFinished;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,11 +7,14 @@ public class GameManager : Singleton<GameManager>
     private CrosshairHandler _crosshairHandler;
     private AsyncSceneLoader _sceneLoader;
 
+
     [SerializeField] private LevelData[] _levels;
     [SerializeField] private SceneLoadEventSO _sceneLoadEventSO;
     [SerializeField] private QuestGiveEventSO _questGiveEventSO;
 
     [SerializeField] private LevelData _firstSceneToLoad;
+
+    [SerializeField] private DataHandling _dataHandling;
 
     #region Unity Method 
     protected override void Awake()
@@ -19,6 +23,7 @@ public class GameManager : Singleton<GameManager>
         DontDestroyOnLoad(gameObject);
         _crosshairHandler = new CrosshairHandler();
         _sceneLoader = new AsyncSceneLoader();
+        _dataHandling.Initialize();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -62,4 +67,35 @@ public class GameManager : Singleton<GameManager>
         _questGiveEventSO.Raise(levelData.LevelQuest);
     }
 
+
+    /// <summary>
+    /// Create new session whenever we are done with the previous
+    /// </summary>
+    private void NewSession()
+    {
+        // TBD. We need to save data first before disposing
+        _dataHandling.DataHandler.Dispose();
+        _dataHandling.Initialize();
+
+    }
+
+    [Serializable]
+    protected class DataHandling
+    {
+        [SerializeField] private RegisterSaveDataEventSO _registerSaveDataEvent;
+        [SerializeField] private GetDataEventSO _getDataEventSO;
+
+        private DataHandler _dataHandler;
+
+        public DataHandler DataHandler => _dataHandler;
+        
+        public void Initialize()
+        {
+            _dataHandler = new DataHandler(_registerSaveDataEvent, _getDataEventSO);
+        }
+
+    }
+
 }
+
+
