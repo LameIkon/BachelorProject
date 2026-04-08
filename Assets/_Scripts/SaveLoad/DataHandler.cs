@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,19 +7,28 @@ public class DataHandler
 {
     private readonly RegisterSaveDataEventSO _registerDataEvent;
     private readonly GetDataEventSO _getDataEvent;
+    //private readonly SaveAllDataEventSO _saveDataEvent;
 
-    private GameSessionRecord _gameSessionRecords;
-    private SessionOverallData _session;
+    private SessionRecord _gameSessionRecords;
+    private SessionSaveData _session;
 
-    private readonly PickableTracker _pickableTracker;
+    private readonly PickableDataTracker _pickableTracker;
+    private readonly TerminalDataTracker _terminalTracker;
+
+    // Trackers
+    //private Dictionary<ButtonType, ButtonRecord> _buttonRecords;
+    //private Dictionary<TerminalState, TerminalStateRecord> _terminalRecords;
 
     public DataHandler(RegisterSaveDataEventSO registerSaveData, GetDataEventSO getData)
     {
         _registerDataEvent = registerSaveData;
         _getDataEvent = getData;
 
-        _pickableTracker = new PickableTracker();
+        //_buttonRecords = new Dictionary<ButtonType, ButtonRecord>();
+        //_terminalRecords = new Dictionary<TerminalState, TerminalStateRecord>();
 
+        //_pickableTracker = new PickableDataTracker();
+        _terminalTracker = new TerminalDataTracker();
 
         _getDataEvent.OnRaise += StoreData;
 
@@ -30,46 +40,41 @@ public class DataHandler
         switch (eventType)
         {
             case EventType.Button:
-
-
                 break;
             case EventType.Terminal:
+                if (context.terminalState is TerminalState state)
+                {
+                    _terminalTracker.Add(state);
+                }
                 break;
         }
     }
 
-
-    /// <summary>
-    /// Each time a level gets started, create a record for the level to track data
-    /// </summary>
-    /// <param name="levelData">The level started</param>
-    private void StoreLevelData(LevelData levelData)
+    public void CategorizeData()
     {
-        LevelRecord levelRecord = new LevelRecord
+
+        SessionSaveData sessionOverallData = new SessionSaveData()
         {
-            levelName = levelData.name,
-            levelStarted = Time.time,
-            entries = new List<InteractionEvent>()
+            sessionInstanceName = "THETestSession",
+            totalTime = 20f,
+            totalCompendiumOpenedWithHotkey = 3,
+            totalCompendiumOpenedWithMenu = 12,
+            totalDistanceMoved = 123123f,
+        };
+
+        LevelSaveData levelSaveData = new LevelSaveData()
+        {
+            sessionInstance = "THETestSession",
+            levelName = "level1",
+            levelRecord = new LevelRecord
+            {
+                levelStarted = 3f,
+                levelFinished = 10f,
+                levelDuration = 7f
+            }
         };
 
 
-        _gameSessionRecords.levelRecords.Add(levelRecord);
-    }
-
-    /// <summary>
-    /// Create session data when game starts
-    /// </summary>
-    /// <param name="name">name of the session</param>
-    public void CreateSessionData(string name)
-    {
-        _gameSessionRecords = new GameSessionRecord
-        {
-            sessionName = name,
-            levelRecords = new List<LevelRecord>()
-        };
-    }
-    private void CategorizeData()
-    {
         _session = new();
 
         // Sum total time across all levels
@@ -77,7 +82,7 @@ public class DataHandler
 
         foreach (LevelRecord level in _gameSessionRecords.levelRecords)
         {
-            OrganizedLevelRecord organized = new();
+            LevelRecord organized = new();
             organized.levelDuration = level.levelDuration; // Set time
             _session.totalTime += level.levelDuration; // Add time to total
 
@@ -103,9 +108,107 @@ public class DataHandler
         _registerDataEvent.Save(_session);
     }
 
-    #region Trackers
+    ///// <summary>
+    ///// Each time a level gets started, create a record for the level to track data
+    ///// </summary>
+    ///// <param name="levelData">The level started</param>
+    //private void StoreLevelData(LevelData levelData)
+    //{
+    //    LevelRecord levelRecord = new LevelRecord
+    //    {
+    //        levelName = levelData.name,
+    //        levelStarted = Time.time,
+    //        entries = new List<InteractionEvent>()
+    //    };
 
-    protected class PickableTracker
+
+    //    _gameSessionRecords.levelRecords.Add(levelRecord);
+    //}
+
+    /// <summary>
+    /// Create session data when game starts
+    /// </summary>
+    /// <param name="name">name of the session</param>
+    //public void CreateSessionData(string name)
+    //{
+    //    _gameSessionRecords = new GameSessionRecord
+    //    {
+    //        sessionName = name,
+    //        levelRecords = new List<LevelRecord>()
+    //    };
+    //}
+
+    #region Trackers
+    //private void PickableTracker(InteractionEvent context)
+    //{
+
+    //}
+
+    //private void TerminalTracker(TerminalState state)
+    //{
+    //    _terminalRecords.TryAdd(state, new TerminalStateRecord // Initialize it if does not exist 
+    //    {
+    //        state = state,
+    //        count = 0,
+    //    });
+
+    //    _terminalRecords[state].count++; // Add to count
+    //}
+
+    protected class TerminalDataTracker
+    {
+        private readonly Dictionary<TerminalState, TerminalStateRecord> _terminalRecords;
+
+        public TerminalDataTracker()
+        {
+            _terminalRecords = new Dictionary<TerminalState, TerminalStateRecord>();
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            foreach (TerminalState state in Enum.GetValues(typeof(TerminalState)))
+            {
+                _terminalRecords[state] = new TerminalStateRecord
+                {
+                    state = state,
+                    count = 0
+                };
+            }
+        }
+
+        /// <summary>
+        /// Increase the counter by one for the specified terminal state
+        /// </summary>
+        /// <param name="state"></param>
+        public void Add(TerminalState state)
+        {
+            _terminalRecords[state].count++;
+        }
+
+        /// <summary>
+        /// Returns a list of all terminalStateRecords
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<TerminalStateRecord> GetRecords()
+        {
+            return _terminalRecords.Values;
+        }
+
+        /// <summary>
+        /// Resets the counter inside the dictionary 
+        /// </summary>
+        public void Reset() 
+        {
+            foreach (TerminalStateRecord record in _terminalRecords.Values)
+            {
+                record.count = 0;
+            }
+        }
+    }
+
+
+    protected class PickableDataTracker
     {
         private Dictionary<ButtonType, ButtonRecord> _records = new();
 
@@ -116,7 +219,7 @@ public class DataHandler
                 type = type
             };
 
-            context.buttonType
+            //context.buttonType
 
             switch (context.eventType)
             {
@@ -134,10 +237,11 @@ public class DataHandler
 #region ISavable 
 
 /// <summary>
-/// Needs a uniq name for session instance... Info TBD
+/// Data combined from levelSaveData to create a more compact structure of whole session.
+/// Needs a uniq name for session instance
 /// </summary>
 [Serializable]
-public class SessionOverallData : ISavableData
+public class SessionSaveData : ISavableData
 {
     // Folder Initialization
     public string sessionInstanceName; // Name of current session
@@ -179,7 +283,7 @@ public class LevelSaveData : ISavableData
     };
 
     // Data population
-    public OrganizedLevelRecord levelRecord;
+    public LevelRecord levelRecord;
 }
 
 #endregion
@@ -187,7 +291,7 @@ public class LevelSaveData : ISavableData
 # region Organized data Ready to Save
 
 [Serializable]
-public class OrganizedLevelRecord
+public class LevelRecord
 {
     // Level Time
     public float levelStarted;
@@ -220,28 +324,29 @@ public class OrganizedLevelRecord
 # region Storing unsaved data methods
 
 [Serializable]
-public class GameSessionRecord
+public class SessionRecord
 {
     public string sessionName;
-    public List<LevelRecord> levelRecords;
+    // TBD add more data here for whole session
+    public List<LevelRecord> levelRecords; // Each individual levels
 }
 
-[Serializable]
-public class LevelRecord
-{
-    public string levelName;
-    public float levelStarted;
-    public float levelFinished;
-    public float levelDuration;
-    public List<InteractionEvent> entries;
-}
+//[Serializable]
+//public class LevelRecord
+//{
+//    public string levelName;
+//    public float levelStarted;
+//    public float levelFinished;
+//    public float levelDuration;
+//    public List<InteractionEvent> entries;
+//}
 
 #endregion
 
 # region Get Data Events
 
 [Serializable]
-public class InteractionEvent
+public struct InteractionEvent
 {
     public float time; // Time since level start
     public EventType eventType; // type to categorize it
@@ -249,7 +354,7 @@ public class InteractionEvent
     // specific event types. Only one should be used
     public PickableType? pickableType;
     public ButtonType? buttonType;
-    public TerminalState? TerminalState;
+    public TerminalState? terminalState;
 }
 
 public enum EventType

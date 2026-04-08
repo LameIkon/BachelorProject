@@ -9,7 +9,7 @@ public class savetest1 : MonoBehaviour
 
     private void Start()
     {
-        SessionOverallData sessionOverallData = new SessionOverallData()
+        SessionSaveData sessionOverallData = new SessionSaveData()
         {
             sessionInstanceName = "THETestSession",
             totalTime = 20f,
@@ -22,7 +22,7 @@ public class savetest1 : MonoBehaviour
         {
             sessionInstance = "THETestSession",
             levelName = "level1",
-            levelRecord = new OrganizedLevelRecord
+            levelRecord = new LevelRecord
             {
                 levelStarted = 3f,
                 levelFinished = 10f,
