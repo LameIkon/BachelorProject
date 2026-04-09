@@ -6,7 +6,8 @@ public class QuestManager : Singleton<QuestManager>
     [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
     [SerializeField] private QuestGiveProviderSO _questGiveProvider;
     [SerializeField] private Quest _activeQuest;
-
+    [SerializeField] private UIToggleEventSO _toggleEvent;
+    
     [SerializeField] private ActionEventSO _updateUIEvent;
 
     [SerializeField] private bool _isQuestComplete;
@@ -42,11 +43,14 @@ public class QuestManager : Singleton<QuestManager>
         _updateUIEvent.Raise();
     }
 
-    private void CompleteQuest(QuestID questId) 
+    private void CompleteQuest(QuestID questId)
     {
+        if (_activeQuest == null) return; 
         _activeQuest.Completed(questId);
         _updateUIEvent.Raise();
         _isQuestComplete = _activeQuest.IsComplete;
+
+        if(_isQuestComplete) _toggleEvent.Raise(UIType.NextLevelPopUp);
     }
 
     private Quest GetQuest() 

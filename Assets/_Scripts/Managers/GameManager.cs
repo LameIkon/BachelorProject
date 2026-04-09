@@ -23,7 +23,7 @@ public class GameManager : Singleton<GameManager>
         DontDestroyOnLoad(gameObject);
         _crosshairHandler = new CrosshairHandler();
         _sceneLoader = new AsyncSceneLoader();
-        _dataHandling.Initialize();
+        //_dataHandling.Initialize();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -63,7 +63,7 @@ public class GameManager : Singleton<GameManager>
 
         // TODO: Send Quest data through the QuestGiveEventSO, would like to refactor this so it
         // uses the LevelData as a parameter instead of the levelId.
-        Debug.Log($"Quest Give event: {levelData.LevelQuest}");
+        yield return null;
         _questGiveEventSO.Raise(levelData.LevelQuest);
     }
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class TerminalStateMachine : MonoBehaviour
     [SerializeField] private TerminalStartEventSO _terminalStartEvent;
     [SerializeField] private OvenStateChangeEventSO _ovenstateChangeEvent;
     [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
+    [SerializeField] private QuestGiveEventSO _questGiveEvent;
 
     [SerializeField] private List<Terminal> _terminals;
     //[SerializeField] private MachineStatus _machineStatus;
@@ -33,19 +35,21 @@ public class TerminalStateMachine : MonoBehaviour
 
     private void Start()
     {
-        SetState(OffState);
+        
     }
 
 	private void OnEnable()
 	{
         _terminalStartEvent.OnRaise += AddTerminal;
         _terminalEvent.OnRaise += ChangeStatus;
+        _questGiveEvent.OnRaise += SetLevelState;
 	}
 
 	private void OnDisable()
 	{
         _terminalEvent.OnRaise -= ChangeStatus;
 		_terminalStartEvent.OnRaise -= AddTerminal;
+        _questGiveEvent.OnRaise -= SetLevelState;
         _terminals.Clear();
 	}
 
@@ -79,11 +83,40 @@ public class TerminalStateMachine : MonoBehaviour
         LeverWarningState = new LeverWarningState(this);
     }
 
-
-    public void SetState(BaseState newState)
+    public void SetState(BaseState newState) 
     {
         _stateMachine.SetState(newState);
     }
+
+    private void SetState(TerminalState newState)
+    {
+        BaseState stateSwitch = null;
+        switch (newState) 
+        {
+            case TerminalState.Off:
+                stateSwitch = OffState;
+                break;
+            case TerminalState.Running:
+                stateSwitch = RunningState;
+                break;
+            case TerminalState.Warning:
+                stateSwitch = WarningState;
+                break;
+            case TerminalState.LeverWarning:
+                stateSwitch = LeverWarningState;
+                break;                    
+        }
+
+        _stateMachine.SetState(stateSwitch);
+    }
+
+
+    private void SetLevelState(Quest quest) 
+    {
+        Debug.Log($"Try set state: {quest.MachineState}");
+        SetState(quest.MachineState);
+    }
+
 
 	/// <summary>
 	/// Changes the speed up and down, though a boolean. <c>True</c> turns the speed up by one and <c>false</c> turns it down by one.

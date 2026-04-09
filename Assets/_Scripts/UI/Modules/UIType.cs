@@ -6,5 +6,6 @@ public enum UIType
     Pause,
     InteractionPopUp,
     MainMenu,
-    Todo
+    Todo,
+    NextLevelPopUp
 }

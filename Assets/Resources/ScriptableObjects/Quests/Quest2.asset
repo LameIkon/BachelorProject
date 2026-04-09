@@ -10,22 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af11e7f5d8b9d2e4681e3b5bd0aea108, type: 3}
-  m_Name: StartMachine
+  m_Name: Quest2
   m_EditorClassIdentifier: Assembly-CSharp::Quest
   _parts:
-  - _id: 0
-    _isComplete: 0
-    _howManySteps: 0
-    _description: Place Block on Belt
   - _id: 1
     _isComplete: 0
     _howManySteps: 0
     _description: Start Machine
-  - _id: 3
-    _isComplete: 0
-    _howManySteps: 5
-    _description: Increase Belt Speed
-  - _id: 2
-    _isComplete: 0
-    _howManySteps: 0
-    _description: Stop Machine

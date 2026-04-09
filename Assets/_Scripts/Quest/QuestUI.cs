@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using static Quest;
 
 public class QuestUI : MonoBehaviour
 {
