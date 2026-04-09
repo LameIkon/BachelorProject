@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: StartMachine
   m_EditorClassIdentifier: Assembly-CSharp::Quest
   _parts:
-  - _isComplete: 0
-    _id: 0
+  - _id: 0
+    _isComplete: 0
+    _howManySteps: 0
     _description: Place Block on Belt
-  - _isComplete: 0
-    _id: 1
+  - _id: 1
+    _isComplete: 0
+    _howManySteps: 0
     _description: Start Machine
-  - _isComplete: 0
-    _id: 3
+  - _id: 3
+    _isComplete: 0
+    _howManySteps: 5
     _description: Increase Belt Speed
-  - _isComplete: 0
-    _id: 2
+  - _id: 2
+    _isComplete: 0
+    _howManySteps: 0
     _description: Stop Machine
