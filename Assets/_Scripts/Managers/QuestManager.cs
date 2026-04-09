@@ -9,6 +9,8 @@ public class QuestManager : Singleton<QuestManager>
 
     [SerializeField] private ActionEventSO _updateUIEvent;
 
+    [SerializeField] private bool _isQuestComplete;
+
     public Quest ActiveQuest => _activeQuest;
 
 	#region Unity Methods
@@ -38,14 +40,13 @@ public class QuestManager : Singleton<QuestManager>
         _activeQuest = quest;
         _activeQuest.Init();
         _updateUIEvent.Raise();
-
     }
 
     private void CompleteQuest(QuestID questId) 
     {
         _activeQuest.Completed(questId);
         _updateUIEvent.Raise();
-
+        _isQuestComplete = _activeQuest.IsComplete;
     }
 
     private Quest GetQuest() 
