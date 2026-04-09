@@ -80,6 +80,11 @@ public class UIManager : Singleton<UIManager>
             {
                 InputReader.SetState(InputState.UI);
             }
+            else if (system.RuleType == UIRuleType.BetterNameLater)
+            {
+                InputReader.SetState(InputState.None);
+            }
+
             Debug.Log("Add to active list");
 
             EvaluateOverlayState();
@@ -111,6 +116,10 @@ public class UIManager : Singleton<UIManager>
                         _activeSystems.Remove(system);
                     }
                     break;
+                case UIRuleType.BetterNameLater:
+                    system.Close();
+                    _activeSystems.Remove(system);
+                    break;
                 default:
                     break;
             }
@@ -122,7 +131,7 @@ public class UIManager : Singleton<UIManager>
     /// </summary>
     private void EvaluateOverlayState()
     {
-        bool hasBlockingUI = _activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable);
+        bool hasBlockingUI = _activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable || s.RuleType == UIRuleType.BetterNameLater);
 
         Debug.Log(hasBlockingUI);
 

@@ -10,4 +10,6 @@ public enum UIRuleType
     Overlay, 
     [Tooltip("Static Background. Will never be changed unless decided to hide hud")]
     HUD, 
+    [Tooltip("Overrules all ui to close and show itself disabling all gameplay")]
+    BetterNameLater
 }

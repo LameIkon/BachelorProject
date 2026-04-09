@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Level2
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   _scenes:
-  - m_SceneAsset: {fileID: 102900000, guid: c52955602ba279e43b7e91ce33e602a3, type: 3}
-    m_SceneName: HUD
   - m_SceneAsset: {fileID: 102900000, guid: 2fd846c7e1c4c844e9d9c338217c98bd, type: 3}
     m_SceneName: FactoryScene
-  _inputState: 0
+  - m_SceneAsset: {fileID: 102900000, guid: c52955602ba279e43b7e91ce33e602a3, type: 3}
+    m_SceneName: HUD
+  _inputState: 1
   _levelQuest: {fileID: 11400000, guid: 09b48c74073d0774aa5784fa49bfac8b, type: 2}

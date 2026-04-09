@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    private CrosshairHandler _crosshairHandler;
+    private MouseHandler _crosshairHandler;
     private AsyncSceneLoader _sceneLoader;
 
 
@@ -21,7 +21,7 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         DontDestroyOnLoad(gameObject);
-        _crosshairHandler = new CrosshairHandler();
+        _crosshairHandler = new MouseHandler();
         _sceneLoader = new AsyncSceneLoader();
         //_dataHandling.Initialize();
     }

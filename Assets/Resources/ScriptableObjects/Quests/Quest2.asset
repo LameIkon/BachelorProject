@@ -17,3 +17,4 @@ MonoBehaviour:
     _isComplete: 0
     _howManySteps: 0
     _description: Start Machine
+  _terminalState: 2

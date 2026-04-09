@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-public class CrosshairHandler : IDisposable
+public class MouseHandler : IDisposable
 {
-    public CrosshairHandler()
+    public MouseHandler()
     {
         // Crosshair related
         InputReader.s_OnInputStateChangedEvent += SetCursorState;
@@ -22,6 +22,7 @@ public class CrosshairHandler : IDisposable
                 Cursor.lockState = CursorLockMode.Locked;
                 break;
             case InputState.UI:
+            case InputState.None:
                 Cursor.lockState = CursorLockMode.None;
                 break;
         }

@@ -15,5 +15,5 @@ MonoBehaviour:
   _scenes:
   - m_SceneAsset: {fileID: 102900000, guid: b69bc05314847584eb749daef80d5744, type: 3}
     m_SceneName: MainMenu
-  _inputState: 1
+  _inputState: 2
   _levelQuest: {fileID: 11400000, guid: 7dc76187873b71345ac74065aa73de3a, type: 2}

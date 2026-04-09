@@ -30,7 +30,7 @@ public class InteractionUtility
     public void OnUpdate()
     {
         if (InputReader.s_State != InputState.Game) return;
-        Hover(InputReader.MousePos);
+        CrosshairHover(InputReader.MousePos);
     }
 
 
@@ -48,10 +48,8 @@ public class InteractionUtility
     }
 
 
-    private void Hover(Vector2 pos)
+    private void CrosshairHover(Vector2 pos)
     {
-        if (InputReader.s_State != InputState.Game) return; // Can't interact if we aren't in Game input state
-
         _newHovered = null;
 
         if (RaycastInteractable(pos, out RaycastResult result))

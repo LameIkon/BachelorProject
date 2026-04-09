@@ -55,13 +55,18 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
         _input.UI.Enable();
 
         // Enable/disable Game input based on state
-        if (state == InputState.Game)
+        switch (state)
         {
-            _input.Game.Enable();
-        }
-        else
-        {
-            _input.Game.Disable();
+            case InputState.Game:
+                _input.Game.Enable();
+                break;
+            case InputState.UI:
+                _input.Game.Disable();
+                break;
+            case InputState.None:
+                _input.Game.Disable();
+                _input.UI.Disable();
+                break;
         }
 
         // Update state and notify listeners
@@ -121,6 +126,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
 
 public enum InputState : byte
 {
-   Game,
-   UI
+    None,
+    Game,
+    UI
 }

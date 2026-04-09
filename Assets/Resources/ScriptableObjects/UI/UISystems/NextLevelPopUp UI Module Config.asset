@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: NextLevelPopUp UI Module Config
   m_EditorClassIdentifier: Assembly-CSharp::UIModuleConfigSO
   uiType: 7
-  uiRuleType: 3
+  uiRuleType: 4
   updateUIEvent: {fileID: 11400000, guid: c54ccdb0f5f8ea74fbc0f4561e9856d9, type: 2}
   registerUIEvent: {fileID: 11400000, guid: 319ac0f259220da44a591b150786b908, type: 2}
