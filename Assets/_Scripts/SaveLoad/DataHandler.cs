@@ -1,29 +1,27 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class DataHandler : IDisposable
 {
     private readonly RegisterSaveDataEventSO _registerDataEvent;
-    private readonly GetDataEventSO _getDataEvent;
+    private readonly StoreDataEventSO _storeDataEvent;
     //private readonly SaveAllDataEventSO _saveDataEvent;
 
     private SessionRecord _sessionRecords;
-    //private SessionSaveData _session;
 
+    // Data trackers for storing data
     private readonly PickableDataTracker _pickableTracker;
     private readonly TerminalDataTracker _terminalTracker;
 
-    // Trackers
-    //private Dictionary<ButtonType, ButtonRecord> _buttonRecords;
-    //private Dictionary<TerminalState, TerminalStateRecord> _terminalRecords;
+    private LevelRecord _currentLevel;
 
-    public DataHandler(RegisterSaveDataEventSO registerSaveData, GetDataEventSO getData)
+    public DataHandler(RegisterSaveDataEventSO registerSaveData, StoreDataEventSO getData)
     {
         _registerDataEvent = registerSaveData;
-        _getDataEvent = getData;
+        _storeDataEvent = getData;
+ 
 
-        //_buttonRecords = new Dictionary<ButtonType, ButtonRecord>();
-        //_terminalRecords = new Dictionary<TerminalState, TerminalStateRecord>();
 
         //_pickableTracker = new PickableDataTracker();
         _terminalTracker = new TerminalDataTracker();
@@ -32,12 +30,12 @@ public class DataHandler : IDisposable
 
         _sessionRecords = new SessionRecord
         {
-            sessionName = temporary
+            sessionName = temporary,
+            levelRecords = new List<LevelRecord>()
         };
 
 
-        _getDataEvent.OnRaise += StoreData;
-
+        _storeDataEvent.OnRaise += StoreData;
     }
 
     #region Data storing
@@ -57,124 +55,124 @@ public class DataHandler : IDisposable
         }
     }
 
-    public void TrackLevel(string levelName)
+    public void TrackLevel(string levelName, bool shouldTrack)
     {
+        if (!shouldTrack) return; // Currently redundant. we want to check what levels we even want to track data on
+
         string uniqueName = GenerateUniqueName(levelName);
 
         LevelRecord newLevelRecord = new LevelRecord()
         {
             name = uniqueName
-        };
+        };  
+
 
         _sessionRecords.levelRecords.Add(newLevelRecord);
+        _currentLevel = newLevelRecord;
     }
 
     private string GenerateUniqueName(string name)
     {
         string uniqueName = name;
         int counter = 1;
-
+        Debug.Log(uniqueName);
+        Debug.Log(_sessionRecords.levelRecords.Exists(levelRecord => levelRecord.name == uniqueName));
         while (_sessionRecords.levelRecords.Exists(levelRecord => levelRecord.name == uniqueName)) // If any by that name exist 
         {
             // Add the counter to the name and loop again to check
-            uniqueName = $"{uniqueName}_{counter}"; 
+            uniqueName = $"{name}_{counter}"; 
             counter++;
         }
-
-        return name;
+        return uniqueName;
     }
 
     #endregion
 
-    public void CategorizeData()
+    #region Data Fetching
+    public void CategorizeDataAndSave()
     {
-        //foreach (LevelRecord level in _sessionRecords.levelRecords)
-        //{
-        //    LevelRecord organized = new();
-        //    organized.levelDuration = level.levelDuration; // Set time
-        //    _session.totalTime += level.levelDuration; // Add time to total
+        Debug.Log("Save data");
 
-        //    foreach (InteractionEvent entries in level.entries)
-        //    {
-        //        switch (entries.eventType) // TBD
-        //        {
-        //            default:
-        //                break;
-        //        }
-        //    }
+        // Organize
+        OrganizeData();
 
-        //    // Add level to organized record
-        //    //_session.levelRecords.Add(organized);
-        //}
+        // Save levels
+        foreach (LevelSaveData levelData in SaveLevel())
+        {
+            Save(levelData);
+        }
 
-        // Save after categorizing
-        SaveSession();
+        // Save session
+        Save(SaveSession());
+
+        // Reset Trackers
+        ResetTrackers();
     }
 
-    public void SaveSession()
-    {       
-        //_registerDataEvent.Save(_sessionRecords);
+    private IEnumerable<LevelSaveData> SaveLevel()
+    {
+        // Save levels
+        foreach (LevelRecord levelRecord in _sessionRecords.levelRecords)
+        {
+            yield return new LevelSaveData
+            {
+                sessionInstance = _sessionRecords.sessionName,
+                levelName = levelRecord.name,
+                levelRecord = levelRecord
+            };
+        }
+    }
+    private SessionSaveData SaveSession()
+    {
+        //public List<TerminalStateRecord> terminalStateRecords = new();
+        SessionSaveData sessionSaveData = new SessionSaveData()
+        {
+            sessionInstanceName = _sessionRecords.sessionName,
+
+        };
+        return sessionSaveData;
     }
 
-    /// <summary>
-    /// Create a new session here for testing purpose, so we don't have to close game and start again to begin new session
-    /// </summary>
-    public void NewSession()
+    private void Save(ISavableData data)
     {
-        // TBD
+        if (data == null) return;
+        _registerDataEvent.Save(data);
+    }
+
+    private void OrganizeData()
+    {
+        var test = _terminalTracker.GetRecords();
+        Debug.Log(test);
+        Debug.Log(_terminalTracker.GetRecords());
+        _currentLevel?.terminalStateRecords.AddRange(_terminalTracker.GetRecords());
+    }
+
+    #endregion
+
+    #region Clean up
+    private void ResetTrackers()
+    {
+        _terminalTracker.Reset();
     }
 
     public void Dispose()
     {
-        _getDataEvent.OnRaise -= StoreData;
+        _storeDataEvent.OnRaise -= StoreData;
     }
-
-    ///// <summary>
-    ///// Each time a level gets started, create a record for the level to track data
-    ///// </summary>
-    ///// <param name="levelData">The level started</param>
-    //private void StoreLevelData(LevelData levelData)
-    //{
-    //    LevelRecord levelRecord = new LevelRecord
-    //    {
-    //        levelName = levelData.name,
-    //        levelStarted = Time.time,
-    //        entries = new List<InteractionEvent>()
-    //    };
-
-
-    //    _gameSessionRecords.levelRecords.Add(levelRecord);
-    //}
-
-    /// <summary>
-    /// Create session data when game starts
-    /// </summary>
-    /// <param name="name">name of the session</param>
-    //public void CreateSessionData(string name)
-    //{
-    //    _gameSessionRecords = new GameSessionRecord
-    //    {
-    //        sessionName = name,
-    //        levelRecords = new List<LevelRecord>()
-    //    };
-    //}
+    #endregion
 
     #region Trackers
-    //private void PickableTracker(InteractionEvent context)
-    //{
 
-    //}
+    public abstract class BaseDataTracker
+    {
+        public abstract void Initialize();
 
-    //private void TerminalTracker(TerminalState state)
-    //{
-    //    _terminalRecords.TryAdd(state, new TerminalStateRecord // Initialize it if does not exist 
-    //    {
-    //        state = state,
-    //        count = 0,
-    //    });
+        public abstract void Add();
 
-    //    _terminalRecords[state].count++; // Add to count
-    //}
+        //public abstract IEnumerable<> GetRecords();
+
+        public abstract void Reset();
+    }
 
     protected class TerminalDataTracker
     {
@@ -192,7 +190,7 @@ public class DataHandler : IDisposable
             {
                 _terminalRecords[state] = new TerminalStateRecord
                 {
-                    state = state,
+                    state = state.ToString(),
                     count = 0
                 };
             }
@@ -204,6 +202,7 @@ public class DataHandler : IDisposable
         /// <param name="state"></param>
         public void Add(TerminalState state)
         {
+            Debug.Log($"Add {state}");
             _terminalRecords[state].count++;
         }
 
@@ -262,7 +261,7 @@ public class DataHandler : IDisposable
 /// Needs a uniq name for session instance
 /// </summary>
 [Serializable]
-public class SessionSaveData : ISavableData
+public struct SessionSaveData : ISavableData
 {
     // Folder Initialization
     public string sessionInstanceName; // Name of current session
@@ -289,7 +288,7 @@ public class SessionSaveData : ISavableData
 /// Need a name on the session instance the level entries should populate. Require sessionInstance and levelName and levelRecord
 /// </summary>
 [Serializable]
-public class LevelSaveData : ISavableData
+public struct LevelSaveData : ISavableData
 {
     // Folder Initialization
     public string sessionInstance; // Name of current session
@@ -372,7 +371,7 @@ public class SessionRecord
 [Serializable]
 public struct InteractionEvent
 {
-    public float time; // Time since level start
+    public float? time; // Time since level start
     public EventType eventType; // type to categorize it
 
     // specific event types. Only one should be used
@@ -383,7 +382,6 @@ public struct InteractionEvent
 
 public enum EventType
 {
-    // Pickable
     Pickable,
     Button,
     Terminal,
@@ -404,7 +402,7 @@ public enum TerminalState
 [Serializable]
 public class TerminalStateRecord
 {
-    public TerminalState state;
+    public string state; 
     public int count;
 }
 

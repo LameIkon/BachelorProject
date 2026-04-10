@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    private MouseHandler _crosshairHandler;
+    private MouseHandler _mouseHandler;
     private AsyncSceneLoader _sceneLoader;
 
 
@@ -21,9 +21,9 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         DontDestroyOnLoad(gameObject);
-        _crosshairHandler = new MouseHandler();
+        _mouseHandler = new MouseHandler();
         _sceneLoader = new AsyncSceneLoader();
-        //_dataHandling.Initialize();
+        _dataHandling.Initialize();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,7 +46,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnApplicationQuit()
     {
-        _crosshairHandler.Dispose();
+        _mouseHandler.Dispose();
     }
 
 
@@ -64,6 +64,8 @@ public class GameManager : Singleton<GameManager>
         // TODO: Send Quest data through the QuestGiveEventSO, would like to refactor this so it
         // uses the LevelData as a parameter instead of the levelId.
         yield return null;
+        _dataHandling.DataHandler.CategorizeDataAndSave();
+        _dataHandling.DataHandler.TrackLevel(levelData.name, true); // Need id to say we should not track main menu
         _questGiveEventSO.Raise(levelData.LevelQuest);
     }
 
@@ -83,7 +85,8 @@ public class GameManager : Singleton<GameManager>
     protected class DataHandling
     {
         [SerializeField] private RegisterSaveDataEventSO _registerSaveDataEvent;
-        [SerializeField] private GetDataEventSO _getDataEventSO;
+        [SerializeField] private StoreDataEventSO _getDataEvent;
+
 
         private DataHandler _dataHandler;
 
@@ -91,9 +94,9 @@ public class GameManager : Singleton<GameManager>
         
         public void Initialize()
         {
-            _dataHandler = new DataHandler(_registerSaveDataEvent, _getDataEventSO);
+            if (_registerSaveDataEvent == null || _getDataEvent == null) return;
+            _dataHandler = new DataHandler(_registerSaveDataEvent, _getDataEvent);
         }
-
     }
 
 }

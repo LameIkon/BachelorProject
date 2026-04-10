@@ -22,7 +22,7 @@ public class WarningState : BaseState
         }
         if (terminal == TerminalType.Main && button == ButtonType.Reset && _isResetTerminalPressed) 
         {
-            manager.SetState(manager.OffState);
+            manager.SetState(TerminalState.Off);
         }
 
     }

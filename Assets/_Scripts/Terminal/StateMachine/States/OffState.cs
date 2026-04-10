@@ -14,7 +14,7 @@ public class OffState : BaseState
     {
         if (terminal == TerminalType.Main && button == ButtonType.Start) 
         {
-            manager.SetState(manager.RunningState);
+            manager.SetState(TerminalState.Running);
         }
 
     }

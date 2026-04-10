@@ -11,6 +11,8 @@ public class TerminalStateMachine : MonoBehaviour
     [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
     [SerializeField] private QuestGiveEventSO _questGiveEvent;
 
+    [SerializeField] private StoreDataEventSO _StoredataEvent;
+
     [SerializeField] private List<Terminal> _terminals;
     //[SerializeField] private MachineStatus _machineStatus;
 
@@ -64,7 +66,7 @@ public class TerminalStateMachine : MonoBehaviour
         {
             if (_stateMachine.CurrentState != LeverWarningState)
             {
-                SetState(LeverWarningState);
+                SetState(TerminalState.LeverWarning);
                 return;
             }
         }
@@ -83,12 +85,12 @@ public class TerminalStateMachine : MonoBehaviour
         LeverWarningState = new LeverWarningState(this);
     }
 
-    public void SetState(BaseState newState) 
-    {
-        _stateMachine.SetState(newState);
-    }
+    //public void SetState(BaseState newState) 
+    //{
+    //    _stateMachine.SetState(newState);
+    //}
 
-    private void SetState(TerminalState newState)
+    public void SetState(TerminalState newState)
     {
         BaseState stateSwitch = null;
         switch (newState) 
@@ -107,6 +109,13 @@ public class TerminalStateMachine : MonoBehaviour
                 break;                    
         }
 
+        InteractionEvent context = new InteractionEvent
+        {
+            eventType = EventType.Terminal,
+            terminalState = newState,
+        };
+
+        _StoredataEvent.Raise(context);
         _stateMachine.SetState(stateSwitch);
     }
 

@@ -9,7 +9,7 @@ public class LeverWarningState : BaseState
 	{
 		if (terminal == TerminalType.Lever)
 		{
-			manager.SetState(manager.WarningState);
+			manager.SetState(TerminalState.Warning);
 		}
 	}
 

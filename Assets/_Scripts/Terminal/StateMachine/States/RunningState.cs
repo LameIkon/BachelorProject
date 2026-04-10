@@ -15,7 +15,7 @@ public class RunningState : BaseState
         switch (button)
         {
             case ButtonType.Stop:
-                manager.SetState(manager.OffState);
+                manager.SetState(TerminalState.Off);
                 break;
 
             case ButtonType.SpeedUp:

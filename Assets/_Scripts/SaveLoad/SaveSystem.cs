@@ -7,7 +7,7 @@ public class SaveSystem : Singleton<SaveSystem>
 {
     [Header("Events")]
     [SerializeField] private SaveAllDataEventSO _saveAllEvent;
-    [SerializeField] private RegisterSaveDataEventSO _saveDataEvent;
+    [SerializeField] private RegisterSaveDataEventSO _registerSaveDataEvent;
     [SerializeField] private LoadDataEventSO _loadDataEvent;
 
     private string _saveFolderLocation;
@@ -17,6 +17,7 @@ public class SaveSystem : Singleton<SaveSystem>
     protected override void Awake()
     {
         base.Awake();
+        DontDestroyOnLoad(this);
         _saveFolderLocation = Path.Combine(Application.persistentDataPath, "saves");
         EnsureFolderExist(_saveFolderLocation);
     }
@@ -24,14 +25,14 @@ public class SaveSystem : Singleton<SaveSystem>
     private void OnEnable()
     {
         _saveAllEvent.OnRaise += SaveAll;
-        _saveDataEvent.OnSave += Register;
+        _registerSaveDataEvent.OnSave += Register;
         _loadDataEvent.OnLoad += LoadData;
     }
 
     private void OnDisable()
     {
         _saveAllEvent.OnRaise -= SaveAll;
-        _saveDataEvent.OnSave -= Register;
+        _registerSaveDataEvent.OnSave -= Register;
         _loadDataEvent.OnLoad -= LoadData;
     }
 
