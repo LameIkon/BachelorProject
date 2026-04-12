@@ -161,6 +161,8 @@ MonoBehaviour:
   _dataHandling:
     _registerSaveDataEvent: {fileID: 11400000, guid: 2819e618ef341944bbc0609adc53d035, type: 2}
     _getDataEvent: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
+    _recordBuilders:
+    - {fileID: 11400000, guid: 7e5ba7f1ffc38174a9ce25892adfcb4c, type: 2}
 --- !u!4 &426925990
 Transform:
   m_ObjectHideFlags: 0
