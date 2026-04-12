@@ -7,31 +7,46 @@ public class PickableRecordBuilderSO : EventRecordBuilderSO
 {
     public override void Initialize(LevelRecord level)
     {
-        level.terminalStateRecords = new List<TerminalStateRecord>();
+        level.pickableTypeRecords = new List<PickableTypeRecord>();
 
-        foreach (TerminalState state in Enum.GetValues(typeof(TerminalState)))
+        foreach (PickableType type in Enum.GetValues(typeof(PickableType)))
         {
-            level.terminalStateRecords.Add(new TerminalStateRecord
+            level.pickableTypeRecords.Add(new PickableTypeRecord
             {
-                state = state.ToString(),
-                count = 0
+                type = type.ToString(),
+                collected = 0,
+                dropped = 0,
+                placedInSlot = 0,
             });
         }
     }
 
     public override void Apply(LevelRecord level, InteractionEvent eventContext)
     {
-        if (eventContext.eventType != EventType.Terminal || !eventContext.terminalState.HasValue) return; // If it is not terminal or state has no value assigned return
+        if (eventContext.eventType != EventType.Pickable) return;
 
-        TerminalState state = eventContext.terminalState.Value;
+        if (eventContext.pickableType is not PickableType type) return;
 
-        foreach (TerminalStateRecord terminalRecord in level.terminalStateRecords)
+        if (eventContext.pickableAction is not PickableAction action) return;
+
+        foreach (PickableTypeRecord record in level.pickableTypeRecords)
         {
-            if (terminalRecord.state.ToString() == state.ToString())
+            if (record.type != type.ToString()) continue; // Search until we find the correct record
+
+            switch (action)
             {
-                terminalRecord.count++;
-                break;
+                case PickableAction.Collected:
+                    record.collected++;
+                    break;
+                case PickableAction.Dropped:
+                    record.dropped++;
+                    break;
+                case PickableAction.PlacedInSlot:
+                    record.placedInSlot++;
+                    break;
+
             }
+            break; // Break once we find the matching record
         }
     }
 }

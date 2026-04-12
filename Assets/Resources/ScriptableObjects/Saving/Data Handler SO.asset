@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e20f5ebc8bb28a44962c0d80c5add95, type: 3}
+  m_Name: Data Handler SO
+  m_EditorClassIdentifier: Assembly-CSharp::DataHandlerSO
+  _registerSaveDataEvent: {fileID: 11400000, guid: 2819e618ef341944bbc0609adc53d035, type: 2}
+  _getDataEvent: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
+  _recordBuilders:
+  - {fileID: 11400000, guid: 7e5ba7f1ffc38174a9ce25892adfcb4c, type: 2}
+  - {fileID: 11400000, guid: a8a687edcac1a0a40b83bb3eee7edc15, type: 2}

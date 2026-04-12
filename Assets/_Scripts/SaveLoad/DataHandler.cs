@@ -131,39 +131,28 @@ public class DataHandler : IDisposable
     }
     private SessionSaveData SaveSession()
     {
-        SessionSaveData sessionSaveData = new SessionSaveData()
+        SessionSaveData session = new SessionSaveData()
         {
             sessionInstanceName = _sessionRecord.sessionName,
+            totalTime = SessionTime()
 
         };
 
-        foreach (LevelRecord levelRecord in _sessionRecord.levelRecords)
+        foreach (LevelRecord level in _sessionRecord.levelRecords)
         {
-            // Terminal Data
-            foreach (TerminalStateRecord record in levelRecord.terminalStateRecords)
-            {
-               if (!Enum.TryParse(record.state, out TerminalState state)) continue;
+            // Terminal
+            session.totalTerminalOff += level.terminalStateRecords.Where(value => value.state == TerminalState.Off.ToString()).Sum(value => value.count);
+            session.totalTerminalRunning += level.terminalStateRecords.Where(value => value.state == TerminalState.Running.ToString()).Sum(value => value.count);
+            session.totalTerminalWarning += level.terminalStateRecords.Where(value => value.state == TerminalState.Warning.ToString()).Sum(value => value.count);
+            session.totalTerminalLeverWarning += level.terminalStateRecords.Where(value => value.state == TerminalState.LeverWarning.ToString()).Sum(value => value.count);
 
-                switch (state)
-                {
-                    case TerminalState.Off:
-                        sessionSaveData.totalTerminalOff += record.count;
-                        break;
-                    case TerminalState.Running:
-                        sessionSaveData.totalTerminalRunning += record.count;
-                        break;
-                    case TerminalState.Warning:
-                        sessionSaveData.totalTerminalWarning += record.count;
-                        break;
-                    case TerminalState.LeverWarning:
-                        sessionSaveData.totalTerminalLeverWarning += record.count;
-                        break;
-
-                }
-            }
+            // Pickables
+            session.totalObjectsCollected += level.pickableTypeRecords.Sum(value => value.collected);
+            session.totalObjectsDropped += level.pickableTypeRecords.Sum(value => value.dropped);
+            session.totalObjectsPlaced += level.pickableTypeRecords.Sum(value => value.placedInSlot);
         }
 
-        return sessionSaveData;
+        return session;
     }
 
     private void Save(ISavableData data)
@@ -246,6 +235,11 @@ public struct SessionSaveData : ISavableData
     public int totalTerminalRunning;
     public int totalTerminalWarning;
     public int totalTerminalLeverWarning;
+
+    // Pickables
+    public int totalObjectsCollected;
+    public int totalObjectsDropped;
+    public int totalObjectsPlaced;
 }
 
 /// <summary>
@@ -322,16 +316,16 @@ public class LevelRecord
 [Serializable]
 public struct InteractionEvent
 {
-    public float? time; // Time since level start
     public EventType eventType; // type to categorize it
 
     // specific event types. Only one should be used
     public PickableType? pickableType;
+    public PickableAction? pickableAction;
     public ButtonType? buttonType;
     public TerminalState? terminalState;
 }
 
-public enum EventType
+public enum EventType : byte
 {
     Pickable,
     Button,
@@ -339,12 +333,19 @@ public enum EventType
     Compendium,
 }
 
-public enum TerminalState
+public enum TerminalState : byte
 {
     Off,
     Running,
     Warning,
     LeverWarning
+}
+
+public enum PickableAction : byte
+{
+    Collected,
+    Dropped,
+    PlacedInSlot
 }
 
 #endregion
@@ -361,7 +362,7 @@ public class TerminalStateRecord
 [Serializable]
 public class PickableTypeRecord
 {
-    public PickableType type;
+    public string type; // PicktableType
     public int collected;
     public int dropped;
     public int placedInSlot;

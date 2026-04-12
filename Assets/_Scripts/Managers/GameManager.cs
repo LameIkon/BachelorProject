@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private LevelData _firstSceneToLoad;
 
-    [SerializeField] private DataHandling _dataHandling;
+    [SerializeField] private DataHandlerSO _dataHandlerSO;
 
     #region Unity Method 
     protected override void Awake()
@@ -24,7 +24,7 @@ public class GameManager : Singleton<GameManager>
         DontDestroyOnLoad(gameObject);
         _mouseHandler = new MouseHandler();
         _sceneLoader = new AsyncSceneLoader();
-        _dataHandling.Initialize();
+        _dataHandlerSO.Initialize();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,7 +47,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnApplicationQuit()
     {
-        _dataHandling.DataHandler.SaveData();
+        _dataHandlerSO.DataHandler.SaveData();
     }
 
 
@@ -65,14 +65,14 @@ public class GameManager : Singleton<GameManager>
         // TODO: Send Quest data through the QuestGiveEventSO, would like to refactor this so it
         // uses the LevelData as a parameter instead of the levelId.
         yield return null;
-        _dataHandling.DataHandler.CompleteLevel(); // Store data from current level before switching to new level
+        _dataHandlerSO.DataHandler.CompleteLevel(); // Store data from current level before switching to new level
 
         // Don't capture any data while next level is being set up
-        _dataHandling.DataHandler.SetCapture(false); 
+        _dataHandlerSO.DataHandler.SetCapture(false); 
         _questGiveEventSO.Raise(levelData.LevelQuest);
-        _dataHandling.DataHandler.SetCapture(true);
+        _dataHandlerSO.DataHandler.SetCapture(true);
 
-        _dataHandling.DataHandler.TrackLevel(levelData.name); // Start tracking new level
+        _dataHandlerSO.DataHandler.TrackLevel(levelData.name); // Start tracking new level
     }
 
 
@@ -81,32 +81,11 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     private void NewSession()
     {
-        _dataHandling.DataHandler.SaveData();
-        _dataHandling.DataHandler.Dispose();
-        _dataHandling.Initialize();
+        _dataHandlerSO.DataHandler.SaveData();
+        _dataHandlerSO.DataHandler.Dispose();
+        _dataHandlerSO.Initialize();
 
     }
-
-
-    [Serializable]
-    protected class DataHandling
-    {
-        [SerializeField] private RegisterSaveDataEventSO _registerSaveDataEvent;
-        [SerializeField] private StoreDataEventSO _getDataEvent;
-        [SerializeField] private List<EventRecordBuilderSO> _recordBuilders;
-
-
-        private DataHandler _dataHandler;
-
-        public DataHandler DataHandler => _dataHandler;
-        
-        public void Initialize()
-        {
-            if (_registerSaveDataEvent == null || _getDataEvent == null) return;
-            _dataHandler = new DataHandler(_registerSaveDataEvent, _getDataEvent, _recordBuilders);
-        }
-    }
-
 }
 
 

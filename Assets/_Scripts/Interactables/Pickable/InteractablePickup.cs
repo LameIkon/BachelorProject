@@ -3,6 +3,9 @@ using UnityEngine;
 [RequireComponent (typeof(Rigidbody), typeof(Collider))]
 public class InteractablePickup : HoverableInteractable, IPickable
 {
+	[Header("Events")]
+	[SerializeField] private StoreDataEventSO _storeDataEvent;
+
 	[Header("Pickup Settings")]
 	[SerializeField] private PickableType _pickableType;
 	[SerializeField] private bool _disablePickupOnPlacement;
@@ -69,6 +72,8 @@ public class InteractablePickup : HoverableInteractable, IPickable
 		
         _rb.useGravity = false;
         _rb.linearDamping = 10f;
+
+		RaiseInteractionEvent(PickableAction.Collected);
 	}
 
 	public void Drop()
@@ -85,14 +90,39 @@ public class InteractablePickup : HoverableInteractable, IPickable
 
 		bool? state = _currentSlot?.TryPlace(this);
 
-		if (state == true && _disablePickupOnPlacement)
+		if (state == true)
 		{
-			base.OnHoverExit();
-			_canBePickedUp = false;
+			if (_disablePickupOnPlacement)
+			{
+				base.OnHoverExit();
+				_canBePickedUp = false;
+			}
+
+			RaiseInteractionEvent(PickableAction.PlacedInSlot);
+		}
+		else
+		{
+			RaiseInteractionEvent(PickableAction.Dropped);
 		}
 	}
 
-	private void OnTriggerEnter(Collider other)
+    #region Raise Event
+	private void RaiseInteractionEvent(PickableAction action)
+	{
+		InteractionEvent interaction = new InteractionEvent
+		{
+			eventType = EventType.Pickable,
+			pickableType = _pickableType,
+			pickableAction = action
+		};
+
+		_storeDataEvent.Raise(interaction);
+	}
+
+    #endregion
+
+
+    private void OnTriggerEnter(Collider other)
 	{
 		if (other.TryGetComponent(out PlaceableSlot slot))
 		{
