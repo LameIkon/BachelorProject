@@ -51,34 +51,34 @@ public class savetest1 : MonoBehaviour
 }
 
 
-[Serializable]
-public class Settings : ISavableData
-{
-    public string SaveFileName => "Saves";
+//[Serializable]
+//public class Settings : ISavableData
+//{
+//    public string SaveFileName => "Saves";
 
-    public string SaveSubFolder => "Settings";
+//    public string SaveSubFolder => "Settings";
 
-    public List<string> SaveFolders => throw new NotImplementedException();
+//    public List<string> SaveFolders => throw new NotImplementedException();
 
-    public SaveFolder SaveFolder => throw new NotImplementedException();
+//    public SaveFolder SaveFolder => throw new NotImplementedException();
 
-    public List<string> SavePath => throw new NotImplementedException();
+//    public List<string> SavePath => throw new NotImplementedException();
 
-    public float Time = 23f;
-}
+//    public float Time = 23f;
+//}
 
-[Serializable]
-public class MetaData : ISavableData
-{
-    public string SaveFileName => "Data";
+//[Serializable]
+//public class MetaData : ISavableData
+//{
+//    public string SaveFileName => "Data";
 
-    public string SaveSubFolder => "Settings";
+//    public string SaveSubFolder => "Settings";
 
-    public List<string> SaveFolders => throw new NotImplementedException();
+//    public List<string> SaveFolders => throw new NotImplementedException();
 
-    public SaveFolder SaveFolder => throw new NotImplementedException();
+//    public SaveFolder SaveFolder => throw new NotImplementedException();
 
-    public List<string> SavePath => throw new NotImplementedException();
+//    public List<string> SavePath => throw new NotImplementedException();
 
-    public string Time = "some time here";
-}
+//    public string Time = "some time here";
+//}

@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DataHandler : IDisposable
 {
     private readonly RegisterSaveDataEventSO _registerDataEvent;
     private readonly StoreDataEventSO _storeDataEvent;
-    //private readonly SaveAllDataEventSO _saveDataEvent;
 
     private SessionRecord _sessionRecords;
 
@@ -26,11 +26,14 @@ public class DataHandler : IDisposable
         //_pickableTracker = new PickableDataTracker();
         _terminalTracker = new TerminalDataTracker();
 
-        string temporary = "TBD";
+        // Date or session as name
+        DateTime dateTime = DateTime.Now;
+        Debug.Log(dateTime.ToString("F"));
 
         _sessionRecords = new SessionRecord
         {
-            sessionName = temporary,
+            sessionName = dateTime.ToString("dd-MM-yyyy_HH.mm.ss"), // Formatting for folder text 
+            sessionData = dateTime.ToString("F"),
             levelRecords = new List<LevelRecord>()
         };
 
@@ -59,7 +62,7 @@ public class DataHandler : IDisposable
     {
         if (!shouldTrack) return; // Currently redundant. we want to check what levels we even want to track data on
 
-        string uniqueName = GenerateUniqueName(levelName);
+        string uniqueName = GenerateUniqueName(levelName, _sessionRecords.levelRecords.Select(record => record.name));
 
         LevelRecord newLevelRecord = new LevelRecord()
         {
@@ -71,13 +74,12 @@ public class DataHandler : IDisposable
         _currentLevel = newLevelRecord;
     }
 
-    private string GenerateUniqueName(string name)
+    private string GenerateUniqueName(string name, IEnumerable<string> existingNames)
     {
         string uniqueName = name;
         int counter = 1;
-        Debug.Log(uniqueName);
-        Debug.Log(_sessionRecords.levelRecords.Exists(levelRecord => levelRecord.name == uniqueName));
-        while (_sessionRecords.levelRecords.Exists(levelRecord => levelRecord.name == uniqueName)) // If any by that name exist 
+
+        while (existingNames.Contains(uniqueName)) // If any by that name exist 
         {
             // Add the counter to the name and loop again to check
             uniqueName = $"{name}_{counter}"; 
@@ -89,7 +91,7 @@ public class DataHandler : IDisposable
     #endregion
 
     #region Data Fetching
-    public void CategorizeDataAndSave()
+    public void SaveTrackedData()
     {
         Debug.Log("Save data");
 
@@ -141,9 +143,6 @@ public class DataHandler : IDisposable
 
     private void OrganizeData()
     {
-        var test = _terminalTracker.GetRecords();
-        Debug.Log(test);
-        Debug.Log(_terminalTracker.GetRecords());
         _currentLevel?.terminalStateRecords.AddRange(_terminalTracker.GetRecords());
     }
 
@@ -304,6 +303,8 @@ public struct LevelSaveData : ISavableData
 
     // Data population
     public LevelRecord levelRecord;
+
+
 }
 
 #endregion
@@ -350,19 +351,10 @@ public class LevelRecord
 public class SessionRecord
 {
     public string sessionName;
+    public string sessionData;
     // TBD add more data here for whole session
     public List<LevelRecord> levelRecords; // Each individual levels
 }
-
-//[Serializable]
-//public class LevelRecord
-//{
-//    public string levelName;
-//    public float levelStarted;
-//    public float levelFinished;
-//    public float levelDuration;
-//    public List<InteractionEvent> entries;
-//}
 
 #endregion
 

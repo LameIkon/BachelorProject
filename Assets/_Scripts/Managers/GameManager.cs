@@ -64,7 +64,7 @@ public class GameManager : Singleton<GameManager>
         // TODO: Send Quest data through the QuestGiveEventSO, would like to refactor this so it
         // uses the LevelData as a parameter instead of the levelId.
         yield return null;
-        _dataHandling.DataHandler.CategorizeDataAndSave();
+        _dataHandling.DataHandler.SaveTrackedData();
         _dataHandling.DataHandler.TrackLevel(levelData.name, true); // Need id to say we should not track main menu
         _questGiveEventSO.Raise(levelData.LevelQuest);
     }
