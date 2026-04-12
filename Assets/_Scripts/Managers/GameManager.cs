@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -67,7 +66,12 @@ public class GameManager : Singleton<GameManager>
         // uses the LevelData as a parameter instead of the levelId.
         yield return null;
         _dataHandling.DataHandler.CompleteLevel(); // Store data from current level before switching to new level
+
+        // Don't capture any data while next level is being set up
+        _dataHandling.DataHandler.SetCapture(false); 
         _questGiveEventSO.Raise(levelData.LevelQuest);
+        _dataHandling.DataHandler.SetCapture(true);
+
         _dataHandling.DataHandler.TrackLevel(levelData.name); // Start tracking new level
     }
 

@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="Terminal Record SO", menuName = "ScriptableObject/SaveLoad/Record analytics/Terminal Record")]
-public class TerminalRecordBuilderSO : EventRecordBuilderSO
+[CreateAssetMenu(fileName ="Pickable Record SO", menuName = "ScriptableObject/SaveLoad/Record analytics/Pickable Record")]
+public class PickableRecordBuilderSO : EventRecordBuilderSO
 {
     public override void Initialize(LevelRecord level)
     {

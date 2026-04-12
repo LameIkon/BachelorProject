@@ -9,15 +9,17 @@ public class DataHandler : IDisposable
     private readonly RegisterSaveDataEventSO _registerDataEvent;
     private readonly StoreDataEventSO _storeDataEvent;
 
-    // Data Trackers
-    private readonly List<InteractionEvent> _sessionBuffer = new();
-    private readonly List<InteractionEvent> _levelBuffer = new();
-
     // Data Builders
     private readonly List<EventRecordBuilderSO> _recordBuilders;
 
     private SessionRecord _sessionRecord;
     private LevelRecord _currentLevel;
+
+    // timing
+    private float _sessionStartTime;
+
+    private bool _isCapturing = true; // Decides if we can track data or not 
+
 
     public DataHandler(RegisterSaveDataEventSO registerSaveData, StoreDataEventSO getData, List<EventRecordBuilderSO> recordBuilders)
     {
@@ -27,6 +29,13 @@ public class DataHandler : IDisposable
  
         _storeDataEvent.OnRaise += StoreData;
 
+
+        StartNewSession();
+    }
+
+    private void StartNewSession()
+    {
+        _sessionStartTime = Time.realtimeSinceStartup;
 
         // Date or session as name
         DateTime dateTime = DateTime.Now;
@@ -39,11 +48,20 @@ public class DataHandler : IDisposable
         };
     }
 
+
     #region Data storing
+    /// <summary>
+    /// Store all data that happens in the game to session and level
+    /// </summary>
+    /// <param name="context"></param>
     private void StoreData(InteractionEvent context)
     {
-        _sessionBuffer.Add(context);
-        _levelBuffer.Add(context);
+        if (!_isCapturing) return;
+
+        foreach (EventRecordBuilderSO builder in _recordBuilders)
+        {
+            builder.Apply(_currentLevel, context);
+        }
     }
 
     public void TrackLevel(string levelName, bool shouldTrack = true)
@@ -55,7 +73,7 @@ public class DataHandler : IDisposable
         _currentLevel = new LevelRecord()
         {
             name = uniqueName,
-            levelStarted = Time.time
+            levelStarted = SessionTime()
         };  
 
         foreach (EventRecordBuilderSO builder in _recordBuilders)
@@ -65,21 +83,6 @@ public class DataHandler : IDisposable
 
         _sessionRecord.levelRecords.Add(_currentLevel);
     }
-
-    private string GenerateUniqueName(string name, IEnumerable<string> existingNames)
-    {
-        string uniqueName = name;
-        int counter = 1;
-
-        while (existingNames.Contains(uniqueName)) // If any by that name exist 
-        {
-            // Add the counter to the name and loop again to check
-            uniqueName = $"{name}_{counter}"; 
-            counter++;
-        }
-        return uniqueName;
-    }
-
     #endregion
 
     #region Level lifeCycle
@@ -88,28 +91,11 @@ public class DataHandler : IDisposable
         if (_currentLevel == null) return;
 
         // Finalize Timing
-        _currentLevel.levelFinished = Time.time;
+        _currentLevel.levelFinished = SessionTime();
         _currentLevel.levelDuration = _currentLevel.levelFinished - _currentLevel.levelStarted;
-
-        // Build analytics
-        BuildLevel(_currentLevel, _levelBuffer);
-
-        // Clear level data
-        _levelBuffer.Clear();
 
         _currentLevel = null;
 
-    }
-
-    private void BuildLevel(LevelRecord level, List<InteractionEvent> events)
-    {
-        foreach (InteractionEvent context in events)
-        {
-            foreach (EventRecordBuilderSO builder in _recordBuilders)
-            {
-                builder.Apply(level, context);
-            }
-        }
     }
     #endregion
 
@@ -151,9 +137,9 @@ public class DataHandler : IDisposable
 
         };
 
-        // Terminals
         foreach (LevelRecord levelRecord in _sessionRecord.levelRecords)
         {
+            // Terminal Data
             foreach (TerminalStateRecord record in levelRecord.terminalStateRecords)
             {
                if (!Enum.TryParse(record.state, out TerminalState state)) continue;
@@ -195,6 +181,32 @@ public class DataHandler : IDisposable
     public void Dispose()
     {
         _storeDataEvent.OnRaise -= StoreData;
+    }
+    #endregion
+
+    #region Utilities
+    private string GenerateUniqueName(string name, IEnumerable<string> existingNames)
+    {
+        string uniqueName = name;
+        int counter = 1;
+
+        while (existingNames.Contains(uniqueName)) // If any by that name exist 
+        {
+            // Add the counter to the name and loop again to check
+            uniqueName = $"{name}_{counter}"; 
+            counter++;
+        }
+        return uniqueName;
+    }
+
+    private float SessionTime()
+    {
+        return Time.realtimeSinceStartup - _sessionStartTime;
+    }
+
+    public void SetCapture(bool value)
+    {
+        _isCapturing = value;
     }
     #endregion
 }
