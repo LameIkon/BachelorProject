@@ -65,7 +65,7 @@ public class GameManager : Singleton<GameManager>
         // uses the LevelData as a parameter instead of the levelId.
         yield return null;
         _dataHandling.DataHandler.SaveTrackedData();
-        _dataHandling.DataHandler.TrackLevel(levelData.name, true); // Need id to say we should not track main menu
+        _dataHandling.DataHandler.TrackLevel(levelData.name); // Need id to say we should not track main menu
         _questGiveEventSO.Raise(levelData.LevelQuest);
     }
 

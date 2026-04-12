@@ -9,29 +9,29 @@ public class savetest1 : MonoBehaviour
 
     private void Start()
     {
-        SessionSaveData sessionOverallData = new SessionSaveData()
-        {
-            sessionInstanceName = "THETestSession",
-            totalTime = 20f,
-            totalCompendiumOpenedWithHotkey = 3,
-            totalCompendiumOpenedWithMenu = 12,
-            totalDistanceMoved = 123123f,
-        };
+        //SessionSaveData sessionOverallData = new SessionSaveData()
+        //{
+        //    sessionInstanceName = "THETestSession",
+        //    totalTime = 20f,
+        //    totalCompendiumOpenedWithHotkey = 3,
+        //    totalCompendiumOpenedWithMenu = 12,
+        //    totalDistanceMoved = 123123f,
+        //};
 
-        LevelSaveData levelSaveData = new LevelSaveData()
-        {
-            sessionInstance = "THETestSession",
-            levelName = "level1",
-            levelRecord = new LevelRecord
-            {
-                levelStarted = 3f,
-                levelFinished = 10f,
-                levelDuration = 7f
-            }
-        };
+        //LevelSaveData levelSaveData = new LevelSaveData()
+        //{
+        //    sessionInstance = "THETestSession",
+        //    levelName = "level1",
+        //    levelRecord = new LevelRecord
+        //    {
+        //        levelStarted = "3f",
+        //        levelFinished = "10f",
+        //        levelDuration = "7f"
+        //    }
+        //};
 
-        registerSaveData.Save(sessionOverallData);
-        registerSaveData.Save(levelSaveData);
+        //registerSaveData.Save(sessionOverallData);
+        //registerSaveData.Save(levelSaveData);
 
     }
 

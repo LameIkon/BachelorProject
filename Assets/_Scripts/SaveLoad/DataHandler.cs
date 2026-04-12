@@ -8,7 +8,7 @@ public class DataHandler : IDisposable
     private readonly RegisterSaveDataEventSO _registerDataEvent;
     private readonly StoreDataEventSO _storeDataEvent;
 
-    private SessionRecord _sessionRecords;
+    private SessionRecord _sessionRecord;
 
     // Data trackers for storing data
     private readonly PickableDataTracker _pickableTracker;
@@ -28,9 +28,8 @@ public class DataHandler : IDisposable
 
         // Date or session as name
         DateTime dateTime = DateTime.Now;
-        Debug.Log(dateTime.ToString("F"));
 
-        _sessionRecords = new SessionRecord
+        _sessionRecord = new SessionRecord
         {
             sessionName = dateTime.ToString("dd-MM-yyyy_HH.mm.ss"), // Formatting for folder text 
             sessionData = dateTime.ToString("F"),
@@ -58,19 +57,20 @@ public class DataHandler : IDisposable
         }
     }
 
-    public void TrackLevel(string levelName, bool shouldTrack)
+    public void TrackLevel(string levelName, bool shouldTrack = true)
     {
-        if (!shouldTrack) return; // Currently redundant. we want to check what levels we even want to track data on
+        if (!shouldTrack) return; // Currently redundant. we want to check what levels we even want to track data on. No reason to track MainMenu
 
-        string uniqueName = GenerateUniqueName(levelName, _sessionRecords.levelRecords.Select(record => record.name));
+        string uniqueName = GenerateUniqueName(levelName, _sessionRecord.levelRecords.Select(record => record.name));
 
         LevelRecord newLevelRecord = new LevelRecord()
         {
-            name = uniqueName
+            name = uniqueName,
+            levelStarted = Time.time,
         };  
 
 
-        _sessionRecords.levelRecords.Add(newLevelRecord);
+        _sessionRecord.levelRecords.Add(newLevelRecord);
         _currentLevel = newLevelRecord;
     }
 
@@ -90,7 +90,7 @@ public class DataHandler : IDisposable
 
     #endregion
 
-    #region Data Fetching
+    #region Data Saving
     public void SaveTrackedData()
     {
         Debug.Log("Save data");
@@ -114,11 +114,11 @@ public class DataHandler : IDisposable
     private IEnumerable<LevelSaveData> SaveLevel()
     {
         // Save levels
-        foreach (LevelRecord levelRecord in _sessionRecords.levelRecords)
+        foreach (LevelRecord levelRecord in _sessionRecord.levelRecords)
         {
             yield return new LevelSaveData
             {
-                sessionInstance = _sessionRecords.sessionName,
+                sessionInstance = _sessionRecord.sessionName,
                 levelName = levelRecord.name,
                 levelRecord = levelRecord
             };
@@ -126,12 +126,36 @@ public class DataHandler : IDisposable
     }
     private SessionSaveData SaveSession()
     {
-        //public List<TerminalStateRecord> terminalStateRecords = new();
         SessionSaveData sessionSaveData = new SessionSaveData()
         {
-            sessionInstanceName = _sessionRecords.sessionName,
+            sessionInstanceName = _sessionRecord.sessionName,
 
         };
+
+        // Terminals
+        foreach (LevelRecord levelRecord in _sessionRecord.levelRecords)
+        {
+            foreach (TerminalStateRecord record in levelRecord.terminalStateRecords)
+            {
+                switch (record.state)
+                {
+                    case TerminalState.Off:
+                        sessionSaveData.totalTerminalOff += record.count;
+                        break;
+                    case TerminalState.Running:
+                        sessionSaveData.totalTerminalRunning += record.count;
+                        break;
+                    case TerminalState.Warning:
+                        sessionSaveData.totalTerminalWarning += record.count;
+                        break;
+                    case TerminalState.LeverWarning:
+                        sessionSaveData.totalTerminalLeverWarning += record.count;
+                        break;
+
+                }
+            }
+        }
+
         return sessionSaveData;
     }
 
@@ -143,7 +167,15 @@ public class DataHandler : IDisposable
 
     private void OrganizeData()
     {
-        _currentLevel?.terminalStateRecords.AddRange(_terminalTracker.GetRecords());
+        if (_currentLevel == null) return;
+
+        // Calculate time
+        _currentLevel.levelFinished = Time.time;
+        _currentLevel.levelDuration = _currentLevel.levelFinished - _currentLevel.levelStarted;
+
+        // Fetch tracker data
+        _currentLevel.terminalStateRecords.AddRange(_terminalTracker.GetRecords());
+
     }
 
     #endregion
@@ -189,7 +221,7 @@ public class DataHandler : IDisposable
             {
                 _terminalRecords[state] = new TerminalStateRecord
                 {
-                    state = state.ToString(),
+                    state = state,
                     count = 0
                 };
             }
@@ -275,12 +307,19 @@ public struct SessionSaveData : ISavableData
     // Time
     public float totalTime;
 
+
     // Compendium
     public int totalCompendiumOpenedWithHotkey;
     public int totalCompendiumOpenedWithMenu;
 
     // Player
     public float totalDistanceMoved;
+
+    // Terminals
+    public int totalTerminalOff;
+    public int totalTerminalRunning;
+    public int totalTerminalWarning;
+    public int totalTerminalLeverWarning;
 }
 
 /// <summary>
@@ -309,7 +348,7 @@ public struct LevelSaveData : ISavableData
 
 #endregion
 
-# region Organized data Ready to Save
+# region Organized data
 
 [Serializable]
 public class LevelRecord
@@ -394,7 +433,7 @@ public enum TerminalState
 [Serializable]
 public class TerminalStateRecord
 {
-    public string state; 
+    public TerminalState state; 
     public int count;
 }
 
