@@ -13,8 +13,24 @@ MonoBehaviour:
   m_Name: Quest2
   m_EditorClassIdentifier: Assembly-CSharp::Quest
   _parts:
-  - _id: 1
-    _isComplete: 0
+  - _id: 7
+    _isComplete: 1
     _howManySteps: 0
-    _description: Start Machine
+    _description: Get the machine to the off mode
+  - _id: 0
+    _isComplete: 1
+    _howManySteps: 0
+    _description: Place the block on the belt
+  - _id: 1
+    _isComplete: 1
+    _howManySteps: 0
+    _description: Start the machine
+  - _id: 3
+    _isComplete: 1
+    _howManySteps: 2
+    _description: Increse the speed
+  - _id: 2
+    _isComplete: 1
+    _howManySteps: 0
+    _description: Stop the machine
   _terminalState: 2

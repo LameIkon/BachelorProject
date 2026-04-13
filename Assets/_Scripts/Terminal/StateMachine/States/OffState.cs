@@ -8,6 +8,7 @@ public class OffState : BaseState
     {
         manager.TurnOffConveyor();
         manager.TryCompleteQuest(QuestID.StopMachine);
+        manager.SendState(TerminalState.Off);
     }
 
     public override bool HandleInput(ButtonType button, TerminalType terminal)

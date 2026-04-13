@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
+using TMPro;
 
+[RequireComponent(typeof(AudioSource))]
 public class Terminal : HoverableInteractable
 {
 
@@ -8,30 +10,69 @@ public class Terminal : HoverableInteractable
     [SerializeField] private TerminalEventSO _onTerminalEvent;
     [SerializeField] private TerminalStartEventSO _onTerminalStartEvent;
     [SerializeField] private ButtonEventSO _onButtonEvent;
+    [SerializeField] private TerminalStateEventSO _terminalStateEvent;
     
     public Action<bool> OnSpeedChange;
+    private TextMeshProUGUI _terminalScreen;
+    private AudioSource _audioSource;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+	#region Unity Method
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	void Start()
     {
+        Reset();
         _onTerminalStartEvent.Raise(this);
+        _terminalScreen = GetComponentInChildren<TextMeshProUGUI>();
+        _terminalScreen.text = gameObject.name;
+        _audioSource = GetComponent<AudioSource>();
+    }
+
+	private void OnEnable()
+	{
         _onButtonEvent.OnRaise += ChangeStatus;
-    }
+		_terminalStateEvent.OnRaise += ChangeState;
+	}
 
-    void OnDisable() 
+	void OnDisable() 
     {
-        _onButtonEvent.OnRaise -= ChangeStatus; 
+        _onButtonEvent.OnRaise -= ChangeStatus;
+        _terminalStateEvent.OnRaise -= ChangeState;
     }
 
+    private void Reset() 
+    {
+        if (GetComponent<AudioSource>() != null) 
+        {
+            gameObject.AddComponent<AudioSource>();
+            GetComponent<AudioSource>().playOnAwake = false;
+        }
+    }
 
-    /// <summary>
-    /// Changes the status of the terminal.
-    /// </summary>
-    /// <param name="type">The type of button that was pressed.</param>
-    private void ChangeStatus(ButtonType type) 
+	#endregion
+
+	/// <summary>
+	/// Changes the status of the terminal.
+	/// </summary>
+	/// <param name="type">The type of button that was pressed.</param>
+	private void ChangeStatus(ButtonType type)
     {
         _onTerminalEvent.Raise(type, _data.Type);
+        if (_data.ButtonSound != null) 
+        {
+            _audioSource.clip = _data.ButtonSound;
+            _audioSource.Play();
+        }
     }
+
+
+    private void ChangeState(TerminalState terminalState) 
+    {
+        if (_terminalScreen == null) return;
+        
+        _terminalScreen.text = gameObject.name + "\n" + terminalState.ToString();
+    
+    }
+
 }
 
 

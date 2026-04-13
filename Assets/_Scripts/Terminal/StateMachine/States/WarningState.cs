@@ -10,9 +10,15 @@ public class WarningState : BaseState
     {
         manager.TurnOffConveyor();
         _isResetTerminalPressed = false;
+        manager.SendState(TerminalState.Warning);
     }
 
-    public override bool HandleInput(ButtonType button, TerminalType terminal)
+	public override void OnExit()
+	{
+		manager.TryCompleteQuest(QuestID.RemoveWarning);
+	}
+
+    public override void HandleInput(ButtonType button, TerminalType terminal)
     {
         Debug.Log("Try fix issue");
 

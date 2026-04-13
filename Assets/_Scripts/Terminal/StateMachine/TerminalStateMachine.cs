@@ -12,6 +12,7 @@ public class TerminalStateMachine : MonoBehaviour
     [SerializeField] private OvenStateChangeEventSO _ovenstateChangeEvent;
     [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
     [SerializeField] private QuestGiveEventSO _questGiveEvent;
+    [SerializeField] private TerminalStateEventSO _terminalStateEvent;
 
 
     [SerializeField] private List<Terminal> _terminals;
@@ -169,6 +170,12 @@ public class TerminalStateMachine : MonoBehaviour
     {
         _questCompleteEvent.Raise(questID);
     }
+
+    public void SendState(TerminalState state) 
+    {
+        _terminalStateEvent.Raise(state);
+    }
+
     #endregion 
 
 }
