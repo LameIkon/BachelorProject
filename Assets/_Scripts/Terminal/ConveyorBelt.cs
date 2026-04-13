@@ -34,7 +34,7 @@ public class ConveyorBelt : MonoBehaviour
         foreach (Rigidbody rb in _onBelt)
         {
 
-            Vector3 targetPos = rb.position + moveDir * _beltSpeed * Time.fixedDeltaTime;
+            Vector3 targetPos = rb.position + moveDir * _beltSpeed * Time.deltaTime;
             rb.MovePosition(targetPos);
             
         }
