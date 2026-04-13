@@ -17,3 +17,20 @@ MonoBehaviour:
     _isComplete: 1
     _howManySteps: 0
     _description: Place Block on Belt
+  - _id: 1
+    _isComplete: 1
+    _howManySteps: 0
+    _description: Start the machine
+  - _id: 3
+    _isComplete: 1
+    _howManySteps: 5
+    _description: Increase the speed of the machine
+  - _id: 4
+    _isComplete: 1
+    _howManySteps: 3
+    _description: Decrese the speed of the machine
+  - _id: 2
+    _isComplete: 1
+    _howManySteps: 0
+    _description: Stop the machine
+  _terminalState: 0

@@ -16,6 +16,12 @@ public class LeverWarningState : BaseState
 	public override void OnEnter()
 	{
 		manager.TurnOffConveyor();
+		manager.SendState(TerminalState.LeverWarning);
+	}
+
+	public override void OnExit()
+	{
+		manager.TryCompleteQuest(QuestID.RemoveLeverWarning);
 	}
 
 

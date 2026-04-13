@@ -6,5 +6,7 @@ public enum QuestID
     IncreaseSpeed,
     DecreaseSpeed,
     EquipItem,
-    PickUpItem
+    PickUpItem,
+    RemoveWarning,
+    RemoveLeverWarning
 }

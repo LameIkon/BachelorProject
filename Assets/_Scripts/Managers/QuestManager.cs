@@ -14,7 +14,8 @@ public class QuestManager : Singleton<QuestManager>
 
     public Quest ActiveQuest => _activeQuest;
 
-	#region Unity Methods
+    #region Unity Methods
+
 
 	void OnEnable()
     {

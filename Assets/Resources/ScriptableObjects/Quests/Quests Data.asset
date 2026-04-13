@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b9cc34dc9d331478b2cb38336350cc, type: 3}
+  m_Name: Quests Data
+  m_EditorClassIdentifier: Assembly-CSharp::QuestsData
+  _levels:
+  - {fileID: 11400000, guid: f1831a170f200bc4b92006b0e251259f, type: 2}
+  - {fileID: 11400000, guid: 9d86affdca87f584bae7d24e94a6e5ea, type: 2}
+  - {fileID: 11400000, guid: 6e3aec3dbf2edc949bff9ba66721c556, type: 2}

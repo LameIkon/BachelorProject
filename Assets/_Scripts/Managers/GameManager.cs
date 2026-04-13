@@ -13,8 +13,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private QuestGiveEventSO _questGiveEventSO;
 
     [SerializeField] private LevelData _firstSceneToLoad;
+	[SerializeField] private LevelsData _questsData;
 
-    [SerializeField] private DataHandling _dataHandling;
+	[SerializeField] private DataHandling _dataHandling;
 
     #region Unity Method 
     protected override void Awake()
@@ -29,6 +30,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _questsData.Init();
         LoadLevel(_firstSceneToLoad);
     }
 

@@ -6,6 +6,7 @@ public class RunningState : BaseState
     {
         manager.TurnOnConveyor();
         manager.TryCompleteQuest(QuestID.StartMachine);
+        manager.SendState(TerminalState.Running);
     }
 
     public override void HandleInput(ButtonType button, TerminalType terminal)
