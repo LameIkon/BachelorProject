@@ -78,16 +78,24 @@ public class TerminalStateMachine : MonoBehaviour
 
     private bool ProcessInput(ButtonType buttonType, TerminalType terminalType)
     {
-        if (terminalType == TerminalType.Lever) return HandleLever();
+        bool shouldContinue = true;
+        if (terminalType == TerminalType.Lever) { shouldContinue = HandleLever(); }
+
+        if (!shouldContinue) 
+        {
+            return true;
+        }
 
         return _stateMachine.HandleInput(buttonType, terminalType);
     }
 
     private bool HandleLever()
     {
-        if (_stateMachine.CurrentState == LeverWarningState) return false;
-
-        SetState(TerminalState.LeverWarning);
+        if (_stateMachine.CurrentState != LeverWarningState)
+        {
+            SetState(TerminalState.LeverWarning);
+            return false; 
+        }
         return true;
     }
 

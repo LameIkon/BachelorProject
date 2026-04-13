@@ -18,7 +18,7 @@ public class WarningState : BaseState
 		manager.TryCompleteQuest(QuestID.RemoveWarning);
 	}
 
-    public override void HandleInput(ButtonType button, TerminalType terminal)
+    public override bool HandleInput(ButtonType button, TerminalType terminal)
     {
         Debug.Log("Try fix issue");
 
