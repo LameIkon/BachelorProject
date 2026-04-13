@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Animator))]
 public sealed class PhysicalButton : HoverableInteractable, IInteractable 
 {
 	[Header("Button Settings")]
@@ -10,29 +11,23 @@ public sealed class PhysicalButton : HoverableInteractable, IInteractable
 	[SerializeField] private float _buttonPressSpeed;
 	[SerializeField] private bool _isLever;
 	private bool _isPressed;
-
-    private Vector3 oldPosition;
-	private Vector3 newPosition;
-
+	private Animator _anim;
+	private int _animInt = Animator.StringToHash("PhysicalButton");
 
     #region Unity Methods
+
+    protected override void Awake()
+    {
+		base.Awake();
+		Debug.Log(transform.position);
+    }
 
     private void Start() 
 	{
 		_lightIndicator = GetComponentInChildren<MeshRenderer>();
 		_buttonData?.SetColor(false);
 		SetColorIndicator(_buttonData.Color);
-		_buttonPressSpeed = .1f;
-
-        Vector3 pos = transform.forward * .02f;
-        pos.x = pos.z;
-        pos.z = -pos.y;
-        pos.y = 0;
-
-        oldPosition = transform.position;
-        newPosition = transform.position;
-        newPosition += pos;
-        Debug.Log(pos);
+		_anim = GetComponent<Animator>();
     }
 
 	#endregion
@@ -49,11 +44,11 @@ public sealed class PhysicalButton : HoverableInteractable, IInteractable
 		SetColorIndicator(_buttonData.Color);
 		if (!_isLever)
 		{
-			StartCoroutine(PressButton());
+			PressButton();
 		}
 		else
 		{
-			StartCoroutine(PullLever());	
+			PullLever();	
 		}
 
 		_onButtonEvent?.Raise(_buttonData.Type);
@@ -66,41 +61,13 @@ public sealed class PhysicalButton : HoverableInteractable, IInteractable
 		_lightIndicator.material.color = color;
 	}
 
-	public IEnumerator PressButton() 
+	public void PressButton() 
 	{
-
-		for (float i = 0; i < 1; i += _buttonPressSpeed)
-		{
-			transform.position = Vector3.Lerp(oldPosition, newPosition, i);
-			yield return null;
-		}
-
-		for (float i = 0; i < 1; i += _buttonPressSpeed)
-		{
-			transform.position = Vector3.Lerp(newPosition, oldPosition, i);
-			yield return null;
-		}
-
+		_anim.Play(_animInt);
 	}
 
-	public IEnumerator PullLever()
+	public void PullLever()
 	{
-		if (!_isPressed) 
-		{
-			for (float i = 0; i < 1; i += _buttonPressSpeed)
-			{
-				transform.position = Vector3.Lerp(oldPosition, newPosition, i);
-				yield return null;
-			}
-		}
-		else
-		{
-			for (float i = 0; i < 1; i += _buttonPressSpeed)
-			{
-				transform.position = Vector3.Lerp(newPosition, oldPosition, i);
-				yield return null;
-			}
-		}
 
 		_isPressed = !_isPressed;
 
