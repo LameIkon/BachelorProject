@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10e823d974e8bd4d974de2035d7cc9e, type: 3}
+  m_Name: Buttons Compendium Chapter Content SO
+  m_EditorClassIdentifier: Assembly-CSharp::CompendiumChapterContentSO
+  chapterTitle: Terminals & Panels
+  compendiumContentSO:
+  - {fileID: 11400000, guid: 3bbfee709dc719647be1b1fb11e48973, type: 2}
+  - {fileID: 11400000, guid: 09fa7f26d45606c45873cbda85e20299, type: 2}
+  - {fileID: 11400000, guid: eddf922e7e2229448a63e7734b4373be, type: 2}
+  - {fileID: 11400000, guid: 18d700dc2d64c2f469fa8aaf93f9386c, type: 2}
+  - {fileID: 11400000, guid: 38ad9aaf56ea9d3459a4a877e271cb5f, type: 2}
+  - {fileID: 11400000, guid: 1041bf943ccf9e949afbc79c11008d5f, type: 2}
+  - {fileID: 11400000, guid: 8fa6a1ddf5f4bb246a53e713c8d7ae3a, type: 2}

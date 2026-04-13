@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7233e5a4c7fbad641a68ba8a90e8d91c, type: 3}
   m_Name: Dry Ice
   m_EditorClassIdentifier: Assembly-CSharp::CompendiumContentSO
-  compendiumID: 12
+  compendiumID: 25
   image: {fileID: 0}
   content: {fileID: 11400000, guid: 994b030ccf5e6854994de536a4075fdf, type: 2}

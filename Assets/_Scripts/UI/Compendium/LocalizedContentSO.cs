@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "localized Content SO", menuName = "ScriptableObject/Localization/Content")]
+[CreateAssetMenu(fileName = "Localized Content SO", menuName = "ScriptableObject/Localization/Content")]
 /// <summary>
 /// For compendium to know what image and text content to show. CompendiumContent is the text data
 /// </summary>

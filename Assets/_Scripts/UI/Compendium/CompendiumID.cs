@@ -10,10 +10,21 @@ public enum CompendiumID
     StartProtocol,
     EndProtocol,
 
+    // Buttons
+    StartButton,
+    StopButton,
+    ResetButton1,
+    ResetButton2,
+    ResetButton3,
+    SpeedIncreaseButton,
+    SpeedDecreaseButton,
+    Lever,
+
+
     // Terminals & Panels
     MainTerminal,
     EndTerminal,
-    Lever,
+    LeverTerminal,
     RestartPanel,
     ControlPanel,
 
@@ -23,7 +34,14 @@ public enum CompendiumID
     SensorError,
 
     // Equipment
+    Mask,
+    Gloves,
+    DryiceBlower,
+    DryiceHose,
+    Airhose,
 
     // Materials
-    iceDry,
+    Dryice,
+    Plank,
+
 }

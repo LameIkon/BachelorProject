@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427fc15e9a95afe4e92ab1f6bcee4def, type: 3}
   m_Name: Main
   m_EditorClassIdentifier: Assembly-CSharp::TerminalData
-  _status: 0
   _type: 0
+  _buttonPressSound: {fileID: 8300000, guid: 9734ba03eea4f6e45bbe33a2943f989f, type: 3}

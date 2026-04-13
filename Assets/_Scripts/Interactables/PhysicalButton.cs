@@ -16,12 +16,6 @@ public sealed class PhysicalButton : HoverableInteractable, IInteractable
 
     #region Unity Methods
 
-    protected override void Awake()
-    {
-		base.Awake();
-		Debug.Log(transform.position);
-    }
-
     private void Start() 
 	{
 		_lightIndicator = GetComponentInChildren<MeshRenderer>();
