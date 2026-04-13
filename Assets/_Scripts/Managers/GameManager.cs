@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
     private AsyncSceneLoader _sceneLoader;
 
 
+    [SerializeField] private InputReader _inputReader;
     [SerializeField] private LevelData[] _levels;
     [SerializeField] private SceneLoadEventSO _sceneLoadEventSO;
     [SerializeField] private QuestGiveEventSO _questGiveEventSO;
