@@ -31,5 +31,5 @@ public abstract class BaseState : IState
         // Not implemented
     }
 
-    public abstract void HandleInput(ButtonType button, TerminalType terminal);
+    public abstract bool HandleInput(ButtonType button, TerminalType terminal);
 }

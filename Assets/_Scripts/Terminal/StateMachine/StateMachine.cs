@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public class StateMachine
 {
@@ -12,10 +13,14 @@ public class StateMachine
         Debug.Log($"Enter State: {CurrentState}");
     }
 
-    public void HandleInput(ButtonType buttonType, TerminalType terminalType)
+    public bool HandleInput(ButtonType buttonType, TerminalType terminalType)
     {
         Debug.Log($"Input Termnials {buttonType}, {terminalType}");
-        CurrentState?.HandleInput(buttonType, terminalType);
+        
+        if (CurrentState == null) 
+            return false;
+
+        return CurrentState.HandleInput(buttonType, terminalType);
     }
 
     public void Update() // Not implemented

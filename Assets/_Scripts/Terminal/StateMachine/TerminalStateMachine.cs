@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class TerminalStateMachine : MonoBehaviour
 {
+    [Header("Events")]
+	[SerializeField] private StoreDataEventSO _storeDataEvent;
     [SerializeField] private TerminalEventSO _terminalEvent;
     [SerializeField] private TerminalStartEventSO _terminalStartEvent;
     [SerializeField] private OvenStateChangeEventSO _ovenstateChangeEvent;
     [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
     [SerializeField] private QuestGiveEventSO _questGiveEvent;
 
-    [SerializeField] private StoreDataEventSO _StoredataEvent;
 
     [SerializeField] private List<Terminal> _terminals;
     //[SerializeField] private MachineStatus _machineStatus;
@@ -62,17 +63,33 @@ public class TerminalStateMachine : MonoBehaviour
 
     private void ChangeStatus(ButtonType buttonType, TerminalType terminalType)
     {
-        if (terminalType == TerminalType.Lever)
-        {
-            if (_stateMachine.CurrentState != LeverWarningState)
-            {
-                SetState(TerminalState.LeverWarning);
-                return;
-            }
-        }
+        bool success = ProcessInput(buttonType, terminalType);
 
-        _stateMachine.HandleInput(buttonType, terminalType);
+        InteractionEvent context = new InteractionEvent
+        {
+            eventType = EventType.Button,
+            buttonType = buttonType,
+            buttonAction = success ? ButtonOutcome.Success : ButtonOutcome.Fail
+        };
+
+        _storeDataEvent.Raise(context);
     }
+
+    private bool ProcessInput(ButtonType buttonType, TerminalType terminalType)
+    {
+        if (terminalType == TerminalType.Lever) return HandleLever();
+
+        return _stateMachine.HandleInput(buttonType, terminalType);
+    }
+
+    private bool HandleLever()
+    {
+        if (_stateMachine.CurrentState == LeverWarningState) return false;
+
+        SetState(TerminalState.LeverWarning);
+        return true;
+    }
+
 
     # region State Machine
     private void CreateStateMachine()
@@ -84,11 +101,6 @@ public class TerminalStateMachine : MonoBehaviour
         WarningState = new WarningState(this);
         LeverWarningState = new LeverWarningState(this);
     }
-
-    //public void SetState(BaseState newState) 
-    //{
-    //    _stateMachine.SetState(newState);
-    //}
 
     public void SetState(TerminalState newState)
     {
@@ -115,7 +127,7 @@ public class TerminalStateMachine : MonoBehaviour
             terminalState = newState,
         };
 
-        _StoredataEvent.Raise(context);
+        _storeDataEvent.Raise(context);
         _stateMachine.SetState(stateSwitch);
     }
 

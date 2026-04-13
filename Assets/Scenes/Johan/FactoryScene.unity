@@ -2449,12 +2449,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a16fdbf9b0c5ac45b33cdd8eedc7061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TerminalStateMachine
+  _storeDataEvent: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
   _terminalEvent: {fileID: 11400000, guid: 69baff98591f6dc4eb20daa0a65b1de1, type: 2}
   _terminalStartEvent: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
   _ovenstateChangeEvent: {fileID: 11400000, guid: 8a4dd22309d9c4d4f96f93db487852e2, type: 2}
   _questCompleteEvent: {fileID: 11400000, guid: ba00323a70b2e7b4a93d33abbe7f1819, type: 2}
   _questGiveEvent: {fileID: 11400000, guid: 05413bab4ed2105408f95bc51eed4ac9, type: 2}
-  _StoredataEvent: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
   _terminals:
   - {fileID: 2025184156}
   - {fileID: 1829980279}

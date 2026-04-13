@@ -8,9 +8,9 @@ public class RunningState : BaseState
         manager.TryCompleteQuest(QuestID.StartMachine);
     }
 
-    public override void HandleInput(ButtonType button, TerminalType terminal)
+    public override bool HandleInput(ButtonType button, TerminalType terminal)
     {
-        if (terminal != TerminalType.Main) return;
+        if (terminal != TerminalType.Main) return false;
 
         switch (button)
         {
@@ -28,5 +28,7 @@ public class RunningState : BaseState
                 manager.TryCompleteQuest(QuestID.DecreaseSpeed);
                 break;
         }
+
+        return true;
     }
 }

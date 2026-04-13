@@ -5,5 +5,5 @@ public interface IState
     void OnFixedUpdate();
     void OnExit();
 
-    void HandleInput(ButtonType button, TerminalType terminal);
+    bool HandleInput(ButtonType button, TerminalType terminal);
 }

@@ -10,12 +10,14 @@ public class OffState : BaseState
         manager.TryCompleteQuest(QuestID.StopMachine);
     }
 
-    public override void HandleInput(ButtonType button, TerminalType terminal)
+    public override bool HandleInput(ButtonType button, TerminalType terminal)
     {
         if (terminal == TerminalType.Main && button == ButtonType.Start) 
         {
             manager.SetState(TerminalState.Running);
+            return true;
         }
+        return false;
 
     }
 

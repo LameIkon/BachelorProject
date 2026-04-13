@@ -150,6 +150,8 @@ public class DataHandler : IDisposable
             session.totalObjectsCollected += level.pickableTypeRecords.Sum(value => value.collected);
             session.totalObjectsDropped += level.pickableTypeRecords.Sum(value => value.dropped);
             session.totalObjectsPlaced += level.pickableTypeRecords.Sum(value => value.placedInSlot);
+
+            // Buttons
         }
 
         return session;
@@ -240,6 +242,11 @@ public struct SessionSaveData : ISavableData
     public int totalObjectsCollected;
     public int totalObjectsDropped;
     public int totalObjectsPlaced;
+
+    // Buttons
+    public int totalButtonsPressed;
+    public int totalButtonsSuccessfullPress;
+    public int totalButtonsUnsuccessfullPress;
 }
 
 /// <summary>
@@ -319,9 +326,16 @@ public struct InteractionEvent
     public EventType eventType; // type to categorize it
 
     // specific event types. Only one should be used
+
+    // Pickable
     public PickableType? pickableType;
     public PickableAction? pickableAction;
+
+    // Button
     public ButtonType? buttonType;
+    public ButtonOutcome? buttonAction;
+
+    // Terminal
     public TerminalState? terminalState;
 }
 
@@ -348,6 +362,15 @@ public enum PickableAction : byte
     PlacedInSlot
 }
 
+/// <summary>
+/// Weather you succesfully press a button and it works or not
+/// </summary>
+public enum ButtonOutcome : byte
+{
+    Success,
+    Fail,
+}
+
 #endregion
 
 # region Data Tracking methods
@@ -371,7 +394,7 @@ public class PickableTypeRecord
 [Serializable]
 public class ButtonRecord
 {
-    public ButtonType type;
+    public string type; // ButtonType
     public int pressed;
     public int succes;
     public int failed;
