@@ -314,6 +314,9 @@ public class LevelRecord
     // Pickable items
     public List<PickableTypeRecord> pickableTypeRecords;
 
+    // Compendium
+    public List<CompendiumRecord> compendiumRecords;
+
 }
 
 #endregion
@@ -337,6 +340,9 @@ public struct InteractionEvent
 
     // Terminal
     public TerminalState? terminalState;
+
+    // Compendium
+    public CompendiumOpenWith? compendiumOutcome;
 }
 
 public enum EventType : byte
@@ -369,6 +375,12 @@ public enum ButtonOutcome : byte
 {
     Success,
     Fail,
+}
+
+public enum CompendiumOpenWith : byte
+{
+    InteractionMenu,
+    KeyToggle
 }
 
 #endregion
@@ -412,6 +424,14 @@ public class QuestPartRecord
 {
     public Part part;
     public float time;
+}
+
+[Serializable]
+public class CompendiumRecord
+{
+    public string compendiumOpenWith; // CompendiumOpenWith
+    public string compendiumID; // What you open up to
+    public int count;
 }
 
 #endregion
