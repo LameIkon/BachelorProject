@@ -3,21 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="Button Record SO", menuName = "ScriptableObject/SaveLoad/Record analytics/Button Record")]
-public class ButtonRecordBuilderSO : EventRecordBuilderSO
+public class ButtonRecordBuilderSO : LevelRecordBuilderSO
 {
     public override void Initialize(LevelRecord level)
     {
+        // Data to be saved
         level.buttonRecords = new List<ButtonRecord>();
+
+        // For more efficient lookup
+        level.buttonLookup = new Dictionary<ButtonType, ButtonRecord>();
 
         foreach (ButtonType type in Enum.GetValues(typeof(ButtonType)))
         {
-            level.buttonRecords.Add(new ButtonRecord
+            ButtonRecord record = new ButtonRecord()
             {
                 type = type.ToString(),
                 pressed = 0,
                 succes = 0,
                 failed = 0,
-            });
+            };
+
+            level.buttonRecords.Add(record);
+            level.buttonLookup.Add(type, record);
         }
     }
 
@@ -29,23 +36,22 @@ public class ButtonRecordBuilderSO : EventRecordBuilderSO
 
         if (eventContext.buttonAction is not ButtonOutcome action) return;
 
-        foreach (ButtonRecord record in level.buttonRecords)
+        // If we have both Type and Outcome for button we can then be able to look up
+        if (level.buttonLookup.TryGetValue(type, out ButtonRecord record))
         {
-            if (record.type != type.ToString()) continue; // Search until we find the correct record
-
             record.pressed++; // Always imcrement when pressed
 
             switch (action)
             {
                 case ButtonOutcome.Success:
+                    level.totalButtonSuccess++;
                     record.succes++;
                     break;
                 case ButtonOutcome.Fail:
+                    level.totalButtonUnsuccess++;
                     record.failed++;
                     break;
-
             }
-            break; // Break once we find the matching record
-        }
+        }      
     }
 }

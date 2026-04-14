@@ -6,7 +6,7 @@ public class DataHandlerSO : ScriptableObject
 {
     [SerializeField] private RegisterSaveDataEventSO _registerSaveDataEvent;
     [SerializeField] private StoreDataEventSO _getDataEvent;
-    [SerializeField] private List<EventRecordBuilderSO> _recordBuilders;
+    [SerializeField] private List<LevelRecordBuilderSO> _recordBuilders;
 
 
     private DataHandler _dataHandler;

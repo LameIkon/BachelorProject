@@ -3,21 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="Pickable Record SO", menuName = "ScriptableObject/SaveLoad/Record analytics/Pickable Record")]
-public class PickableRecordBuilderSO : EventRecordBuilderSO
+public class PickableRecordBuilderSO : LevelRecordBuilderSO
 {
     public override void Initialize(LevelRecord level)
     {
+        // Data to be saved
         level.pickableTypeRecords = new List<PickableTypeRecord>();
+
+        // For more efficient lookup
+        level.pickableTypeLookup = new Dictionary<PickableType, PickableTypeRecord>();
 
         foreach (PickableType type in Enum.GetValues(typeof(PickableType)))
         {
-            level.pickableTypeRecords.Add(new PickableTypeRecord
+            PickableTypeRecord record = new PickableTypeRecord()
             {
                 type = type.ToString(),
                 collected = 0,
                 dropped = 0,
                 placedInSlot = 0,
-            });
+            };
+
+            level.pickableTypeRecords.Add(record);
+            level.pickableTypeLookup.Add(type, record);
         }
     }
 
@@ -29,13 +36,12 @@ public class PickableRecordBuilderSO : EventRecordBuilderSO
 
         if (eventContext.pickableAction is not PickableAction action) return;
 
-        foreach (PickableTypeRecord record in level.pickableTypeRecords)
+        if (level.pickableTypeLookup.TryGetValue(type, out PickableTypeRecord record))
         {
-            if (record.type != type.ToString()) continue; // Search until we find the correct record
-
             switch (action)
             {
                 case PickableAction.Collected:
+                    level.totalTimePickedObject++;
                     record.collected++;
                     break;
                 case PickableAction.Dropped:
@@ -46,7 +52,6 @@ public class PickableRecordBuilderSO : EventRecordBuilderSO
                     break;
 
             }
-            break; // Break once we find the matching record
         }
     }
 }

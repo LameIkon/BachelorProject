@@ -2160,6 +2160,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractionMenuCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5932769450240127242, guid: 69fdc991cdcacd04aab4724953202bae, type: 3}
+      propertyPath: _storeDataEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

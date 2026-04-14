@@ -10,7 +10,7 @@ public class DataHandler : IDisposable
     private readonly StoreDataEventSO _storeDataEvent;
 
     // Data Builders
-    private readonly List<EventRecordBuilderSO> _recordBuilders;
+    private readonly List<LevelRecordBuilderSO> _recordBuilders;
 
     private SessionRecord _sessionRecord;
     private LevelRecord _currentLevel;
@@ -21,7 +21,7 @@ public class DataHandler : IDisposable
     private bool _isCapturing = true; // Decides if we can track data or not 
 
 
-    public DataHandler(RegisterSaveDataEventSO registerSaveData, StoreDataEventSO getData, List<EventRecordBuilderSO> recordBuilders)
+    public DataHandler(RegisterSaveDataEventSO registerSaveData, StoreDataEventSO getData, List<LevelRecordBuilderSO> recordBuilders)
     {
         _registerDataEvent = registerSaveData;
         _storeDataEvent = getData;
@@ -58,7 +58,7 @@ public class DataHandler : IDisposable
     {
         if (!_isCapturing) return;
 
-        foreach (EventRecordBuilderSO builder in _recordBuilders)
+        foreach (LevelRecordBuilderSO builder in _recordBuilders)
         {
             builder.Apply(_currentLevel, context);
         }
@@ -76,7 +76,7 @@ public class DataHandler : IDisposable
             levelStarted = SessionTime()
         };  
 
-        foreach (EventRecordBuilderSO builder in _recordBuilders)
+        foreach (LevelRecordBuilderSO builder in _recordBuilders)
         {
             builder.Initialize(_currentLevel);
         }
@@ -295,12 +295,9 @@ public class LevelRecord
     public float levelFinished;
     public float levelDuration;
 
-    // Compendium
-    public int compendiumOpenedWithHotkey;
-    public int compendiumOpenedWithMenu;
-
-    // Player
-    public float distanceMoved;
+    /// <summary>
+    /// The more specific data to be tracked. Each list will have a corresponding dictionary for faster lookup
+    /// </summary>
 
     // Quest
     public List<Quest> quests;
@@ -308,14 +305,28 @@ public class LevelRecord
     // Terminal states
     public List<TerminalStateRecord> terminalStateRecords;
 
+    public Dictionary<TerminalState, TerminalStateRecord> terminalStateLookup;
+
     // Buttons
+    public int totalButtonSuccess;
+    public int totalButtonUnsuccess;
     public List<ButtonRecord> buttonRecords;
 
+    public Dictionary<ButtonType, ButtonRecord> buttonLookup;
+
     // Pickable items
+    public int totalTimePickedObject;
     public List<PickableTypeRecord> pickableTypeRecords;
 
+    public Dictionary<PickableType, PickableTypeRecord> pickableTypeLookup;
+
     // Compendium
-    public List<CompendiumRecord> compendiumRecords;
+    public int totalTimeOpenCompendium;
+    public List<CompendiumOpenRecord> compendiumOpenRecords;
+    public List<CompendiumPageRecord> compendiumPageRecords;
+
+    public Dictionary<CompendiumOpenMethod, CompendiumOpenRecord> compendiumOpenLookup;
+    public Dictionary<CompendiumID, CompendiumPageRecord> compendiumPageLookup;
 
 }
 
@@ -342,7 +353,8 @@ public struct InteractionEvent
     public TerminalState? terminalState;
 
     // Compendium
-    public CompendiumOpenWith? compendiumOutcome;
+    public CompendiumOpenMethod? compendiumOutcome;
+    public CompendiumID? compendiumID;
 }
 
 public enum EventType : byte
@@ -377,7 +389,7 @@ public enum ButtonOutcome : byte
     Fail,
 }
 
-public enum CompendiumOpenWith : byte
+public enum CompendiumOpenMethod : byte
 {
     InteractionMenu,
     KeyToggle
@@ -427,11 +439,18 @@ public class QuestPartRecord
 }
 
 [Serializable]
-public class CompendiumRecord
+public class CompendiumOpenRecord
 {
-    public string compendiumOpenWith; // CompendiumOpenWith
-    public string compendiumID; // What you open up to
+    public string openMethod; // CompendiumOpenWith
     public int count;
 }
+
+[Serializable]
+public class CompendiumPageRecord
+{
+    public string pageID; // What you open up to
+    public int count;
+}
+
 
 #endregion

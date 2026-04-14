@@ -12,13 +12,13 @@ public class InteractionMenu : MonoBehaviour
     [SerializeField] private UIToggleEventSO _toggleUI;
     [SerializeField] private CompendiumPageProviderSO _pageProvider;
     [SerializeField] private CompendiumPageRequestEventSO _request;
+    [SerializeField] private StoreDataEventSO _storeDataEvent;
 
     [Header("Required Components")]
     [SerializeField] private TextMeshProUGUI _title;
     [SerializeField] private Button _toCompendiumButton;
 
     private CompendiumPage _currentPage;
-
 
     private void Awake()
     {
@@ -49,5 +49,13 @@ public class InteractionMenu : MonoBehaviour
         if (_currentPage == null) return;
         _toggleUI.Raise(UIType.Compendium); // Open compendium
         _currentPage.button?.onClick?.Invoke(); // Open compendium to the right page
+
+        InteractionEvent interactionEvent = new InteractionEvent()
+        {
+            eventType = EventType.Compendium,
+            compendiumOutcome = CompendiumOpenMethod.InteractionMenu,
+        };
+
+        _storeDataEvent?.Raise(interactionEvent);
     }
 }
