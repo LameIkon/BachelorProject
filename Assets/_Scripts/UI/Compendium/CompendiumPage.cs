@@ -1,4 +1,6 @@
+using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +9,7 @@ using UnityEngine.UI;
 /// </summary>
 public class CompendiumPage : MonoBehaviour, ILanguage
 {
+
     [SerializeField] private CompendiumContentSO _compendiumData;
 
     [Header("Button UI")]
@@ -17,7 +20,6 @@ public class CompendiumPage : MonoBehaviour, ILanguage
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _title;
     [SerializeField] private TextMeshProUGUI _description;
-
 
     public string title {get; private set; } = "Unasigned";
     public Button button {get; private set; } // Access from outside to call button 

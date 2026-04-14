@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class CompendiumManager : MonoBehaviour
 {
+    [Header("Events")]
+    [SerializeField] private StoreDataEventSO _storeDataEvent;
+
     [Header("Prefabs")]
     [SerializeField] private GameObject _buttonPrefab;
     [SerializeField] private GameObject _compendiumPagePrefab;
@@ -149,6 +152,16 @@ public class CompendiumManager : MonoBehaviour
         }
 
         _currentPage = pageButton;
+
+        CompendiumPage page = _pages[pageButton.pageIndex];
+
+        InteractionEvent interactionEvent = new InteractionEvent
+        {
+            eventType = EventType.Compendium,
+            compendiumID = page.id
+        };
+
+        _storeDataEvent.Raise(interactionEvent);
 
         PrintNavigationHistory();
     }
