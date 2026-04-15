@@ -300,7 +300,9 @@ public class LevelRecord
     /// </summary>
 
     // Quest
-    public List<Quest> quests;
+    public List<QuestRecord> questRecords;
+
+    public Dictionary<Quest, QuestRecord> questLookup;
 
     // Terminal states
     public List<TerminalStateRecord> terminalStateRecords;
@@ -355,6 +357,10 @@ public struct InteractionEvent
     // Compendium
     public CompendiumOpenMethod? compendiumOutcome;
     public CompendiumID? compendiumID;
+
+    // Quest
+    public Quest quest;
+    public Part questPart;
 }
 
 public enum EventType : byte
@@ -363,6 +369,7 @@ public enum EventType : byte
     Button,
     Terminal,
     Compendium,
+    Quest
 }
 
 public enum TerminalState : byte
@@ -425,17 +432,22 @@ public class ButtonRecord
 }
 
 [Serializable]
-public class QuesRecord
+public class QuestRecord
 {
+    public Quest quest;
     public List<Part> questParts;
-    public float time;
+    public float timeStarted;
+    public float timeFinished;
+    public float timeDuration;
 }
 
 [Serializable]
 public class QuestPartRecord
 {
     public Part part;
-    public float time;
+    public float timeStarted;
+    public float timeFinished;
+    public float timeDuration;
 }
 
 [Serializable]
