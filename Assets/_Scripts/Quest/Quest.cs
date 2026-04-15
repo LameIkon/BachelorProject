@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Quest Object", menuName = "ScriptableObject/Quest")]
 public class Quest : ScriptableObject
 {
-	[SerializeField] private List<Part> _parts;
+	[SerializeField] private List<QuestPart> _parts;
     [SerializeField] private TerminalState _terminalState;
     private int _index;
     
@@ -13,7 +13,7 @@ public class Quest : ScriptableObject
 	public void Init() 
 	{
 		_index = 0;
-		foreach (Part p in _parts) 
+		foreach (QuestPart p in _parts) 
 		{
 			p.Init();
 		}
@@ -38,7 +38,7 @@ public class Quest : ScriptableObject
 		}
 	}
 
-	public List<Part> Parts  
+	public List<QuestPart> Parts  
 	{
 		get 
 		{
@@ -55,7 +55,7 @@ public class Quest : ScriptableObject
 /// <c>Part</c> is a part of a quest and is used for making a quest have multiple objectives.
 /// </summary>
 [Serializable]
-public class Part
+public class QuestPart
 {
     [SerializeField] private QuestID _id;
     [SerializeField] private bool _isComplete;

@@ -36,7 +36,7 @@ public class QuestUI : MonoBehaviour
             return;
         }
 
-        foreach (Part p in _questProvider.GetQuest().Parts)
+        foreach (QuestPart p in _questProvider.GetQuest().Parts)
         {
             if (!p.IsPartComplete)
             {

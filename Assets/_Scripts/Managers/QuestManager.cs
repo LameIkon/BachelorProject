@@ -7,6 +7,8 @@ public class QuestManager : Singleton<QuestManager>
     [SerializeField] private QuestGiveProviderSO _questGiveProvider;
     [SerializeField] private Quest _activeQuest;
     [SerializeField] private UIToggleEventSO _toggleEvent;
+
+    [SerializeField] private StoreDataEventSO _storeDataEvent;
     
     [SerializeField] private ActionEventSO _updateUIEvent;
 
@@ -34,13 +36,21 @@ public class QuestManager : Singleton<QuestManager>
 
 	}
 
-	#endregion
+    #endregion
 
-	private void AddQuest(Quest quest) 
+    private void AddQuest(Quest quest) 
     {
         Debug.Log($"Quest added: {quest}");
         _activeQuest = quest;
         _activeQuest.Init();
+
+        _storeDataEvent.Raise(new InteractionEvent
+        {
+            eventType = EventType.Quest,
+            quest = quest,
+            questEventType = QuestEventType.Started
+        });
+
         _updateUIEvent.Raise();
     }
 

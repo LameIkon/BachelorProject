@@ -23,9 +23,12 @@ public class DataHandler : IDisposable
 
     public DataHandler(RegisterSaveDataEventSO registerSaveData, StoreDataEventSO getData, List<LevelRecordBuilderSO> recordBuilders)
     {
+
         _registerDataEvent = registerSaveData;
         _storeDataEvent = getData;
         _recordBuilders = recordBuilders;
+
+        _storeDataEvent.InitializeTimeProvider(SessionTime);
  
         _storeDataEvent.OnRaise += StoreData;
 
@@ -303,6 +306,7 @@ public class LevelRecord
     public List<QuestRecord> questRecords;
 
     public Dictionary<Quest, QuestRecord> questLookup;
+    public Dictionary<QuestPart, QuestPartRecord> questPartLookup;
 
     // Terminal states
     public List<TerminalStateRecord> terminalStateRecords;
@@ -343,6 +347,9 @@ public struct InteractionEvent
 
     // specific event types. Only one should be used
 
+    // Time
+    public float timeStamp;
+
     // Pickable
     public PickableType? pickableType;
     public PickableAction? pickableAction;
@@ -360,7 +367,8 @@ public struct InteractionEvent
 
     // Quest
     public Quest quest;
-    public Part questPart;
+    public QuestPart questPart;
+    public QuestEventType? questEventType;
 }
 
 public enum EventType : byte
@@ -402,6 +410,13 @@ public enum CompendiumOpenMethod : byte
     KeyToggle
 }
 
+public enum QuestEventType : byte
+{
+    Started,
+    PartCompleted,
+    Completed
+}
+
 #endregion
 
 # region Data Tracking methods
@@ -435,7 +450,7 @@ public class ButtonRecord
 public class QuestRecord
 {
     public Quest quest;
-    public List<Part> questParts;
+    public List<QuestPartRecord> questParts;
     public float timeStarted;
     public float timeFinished;
     public float timeDuration;
@@ -444,7 +459,7 @@ public class QuestRecord
 [Serializable]
 public class QuestPartRecord
 {
-    public Part part;
+    public QuestPart part;
     public float timeStarted;
     public float timeFinished;
     public float timeDuration;

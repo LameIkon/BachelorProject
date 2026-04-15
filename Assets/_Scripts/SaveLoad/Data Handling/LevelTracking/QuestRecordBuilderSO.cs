@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,33 +11,67 @@ public class QuestRecordBuilderSO : LevelRecordBuilderSO
 
         // For more efficient lookup
         level.questLookup = new Dictionary<Quest, QuestRecord>();
-
-        //// For initialize and tracking
-        //foreach (QuestRecord quest in level.questRecords) // We need a list of all quests in game
-        //{
-        //    QuestRecord record = new QuestRecord
-        //    {
-        //        quest = null,
-        //        questParts = quest.questParts,
-        //    };
-
-        //    level.questRecords.Add(record);
-        //    level.questLookup.Add(quest, record);
-        //}
+        level.questPartLookup = new Dictionary<QuestPart, QuestPartRecord>();
     }
 
     public override void Apply(LevelRecord level, InteractionEvent eventContext)
     {
         if (eventContext.eventType != EventType.Quest) return;
 
-        if (eventContext.compendiumOutcome is CompendiumOpenMethod method)
-        {
-            level.totalTimeOpenCompendium++; // Always increase when opening
+        if (eventContext.quest is not Quest quest) return;
 
-            if (level.compendiumOpenLookup.TryGetValue(method, out CompendiumOpenRecord record))
+        if (eventContext.questEventType is not QuestEventType questEvent) return;
+
+        float time = eventContext.timeStamp;
+
+        // Ensure quest record exists
+        if (!level.questLookup.TryGetValue(quest, out QuestRecord questRecord))
+        {
+            questRecord = new QuestRecord
             {
-                record.count++;
-            }
+                quest = quest,
+                timeStarted = time,
+                questParts = new List<QuestPartRecord>()
+
+            };
+
+            level.questRecords.Add(questRecord);
+            level.questLookup.Add(quest, questRecord);
+        }
+
+        // Quest event
+        switch (questEvent)
+        {
+            case QuestEventType.Completed:
+                questRecord.timeFinished = time;
+                questRecord.timeDuration = questRecord.timeFinished - questRecord.timeStarted;
+                break;
+        }
+
+
+        // Part record
+        if (eventContext.questPart is not QuestPart questPart) return;
+
+        // Ensure part record exists
+        if (!level.questPartLookup.TryGetValue(questPart, out QuestPartRecord partRecord))
+        {
+            partRecord = new QuestPartRecord
+            {
+                part = questPart,
+                timeStarted = time
+            };
+
+            questRecord.questParts.Add(partRecord);
+            level.questPartLookup.Add(questPart, partRecord);
+        }
+
+        // Quest part event
+        switch (questEvent)
+        {
+            case QuestEventType.PartCompleted:
+                partRecord.timeFinished = time;
+                partRecord.timeDuration = partRecord.timeFinished - partRecord.timeStarted;
+                break;          
         }
     }
 }
