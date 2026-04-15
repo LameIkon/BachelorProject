@@ -61,6 +61,9 @@ public class QuestPart
     [SerializeField] private bool _isComplete;
     [SerializeField] private int _howManySteps = 0;
     [SerializeField] private string _description;
+
+    [SerializeField] private LocalizedContentSO _content;
+
     private int _stepIndex = 1; // This needs to be one to make the times match the number of steps.
 
     /// <summary>

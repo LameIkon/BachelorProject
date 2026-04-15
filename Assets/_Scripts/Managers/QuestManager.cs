@@ -44,12 +44,12 @@ public class QuestManager : Singleton<QuestManager>
         _activeQuest = quest;
         _activeQuest.Init();
 
-        _storeDataEvent.Raise(new InteractionEvent
-        {
-            eventType = EventType.Quest,
-            quest = quest,
-            questEventType = QuestEventType.Started
-        });
+        //_storeDataEvent.Raise(new InteractionEvent
+        //{
+        //    eventType = EventType.Quest,
+        //    quest = quest,
+        //    questEventType = QuestEventType.Started
+        //});
 
         _updateUIEvent.Raise();
     }

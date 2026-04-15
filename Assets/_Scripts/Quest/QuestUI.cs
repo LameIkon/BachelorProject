@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class QuestUI : MonoBehaviour
+public class QuestUI : MonoBehaviour, ILanguage
 {
     [SerializeField] private QuestGiveProviderSO _questProvider;
     [SerializeField] private ActionEventSO _updatedUIEventSO;
@@ -16,11 +16,13 @@ public class QuestUI : MonoBehaviour
 
     private void OnEnable()
     {
+        LanguageUtility.OnLanguageChanged += SetLanguage;
         _updatedUIEventSO.OnRaise += UpdateUI;
     }
 
     private void OnDisable()
     {
+        LanguageUtility.OnLanguageChanged -= SetLanguage;
         _updatedUIEventSO.OnRaise -= UpdateUI;
     }
     #endregion
@@ -47,6 +49,11 @@ public class QuestUI : MonoBehaviour
                 _gui.text += "<s>" + p.ToString() + "</s>\n" ; 
             }
         }
+    }
+
+    public void SetLanguage(Language language)
+    {
+        throw new System.NotImplementedException();
     }
 
     #endregion
