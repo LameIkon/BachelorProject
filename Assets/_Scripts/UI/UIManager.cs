@@ -168,7 +168,7 @@ public class UIManager : Singleton<UIManager>
         if (systemToRemove != null) // Remove the system
         {
             _uiToggleEvent.Raise(systemToRemove.UIType);
-            _activeSystems.Remove(systemToRemove);
+            //_activeSystems.Remove(systemToRemove);
         }
         else if (systemToRemove == null) // if there are no sytem to removen then open the pause menu
         {

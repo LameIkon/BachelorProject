@@ -28,6 +28,9 @@ public class RunningState : BaseState
                 manager.ChangeSpeed(false);
                 manager.TryCompleteQuest(QuestID.DecreaseSpeed);
                 break;
+
+            default:
+                return false;
         }
 
         return true;
