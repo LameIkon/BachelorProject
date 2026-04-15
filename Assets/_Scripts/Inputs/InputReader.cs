@@ -117,7 +117,7 @@ public class InputReader : ScriptableObject, Inputs.IGameActions, Inputs.IUIActi
     public void OnCompendium(InputAction.CallbackContext context)
     {
         Debug.Log("try Toggle Compendium");
-        if (context.started) _toggleUI.Raise(UIType.Compendium);
+        if (context.started) _toggleUI.Raise(new UIRequest(UIType.Compendium, UIInteractionSource.Hotkey));
     }
 
 

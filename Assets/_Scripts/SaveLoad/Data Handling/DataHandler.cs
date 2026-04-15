@@ -326,9 +326,11 @@ public class LevelRecord
 
     public Dictionary<PickableType, PickableTypeRecord> pickableTypeLookup;
 
+    // UI
+    public List<UIModuleRecord> uiModuleRecords;
+    public Dictionary<UIType, UIModuleRecord> uiModuleLookup;
+
     // Compendium
-    public int totalTimeOpenCompendium;
-    public List<CompendiumOpenRecord> compendiumOpenRecords;
     public List<CompendiumPageRecord> compendiumPageRecords;
 
     public Dictionary<CompendiumOpenMethod, CompendiumOpenRecord> compendiumOpenLookup;
@@ -362,8 +364,11 @@ public struct InteractionEvent
     public TerminalState? terminalState;
 
     // Compendium
-    public CompendiumOpenMethod? compendiumOutcome;
+    //public CompendiumOpenMethod? compendiumOutcome;
     public CompendiumID? compendiumID;
+
+    // UI
+    public UIRequest? UIRequest;
 
     // Quest
     public Quest quest;
@@ -377,7 +382,8 @@ public enum EventType : byte
     Button,
     Terminal,
     Compendium,
-    Quest
+    Quest,
+    UIModule
 }
 
 public enum TerminalState : byte
@@ -415,6 +421,28 @@ public enum QuestEventType : byte
     Started,
     PartCompleted,
     Completed
+}
+
+/// <summary>
+/// To know what ui type we are requesting and from what source
+/// </summary>
+public struct UIRequest 
+{
+    public UIType type;
+    public UIInteractionSource source;
+
+    public UIRequest(UIType type, UIInteractionSource source)
+    {
+        this.type = type;
+        this.source = source;
+    }
+}
+
+public enum UIInteractionSource
+{
+    Hotkey,
+    WorldButton,
+    UIInternal
 }
 
 #endregion
@@ -477,6 +505,17 @@ public class CompendiumPageRecord
 {
     public string pageID; // What you open up to
     public int count;
+}
+
+
+[Serializable]
+public class UIModuleRecord
+{
+    public string uiType; // UIType
+    public int timesOpenedTotal;
+    public int uiInternalAmount;
+    public int worldButtonAmount;
+    public int hotkeyAmount;
 }
 
 

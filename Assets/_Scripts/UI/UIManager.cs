@@ -7,6 +7,7 @@ public class UIManager : Singleton<UIManager>
     [Header("Event")]
     [SerializeField] private UISystemEventSO _registerUIEvent;
     [SerializeField] private UIToggleEventSO _uiToggleEvent;
+    [SerializeField] private StoreDataEventSO _storeDataEvent;
 
     private readonly HashSet<IUISystem> _uiSystems = new();
     private readonly HashSet<IUISystem> _activeSystems = new();
@@ -50,12 +51,13 @@ public class UIManager : Singleton<UIManager>
     #endregion
 
     #region Methods
-    private void HandleToggleRequest(UIType type)
+    private void HandleToggleRequest(UIRequest request)
     {
-        if (!_systemLookup.TryGetValue(type, out IUISystem system)) return; 
+        if (!_systemLookup.TryGetValue(request.type, out IUISystem system)) return; 
 
         Debug.Log("handle UI Change");
 
+        // Close UI if it's currently open
         if (system.IsOpen)
         {
             system.Close();
@@ -68,8 +70,20 @@ public class UIManager : Singleton<UIManager>
             Debug.Log("Remove from active list");
 
             EvaluateOverlayState();
+
+            // Send Data
+            InteractionEvent interactionEvent = new InteractionEvent
+            {
+                eventType = EventType.UIModule,
+                UIRequest = request
+
+            };
+
+            _storeDataEvent?.Raise(interactionEvent);
+
+
         }
-        else
+        else // Otherwise open ui
         {
             ApplyUIRules(system);
             system.Open();
@@ -167,12 +181,11 @@ public class UIManager : Singleton<UIManager>
 
         if (systemToRemove != null) // Remove the system
         {
-            _uiToggleEvent.Raise(systemToRemove.UIType);
-            //_activeSystems.Remove(systemToRemove);
+            _uiToggleEvent.Raise(new UIRequest(systemToRemove.UIType, UIInteractionSource.Hotkey));
         }
         else if (systemToRemove == null) // if there are no sytem to removen then open the pause menu
         {
-            _uiToggleEvent.Raise(UIType.Pause);
+            _uiToggleEvent.Raise(new UIRequest(UIType.Pause, UIInteractionSource.Hotkey));
         }
     }
 

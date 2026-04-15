@@ -55,7 +55,7 @@ public class UIHoverHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
 
         // Trigger 
-        if (_uIModule != null) _toggleEvent?.Raise(_uIModule.UIType);
+        if (_uIModule != null) _toggleEvent?.Raise(new UIRequest(_uIModule.UIType, UIInteractionSource.UIInternal));
 
         // Reset
         _exitCoroutine = null;

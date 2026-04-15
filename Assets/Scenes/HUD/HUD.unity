@@ -228,6 +228,10 @@ PrefabInstance:
       propertyPath: _uiToggleEvent
       value: 
       objectReference: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
+    - target: {fileID: 6147917137846298642, guid: 0d3419710b0fe2743a3fade9eee9e9b6, type: 3}
+      propertyPath: _storeDataEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
     - target: {fileID: 6838466854162809996, guid: 0d3419710b0fe2743a3fade9eee9e9b6, type: 3}
       propertyPath: m_Name
       value: UIManager

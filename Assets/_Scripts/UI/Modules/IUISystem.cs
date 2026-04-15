@@ -8,7 +8,8 @@ public interface IUISystem // Used to tell systems this is UI element
     /// <summary>
     /// The rules for the ui desides how it should be handled
     /// </summary>
-    UIRuleType RuleType { get; }
+    UIRuleType RuleType { get; } 
+
     bool IsOpen { get; }
 
     void Open();

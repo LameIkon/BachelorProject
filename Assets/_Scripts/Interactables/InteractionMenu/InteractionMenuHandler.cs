@@ -38,7 +38,7 @@ public class InteractionMenuHandler : IDisposable
         {
             Debug.Log("Toggle");
             _compendiumPageEvent.Raise(_compendiumID);
-            _uiToggleEvent.Raise(UIType.InteractionPopUp);
+            _uiToggleEvent.Raise(new UIRequest(UIType.InteractionPopUp, UIInteractionSource.UIInternal));
         }
     }
 
