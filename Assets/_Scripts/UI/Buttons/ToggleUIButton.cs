@@ -21,6 +21,7 @@ public class ToggleUIButton : MonoBehaviour
 
         if (TryGetComponent(out Button button))
         {
+            Debug.Log(button);
             button.onClick.AddListener(() => _toggleEvent.Raise(new UIRequest(_uiModule.UIType, UIInteractionSource.WorldButton)));
         }
     }

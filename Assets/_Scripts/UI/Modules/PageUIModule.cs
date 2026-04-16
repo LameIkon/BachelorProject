@@ -26,7 +26,7 @@ public class PageUIModule
         _pageHelper.SwitchToPage(_pages, pageKey);
     }
 
-    public void SetupButtons() // Find all buttons 
+    private void SetupButtons() // Find all buttons 
     {
         foreach (Button button in _pageSettings.pageContainer.GetComponentsInChildren<Button>(true))
         {

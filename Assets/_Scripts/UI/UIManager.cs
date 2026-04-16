@@ -53,6 +53,7 @@ public class UIManager : Singleton<UIManager>
     #region Methods
     private void HandleToggleRequest(UIRequest request)
     {
+        Debug.Log("Try ui change");
         if (!_systemLookup.TryGetValue(request.type, out IUISystem system)) return; 
 
         Debug.Log("handle UI Change");

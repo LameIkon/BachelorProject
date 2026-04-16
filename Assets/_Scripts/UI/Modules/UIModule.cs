@@ -22,19 +22,23 @@ public class UIModule : MonoBehaviour, IUISystem
 
     public bool IsOpen { get; private set;}
 
-
-    private void Start()
+    private void Awake()
     {
         Initialize();
     }
 
+
+    private void Start()
+    {
+        _config.registerUIEvent.Raise(this);    
+    }
+
     #region Initialize
     private void Initialize()
-    {
+    {     
         _canvasModule = new CanvasUIModule(_canvas, _setCanvasActiveAtStart);
         IsOpen = _setCanvasActiveAtStart;
         InitializePageSettings();
-        _config.registerUIEvent.Raise(this);    
     }
 
     private void InitializePageSettings()
@@ -49,7 +53,7 @@ public class UIModule : MonoBehaviour, IUISystem
             case PageMode.MultiplePages:
                 // If we have a pageSetting we will create a method to switch pages
                 pageModule = new PageUIModule(_pageSettings);     
-                pageModule?.SetupButtons();
+                //pageModule?.SetupButtons();
                 pageModule?.SwitchPage(0);
                 return;
 

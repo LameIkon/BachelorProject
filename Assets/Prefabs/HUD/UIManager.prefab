@@ -45,4 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   _registerUIEvent: {fileID: 11400000, guid: 319ac0f259220da44a591b150786b908, type: 2}
-  _uiStateEvent: {fileID: 11400000, guid: c54ccdb0f5f8ea74fbc0f4561e9856d9, type: 2}
+  _uiToggleEvent: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
+  _storeDataEvent: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
