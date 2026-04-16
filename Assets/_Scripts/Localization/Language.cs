@@ -1,5 +1,5 @@
 public enum Language
 {
-    Danish,
+    Dansk,
     English
 }

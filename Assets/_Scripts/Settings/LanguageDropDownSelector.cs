@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LanguageDropDownSelector : MonoBehaviour
 {
@@ -33,25 +32,12 @@ public class LanguageDropDownSelector : MonoBehaviour
 
         _dropdownLanguageOptions.AddOptions(optionsData);
 
-
         _dropdownLanguageOptions.onValueChanged.AddListener(value => SetLanguage(value));
-        
-        _dropdownLanguageOptions.captionText.text = "LanguageUtility.CurrentLanguage.ToString()";
-        ////var options = CreateOptionData(null);
-        //_dropdownLanguageOptions.AddOptions(options);
 
+        // Update display to show the current language
+        Language currentLanguage = LanguageUtility.CurrentLanguage;
+        _dropdownLanguageOptions.value = (int)currentLanguage;
 
-        //_dropdownLanguageOptions.AddOptions();
-    }
-
-    private IEnumerable<Dropdown.OptionData> CreateOptionData()
-    {
-        Dropdown.OptionData optionData = new Dropdown.OptionData
-        {
-            text = string.Empty,
-        };
-
-        yield return optionData;
     }
 
     private void SetLanguage(int value)
