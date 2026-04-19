@@ -28,15 +28,22 @@ public class PageUIModule
 
     private void SetupButtons() // Find all buttons 
     {
+        Debug.Log($"{this} Setup Buttons");
         foreach (Button button in _pageSettings.pageContainer.GetComponentsInChildren<Button>(true))
         {
+            Debug.Log("button found");
             if (button.TryGetComponent(out PageButton pageButton)) // If button have the PageButton script
             {
+                Debug.Log(pageButton.pageIndex);
                 int pageKey = pageButton.pageIndex;
                 button.onClick.AddListener(() => { 
                     SwitchPage(pageKey);
                     Debug.Log(pageKey);
                     });
+            }
+            else
+            {
+                Debug.Log($"PageButton script not found on {button.name}");
             }
         }
 
