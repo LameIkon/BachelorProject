@@ -64,6 +64,7 @@ public class UIManager : Singleton<UIManager>
             system.Close();
             _activeSystems.Remove(system);
             
+            // Set Game Mode if there is no solo or stackable open
             if (!_activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable))
             {
                 InputReader.SetState(InputState.Game);
@@ -95,7 +96,7 @@ public class UIManager : Singleton<UIManager>
             {
                 InputReader.SetState(InputState.UI);
             }
-            else if (system.RuleType == UIRuleType.BetterNameLater)
+            else if (system.RuleType == UIRuleType.GameBlocking)
             {
                 InputReader.SetState(InputState.None);
             }
@@ -117,7 +118,7 @@ public class UIManager : Singleton<UIManager>
             switch (openedSystem.RuleType) // Our opened system type
             {
                 case UIRuleType.Solo:
-                    if (system.RuleType == UIRuleType.Solo || system.RuleType == UIRuleType.Stackable)  // If our opened system is an exlusive type then we will close all of that 
+                    if (system.RuleType == UIRuleType.Solo || system.RuleType == UIRuleType.Stackable || system.RuleType == UIRuleType.PopUp)  // If our opened system is an exlusive type then we will close all of that 
                     {
                         system.Close();
                         _activeSystems.Remove(system);
@@ -125,13 +126,13 @@ public class UIManager : Singleton<UIManager>
                     break;
 
                 case UIRuleType.Stackable:
-                    if (system.RuleType == UIRuleType.Solo) 
+                    if (system.RuleType == UIRuleType.Solo || system.RuleType == UIRuleType.PopUp) 
                     {
                         system.Close();
                         _activeSystems.Remove(system);
                     }
                     break;
-                case UIRuleType.BetterNameLater:
+                case UIRuleType.GameBlocking:
                     system.Close();
                     _activeSystems.Remove(system);
                     break;
@@ -146,7 +147,7 @@ public class UIManager : Singleton<UIManager>
     /// </summary>
     private void EvaluateOverlayState()
     {
-        bool hasBlockingUI = _activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable || s.RuleType == UIRuleType.BetterNameLater);
+        bool hasBlockingUI = _activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable || s.RuleType == UIRuleType.GameBlocking);
 
         Debug.Log(hasBlockingUI);
 

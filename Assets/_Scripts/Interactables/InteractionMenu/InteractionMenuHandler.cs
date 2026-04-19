@@ -11,6 +11,7 @@ public class InteractionMenuHandler : IDisposable
     private readonly CompendiumID _compendiumID;  
     
     private bool _isSelected;
+    private bool _isUIOpen;
 
     public InteractionMenuHandler(UIToggleEventSO uiToggleEvent, CompendiumPageRequestEventSO compendiumPageRequestEventSO, CompendiumID compendiumID)
     {
@@ -25,6 +26,18 @@ public class InteractionMenuHandler : IDisposable
     public void OnHoverState(bool state)
     {
         _isSelected = state;
+
+        // Try Open
+        if (state && !_isUIOpen)
+        {
+            _uiToggleEvent.Raise(new UIRequest(UIType.ActionGuide, UIInteractionSource.UIInternal));
+            _isUIOpen = true;
+        }
+        else if (!state && _isUIOpen)
+        {
+            _uiToggleEvent.Raise(new UIRequest(UIType.ActionGuide, UIInteractionSource.UIInternal));
+            _isUIOpen = false;    
+        }
     }
 
     /// <summary>

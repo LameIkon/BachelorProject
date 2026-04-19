@@ -7,5 +7,6 @@ public enum UIType
     InteractionPopUp,
     MainMenu,
     Todo,
-    NextLevelPopUp
+    NextLevelPopUp,
+    ActionGuide, // To display keybinds for player
 }

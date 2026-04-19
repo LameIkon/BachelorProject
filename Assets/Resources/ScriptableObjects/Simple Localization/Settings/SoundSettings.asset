@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedContentSO
   entries:
   - language: 0
-    title: input taster
+    title: Lyd indstillinger
     description: 
   - language: 1
-    title: sounds
+    title: Audio Settings
     description: 

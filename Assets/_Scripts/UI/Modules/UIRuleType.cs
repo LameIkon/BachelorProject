@@ -11,5 +11,7 @@ public enum UIRuleType
     [Tooltip("Static Background. Will never be changed unless decided to hide hud")]
     HUD, 
     [Tooltip("Overrules all ui to close and show itself disabling all gameplay")]
-    BetterNameLater
+    GameBlocking,
+    [Tooltip("An ui that can pop up without closing other ui types but closes when in UI mode")]
+    PopUp
 }
