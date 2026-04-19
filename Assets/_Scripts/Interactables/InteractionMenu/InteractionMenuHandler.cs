@@ -11,7 +11,6 @@ public class InteractionMenuHandler : IDisposable
     private readonly CompendiumID _compendiumID;  
     
     private bool _isSelected;
-    private bool _isUIOpen;
 
     public InteractionMenuHandler(UIToggleEventSO uiToggleEvent, CompendiumPageRequestEventSO compendiumPageRequestEventSO, CompendiumID compendiumID)
     {
@@ -19,7 +18,7 @@ public class InteractionMenuHandler : IDisposable
         _compendiumPageEvent = compendiumPageRequestEventSO;
         _compendiumID = compendiumID;
 
-        InputReader.s_TogglePopUp += TogglePopUp;
+        InputReader.s_TogglePopUp += OnInteract;
 
     }
 
@@ -27,23 +26,23 @@ public class InteractionMenuHandler : IDisposable
     {
         _isSelected = state;
 
-        // Try Open
-        if (state && !_isUIOpen)
+        if (state)
         {
-            _uiToggleEvent.Raise(new UIRequest(UIType.ActionGuide, UIInteractionSource.UIInternal));
-            _isUIOpen = true;
+            Debug.Log("Open");
+            _uiToggleEvent.Raise(new UIRequest(UIType.ActionGuide, UIInteractionSource.UIInternal, UIAction.Open));
         }
-        else if (!state && _isUIOpen)
+        else if (!state)
         {
-            _uiToggleEvent.Raise(new UIRequest(UIType.ActionGuide, UIInteractionSource.UIInternal));
-            _isUIOpen = false;    
+            Debug.Log("Close");
+            _uiToggleEvent.Raise(new UIRequest(UIType.ActionGuide, UIInteractionSource.UIInternal, UIAction.Close));
         }
+
     }
 
     /// <summary>
     /// Toggle ui
     /// </summary>
-    private void TogglePopUp()
+    private void OnInteract()
     {
         if (_uiToggleEvent == null) return;
 
@@ -51,14 +50,14 @@ public class InteractionMenuHandler : IDisposable
         {
             Debug.Log("Toggle");
             _compendiumPageEvent.Raise(_compendiumID);
-            _uiToggleEvent.Raise(new UIRequest(UIType.InteractionPopUp, UIInteractionSource.UIInternal));
+            _uiToggleEvent.Raise(new UIRequest(UIType.InteractionPopUp, UIInteractionSource.Hotkey));
         }
     }
 
     #region Cleanup
     public void Dispose()
     {
-        InputReader.s_TogglePopUp -= TogglePopUp;
+        InputReader.s_TogglePopUp -= OnInteract;
     }
     #endregion
 }

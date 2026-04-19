@@ -53,58 +53,70 @@ public class UIManager : Singleton<UIManager>
     #region Methods
     private void HandleToggleRequest(UIRequest request)
     {
-        Debug.Log("Try ui change");
         if (!_systemLookup.TryGetValue(request.type, out IUISystem system)) return; 
 
-        Debug.Log("handle UI Change");
-
         // Close UI if it's currently open
-        if (system.IsOpen)
+        //if (system.IsOpen)
+        //{
+        switch (request.action)
         {
-            system.Close();
-            _activeSystems.Remove(system);
-            
-            // Set Game Mode if there is no solo or stackable open
-            if (!_activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable))
-            {
-                InputReader.SetState(InputState.Game);
-            }
-            Debug.Log("Remove from active list");
-
-            EvaluateOverlayState();
-
-            // Send Data
-            InteractionEvent interactionEvent = new InteractionEvent
-            {
-                eventType = EventType.UIModule,
-                UIRequest = request
-
-            };
-
-            _storeDataEvent?.Raise(interactionEvent);
-
-
+            case UIAction.Toggle:
+                if (system.IsOpen) // Close ui
+                {
+                    CloseUI(system, request);
+                }
+                else // Else open ui
+                {
+                    OpenUI(system);
+                }
+                break;
+            case UIAction.Open: 
+                OpenUI(system);
+                break;
+            case UIAction.Close:
+                CloseUI(system, request);   
+                break;
         }
-        else // Otherwise open ui
+    }
+
+    private void OpenUI(IUISystem system)
+    {
+        ApplyUIRules(system);
+        system.Open();
+        _activeSystems.Add(system);
+
+        if (system.RuleType == UIRuleType.Solo || system.RuleType == UIRuleType.Stackable)
         {
-            ApplyUIRules(system);
-            system.Open();
-
-            _activeSystems.Add(system);
-            
-            if (system.RuleType == UIRuleType.Solo || system.RuleType == UIRuleType.Stackable)
-            {
-                InputReader.SetState(InputState.UI);
-            }
-            else if (system.RuleType == UIRuleType.GameBlocking)
-            {
-                InputReader.SetState(InputState.None);
-            }
-
-            Debug.Log("Add to active list");
-
-            EvaluateOverlayState();
+            InputReader.SetState(InputState.UI);
         }
+        else if (system.RuleType == UIRuleType.GameBlocking)
+        {
+            InputReader.SetState(InputState.None);
+        }
+
+        Debug.Log("Add to active list");
+
+        EvaluatePassiveUI();
+    }
+
+    private void CloseUI(IUISystem system, UIRequest request)
+    {
+        system.Close();
+        _activeSystems.Remove(system);
+
+        // Set Game Mode if there is no solo or stackable open
+        if (!_activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable))
+        {
+            InputReader.SetState(InputState.Game);
+        }
+        Debug.Log("Remove from active list");
+
+        // Check if we can open any ui elements
+        EvaluatePassiveUI();
+
+        // Send Data
+        DataStoring(request);
+
     }
 
     private void ApplyUIRules(IUISystem openedSystem)
@@ -142,32 +154,6 @@ public class UIManager : Singleton<UIManager>
         }   
     }
 
-    /// <summary>
-    /// Evaluate everytime we open and close ui. Overlay will try to open when no solo or stackable ui elements are active
-    /// </summary>
-    private void EvaluateOverlayState()
-    {
-        bool hasBlockingUI = _activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable || s.RuleType == UIRuleType.GameBlocking);
-
-        Debug.Log(hasBlockingUI);
-
-        foreach (IUISystem system in _uiSystems)
-        {
-            if (system.RuleType != UIRuleType.Overlay) continue;
-            
-            if (hasBlockingUI)
-            {
-                if (system.IsOpen)
-                    system.Close();
-            }
-            else
-            {
-                if (!system.IsOpen)
-                    system.Open();
-            }
-        }
-    }
-
 
     private void HandleEscapeRequest()
     {
@@ -190,6 +176,71 @@ public class UIManager : Singleton<UIManager>
             _uiToggleEvent.Raise(new UIRequest(UIType.Pause, UIInteractionSource.Hotkey));
         }
     }
+
+    #endregion
+
+    #region Utility Methods
+    private void DataStoring(UIRequest request)
+    {
+        // Send Data
+        InteractionEvent interactionEvent = new InteractionEvent
+        {
+            eventType = EventType.UIModule,
+            UIRequest = request
+
+        };
+
+        _storeDataEvent?.Raise(interactionEvent);
+    }
+
+    /// <summary>
+    /// Evaluate everytime we open and close ui. Overlay will try to open when no solo or stackable ui elements are active
+    /// </summary>
+    private void EvaluatePassiveUI()
+    {
+        bool hasBlockingUI = _activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable || s.RuleType == UIRuleType.GameBlocking);
+
+        Debug.Log(hasBlockingUI);
+
+
+        // Evaluate Overlay
+        foreach (IUISystem system in _uiSystems)
+        {
+            if (system.RuleType == UIRuleType.Overlay)
+            {
+                if (hasBlockingUI)
+                {
+                    if (system.IsOpen) system.Close();
+                }
+                else if (!system.IsOpen)
+                {
+                    system.Open();
+                }
+            }
+
+            //// Evaluate PopUp
+            //else if (system.RuleType == UIRuleType.PopUp)
+            //{
+            //    bool shouldOpen = true;
+
+            //    if (hasBlockingUI)
+            //    {
+            //        shouldOpen = false;
+            //    }
+            //    if (shouldOpen && !system.IsOpen)
+            //    {
+            //        system.Open();
+            //    }
+            //    else if (!shouldOpen && system.IsOpen)
+            //    {
+            //        CloseUI(system, new UIRequest(UIType.None, UIInteractionSource.UIInternal, UIAction.Close));
+            //    }
+            //}
+            
+
+        }
+    }
+
 
     #endregion
 

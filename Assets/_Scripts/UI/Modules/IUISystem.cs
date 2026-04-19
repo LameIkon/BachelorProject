@@ -12,8 +12,6 @@ public interface IUISystem // Used to tell systems this is UI element
 
     bool IsOpen { get; }
 
-    bool ShouldBeOpen(); // An optional condition to try open ui in evaluation
-
     void Open();
     void Close();
 }

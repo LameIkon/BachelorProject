@@ -430,12 +430,27 @@ public struct UIRequest
 {
     public UIType type;
     public UIInteractionSource source;
+    public UIAction action;
 
-    public UIRequest(UIType type, UIInteractionSource source)
+    /// <summary>
+    /// A struct to execute an request for what to happen with ui. Require what ui type, how it was executed and the toggle type
+    /// </summary>
+    /// <param name="type">UI type to toggle</param>
+    /// <param name="source">How the request was made</param>
+    /// <param name="action">Default action method is toggle between open and close, but can be specific if we want to ensure open or close</param>
+    public UIRequest(UIType type, UIInteractionSource source, UIAction action = UIAction.Toggle)
     {
         this.type = type;
         this.source = source;
+        this.action = action;
     }
+}
+
+public enum UIAction
+{
+    Toggle,
+    Open,
+    Close
 }
 
 public enum UIInteractionSource

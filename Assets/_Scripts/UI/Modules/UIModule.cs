@@ -86,14 +86,5 @@ public class UIModule : MonoBehaviour, IUISystem
 
         _config.updateUIEvent.Raise(this);
     }
-
-    /// <summary>
-    /// Default not in use. Can be used in evaluation to open ui when closing other ui elements
-    /// </summary>
-    /// <returns></returns>
-    public virtual bool ShouldBeOpen()
-    {
-        return false;
-    }
     #endregion
 }
