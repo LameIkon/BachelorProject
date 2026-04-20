@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent (typeof(Rigidbody), typeof(Collider))]
 public class InteractablePickup : HoverableInteractable, IPickable
@@ -9,6 +10,7 @@ public class InteractablePickup : HoverableInteractable, IPickable
 	[Header("Pickup Settings")]
 	[SerializeField] private PickableType _pickableType;
 	[SerializeField] private bool _disablePickupOnPlacement;
+	[SerializeField] private UIInteractionDescriptionEventSO _interactionDescriptionEvent;
 	
 	private Transform _holdPoint;
 	private Rigidbody _rb;
@@ -152,5 +154,16 @@ public class InteractablePickup : HoverableInteractable, IPickable
 		if (_isPickedUp || !_canBePickedUp) return;
 		base.OnHoverExit();
 	}
+
+    public InteractionData GetInteractionData()
+    {
+		InteractionData data = new InteractionData
+		{
+			icon = _interactionDescriptionEvent?.ActionSymbol,
+			description = _interactionDescriptionEvent?.actionDescription,
+		};
+
+        return data;
+    }
     #endregion
 }

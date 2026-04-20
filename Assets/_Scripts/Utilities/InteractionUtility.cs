@@ -1,14 +1,19 @@
+using System;
 using UnityEngine;
 
 public class InteractionUtility
 {
+    // Core settings
     private readonly Camera _camera;
     private readonly LayerMask _interactionMask;
     private readonly Transform _pickUpPoint;
     private readonly float _pickUpDistance;
 
+    // Hoverable 
     private IHoverable _currentHovered;
     private IHoverable _newHovered;
+    private UIHoverDataEventSO _hoverEvent;
+
 
     /// <summary>
     /// How to interact with interactables
@@ -16,12 +21,13 @@ public class InteractionUtility
     /// <param name="camera">Camera reference to do raycast from</param>
     /// <param name="pickUpPoint">Objects that can be picked; Place object in front of player like you are holding it</param>
     /// <param name="interactRange">The range of which you can reach</param>
-    public InteractionUtility(Camera camera, Transform pickUpPoint, float interactRange)
+    public InteractionUtility(Camera camera, Transform pickUpPoint, float interactRange, UIHoverDataEventSO hoverDataEvent)
     {
         // Interaction related
         _camera = camera;
         _pickUpPoint = pickUpPoint;
         _pickUpDistance = interactRange;
+        _hoverEvent = hoverDataEvent;
         
         _interactionMask = LayerMask.GetMask("Interactable"); // Specific layer we can interact with
 
@@ -56,6 +62,7 @@ public class InteractionUtility
         {
             //Debug.Log(result.Hoverable);
             _newHovered = result.Hoverable;
+
         }
 
 
@@ -68,6 +75,11 @@ public class InteractionUtility
         if (_newHovered != null && _newHovered != _currentHovered) // Enter new
         {
             _newHovered.OnHoverEnter();
+
+            if (_newHovered is IInteractable interactable)
+            {
+                _hoverEvent?.Raise(interactable.GetInteractionData()); // Update ActionGuide ui to display the required options for interaction
+            }
             _currentHovered = _newHovered;
         }
     }

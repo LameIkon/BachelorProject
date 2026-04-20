@@ -6,11 +6,11 @@ public interface IHoverable
     /// <summary>
 	/// InteractionUtility will handle the detection
 	/// </summary>
-    void OnHoverEnter();
+    public void OnHoverEnter();
 
     /// <summary>
 	/// InteractionUtility will handle the detection
 	/// </summary>
-    void OnHoverExit();
+    public void OnHoverExit();
 }
 

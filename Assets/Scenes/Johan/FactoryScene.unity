@@ -2990,6 +2990,7 @@ MonoBehaviour:
   _storeDataEvent: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
   _pickableType: 1
   _disablePickupOnPlacement: 1
+  _interactionDescriptionEvent: {fileID: 11400000, guid: 29a28f9f9f6636e43985683c5f89a928, type: 2}
 --- !u!54 &536146068
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3267,6 +3268,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1322482228698620613, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
+      propertyPath: _hoverEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: a702fec6d6256a74991b6f4c10727833, type: 2}
     - target: {fileID: 2188616589692227097, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5227,6 +5232,7 @@ MonoBehaviour:
   _storeDataEvent: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
   _pickableType: 3
   _disablePickupOnPlacement: 0
+  _interactionDescriptionEvent: {fileID: 11400000, guid: 29a28f9f9f6636e43985683c5f89a928, type: 2}
 --- !u!54 &1028459531
 Rigidbody:
   m_ObjectHideFlags: 0

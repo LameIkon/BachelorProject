@@ -66,4 +66,15 @@ public sealed class PhysicalButton : HoverableInteractable, IInteractable
 		_isPressed = !_isPressed;
 
 	}
+
+    public InteractionData GetInteractionData()
+    {
+		InteractionData data = new InteractionData
+		{
+			icon = string.Empty,
+			description = string.Empty,
+		};
+
+        return data;
+    }
 }
