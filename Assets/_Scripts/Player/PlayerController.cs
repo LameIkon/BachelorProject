@@ -10,6 +10,8 @@ namespace _Scripts
 
         [SerializeField] private Transform _pickUpPoint;
 
+        [SerializeField] private AudioPlayer _player;
+
         private Rigidbody _rb;
         private Camera _camera;
         private CharacterController _controller;
