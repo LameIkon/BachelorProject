@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent (typeof(Rigidbody), typeof(Collider))]
 public class InteractablePickup : HoverableInteractable, IPickable
@@ -90,9 +89,9 @@ public class InteractablePickup : HoverableInteractable, IPickable
 
 		if (_canBePickedUp) _highlightHandler?.SetHighlight(true);
 
-		bool? state = _currentSlot?.TryPlace(this);
+		//bool? state = _currentSlot?.TryPlace(this);
 
-		if (state == true)
+		if (true)
 		{
 			if (_disablePickupOnPlacement)
 			{

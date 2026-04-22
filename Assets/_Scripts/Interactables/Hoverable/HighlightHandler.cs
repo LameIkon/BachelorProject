@@ -1,16 +1,33 @@
-using TMPro;
 using UnityEngine;
 
 public class HighlightHandler
 {
-    private readonly Material[] _materials;
-	private readonly float _highlightScale;
+    private readonly Material _targetMaterial;
+    private readonly string _property; // The name of the outline
+    private readonly float _highlightScaleValue;
 
-    public HighlightHandler(GameObject gameObject)
+    public HighlightHandler(GameObject owner, HighlightModuleConfigSO config)
     {
-        _materials = gameObject.GetComponent<MeshRenderer>().materials;
+        Renderer renderer = owner.GetComponent<Renderer>();
 
-        if (_materials.Length > 1) _highlightScale = _materials[1].GetFloat("_OutlineScale"); // Material must have more than 1 to work
+        if (renderer == null)
+        {
+            Debug.LogWarning($"{owner.name} has no Renderer for highlight.");
+            return;
+        }
+
+        Material[] materials = renderer.materials;
+
+        if (materials.Length <= config.materialIndex)
+        {
+            Debug.LogWarning($"{owner.name} missing material index {config.materialIndex}");
+            return;
+        }
+
+        _targetMaterial = materials[config.materialIndex];
+        _property = config.outlineProperty;
+
+        _highlightScaleValue = config.outlineScale;
 
 		SetHighlight(false);
     }
@@ -22,7 +39,9 @@ public class HighlightHandler
 	/// <param name="state">boolean to check state. True will activate and false to deactivate highlight</param>
     public void SetHighlight(bool state)
     {
-        if (_materials.Length > 1) _materials[1].SetFloat("_OutlineScale", state ? _highlightScale : 0f);
+        if (_targetMaterial == null) return;
+
+        _targetMaterial.SetFloat(_property, state ? _highlightScaleValue : 0f);
     }
 }
 

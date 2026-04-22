@@ -9,10 +9,9 @@ public abstract class HoverableInteractable : MonoBehaviour, IHoverable
 
 	protected virtual void Awake()
 	{
-		_highlightHandler = new HighlightHandler(this.gameObject);
+		//_highlightHandler = new HighlightHandler(this.gameObject);
 		_interactionMenu?.Initialize();
 	}
-
 
     public virtual void OnHoverEnter()
     {
@@ -56,39 +55,71 @@ public class InteractionGuideModule
     }
 }
 
-public class HoverModule
-{
-    private readonly GameObject _owner;
-    private readonly HighlightHandler _highlightHandler;
-
-    public HoverModule(GameObject owner)
-    {
-        _owner = owner;
-        _highlightHandler = new HighlightHandler(_owner);
-    }
-
-    public void OnHoverEnter()
-    {
-        _highlightHandler?.SetHighlight(true);
-    }
-
-    public void OnHoverExit()
-    {
-        _highlightHandler?.SetHighlight(false);
-    }
-}
-
-public class PickupModule
-{
-    // TBD
-}
-
 public class ButtonModule
 {
-    // TBD
+	private readonly ButtonData _buttonData;
+	private readonly MeshRenderer _lightIndicator;
+
+	private readonly Animator _animator;
+	private readonly int _animInt = Animator.StringToHash("PhysicalButton");
+
+	private readonly ButtonEventSO _onButtonEvent;
+
+	public ButtonModule(GameObject owner, ButtonData data, ButtonEventSO buttonEvent)
+	{
+		_buttonData = data;
+		_onButtonEvent = buttonEvent;
+
+		_lightIndicator = owner.GetComponentInChildren<MeshRenderer>();
+		_animator = owner.GetComponent<Animator>();
+
+		_buttonData?.SetColor(false);
+		SetColorIndicator(_buttonData.Color);
+	}
+
+
+
+	public void PressButton()
+	{
+		_buttonData?.SetColor(true);
+		SetColorIndicator(_buttonData.Color);
+		
+		_animator.Play(_animInt);
+		_onButtonEvent?.Raise(_buttonData.Type);
+	}
+
+	private void SetColorIndicator(Color color) 
+	{
+		_lightIndicator.material.color = color;
+	}
+
+}
+
+public class LeverModule
+{
+	private readonly ButtonData _leverData;
+	private readonly ButtonEventSO _onLeverEvent;
+
+	public LeverModule(ButtonData data, ButtonEventSO leverEvent)
+	{
+		_onLeverEvent = leverEvent;
+	}
+
+	public void UseLever()
+	{
+		//TBD
+		_onLeverEvent?.Raise(_leverData.Type);
+	}
+}
+
+public class DoorModule
+{
+
 }
 
 public class InteractionMenuModule
 {
-    // TBD
+	private readonly InteractionMenuContent _interactionMenu;
+    private readonly HighlightHandler _highlightHandler;
+
 }

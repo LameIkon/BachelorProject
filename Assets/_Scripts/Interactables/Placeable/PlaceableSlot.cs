@@ -4,13 +4,14 @@ using Random = UnityEngine.Random;
 public class PlaceableSlot : MonoBehaviour
 {
     [Header("Required")]
-    [SerializeField] private PickableType _pickableTypeHolder; 
-    [SerializeField] private Transform _visualModel;
+    [SerializeField] private PickableType _allowedType; 
     [SerializeField] private Transform _snapPoint;
+    
+    [SerializeField] private Transform _visualModel;
     [SerializeField] private float _wiggleStrenght;
     
-    private IPickable _pickupInTrigger; // The pickup currently inside this slot
-    private IPickable _placedPickup; // The pickup placed
+    private IPickableIdentity _candidate;
+    private IPickableIdentity _placed;
 
     private Material _visualMaterial;
 
@@ -20,8 +21,6 @@ public class PlaceableSlot : MonoBehaviour
     [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
 
     private bool _canPlace;
-
-    private bool _isOccupied => _placedPickup != null;
 
     private void Awake()
     {
@@ -35,20 +34,22 @@ public class PlaceableSlot : MonoBehaviour
 
 
     # region Placement
-    public bool TryPlace(IPickable pickup)
+    public bool TryPlace(IPickableIdentity pickup)
     {
-        if (!_canPlace || _isOccupied) return false;
+        if (!_canPlace) return false;
+        if (pickup == null) return false;
 
-        if (pickup == _pickupInTrigger)
+        if (pickup.type != _allowedType) return false;
         {
             AssignToSlot(pickup);
             return true;
         }
-        return false;
     }
-    private void AssignToSlot(IPickable pickup)
+    private void AssignToSlot(IPickableIdentity pickup)
     {
-        Transform pickupTransform = pickup.Transform;
+        _placed = pickup;
+
+        Transform pickupTransform = pickup.transform;
 
         // Parent it to this slot
         pickupTransform.SetParent(_snapPoint);
@@ -72,9 +73,6 @@ public class PlaceableSlot : MonoBehaviour
         // Disable visual indication
         SetVisualAlpha(0f);
 
-        // Set states
-        _placedPickup = pickup;
-
         if (_canPlaceOnce)
         {
             _canPlace = false;
@@ -87,15 +85,15 @@ public class PlaceableSlot : MonoBehaviour
 
     private void RemoveFromSlot()
     {
-        if (!_isOccupied) return;
+        if (_placed == null) return;
 
         // Enable physics
-        if (_setToKinematic && _placedPickup.Transform.TryGetComponent(out Rigidbody rb))
+        if (_setToKinematic && _placed.transform.TryGetComponent(out Rigidbody rb))
         {
             rb.isKinematic = false;
         }
         
-        _placedPickup = null;
+        _placed = null;
 
         if (_canPlaceOnce)
         {
@@ -123,7 +121,7 @@ public class PlaceableSlot : MonoBehaviour
         _canPlace = canPlace;
         _canPlaceOnce = canPlaceOne;
 
-        if (!_isOccupied && _pickupInTrigger == null)
+        if (_placed == null && _candidate == null)
         {
             // Dim visual indication
             SetVisualAlpha(0.25f);
@@ -141,36 +139,20 @@ public class PlaceableSlot : MonoBehaviour
     #endregion
 
     #region Trigger methods
-
     private void OnTriggerEnter(Collider other)
     {
-        if (_isOccupied || !_canPlace) return;
-
-        if (other.TryGetComponent(out IPickable pickup))
+        if (other.TryGetComponent(out IPickableIdentity pickup))
         {
-            if (pickup.PickableType == _pickableTypeHolder)
-            {
-                _pickupInTrigger = pickup; // Placable pickup detected
-                SetVisualAlpha(0.4f);
-            }
+            if (pickup.type == _allowedType) _candidate = pickup;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.TryGetComponent(out IPickable pickup)) return;
-
-        if (_placedPickup == pickup) // Compare if the placed pickup that exited
+        if (other.TryGetComponent(out IPickableIdentity pickup))
         {
-            RemoveFromSlot();
-            return;
+            if (_candidate == pickup) _candidate = null;
         }
-
-        if (_pickupInTrigger == pickup) // If it is an canditate that never got placed but entered
-        {
-            _pickupInTrigger = null;
-            if (!_isOccupied && _canPlace) SetVisualAlpha(0.25f);
-        }       
     }
     #endregion
 }

@@ -13,7 +13,7 @@ public interface IInteractable
     /// Data to display ui for helping guiding player for how to interact with objects
     /// </summary>
     /// <returns>HoverData struct containing icon and description</returns>
-    InteractionData GetInteractionData();
+    //InteractionData GetInteractionData();
 }
 
 public struct InteractionData

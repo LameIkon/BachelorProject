@@ -78,7 +78,7 @@ public class InteractionUtility
 
             if (_newHovered is IInteractable interactable)
             {
-                _hoverEvent?.Raise(interactable.GetInteractionData()); // Update ActionGuide ui to display the required options for interaction
+                //_hoverEvent?.Raise(interactable.GetInteractionData()); // Update ActionGuide ui to display the required options for interaction
             }
             _currentHovered = _newHovered;
         }

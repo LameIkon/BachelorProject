@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef245644e94bb444b1a867446af9391, type: 3}
+  m_Name: Pickup Interaction description Event SO
+  m_EditorClassIdentifier: Assembly-CSharp::UIInteractionDescriptionEventSO
+  actionRef: {fileID: 3493176198710711816, guid: 244539df15b66724ea5d651136ea03ed, type: 3}
+  bindingIndex: 0
+  actionDescription: Pick up
