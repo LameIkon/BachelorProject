@@ -116,10 +116,3 @@ public class DoorModule
 {
 
 }
-
-public class InteractionMenuModule
-{
-	private readonly InteractionMenuContent _interactionMenu;
-    private readonly HighlightHandler _highlightHandler;
-
-}

@@ -3,13 +3,13 @@ using UnityEngine;
 /// <summary>
 /// This module enables highlight of objects on hovering
 /// </summary>
-public class HoverModule
+public class HighlightModule
 {
     private readonly HighlightHandler _highlightHandler;
 
     private bool _canHighlight = true;
 
-    public HoverModule(GameObject owner, HighlightModuleConfigSO config)
+    public HighlightModule(GameObject owner, HighlightModuleConfigSO config)
     {
         _highlightHandler = new HighlightHandler(owner, config);
     }

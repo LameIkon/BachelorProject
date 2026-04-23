@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable
@@ -9,9 +10,11 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable
 
     [Header("Optional Modules")]
     [SerializeField] private HighlightModuleConfigSO _highlightConfig;
+    [SerializeField] private InteractionMenuModuleConfigSO _menuConfig;
 
 
-	private HoverModule _hoverModule;
+	private HighlightModule _hoverModule;
+    private InteractionMenuModule _interactionMenuModule;
     
     // Some may be null. It depends on interactionConfig for what it's purpose is
     private IInteractionAction _interactionAction;
@@ -19,9 +22,13 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable
     private ITriggerModule _triggerable;
     private IInteractionSignalSource _signalSource;
 
+
+    private List<IHoverable> _hoverables;
+
     private void Awake()
     {
-        if (_highlightConfig != null) _hoverModule = new HoverModule(gameObject, _highlightConfig);
+        if (_highlightConfig != null) _hoverModule = new HighlightModule(gameObject, _highlightConfig);
+        //if (_interactionConfig != null) _interactionMenuModule = new InteractionMenuModule();
 
         if (_interactionConfig != null)
         {
