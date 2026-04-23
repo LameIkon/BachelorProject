@@ -1160,9 +1160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e14f26758cc07a74bbdc09cc713c5aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Placeable
-  _pickableTypeHolder: 3
-  _visualModel: {fileID: 182626570}
+  _allowedType: 0
   _snapPoint: {fileID: 438518661}
+  _visualModel: {fileID: 182626570}
   _wiggleStrenght: 0
   _canPlaceOnce: 0
   _setToKinematic: 0
@@ -1280,8 +1280,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db41fd86ff7c27c498f932cc98f15779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableEntity
-  _highlightConfig: {fileID: 11400000, guid: 9d7fa875b47d61745b8b0b0868c2438d, type: 2}
   _interactionConfig: {fileID: 11400000, guid: 0345307ac7d8b7d478dad66143c66f0d, type: 2}
+  _interactionIdentity: {fileID: 11400000, guid: 029f3c22670ae5d449db5e00b1f6feaa, type: 2}
+  _highlightConfig: {fileID: 11400000, guid: 9d7fa875b47d61745b8b0b0868c2438d, type: 2}
 --- !u!54 &238421949
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5146,9 +5147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e14f26758cc07a74bbdc09cc713c5aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Placeable
-  _pickableTypeHolder: 1
-  _visualModel: {fileID: 946984397}
+  _allowedType: 1
   _snapPoint: {fileID: 1210754807}
+  _visualModel: {fileID: 946984397}
   _wiggleStrenght: 0
   _canPlaceOnce: 1
   _setToKinematic: 0

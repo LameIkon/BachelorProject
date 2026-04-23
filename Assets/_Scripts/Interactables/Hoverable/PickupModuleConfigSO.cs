@@ -12,9 +12,9 @@ public class PickupModuleConfigSO : InteractionModuleConfigSO
     /// </summary>
     /// <param name="owner"></param>
     /// <returns></returns>
-    public override InteractionModuleResult Create(GameObject owner)
+    public override InteractionModuleResult Create(GameObject owner, InteractionIdentitySO identity)
     {
-        PickupInteraction module = new PickupInteraction(owner, this);
+        PickupInteraction module = new PickupInteraction(owner, this, identity);
         return new InteractionModuleResult
         {
             interaction = module,

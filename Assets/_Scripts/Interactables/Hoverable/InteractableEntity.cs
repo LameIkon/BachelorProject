@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable
 {
+    [Header("Interaction Module")]
+    [SerializeField] private InteractionModuleConfigSO _interactionConfig;
+    [SerializeField] private InteractionIdentitySO _interactionIdentity;
+
     [Header("Optional Modules")]
     [SerializeField] private HighlightModuleConfigSO _highlightConfig;
 
-    [Header("Interaction Module")]
-    [SerializeField] private InteractionModuleConfigSO _interactionConfig;
 
 	private HoverModule _hoverModule;
     
@@ -23,7 +25,7 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable
 
         if (_interactionConfig != null)
         {
-            InteractionModuleResult result = _interactionConfig.Create(gameObject);
+            InteractionModuleResult result = _interactionConfig.Create(gameObject, _interactionIdentity);
 
             _interactionAction = result.interaction;
             _tickable = result.tickable;
@@ -61,16 +63,13 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable
         switch (signal.InteractionAction)
         {
             case InteractionSignalType.PickedUp:
-                Debug.Log("Picked");
                 _hoverModule?.SetEnabled(false);
                 break;
 
             case InteractionSignalType.Dropped:
-                Debug.Log("Dropped");
                 _hoverModule?.SetEnabled(true);
                 break;
             case InteractionSignalType.Placed:
-                Debug.Log("Dropped");
                 _hoverModule?.SetEnabled(true);
                 break;
         }
@@ -117,8 +116,8 @@ public interface IInteractionSignalSource
     event Action<InteractionSignal> OnRaise;
 }
 
-public interface IPickableIdentity
-{
-    PickableType type { get; }
-    Transform transform { get; }
-}
+//public interface IPickableIdentity
+//{
+//    PickableType Type { get; }
+//    Transform Transform { get; }
+//}

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerModule, IInteractionSignalSource
 {
+	private readonly InteractionIdentitySO _identity;
 	private readonly Transform _ownerTransform;
 	private readonly Rigidbody _rb;
 	
@@ -16,13 +17,12 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 
     public event Action<InteractionSignal> OnRaise;
 
-    private PlaceableSlot _currentSlot;
-
     public PickableType PickableType { get; }
 
-    public PickupInteraction(GameObject owner, PickupModuleConfigSO config)
+    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, InteractionIdentitySO identity)
 	{
 		_rb = owner.GetComponent<Rigidbody>();
+		_identity = identity;
 		_ownerTransform = owner.transform;
 		
 		_followSpeed = config.followSpeed;
@@ -69,8 +69,11 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		_rb.useGravity = true;
 		_rb.linearDamping = 0f;
 		
+
+		bool placed = TryPlace();
+
 		// Try find a place
-		if (_currentSlot != null) // Place found
+		if (placed) // Place found
 		{
 			_canBePickedUp = !_disablePickupOnPlacement;
 			OnRaise?.Invoke(new InteractionSignal { InteractionAction = InteractionSignalType.Placed });
@@ -91,19 +94,35 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
     }
 
     #region Placemenet logic
+	private PlaceableSlot _currentSlot;
+	private bool TryPlace()
+	{
+		if (_currentSlot == null) return false;
+
+		if (_currentSlot.TryPlace(_identity, _ownerTransform))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
     public void OnTriggerEnterContext(Collider other)
     {
         if (other.TryGetComponent(out PlaceableSlot slot))
-		{
+		{	
 			_currentSlot = slot;
+			 slot.OnCandidateEnter(_identity);
 		}
     }
 
     public void OnTriggerExitContext(Collider other)
     {
-        if (other.TryGetComponent(out PlaceableSlot slot) && slot == _currentSlot)
+        if (other.TryGetComponent(out PlaceableSlot slot))
 		{
-			if (_currentSlot == slot) _currentSlot = null;
+			if (_currentSlot != slot) return;
+            _currentSlot = null;
+			slot.OnCandidateExit(_identity);
 		}
     }
     #endregion

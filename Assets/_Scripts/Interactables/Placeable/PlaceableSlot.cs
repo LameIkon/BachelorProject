@@ -6,21 +6,18 @@ public class PlaceableSlot : MonoBehaviour
     [Header("Required")]
     [SerializeField] private PickableType _allowedType; 
     [SerializeField] private Transform _snapPoint;
-    
     [SerializeField] private Transform _visualModel;
     [SerializeField] private float _wiggleStrenght;
-    
-    private IPickableIdentity _candidate;
-    private IPickableIdentity _placed;
 
-    private Material _visualMaterial;
 
     [Header("Options")]
     [SerializeField] private bool _canPlaceOnce;
     [SerializeField] private bool _setToKinematic;
     [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
 
+    private Transform _placed;
     private bool _canPlace;
+    private Material _visualMaterial;
 
     private void Awake()
     {
@@ -34,22 +31,21 @@ public class PlaceableSlot : MonoBehaviour
 
 
     # region Placement
-    public bool TryPlace(IPickableIdentity pickup)
+    public bool TryPlace(InteractionIdentitySO identity, Transform target)
     {
         if (!_canPlace) return false;
-        if (pickup == null) return false;
-
-        if (pickup.type != _allowedType) return false;
-        {
-            AssignToSlot(pickup);
-            return true;
-        }
+        if (_placed != null) return false;
+        if (identity.type != _allowedType) return false;
+        
+        AssignToSlot(target);
+        return true;
+        
     }
-    private void AssignToSlot(IPickableIdentity pickup)
+    private void AssignToSlot(Transform pickup)
     {
         _placed = pickup;
 
-        Transform pickupTransform = pickup.transform;
+        Transform pickupTransform = pickup;
 
         // Parent it to this slot
         pickupTransform.SetParent(_snapPoint);
@@ -88,7 +84,7 @@ public class PlaceableSlot : MonoBehaviour
         if (_placed == null) return;
 
         // Enable physics
-        if (_setToKinematic && _placed.transform.TryGetComponent(out Rigidbody rb))
+        if (_setToKinematic && _placed.TryGetComponent(out Rigidbody rb))
         {
             rb.isKinematic = false;
         }
@@ -121,7 +117,7 @@ public class PlaceableSlot : MonoBehaviour
         _canPlace = canPlace;
         _canPlaceOnce = canPlaceOne;
 
-        if (_placed == null && _candidate == null)
+        if (_placed == null)
         {
             // Dim visual indication
             SetVisualAlpha(0.25f);
@@ -139,20 +135,49 @@ public class PlaceableSlot : MonoBehaviour
     #endregion
 
     #region Trigger methods
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (_placed != null || !_canPlace) return;
+
+    //    if (other.TryGetComponent(out PickupInteraction pickup))
+    //    {
+    //        if (pickup.type != _allowedType) return;
+
+    //        SetVisualAlpha(0.4f);
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.TryGetComponent(out IPickableIdentity pickup))
+    //    {
+    //        if (_candidate != pickup) return;
+            
+    //        _candidate = null;
+
+    //        if (_placed == null && _canPlace)
+    //        {
+    //            SetVisualAlpha(0.25f);
+    //        }
+            
+    //    }
+    //}
+
+    public void OnCandidateEnter(InteractionIdentitySO identity)
     {
-        if (other.TryGetComponent(out IPickableIdentity pickup))
+        if (_placed != null || !_canPlace) return;
+
+        if (identity.type == _allowedType)
         {
-            if (pickup.type == _allowedType) _candidate = pickup;
+            SetVisualAlpha(0.4f);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OnCandidateExit(InteractionIdentitySO identity)
     {
-        if (other.TryGetComponent(out IPickableIdentity pickup))
-        {
-            if (_candidate == pickup) _candidate = null;
-        }
+        if (_placed != null || !_canPlace) return;
+
+        SetVisualAlpha(0.25f);
     }
     #endregion
 }
