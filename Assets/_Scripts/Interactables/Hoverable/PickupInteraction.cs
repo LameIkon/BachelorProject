@@ -15,7 +15,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 	private readonly float _linearDamping;
 	private readonly bool _disablePickupOnPlacement;
 
-    public event Action<InteractionSignal> OnRaise;
+	private IInteractionSignalSource _signalSource;
 
     public PickableType PickableType { get; }
 
@@ -95,7 +95,10 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 
     #region Placemenet logic
 	private PlaceableSlot _currentSlot;
-	private bool TryPlace()
+
+    public event Action<InteractionSignal> OnRaise;
+
+    private bool TryPlace()
 	{
 		if (_currentSlot == null) return false;
 

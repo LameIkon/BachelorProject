@@ -10,5 +10,6 @@ public class HighlightModuleConfigSO : ScriptableObject
 [CreateAssetMenu(fileName = "Interaction Menu Module SO", menuName = "ScriptableObject/Interactable/Interaction Menu")]
 public class InteractionMenuModuleConfigSO : ScriptableObject
 {
-    //public
+    public UIToggleEventSO uiToggleEvent;
+    public CompendiumPageRequestEventSO compendiumPageEvent;
 }

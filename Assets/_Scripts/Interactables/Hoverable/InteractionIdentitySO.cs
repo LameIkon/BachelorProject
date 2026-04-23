@@ -4,6 +4,7 @@ using UnityEngine;
 public class InteractionIdentitySO : ScriptableObject
 {
     public PickableType type;
+    public CompendiumID compendiumID; 
     public Sprite icon;
     public string displayName;
 }

@@ -12,7 +12,7 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable
     [SerializeField] private HighlightModuleConfigSO _highlightConfig;
     [SerializeField] private InteractionMenuModuleConfigSO _menuConfig;
 
-
+    public event Action<InteractionSignal> OnRaise;
 	private HighlightModule _hoverModule;
     private InteractionMenuModule _interactionMenuModule;
     
@@ -23,12 +23,10 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable
     private IInteractionSignalSource _signalSource;
 
 
-    private List<IHoverable> _hoverables;
-
     private void Awake()
     {
         if (_highlightConfig != null) _hoverModule = new HighlightModule(gameObject, _highlightConfig);
-        //if (_interactionConfig != null) _interactionMenuModule = new InteractionMenuModule();
+        if (_interactionConfig != null) _interactionMenuModule = new InteractionMenuModule(_menuConfig, _interactionIdentity.compendiumID);
 
         if (_interactionConfig != null)
         {
@@ -37,8 +35,8 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable
             _interactionAction = result.interaction;
             _tickable = result.tickable;
             _triggerable = result.trigger;
+            _signalSource = result.signalSource;
 
-            _signalSource = _interactionAction as IInteractionSignalSource;
             if (_signalSource != null)
             {
                 _signalSource.OnRaise += HandleAction;
@@ -53,8 +51,16 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable
 
     public void Interact(Transform holdPoint = null) => _interactionAction?.Interact(holdPoint);
 
-    public void OnHoverEnter() => _hoverModule?.OnHoverEnter();     
-    public void OnHoverExit() => _hoverModule?.OnHoverExit();
+    public void OnHoverEnter()
+    {
+        _hoverModule?.OnHoverEnter();     
+        _interactionMenuModule?.OnHoverEnter();
+    }
+    public void OnHoverExit()
+    {
+        _hoverModule?.OnHoverExit();
+        _interactionMenuModule?.OnHoverEnter();
+    }
 
     private void FixedUpdate() => _tickable?.Tick();
 
@@ -104,6 +110,7 @@ public struct InteractionModuleResult
     public IInteractionAction interaction;
     public ITickableModule tickable;
     public ITriggerModule trigger;
+    public IInteractionSignalSource signalSource;
 }
 
 public enum InteractionSignalType
@@ -122,9 +129,3 @@ public interface IInteractionSignalSource
 {
     event Action<InteractionSignal> OnRaise;
 }
-
-//public interface IPickableIdentity
-//{
-//    PickableType Type { get; }
-//    Transform Transform { get; }
-//}

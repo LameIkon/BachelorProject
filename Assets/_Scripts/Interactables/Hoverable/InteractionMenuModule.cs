@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-public class InteractionMenuModule : IHoverable
+public class InteractionMenuModule
 {
     private readonly InteractionMenuHandler _interactionMenuHandler;
-    public InteractionMenuModule(InteractionMenuModuleConfigSO config)
+    public InteractionMenuModule(InteractionMenuModuleConfigSO config, CompendiumID id)
     {
-
+        _interactionMenuHandler = new InteractionMenuHandler(config.uiToggleEvent, config.compendiumPageEvent, id);
     }
 
 
