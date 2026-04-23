@@ -78,32 +78,6 @@ public class PlaceableSlot : MonoBehaviour
 
         if (_questCompleteEvent != null) _questCompleteEvent.Raise(QuestID.PlaceItem);
     }
-
-    private void RemoveFromSlot()
-    {
-        if (_placed == null) return;
-
-        // Enable physics
-        if (_setToKinematic && _placed.TryGetComponent(out Rigidbody rb))
-        {
-            rb.isKinematic = false;
-        }
-        
-        _placed = null;
-
-        if (_canPlaceOnce)
-        {
-            _canPlace = false;
-            SetVisualAlpha(0f);
-        }
-        else
-        {
-            _canPlace = true;
-            SetVisualAlpha(0.25f);
-
-        }
-    }
-
     #endregion
 
     #region Helpers
@@ -135,33 +109,6 @@ public class PlaceableSlot : MonoBehaviour
     #endregion
 
     #region Trigger methods
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (_placed != null || !_canPlace) return;
-
-    //    if (other.TryGetComponent(out PickupInteraction pickup))
-    //    {
-    //        if (pickup.type != _allowedType) return;
-
-    //        SetVisualAlpha(0.4f);
-    //    }
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.TryGetComponent(out IPickableIdentity pickup))
-    //    {
-    //        if (_candidate != pickup) return;
-            
-    //        _candidate = null;
-
-    //        if (_placed == null && _canPlace)
-    //        {
-    //            SetVisualAlpha(0.25f);
-    //        }
-            
-    //    }
-    //}
 
     public void OnCandidateEnter(InteractionIdentitySO identity)
     {
@@ -173,11 +120,26 @@ public class PlaceableSlot : MonoBehaviour
         }
     }
 
-    public void OnCandidateExit(InteractionIdentitySO identity)
+    public void OnCandidateExit(InteractionIdentitySO identity, Transform target)
     {
-        if (_placed != null || !_canPlace) return;
+        if (_placed == null) return;
+        if (target != _placed) return;
 
-        SetVisualAlpha(0.25f);
+        if (_setToKinematic && _placed.TryGetComponent(out Rigidbody rb))
+        {
+            rb.isKinematic = false;
+        }
+        
+        _placed = null;
+
+        if (_canPlaceOnce) return;
+
+        else
+        {
+            _canPlace = true;
+            SetVisualAlpha(0.25f);
+
+        }
     }
     #endregion
 }

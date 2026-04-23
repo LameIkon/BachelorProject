@@ -122,7 +122,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		{
 			if (_currentSlot != slot) return;
             _currentSlot = null;
-			slot.OnCandidateExit(_identity);
+			slot.OnCandidateExit(_identity, _ownerTransform);
 		}
     }
     #endregion
