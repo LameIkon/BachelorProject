@@ -11,11 +11,13 @@ public class PlaceableSlot : MonoBehaviour
 
 
     [Header("Options")]
-    [SerializeField] private bool _canPlaceOnce;
+    [SerializeField] private bool _placeOnlyOnce;
     [SerializeField] private bool _setToKinematic;
     [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
 
-    private Transform _placed;
+    private InteractionIdentitySO _currentCandidate; // An possible candidate to be placed in slot
+    private Transform _placed; // Object placed in slot
+
     private bool _canPlace;
     private Material _visualMaterial;
 
@@ -33,9 +35,9 @@ public class PlaceableSlot : MonoBehaviour
     # region Placement
     public bool TryPlace(InteractionIdentitySO identity, Transform target)
     {
-        if (!_canPlace) return false;
-        if (_placed != null) return false;
-        if (identity.type != _allowedType) return false;
+        if (!_canPlace) return false; // if we are even allowed to place
+        if (_placed != null) return false; // if slot occupied
+        if (identity.type != _allowedType) return false; // if it's of the type to allow placement
         
         AssignToSlot(target);
         return true;
@@ -69,11 +71,12 @@ public class PlaceableSlot : MonoBehaviour
         // Disable visual indication
         SetVisualAlpha(0f);
 
-        if (_canPlaceOnce)
+        if (_placeOnlyOnce)
         {
             _canPlace = false;
         }
 
+        _currentCandidate = null;
         Debug.Log("Assigned");
 
         if (_questCompleteEvent != null) _questCompleteEvent.Raise(QuestID.PlaceItem);
@@ -89,7 +92,7 @@ public class PlaceableSlot : MonoBehaviour
     public void EnableCanPlace(bool canPlace, bool canPlaceOne = true) // Called from outside if we want to adjust the settings
     {
         _canPlace = canPlace;
-        _canPlaceOnce = canPlaceOne;
+        _placeOnlyOnce = canPlaceOne;
 
         if (_placed == null)
         {
@@ -106,39 +109,51 @@ public class PlaceableSlot : MonoBehaviour
         _visualMaterial.SetFloat("_Alpha", value);
     }
 
-    #endregion
-
-    #region Trigger methods
-
-    public void OnCandidateEnter(InteractionIdentitySO identity)
-    {
-        if (_placed != null || !_canPlace) return;
-
-        if (identity.type == _allowedType)
-        {
-            SetVisualAlpha(0.4f);
-        }
-    }
-
-    public void OnCandidateExit(InteractionIdentitySO identity, Transform target)
+   private void RemovePlaced()
     {
         if (_placed == null) return;
-        if (target != _placed) return;
 
         if (_setToKinematic && _placed.TryGetComponent(out Rigidbody rb))
         {
             rb.isKinematic = false;
         }
-        
+
         _placed = null;
 
-        if (_canPlaceOnce) return;
-
-        else
+        if (_canPlace)
         {
-            _canPlace = true;
             SetVisualAlpha(0.25f);
+        }
+    }
 
+    #endregion
+
+    #region Trigger methods
+
+    public void OnSlotEnter(InteractionIdentitySO identity)
+    {
+        if (_placed != null || !_canPlace) return;
+        if (identity.type != _allowedType) return;
+        
+        _currentCandidate = identity;
+        SetVisualAlpha(0.4f);    
+    }
+
+    public void OnSlotExit(InteractionIdentitySO identity, Transform target)
+    {
+        if (_currentCandidate != null && _currentCandidate.type == identity.type)
+        {
+            _currentCandidate = null;
+
+            if (_placed == null && _canPlace)
+            {
+                SetVisualAlpha(0.25f);
+            }
+        }
+
+        if (_placed != null && target == _placed)
+        {
+            RemovePlaced();
         }
     }
     #endregion

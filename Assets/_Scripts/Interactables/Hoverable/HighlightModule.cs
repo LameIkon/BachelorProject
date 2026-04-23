@@ -9,12 +9,29 @@ public class HighlightModule
 
     private bool _canHighlight = true;
 
+
     public HighlightModule(GameObject owner, HighlightModuleConfigSO config)
     {
         _highlightHandler = new HighlightHandler(owner, config);
     }
 
-    public void SetEnabled(bool enabled)
+    public void HandleSignal(InteractionSignal signal)
+    {
+        switch (signal.InteractionAction)
+        {
+            case InteractionSignalType.PickedUp:
+                SetEnabled(false);
+                break;
+
+            case InteractionSignalType.Dropped:
+            case InteractionSignalType.Placed:
+                SetEnabled(true);
+                break;
+        }
+    }
+
+
+    private void SetEnabled(bool enabled)
     {
         _canHighlight = enabled;
 

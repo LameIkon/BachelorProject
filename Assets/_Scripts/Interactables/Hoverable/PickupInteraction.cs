@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerModule, IInteractionSignalSource
+public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerModule
 {
 	private readonly InteractionIdentitySO _identity;
 	private readonly Transform _ownerTransform;
@@ -15,15 +14,16 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 	private readonly float _linearDamping;
 	private readonly bool _disablePickupOnPlacement;
 
-	private IInteractionSignalSource _signalSource;
+	private IInteractionEvent _interactionEvent;
 
     public PickableType PickableType { get; }
 
-    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, InteractionIdentitySO identity)
+    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, InteractionIdentitySO identity, IInteractionEvent interactionEvent)
 	{
 		_rb = owner.GetComponent<Rigidbody>();
 		_identity = identity;
 		_ownerTransform = owner.transform;
+		_interactionEvent = interactionEvent;
 		
 		_followSpeed = config.followSpeed;
 		_linearDamping = config.linearDamping;
@@ -58,7 +58,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		_rb.useGravity = false;
 		_rb.linearDamping = _linearDamping;
 
-		OnRaise?.Invoke(new InteractionSignal { InteractionAction = InteractionSignalType.PickedUp });
+		_interactionEvent.Raise(new InteractionSignal { InteractionAction = InteractionSignalType.PickedUp });
 	}
 
 	private void Drop()
@@ -76,11 +76,11 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		if (placed) // Place found
 		{
 			_canBePickedUp = !_disablePickupOnPlacement;
-			OnRaise?.Invoke(new InteractionSignal { InteractionAction = InteractionSignalType.Placed });
+			_interactionEvent.Raise(new InteractionSignal { InteractionAction = InteractionSignalType.Placed });
 		}
 		else // No place found
 		{
-			OnRaise?.Invoke(new InteractionSignal { InteractionAction = InteractionSignalType.Dropped });
+			_interactionEvent.Raise(new InteractionSignal { InteractionAction = InteractionSignalType.Dropped });
 		}
 	}
 
@@ -94,9 +94,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
     }
 
     #region Placemenet logic
-	private PlaceableSlot _currentSlot;
-
-    public event Action<InteractionSignal> OnRaise;
+    private PlaceableSlot _currentSlot;
 
     private bool TryPlace()
 	{
@@ -115,7 +113,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
         if (other.TryGetComponent(out PlaceableSlot slot))
 		{	
 			_currentSlot = slot;
-			 slot.OnCandidateEnter(_identity);
+			 slot.OnSlotEnter(_identity);
 		}
     }
 
@@ -125,7 +123,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		{
 			if (_currentSlot != slot) return;
             _currentSlot = null;
-			slot.OnCandidateExit(_identity, _ownerTransform);
+			slot.OnSlotExit(_identity, _ownerTransform);
 		}
     }
     #endregion

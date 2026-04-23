@@ -2,5 +2,5 @@ using UnityEngine;
 
 public abstract class InteractionModuleConfigSO : ScriptableObject
 {
-    public abstract InteractionModuleResult Create(GameObject owner, InteractionIdentitySO identity);
+    public abstract InteractionModuleResult Create(GameObject owner, InteractionIdentitySO identity, IInteractionEvent interactEvent);
 }
