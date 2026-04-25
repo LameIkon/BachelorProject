@@ -10,6 +10,7 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable, IInt
     [Header("Optional Modules")]
     [SerializeField] private HighlightModuleConfigSO _highlightConfig;
     [SerializeField] private InteractionMenuModuleConfigSO _menuConfig;
+    [SerializeField] private InputPromptDataSO _inputPromptConfig;
 
     public event Action<InteractionSignal> raiseModuleComunicator;
 
@@ -64,26 +65,6 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable, IInt
     private void OnTriggerEnter(Collider other) => _triggerable?.OnTriggerEnterContext(other);
     private void OnTriggerExit(Collider other) => _triggerable?.OnTriggerExitContext(other);
 
-    /// <summary>
-    /// For modules to communicate with each other
-    /// </summary>
-    /// <param name="signal"></param>
-    //private void HandleAction(InteractionSignal signal)
-    //{
-    //    switch (signal.InteractionAction)
-    //    {
-    //        case InteractionSignalType.PickedUp:
-    //            _hoverModule?.SetEnabled(false);
-    //            break;
-
-    //        case InteractionSignalType.Dropped:
-    //            _hoverModule?.SetEnabled(true);
-    //            break;
-    //        case InteractionSignalType.Placed:
-    //            _hoverModule?.SetEnabled(true);
-    //            break;
-    //    }
-    //}
 
     public void Raise(InteractionSignal signal) => raiseModuleComunicator?.Invoke(signal);
 }

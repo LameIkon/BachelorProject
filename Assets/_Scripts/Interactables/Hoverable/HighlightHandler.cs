@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// This script handle rendering control
+/// </summary>
 public class HighlightHandler
 {
     private readonly Material _targetMaterial;

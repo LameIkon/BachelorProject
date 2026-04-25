@@ -52,7 +52,7 @@ public class UIModule : MonoBehaviour, IUISystem
                 return;
             case PageMode.MultiplePages:
                 // If we have a pageSetting we will create a method to switch pages
-                pageModule = new PageUIModule(_pageSettings);     
+                pageModule = new PageUIModule(_pageSettings, this.gameObject);     
                 pageModule?.SwitchPage(0);
                 return;
 

@@ -40,7 +40,7 @@ public class InteractionMenuHandler : IDisposable
     }
 
     /// <summary>
-    /// Toggle ui
+    /// Toggle interaction menu from event call
     /// </summary>
     private void OnInteract()
     {

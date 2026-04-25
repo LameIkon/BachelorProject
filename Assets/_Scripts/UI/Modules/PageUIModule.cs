@@ -13,12 +13,12 @@ public class PageUIModule
     private readonly Dictionary<int, GameObject> _pages; // index of a page (like a page in a book)
     private readonly PageHelper _pageHelper;
 
-    public PageUIModule(PageSettings settings)
+    public PageUIModule(PageSettings settings, GameObject owner)
     {
         _pageSettings = settings;
         _pageHelper = new PageHelper();
         _pages = _pageHelper.InitializePages(_pageSettings.pageContainer);
-        SetupButtons();
+        SetupButtons(owner);
     }
 
     public void SwitchPage(int pageKey)
@@ -26,12 +26,12 @@ public class PageUIModule
         _pageHelper.SwitchToPage(_pages, pageKey);
     }
 
-    private void SetupButtons() // Find all buttons 
+    private void SetupButtons(GameObject owner) // Find all buttons 
     {
-        Debug.Log($"{this} Setup Buttons");
+        Debug.Log($"{owner.name} Setup Buttons");
         foreach (Button button in _pageSettings.pageContainer.GetComponentsInChildren<Button>(true))
         {
-            Debug.Log("button found");
+            Debug.Log($"button found for {owner.name}");
             if (button.TryGetComponent(out PageButton pageButton)) // If button have the PageButton script
             {
                 Debug.Log(pageButton.pageIndex);
@@ -51,13 +51,18 @@ public class PageUIModule
 
         foreach (Button button in _pageSettings.buttonContainer.GetComponentsInChildren<Button>(true))
         {
+            Debug.Log($"button found for {owner.name}");
             if (button.TryGetComponent(out PageButton pageButton)) // If button have the PageButton script
             {
                 int pageKey = pageButton.pageIndex;
                 button.onClick.AddListener(() => { 
                     SwitchPage(pageKey);
-                    //Debug.Log(pageKey);
+                    Debug.Log(pageKey);
                     }); 
+            }
+            else
+            {
+                Debug.Log($"PageButton script not found on {button.name}");
             }
         }
     }

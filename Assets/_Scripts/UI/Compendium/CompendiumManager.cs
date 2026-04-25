@@ -70,7 +70,7 @@ public class CompendiumManager : MonoBehaviour
         // Initialize Button to pages
         for (int i = 0; i < _pages.Count; i++)
         {
-            GameObject button = Instantiate(_buttonPrefab, _buttonList);
+            GameObject button = Instantiate(_buttonPrefab, _buttonList); // Bug here. We need to register this to UImanager to initialize pageButton script to hold the event to be able to switch event
             PageButton pageButton = button.GetComponent<PageButton>();
             pageButton.pageIndex = i; // Set index of button to corresponding page index
 
