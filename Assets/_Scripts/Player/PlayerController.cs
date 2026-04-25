@@ -12,7 +12,7 @@ namespace _Scripts
 
         [SerializeField] private AudioPlayer _player;
 
-        [SerializeField] private UIHoverDataEventSO _hoverEvent;
+        [SerializeField] private InputPromptProvideEventSO _hoverEvent;
 
         private Rigidbody _rb;
         private Camera _camera;

@@ -12,7 +12,7 @@ public class InteractionUtility
     // Hoverable 
     private IHoverable _currentHovered;
     private IHoverable _newHovered;
-    private UIHoverDataEventSO _hoverEvent;
+    private InputPromptProvideEventSO _hoverEvent;
 
 
     /// <summary>
@@ -21,7 +21,7 @@ public class InteractionUtility
     /// <param name="camera">Camera reference to do raycast from</param>
     /// <param name="pickUpPoint">Objects that can be picked; Place object in front of player like you are holding it</param>
     /// <param name="interactRange">The range of which you can reach</param>
-    public InteractionUtility(Camera camera, Transform pickUpPoint, float interactRange, UIHoverDataEventSO hoverDataEvent)
+    public InteractionUtility(Camera camera, Transform pickUpPoint, float interactRange, InputPromptProvideEventSO hoverDataEvent)
     {
         // Interaction related
         _camera = camera;

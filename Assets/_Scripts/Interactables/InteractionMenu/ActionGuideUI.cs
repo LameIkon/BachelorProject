@@ -4,7 +4,7 @@ using UnityEngine;
 public class ActionGuideUI : MonoBehaviour
 {
     [Header("Events")]
-    [SerializeField] private UIHoverDataEventSO _uiHoverDataEvent;
+    [SerializeField] private InputPromptProvideEventSO _uiHoverDataEvent;
 
     [Header("Components")]
     [SerializeField] private TextMeshProUGUI _icon;

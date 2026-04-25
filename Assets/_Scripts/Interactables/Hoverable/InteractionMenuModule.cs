@@ -23,13 +23,3 @@ public class InteractionMenuModule
         _interactionMenuHandler.OnHoverState(false);
     }
 }
-
-public class InputPromptModule
-{
-    private readonly InputPromptDataSO _inputPromptData;
-    public InputPromptModule(InputPromptDataSO promptData)
-    {
-        _inputPromptData = promptData;
-    }
-
-}

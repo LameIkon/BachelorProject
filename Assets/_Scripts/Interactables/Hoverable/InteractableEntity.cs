@@ -14,9 +14,11 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable, IInt
 
     public event Action<InteractionSignal> raiseModuleComunicator;
 
-    private HighlightModule _hoverModule;
+    // modules created if neseccary configs is available
+    private HighlightModule _highlightModule;
     private InteractionMenuModule _interactionMenuModule;
-    
+    private InputPromptModule _inputPromptModule;
+
     // Some may be null. It depends on interactionConfig for what it's purpose is
     private IInteractionAction _interactionAction;
     private ITickableModule _tickable;
@@ -25,13 +27,20 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable, IInt
 
     private void Awake()
     {
+        // Try create highlight
         if (_highlightConfig != null)
         {
-            _hoverModule = new HighlightModule(gameObject, _highlightConfig);
-            raiseModuleComunicator += _hoverModule.HandleSignal;
+            _highlightModule = new HighlightModule(gameObject, _highlightConfig);
+            raiseModuleComunicator += _highlightModule.HandleSignal;
         }
+
+        // Try create interaction menu
         if (_menuConfig != null) _interactionMenuModule = new InteractionMenuModule(_menuConfig, _interactionIdentity.compendiumID);
 
+        // Try create input prompt display
+        if (_interactionIdentity.prompts.Count > 0) _inputPromptModule = new InputPromptModule(_interactionIdentity.prompts);
+
+        // Create core interaction (eg. should it be a button or an item)
         if (_interactionConfig != null)
         {
             InteractionModuleResult result = _interactionConfig.Create(gameObject, _interactionIdentity, this);
@@ -44,19 +53,19 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable, IInt
 
     private void OnDisable()
     {
-        if (_hoverModule != null) raiseModuleComunicator -= _hoverModule.HandleSignal;
+        if (_highlightModule != null) raiseModuleComunicator -= _highlightModule.HandleSignal;
     }
 
     public void Interact(Transform holdPoint = null) => _interactionAction?.Interact(holdPoint);
 
     public void OnHoverEnter()
     {
-        _hoverModule?.OnHoverEnter();     
+        _highlightModule?.OnHoverEnter();     
         _interactionMenuModule?.OnHoverEnter();
     }
     public void OnHoverExit()
     {
-        _hoverModule?.OnHoverExit();
+        _highlightModule?.OnHoverExit();
         _interactionMenuModule?.OnHoverEnter();
     }
 
