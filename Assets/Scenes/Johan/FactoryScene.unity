@@ -15444,18 +15444,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1425290060}
     m_Modifications:
-    - target: {fileID: 2118771970758266852, guid: bcd8c28278331d34180b2879e510925f, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2426079489220543308, guid: bcd8c28278331d34180b2879e510925f, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2802217007138947388, guid: bcd8c28278331d34180b2879e510925f, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2973254572078914879, guid: bcd8c28278331d34180b2879e510925f, type: 3}
       propertyPath: m_Name
       value: Reset Terminal
@@ -15500,14 +15488,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5436723157290934794, guid: bcd8c28278331d34180b2879e510925f, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6779431475470593128, guid: bcd8c28278331d34180b2879e510925f, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: -5829926960871157125, guid: fba38edc64d0e7b4bb66ee7dca36b732, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
