@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIHoverHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UIHoverProgressClosingHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private UIToggleEventSO _toggleEvent;
     [SerializeField] private float _exitDelay = 0.5f; // Default delay for UI exit

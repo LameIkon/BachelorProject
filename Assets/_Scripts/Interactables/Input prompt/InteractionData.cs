@@ -16,6 +16,9 @@ using UnityEngine;
 //    //InteractionData GetInteractionData();
 //}
 
+/// <summary>
+/// 
+/// </summary>
 public struct InteractionData
 {
     public string icon;

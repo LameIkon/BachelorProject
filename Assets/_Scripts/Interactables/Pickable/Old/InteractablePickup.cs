@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody), typeof(Collider))]
-public class InteractablePickup : HoverableInteractable, IPickable
+public class InteractablePickup : HoverableInteractable
 {
 	[Header("Events")]
 	[SerializeField] private StoreDataEventSO _storeDataEvent;
