@@ -5,10 +5,12 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
 {
     [Header("Required")]
     [SerializeField] private InteractionIdentitySO _interactionIdentity;
-    [SerializeField] private InteractionDefinitionSO _interactionDefinition;
+    
+    [Header("Optional Behaviours")]
+    //[SerializeField] private InteractionDefinitionSO _interactionDefinition;
+    [SerializeField] private InteractionBehaviourConfigSO _interactionBehaviourConfig;
 
     [Header("Optional Modules")]
-    [SerializeField] private InteractionBehaviourConfigSO _interactionBehaviourConfig;
     [SerializeField] private HighlightModuleConfigSO _highlightConfig;
     [SerializeField] private InteractionMenuModuleConfigSO _menuConfig;
     [SerializeField] private InputPromptModuleConfigSO _inputPromptConfig;
@@ -46,7 +48,7 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
         // Create core interaction (eg. should it be a button or an item)
         if (_interactionBehaviourConfig != null)
         {
-            InteractionModuleResult result = _interactionBehaviourConfig.Create(gameObject, _interactionIdentity, _interactionDefinition, this);
+            InteractionModuleResult result = _interactionBehaviourConfig.Create(gameObject, _interactionIdentity, this);
 
             _interactionAction = result.interaction;
             _tickable = result.tickable;

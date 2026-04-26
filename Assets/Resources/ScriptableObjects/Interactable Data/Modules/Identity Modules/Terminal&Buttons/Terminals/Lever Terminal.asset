@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6f9b5b7215396b4bbbc8d9a957cc7c0, type: 3}
-  m_Name: Plank
+  m_Name: Lever Terminal
   m_EditorClassIdentifier: Assembly-CSharp::InteractionIdentitySO
-  type: 3
-  compendiumID: 25
+  compendiumID: 14
   prompts:
   - {fileID: 11400000, guid: 69b44fe5ff326cf48adfe400d436dbf3, type: 2}
-  - {fileID: 11400000, guid: 252b269273ad3ed4780ff3536dd6fff0, type: 2}

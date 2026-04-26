@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92fd489913b24b74d90186ca3b43101e, type: 3}
-  m_Name: Right Click Localized Content SO
+  m_Name: E Interact Localized Content SO 1
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedContentSO
   entries:
   - language: 0
     title: 
-    description: for at inspicere
+    description: for at interagere
   - language: 1
     title: 
-    description: to inspect
+    description: to interact

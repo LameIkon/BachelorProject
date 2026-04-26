@@ -11,11 +11,11 @@ public class PickupModuleConfigSO : InteractionBehaviourConfigSO
     /// </summary>
     /// <param name="owner"></param>
     /// <returns></returns>
-    public override InteractionModuleResult Create(GameObject owner, InteractionIdentitySO identity, InteractionDefinitionSO definition, IInteractionEvent interactionEvent)
+    public override InteractionModuleResult Create(GameObject owner, InteractionIdentitySO identity, IInteractionEvent interactionEvent)
     {
-        if (definition is not PickupInteractionDefinitionSO pickupDef)
+        if (identity is not PickupInteractionIdentitySO pickupDef)
         {
-            Debug.LogError($"Expected {nameof(PickupInteractionDefinitionSO)} but got {definition?.GetType().Name}");
+            Debug.LogError($"Expected {nameof(PickupInteractionIdentitySO)} but got {identity?.GetType().Name}");
             return default;
         }
 

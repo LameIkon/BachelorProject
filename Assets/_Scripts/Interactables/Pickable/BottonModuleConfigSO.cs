@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Button Interaction SO", menuName = "ScriptableObject/Interactable/Button")]
@@ -9,11 +8,11 @@ public class BottonModuleConfigSO : InteractionBehaviourConfigSO
     /// </summary>
     /// <param name="owner"></param>
     /// <returns></returns>
-    public override InteractionModuleResult Create(GameObject owner, InteractionIdentitySO identity, InteractionDefinitionSO definition,  IInteractionEvent interactionEvent)
+    public override InteractionModuleResult Create(GameObject owner, InteractionIdentitySO identity,  IInteractionEvent interactionEvent)
     {
-        if (definition is not ButtonInteractionDefinitionSO buttonDef)
+        if (identity is not ButtonInteractionIdentitySO buttonDef)
         {
-            Debug.LogError($"Expected {nameof(ButtonInteractionDefinitionSO)} but got {definition?.GetType().Name}");
+            Debug.LogError($"Expected {nameof(ButtonInteractionIdentitySO)} but got {identity?.GetType().Name}");
             return default;
         }
 

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2931e8b9bdde8b848a59bb860d2832c9, type: 3}
+  m_Name: Reset2Button
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonInteractionIdentitySO
+  compendiumID: 7
+  prompts:
+  - {fileID: 11400000, guid: 69b44fe5ff326cf48adfe400d436dbf3, type: 2}
+  - {fileID: 11400000, guid: 97afef72c24a8a24ca464bc9911f71cb, type: 2}
+  buttonEvent: {fileID: 11400000, guid: ab4116fc9b025c549a93be519ae6408a, type: 2}
+  buttonData: {fileID: 11400000, guid: 603e2696bef3e9945947e7c53d7e6037, type: 2}

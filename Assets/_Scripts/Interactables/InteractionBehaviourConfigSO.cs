@@ -3,5 +3,5 @@ using UnityEngine;
 
 public abstract class InteractionBehaviourConfigSO : ScriptableObject
 {
-    public abstract InteractionModuleResult Create(GameObject owner, InteractionIdentitySO identity, InteractionDefinitionSO definition, IInteractionEvent interactEvent);
+    public abstract InteractionModuleResult Create(GameObject owner, InteractionIdentitySO identity, IInteractionEvent interactEvent);
 }

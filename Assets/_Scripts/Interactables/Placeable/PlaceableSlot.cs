@@ -14,7 +14,7 @@ public class PlaceableSlot : MonoBehaviour
     [SerializeField] private bool _setToKinematic;
     [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
 
-    private PickupInteractionDefinitionSO _currentCandidate; // An possible candidate to be placed in slot
+    private PickupInteractionIdentitySO _currentCandidate; // An possible candidate to be placed in slot
     private Transform _placed; // Object placed in slot
 
     private bool _canPlace;
@@ -32,11 +32,11 @@ public class PlaceableSlot : MonoBehaviour
 
 
     # region Placement
-    public bool TryPlace(PickupInteractionDefinitionSO definition, Transform target)
+    public bool TryPlace(PickupInteractionIdentitySO identity, Transform target)
     {
         if (!_canPlace) return false; // if we are even allowed to place
         if (_placed != null) return false; // if slot occupied
-        if (definition.type != _allowedType) return false; // if it's of the type to allow placement
+        if (identity.type != _allowedType) return false; // if it's of the type to allow placement
         
         AssignToSlot(target);
         return true;
@@ -129,18 +129,18 @@ public class PlaceableSlot : MonoBehaviour
 
     #region Trigger methods
 
-    public void OnSlotEnter(PickupInteractionDefinitionSO definition)
+    public void OnSlotEnter(PickupInteractionIdentitySO identity)
     {
         if (_placed != null || !_canPlace) return;
-        if (definition.type != _allowedType) return;
+        if (identity.type != _allowedType) return;
         
-        _currentCandidate = definition;
+        _currentCandidate = identity;
         SetVisualAlpha(0.4f);    
     }
 
-    public void OnSlotExit(PickupInteractionDefinitionSO definition, Transform target)
+    public void OnSlotExit(PickupInteractionIdentitySO identity, Transform target)
     {
-        if (_currentCandidate != null && _currentCandidate.type == definition.type)
+        if (_currentCandidate != null && _currentCandidate.type == identity.type)
         {
             _currentCandidate = null;
 

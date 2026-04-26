@@ -10,7 +10,7 @@ public class WorldButton : IInteractionAction
 	private readonly Animator _animator;
 	private readonly int _animInt = Animator.StringToHash("PhysicalButton");
 
-	public WorldButton(GameObject owner, BottonModuleConfigSO config, ButtonInteractionDefinitionSO buttonDefinition)
+	public WorldButton(GameObject owner, BottonModuleConfigSO config, ButtonInteractionIdentitySO buttonDefinition)
 	{
 		_buttonData = buttonDefinition.buttonData;
 		_onButtonEvent = buttonDefinition.buttonEvent;

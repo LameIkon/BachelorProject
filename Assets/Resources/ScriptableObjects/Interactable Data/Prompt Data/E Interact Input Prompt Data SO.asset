@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf469e20b66539b49b84a7090259416c, type: 3}
-  m_Name: E Input Prompt Data SO 1
+  m_Name: E Interact Input Prompt Data SO
   m_EditorClassIdentifier: Assembly-CSharp::InputPromptDataSO
   actionRef: {fileID: -7526132599778404749, guid: 244539df15b66724ea5d651136ea03ed, type: 3}
   bindingIndex: 0
-  textContent: {fileID: 11400000, guid: 19ffc58a83c23d04aa9c4cb47381f28e, type: 2}
+  textContent: {fileID: 11400000, guid: 9925da1660c52b74bb3a75b57dbe73c2, type: 2}

@@ -3,7 +3,7 @@ using UnityEngine;
 public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerModule
 {
 	private readonly InteractionIdentitySO _identity;
-	private readonly PickupInteractionDefinitionSO _definition;
+	private readonly PickupInteractionIdentitySO _definition;
 	private readonly Transform _ownerTransform;
 	private readonly Rigidbody _rb;
 	
@@ -19,7 +19,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 
     public PickableType PickableType { get; }
 
-    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, InteractionIdentitySO identity, PickupInteractionDefinitionSO definition, IInteractionEvent interactionEvent)
+    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, InteractionIdentitySO identity, PickupInteractionIdentitySO definition, IInteractionEvent interactionEvent)
 	{
 		_rb = owner.GetComponent<Rigidbody>();
 		_identity = identity;
