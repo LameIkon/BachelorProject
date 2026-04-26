@@ -3,6 +3,7 @@ using UnityEngine;
 public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerModule
 {
 	private readonly InteractionIdentitySO _identity;
+	private readonly PickupInteractionDefinitionSO _definition;
 	private readonly Transform _ownerTransform;
 	private readonly Rigidbody _rb;
 	
@@ -18,16 +19,17 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 
     public PickableType PickableType { get; }
 
-    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, InteractionIdentitySO identity, IInteractionEvent interactionEvent)
+    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, InteractionIdentitySO identity, PickupInteractionDefinitionSO definition, IInteractionEvent interactionEvent)
 	{
 		_rb = owner.GetComponent<Rigidbody>();
 		_identity = identity;
+		_definition = definition;
 		_ownerTransform = owner.transform;
 		_interactionEvent = interactionEvent;
 		
 		_followSpeed = config.followSpeed;
 		_linearDamping = config.linearDamping;
-		_disablePickupOnPlacement = config.disablePickupOnPlacement;
+		_disablePickupOnPlacement = _definition.disablePickupOnPlacement;
 	}
 
 	public void SetPickupState(bool state)
@@ -101,7 +103,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 	{
 		if (_currentSlot == null) return false;
 
-		if (_currentSlot.TryPlace(_identity, _ownerTransform))
+		if (_currentSlot.TryPlace(_definition, _ownerTransform))
 		{
 			return true;
 		}
@@ -114,7 +116,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
         if (other.TryGetComponent(out PlaceableSlot slot))
 		{	
 			_currentSlot = slot;
-			 slot.OnSlotEnter(_identity);
+			 slot.OnSlotEnter(_definition);
 		}
     }
 
@@ -124,7 +126,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		{
 			if (_currentSlot != slot) return;
             _currentSlot = null;
-			slot.OnSlotExit(_identity, _ownerTransform);
+			slot.OnSlotExit(_definition, _ownerTransform);
 		}
     }
     #endregion

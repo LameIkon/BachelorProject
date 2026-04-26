@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class InteractableEntity : MonoBehaviour, IInteractionEvent
 {
-    [Header("Interaction Module")]
-    [SerializeField] private InteractionModuleConfigSO _interactionConfig;
+    [Header("Required")]
     [SerializeField] private InteractionIdentitySO _interactionIdentity;
+    [SerializeField] private InteractionDefinitionSO _interactionDefinition;
 
     [Header("Optional Modules")]
+    [SerializeField] private InteractionBehaviourConfigSO _interactionBehaviourConfig;
     [SerializeField] private HighlightModuleConfigSO _highlightConfig;
     [SerializeField] private InteractionMenuModuleConfigSO _menuConfig;
     [SerializeField] private InputPromptModuleConfigSO _inputPromptConfig;
@@ -43,9 +44,9 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
         if (_interactionIdentity.prompts.Count > 0) _inputPromptModule = new InputPromptModule(_interactionIdentity.prompts, _inputPromptConfig);
 
         // Create core interaction (eg. should it be a button or an item)
-        if (_interactionConfig != null)
+        if (_interactionBehaviourConfig != null)
         {
-            InteractionModuleResult result = _interactionConfig.Create(gameObject, _interactionIdentity, this);
+            InteractionModuleResult result = _interactionBehaviourConfig.Create(gameObject, _interactionIdentity, _interactionDefinition, this);
 
             _interactionAction = result.interaction;
             _tickable = result.tickable;

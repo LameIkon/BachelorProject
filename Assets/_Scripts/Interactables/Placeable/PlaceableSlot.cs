@@ -14,7 +14,7 @@ public class PlaceableSlot : MonoBehaviour
     [SerializeField] private bool _setToKinematic;
     [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
 
-    private InteractionIdentitySO _currentCandidate; // An possible candidate to be placed in slot
+    private PickupInteractionDefinitionSO _currentCandidate; // An possible candidate to be placed in slot
     private Transform _placed; // Object placed in slot
 
     private bool _canPlace;
@@ -32,11 +32,11 @@ public class PlaceableSlot : MonoBehaviour
 
 
     # region Placement
-    public bool TryPlace(InteractionIdentitySO identity, Transform target)
+    public bool TryPlace(PickupInteractionDefinitionSO definition, Transform target)
     {
         if (!_canPlace) return false; // if we are even allowed to place
         if (_placed != null) return false; // if slot occupied
-        if (identity.type != _allowedType) return false; // if it's of the type to allow placement
+        if (definition.type != _allowedType) return false; // if it's of the type to allow placement
         
         AssignToSlot(target);
         return true;
@@ -129,18 +129,18 @@ public class PlaceableSlot : MonoBehaviour
 
     #region Trigger methods
 
-    public void OnSlotEnter(InteractionIdentitySO identity)
+    public void OnSlotEnter(PickupInteractionDefinitionSO definition)
     {
         if (_placed != null || !_canPlace) return;
-        if (identity.type != _allowedType) return;
+        if (definition.type != _allowedType) return;
         
-        _currentCandidate = identity;
+        _currentCandidate = definition;
         SetVisualAlpha(0.4f);    
     }
 
-    public void OnSlotExit(InteractionIdentitySO identity, Transform target)
+    public void OnSlotExit(PickupInteractionDefinitionSO definition, Transform target)
     {
-        if (_currentCandidate != null && _currentCandidate.type == identity.type)
+        if (_currentCandidate != null && _currentCandidate.type == definition.type)
         {
             _currentCandidate = null;
 

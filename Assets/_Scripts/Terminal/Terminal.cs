@@ -3,7 +3,7 @@ using System;
 using TMPro;
 
 [RequireComponent(typeof(AudioSource))]
-public class Terminal : HoverableInteractable
+public class Terminal : MonoBehaviour
 {
 
     [SerializeField] private TerminalData _data;
