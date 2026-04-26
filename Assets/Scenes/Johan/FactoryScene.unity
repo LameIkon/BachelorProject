@@ -1284,6 +1284,7 @@ MonoBehaviour:
   _interactionIdentity: {fileID: 11400000, guid: 029f3c22670ae5d449db5e00b1f6feaa, type: 2}
   _highlightConfig: {fileID: 11400000, guid: 9d7fa875b47d61745b8b0b0868c2438d, type: 2}
   _menuConfig: {fileID: 11400000, guid: 2190a49b369f0b04dadf77d68258087a, type: 2}
+  _inputPromptConfig: {fileID: 11400000, guid: 9dc86ffab7840fb4f8adea432fbfb099, type: 2}
 --- !u!54 &238421949
 Rigidbody:
   m_ObjectHideFlags: 0

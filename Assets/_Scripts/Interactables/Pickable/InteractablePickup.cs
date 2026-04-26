@@ -101,10 +101,10 @@ public class InteractablePickup : HoverableInteractable, IPickable
 
 			RaiseInteractionEvent(PickableAction.PlacedInSlot);
 		}
-		else
-		{
-			RaiseInteractionEvent(PickableAction.Dropped);
-		}
+		//else
+		//{
+		//	RaiseInteractionEvent(PickableAction.Dropped);
+		//}
 	}
 
     #region Raise Event

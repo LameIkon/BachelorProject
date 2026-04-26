@@ -10,9 +10,8 @@ public class InteractionUtility
     private readonly float _pickUpDistance;
 
     // Hoverable 
-    private IHoverable _currentHovered;
-    private IHoverable _newHovered;
-    private InputPromptProvideEventSO _hoverEvent;
+    private InteractableEntity _currentHovered;
+    private InteractableEntity _newHovered;
 
 
     /// <summary>
@@ -21,13 +20,12 @@ public class InteractionUtility
     /// <param name="camera">Camera reference to do raycast from</param>
     /// <param name="pickUpPoint">Objects that can be picked; Place object in front of player like you are holding it</param>
     /// <param name="interactRange">The range of which you can reach</param>
-    public InteractionUtility(Camera camera, Transform pickUpPoint, float interactRange, InputPromptProvideEventSO hoverDataEvent)
+    public InteractionUtility(Camera camera, Transform pickUpPoint, float interactRange)
     {
         // Interaction related
         _camera = camera;
         _pickUpPoint = pickUpPoint;
         _pickUpDistance = interactRange;
-        _hoverEvent = hoverDataEvent;
         
         _interactionMask = LayerMask.GetMask("Interactable"); // Specific layer we can interact with
 
@@ -47,9 +45,9 @@ public class InteractionUtility
     {
         if (InputReader.s_State != InputState.Game) return; // Can't interact if we aren't in Game input state
 
-        if (RaycastInteractable(pos, out RaycastResult result))
+        if (RaycastInteractable(pos, out InteractableEntity entity))
         {
-            result.Interactable?.Interact(_pickUpPoint);
+            entity.Interact(_pickUpPoint);
         }
     }
 
@@ -58,11 +56,9 @@ public class InteractionUtility
     {
         _newHovered = null;
 
-        if (RaycastInteractable(pos, out RaycastResult result))
+        if (RaycastInteractable(pos, out InteractableEntity entity))
         {
-            //Debug.Log(result.Hoverable);
-            _newHovered = result.Hoverable;
-
+            _newHovered = entity;
         }
 
 
@@ -75,58 +71,29 @@ public class InteractionUtility
         if (_newHovered != null && _newHovered != _currentHovered) // Enter new
         {
             _newHovered.OnHoverEnter();
-
-            if (_newHovered is IInteractable interactable)
-            {
-                //_hoverEvent?.Raise(interactable.GetInteractionData()); // Update ActionGuide ui to display the required options for interaction
-            }
+            
             _currentHovered = _newHovered;
         }
     }
 
     /// <summary>
     /// A boolean detection for the interactable objects in the game the player can interact with. If any interactables found return true
-    /// And give out the interactable. Will only return one to work with. IPickable has priority
+    /// And give out the interactable.
     /// </summary>
     /// <param name="ray">Raycast from center of camera</param>
-    /// <param name="pickable">Types that the player can pick up</param>
-    /// <param name="interactable">Types the player can interact with, eg. press a button</param>
     /// <returns></returns>
-    private bool RaycastInteractable(Vector2 screenPos, out RaycastResult result)
+    private bool RaycastInteractable(Vector2 screenPos, out InteractableEntity entity)
     {
-        Ray ray = _camera.ScreenPointToRay(screenPos);
+        entity = null;
 
-        result = new RaycastResult();
+        Ray ray = _camera.ScreenPointToRay(screenPos);
 
         if (Physics.Raycast(ray, out RaycastHit hit, _pickUpDistance, _interactionMask))
         {
             
-            // Optional Ihoverable detection found
-            if (hit.collider.TryGetComponent(out IHoverable foundHoverable))
-            {
-                result.Hoverable = foundHoverable;
-            }
-            
-            // Try get interactable interface
-            if (hit.collider.TryGetComponent(out IPickable pickable)) // Try get IPickable first
-            {
-                result.Interactable = pickable;
-            }
-            else if (hit.collider.TryGetComponent(out IInteractable normalInteractable)) // Otherwise get IInteractable
-            {
-                result.Interactable = normalInteractable;
-            }
+            return hit.collider.TryGetComponent(out entity);
         }
 
-        return result.Interactable != null || result.Hoverable != null;
-    }
-
-    /// <summary>
-    /// Used for Raycast Detection to store Ihoverable and IInterable interfaces
-    /// </summary>
-    private struct RaycastResult
-    {
-        public IInteractable Interactable;
-        public IHoverable Hoverable;
+        return false;
     }
 }

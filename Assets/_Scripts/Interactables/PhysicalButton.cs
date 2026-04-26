@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(Animator))]
-public sealed class PhysicalButton : HoverableInteractable, IInteractable 
+public sealed class PhysicalButton : HoverableInteractable
 {
 	[Header("Button Settings")]
     [SerializeField] private ButtonData _buttonData;

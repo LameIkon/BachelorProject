@@ -1,5 +1,5 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "Highlight Interaction Module SO", menuName = "ScriptableObject/Interactable/Highlight")]
+[CreateAssetMenu(fileName = "Highlight Interaction Module SO", menuName = "ScriptableObject/Interactable/Config/Highlight Config")]
 public class HighlightModuleConfigSO : ScriptableObject
 {
     public int materialIndex = 1;

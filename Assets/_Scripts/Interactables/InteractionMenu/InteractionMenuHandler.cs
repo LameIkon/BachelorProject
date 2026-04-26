@@ -22,22 +22,22 @@ public class InteractionMenuHandler : IDisposable
 
     }
 
-    public void OnHoverState(bool state)
-    {
-        _isSelected = state;
+    //public void OnHoverState(bool state)
+    //{
+    //    _isSelected = state;
 
-        if (state)
-        {
-            Debug.Log("Open");
-            _uiToggleEvent.Raise(new UIRequest(UIType.ActionGuide, UIInteractionSource.UIInternal, UIAction.Open));
-        }
-        else if (!state)
-        {
-            Debug.Log("Close");
-            _uiToggleEvent.Raise(new UIRequest(UIType.ActionGuide, UIInteractionSource.UIInternal, UIAction.Close));
-        }
+    //    if (state)
+    //    {
+    //        Debug.Log("Open");
+    //        _uiToggleEvent.Raise(new UIRequest(UIType.ActionGuide, UIInteractionSource.UIInternal, UIAction.Open));
+    //    }
+    //    else if (!state)
+    //    {
+    //        Debug.Log("Close");
+    //        _uiToggleEvent.Raise(new UIRequest(UIType.ActionGuide, UIInteractionSource.UIInternal, UIAction.Close));
+    //    }
 
-    }
+    //}
 
     /// <summary>
     /// Toggle interaction menu from event call

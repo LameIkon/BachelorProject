@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable, IInteractionEvent
+public class InteractableEntity : MonoBehaviour, IInteractionEvent
 {
     [Header("Interaction Module")]
     [SerializeField] private InteractionModuleConfigSO _interactionConfig;
@@ -10,7 +10,7 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable, IInt
     [Header("Optional Modules")]
     [SerializeField] private HighlightModuleConfigSO _highlightConfig;
     [SerializeField] private InteractionMenuModuleConfigSO _menuConfig;
-    [SerializeField] private InputPromptDataSO _inputPromptConfig;
+    [SerializeField] private InputPromptModuleConfigSO _inputPromptConfig;
 
     public event Action<InteractionSignal> raiseModuleComunicator;
 
@@ -24,6 +24,8 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable, IInt
     private ITickableModule _tickable;
     private ITriggerModule _triggerable;
 
+    // Getters
+    public InputPromptModule InputPromptModule => _inputPromptModule;
 
     private void Awake()
     {
@@ -38,7 +40,7 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable, IInt
         if (_menuConfig != null) _interactionMenuModule = new InteractionMenuModule(_menuConfig, _interactionIdentity.compendiumID);
 
         // Try create input prompt display
-        if (_interactionIdentity.prompts.Count > 0) _inputPromptModule = new InputPromptModule(_interactionIdentity.prompts);
+        if (_interactionIdentity.prompts.Count > 0) _inputPromptModule = new InputPromptModule(_interactionIdentity.prompts, _inputPromptConfig);
 
         // Create core interaction (eg. should it be a button or an item)
         if (_interactionConfig != null)
@@ -61,12 +63,14 @@ public class InteractableEntity : MonoBehaviour, IHoverable, IInteractable, IInt
     public void OnHoverEnter()
     {
         _highlightModule?.OnHoverEnter();     
+        _inputPromptModule?.OnHoverEnter();
         _interactionMenuModule?.OnHoverEnter();
     }
     public void OnHoverExit()
     {
         _highlightModule?.OnHoverExit();
-        _interactionMenuModule?.OnHoverEnter();
+        _inputPromptModule?.OnHoverExit();
+        _interactionMenuModule?.OnHoverExit();
     }
 
     private void FixedUpdate() => _tickable?.Tick();

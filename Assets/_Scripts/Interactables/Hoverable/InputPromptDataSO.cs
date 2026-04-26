@@ -9,8 +9,7 @@ public class InputPromptDataSO : ScriptableObject
 	[SerializeField] private int bindingIndex;
 
 	[Header("Description")]
-
-	public string actionDescription;
+	public LocalizedContentSO textContent;
 
 	public string ActionSymbol => actionRef.action.GetBindingDisplayString(bindingIndex).ToUpper();
 }

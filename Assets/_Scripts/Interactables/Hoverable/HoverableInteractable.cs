@@ -15,13 +15,13 @@ public abstract class HoverableInteractable : MonoBehaviour, IHoverable
 
     public virtual void OnHoverEnter()
     {
-		_interactionMenu?.InteractionMenuHandler?.OnHoverState(true);
+		//_interactionMenu?.InteractionMenuHandler?.OnHoverState(true);
 		_highlightHandler?.SetHighlight(true);
     }
 
     public virtual void OnHoverExit()
     {
-		_interactionMenu?.InteractionMenuHandler?.OnHoverState(false);
+		//_interactionMenu?.InteractionMenuHandler?.OnHoverState(false);
 		_highlightHandler?.SetHighlight(false);
     }
 

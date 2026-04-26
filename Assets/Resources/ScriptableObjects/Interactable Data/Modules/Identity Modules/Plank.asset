@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractionIdentitySO
   type: 3
   compendiumID: 25
-  icon: {fileID: 0}
-  displayName: test plank
+  prompts:
+  - {fileID: 11400000, guid: 69b44fe5ff326cf48adfe400d436dbf3, type: 2}
+  - {fileID: 11400000, guid: 252b269273ad3ed4780ff3536dd6fff0, type: 2}

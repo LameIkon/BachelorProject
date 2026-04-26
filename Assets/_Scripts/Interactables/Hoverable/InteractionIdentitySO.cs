@@ -6,8 +6,6 @@ public class InteractionIdentitySO : ScriptableObject
 {
     public PickableType type;
     public CompendiumID compendiumID; 
-    public Sprite icon;
-    public string displayName;
 
     [Header("Input Prompts")]
     public List<InputPromptDataSO> prompts;

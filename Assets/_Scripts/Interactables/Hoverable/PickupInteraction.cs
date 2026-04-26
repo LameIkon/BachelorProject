@@ -37,6 +37,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 
 	public void Interact(Transform holdPoint)
 	{
+		Debug.Log("Will try pickup");
 		if (!_canBePickedUp) return;
 
 		if (!_isPickedUp)

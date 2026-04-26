@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf469e20b66539b49b84a7090259416c, type: 3}
+  m_Name: Right Mouse Input Prompt Data SO
+  m_EditorClassIdentifier: Assembly-CSharp::InputPromptDataSO
+  actionRef: {fileID: -8332628104942859738, guid: 244539df15b66724ea5d651136ea03ed, type: 3}
+  bindingIndex: 0
+  textContent: {fileID: 11400000, guid: 3cfacf077941e214f86805ff7d2f49bd, type: 2}

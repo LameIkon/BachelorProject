@@ -12,8 +12,6 @@ namespace _Scripts
 
         [SerializeField] private AudioPlayer _player;
 
-        [SerializeField] private InputPromptProvideEventSO _hoverEvent;
-
         private Rigidbody _rb;
         private Camera _camera;
         private CharacterController _controller;
@@ -105,7 +103,7 @@ namespace _Scripts
             _camera = GetComponentInChildren<Camera>();
 
 
-            _interactionUtility = new InteractionUtility(_camera, _pickUpPoint, _interactDistance, _hoverEvent);
+            _interactionUtility = new InteractionUtility(_camera, _pickUpPoint, _interactDistance);
             //_mouseUtility = new MouseUtility(_staticMouseCanvas);
             Reset();
         }
