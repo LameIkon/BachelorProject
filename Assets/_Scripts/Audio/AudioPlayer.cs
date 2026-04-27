@@ -8,11 +8,14 @@ public class AudioPlayer : ScriptableObject, ISoundPlayer
 {
 	[SerializeField] AudioMixerGroup _mixerGroup;
 	[SerializeField] AudioClip[] _clips;
-	[SerializeField, Tooltip("This value goes from 0 to 1")] RangedFloat _volumeRange;
-	[SerializeField, Tooltip("This value goes from -3 to 3")] RangedFloat _pitchRange;
+	[SerializeField, RangedFloat(0,1)] RangedFloat _volumeRange;
+	[SerializeField, RangedFloat(-3,3)] RangedFloat _pitchRange;
 	[SerializeField] bool _is3D;
+<<<<<<< Updated upstream
 	[SerializeField] bool _loops;
 
+=======
+>>>>>>> Stashed changes
 
 	public void PlaySound(AudioSource source) 
 	{
@@ -34,8 +37,8 @@ public class AudioPlayer : ScriptableObject, ISoundPlayer
 		else source.spatialBlend = 0;
 
 		source.clip = _clips[Random.Range(0, _clips.Length)];
-		source.volume = _volumeRange.Value;
-		source.pitch = _pitchRange.Value;
+		source.volume = _volumeRange;
+		source.pitch = _pitchRange;
 
 		source.Play();
 	}
@@ -49,12 +52,17 @@ public class RangedFloat
 	[SerializeField] private float _minValue;
 	[SerializeField] private float _maxValue;
 
-	public float Value 
+	private float Value 
 	{
 		get 
 		{
 			return Random.Range(_minValue, _maxValue);
 		}
+	}
+
+	public static implicit operator float(RangedFloat rangedFloat) 
+	{
+		return rangedFloat.Value;
 	}
 
 }

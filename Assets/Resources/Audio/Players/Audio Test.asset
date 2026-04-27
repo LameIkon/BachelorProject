@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Audio Test
   m_EditorClassIdentifier: Assembly-CSharp::AudioPlayer
   _mixerGroup: {fileID: 4991979802742565857, guid: 3edb22aa6c8f252489d46398a74a914b, type: 2}
+<<<<<<< Updated upstream
   _clips:
   - {fileID: 8300000, guid: f91daeb7ff0f6b7448a7dca9d698e372, type: 3}
   - {fileID: 8300000, guid: 23e05d0248794474e921345a0bc6f1a9, type: 3}
@@ -28,3 +29,13 @@ MonoBehaviour:
     _maxValue: 1.1
   _is3D: 1
   _loops: 0
+=======
+  _clips: []
+  _volumeRange:
+    _minValue: 0.704
+    _maxValue: 0.9608889
+  _pitchRange:
+    _minValue: 0.9286678
+    _maxValue: 1.0926671
+  _is3D: 0
+>>>>>>> Stashed changes
