@@ -2,10 +2,8 @@ using UnityEngine;
 using System;
 using TMPro;
 
-[RequireComponent(typeof(AudioSource))]
 public class Terminal : MonoBehaviour
 {
-
     [SerializeField] private TerminalData _data;
     [SerializeField] private TerminalEventSO _onTerminalEvent;
     [SerializeField] private TerminalStartEventSO _onTerminalStartEvent;
@@ -14,7 +12,6 @@ public class Terminal : MonoBehaviour
     
     public Action<bool> OnSpeedChange;
     private TextMeshProUGUI _terminalScreen;
-    private AudioSource _audioSource;
 
 	#region Unity Method
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,7 +21,6 @@ public class Terminal : MonoBehaviour
         _onTerminalStartEvent.Raise(this);
         _terminalScreen = GetComponentInChildren<TextMeshProUGUI>();
         _terminalScreen.text = gameObject.name;
-        _audioSource = GetComponent<AudioSource>();
     }
 
 	private void OnEnable()
@@ -57,11 +53,6 @@ public class Terminal : MonoBehaviour
 	private void ChangeStatus(ButtonType type)
     {
         _onTerminalEvent.Raise(type, _data.Type);
-        if (_data.ButtonSound != null) 
-        {
-            _audioSource.clip = _data.ButtonSound;
-            _audioSource.Play();
-        }
     }
 
 

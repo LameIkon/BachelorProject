@@ -11,7 +11,7 @@ public class PickupModuleConfigSO : InteractionBehaviourConfigSO
     /// </summary>
     /// <param name="owner"></param>
     /// <returns></returns>
-    public override InteractionModuleResult Create(GameObject owner, InteractionIdentitySO identity, IInteractionEvent interactionEvent)
+    public override InteractionModuleResult Create(GameObject owner, InteractionIdentitySO identity, IInteractionEvent interactionEvent, AudioSource source)
     {
         if (identity is not PickupInteractionIdentitySO pickupDef)
         {
@@ -19,7 +19,7 @@ public class PickupModuleConfigSO : InteractionBehaviourConfigSO
             return default;
         }
 
-        PickupInteraction module = new PickupInteraction(owner, this, identity, pickupDef, interactionEvent);
+        PickupInteraction module = new PickupInteraction(owner, this, pickupDef, interactionEvent, source);
         return new InteractionModuleResult
         {
             interaction = module,

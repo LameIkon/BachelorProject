@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class InteractableEntity : MonoBehaviour, IInteractionEvent
 {
     [Header("Required")]
@@ -27,6 +28,9 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
     private ITickableModule _tickable;
     private ITriggerModule _triggerable;
 
+    // Audio Source
+    private AudioSource _audioSource;
+
     // Getters
     public InputPromptModule InputPromptModule => _inputPromptModule;
 
@@ -45,10 +49,13 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
         // Try create input prompt display
         if (_interactionIdentity.prompts.Count > 0) _inputPromptModule = new InputPromptModule(_interactionIdentity.prompts, _inputPromptConfig);
 
+        // Get AudioSource
+        _audioSource = GetComponent<AudioSource>();
+
         // Create core interaction (eg. should it be a button or an item)
         if (_interactionBehaviourConfig != null)
         {
-            InteractionModuleResult result = _interactionBehaviourConfig.Create(gameObject, _interactionIdentity, this);
+            InteractionModuleResult result = _interactionBehaviourConfig.Create(gameObject, _interactionIdentity, this, _audioSource);
 
             _interactionAction = result.interaction;
             _tickable = result.tickable;

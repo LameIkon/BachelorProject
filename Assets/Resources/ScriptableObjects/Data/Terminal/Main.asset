@@ -13,4 +13,3 @@ MonoBehaviour:
   m_Name: Main
   m_EditorClassIdentifier: Assembly-CSharp::TerminalData
   _type: 0
-  _buttonPressSound: {fileID: 8300000, guid: 9734ba03eea4f6e45bbe33a2943f989f, type: 3}

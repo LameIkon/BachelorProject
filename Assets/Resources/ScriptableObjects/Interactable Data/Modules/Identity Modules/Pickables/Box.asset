@@ -19,3 +19,4 @@ MonoBehaviour:
   type: 3
   disablePickupOnPlacement: 0
   weight: 0
+  _audioPlayer: {fileID: 11400000, guid: 256b53bd9d4f1c143a691de1a43a81d0, type: 2}

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba64dee46ecbc98449c81a9f7dccfa9d, type: 3}
+  m_Name: Next Level Sound Player SO
+  m_EditorClassIdentifier: Assembly-CSharp::AudioPlayer
+  _mixerGroup: {fileID: 4991979802742565857, guid: 3edb22aa6c8f252489d46398a74a914b, type: 2}
+  _clips:
+  - {fileID: 8300000, guid: 9734ba03eea4f6e45bbe33a2943f989f, type: 3}
+  _volumeRange:
+    _minValue: 1
+    _maxValue: 1
+  _pitchRange:
+    _minValue: 1.0879997
+    _maxValue: 1.8133335
+  _is3D: 0
+  _loops: 0

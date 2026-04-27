@@ -1,9 +1,10 @@
 using UnityEngine;
 
+
 public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerModule
 {
-	private readonly InteractionIdentitySO _identity;
-	private readonly PickupInteractionIdentitySO _definition;
+	//private readonly InteractionIdentitySO _identity;
+	private readonly PickupInteractionIdentitySO _identity;
 	private readonly Transform _ownerTransform;
 	private readonly Rigidbody _rb;
 	
@@ -14,22 +15,23 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 	private readonly float _followSpeed;
 	private readonly float _linearDamping;
 	private readonly bool _disablePickupOnPlacement;
+	private readonly AudioSource _audioSource;
 
 	private IInteractionEvent _interactionEvent;
 
     public PickableType PickableType { get; }
 
-    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, InteractionIdentitySO identity, PickupInteractionIdentitySO definition, IInteractionEvent interactionEvent)
+    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, PickupInteractionIdentitySO identity, IInteractionEvent interactionEvent, AudioSource source)
 	{
 		_rb = owner.GetComponent<Rigidbody>();
 		_identity = identity;
-		_definition = definition;
 		_ownerTransform = owner.transform;
 		_interactionEvent = interactionEvent;
 		
 		_followSpeed = config.followSpeed;
 		_linearDamping = config.linearDamping;
-		_disablePickupOnPlacement = _definition.disablePickupOnPlacement;
+		_disablePickupOnPlacement = _identity.disablePickupOnPlacement;
+		_audioSource = source;
 	}
 
 	public void SetPickupState(bool state)
@@ -50,6 +52,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		{
 			Drop();
 		}
+		_identity.PlayAudio(_audioSource);
 	}
 
 	private void PickUp(Transform holdPoint)
@@ -103,7 +106,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 	{
 		if (_currentSlot == null) return false;
 
-		if (_currentSlot.TryPlace(_definition, _ownerTransform))
+		if (_currentSlot.TryPlace(_identity, _ownerTransform))
 		{
 			return true;
 		}
@@ -116,7 +119,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
         if (other.TryGetComponent(out PlaceableSlot slot))
 		{	
 			_currentSlot = slot;
-			 slot.OnSlotEnter(_definition);
+			 slot.OnSlotEnter(_identity);
 		}
     }
 
@@ -126,7 +129,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		{
 			if (_currentSlot != slot) return;
             _currentSlot = null;
-			slot.OnSlotExit(_definition, _ownerTransform);
+			slot.OnSlotExit(_identity, _ownerTransform);
 		}
     }
     #endregion

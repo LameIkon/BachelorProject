@@ -3269,6 +3269,10 @@ PrefabInstance:
       propertyPath: _hoverEvent
       value: 
       objectReference: {fileID: 11400000, guid: a702fec6d6256a74991b6f4c10727833, type: 2}
+    - target: {fileID: 1322482228698620613, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
+      propertyPath: _playerFootsteps
+      value: 
+      objectReference: {fileID: 11400000, guid: 8461b0f4584269a488f4acceff7efaf5, type: 2}
     - target: {fileID: 2188616589692227097, guid: c2b7d01218133f5468d5b67f2bcd4560, type: 3}
       propertyPath: m_Name
       value: Player

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody), typeof(Collider), typeof(AudioSource))]
-public class InteractablePickup : HoverableInteractable, IPickable
+public class InteractablePickup : HoverableInteractable
 {
 	[Header("Events")]
 	[SerializeField] private StoreDataEventSO _storeDataEvent;
@@ -11,7 +11,7 @@ public class InteractablePickup : HoverableInteractable, IPickable
 	[SerializeField] private bool _disablePickupOnPlacement;
 
 	[Header("Audio Player")]
-	[SerializeField] private AudioPlayer _player;
+	[SerializeField] private AudioPlayerSO _player;
 	
 	private Transform _holdPoint;
 	private Rigidbody _rb;
@@ -160,15 +160,5 @@ public class InteractablePickup : HoverableInteractable, IPickable
 		base.OnHoverExit();
 	}
 
-    public InteractionData GetInteractionData()
-    {
-		InteractionData data = new InteractionData
-		{
-			icon = _interactionDescriptionEvent?.ActionSymbol,
-			description = _interactionDescriptionEvent?.actionDescription,
-		};
-
-        return data;
-    }
     #endregion
 }

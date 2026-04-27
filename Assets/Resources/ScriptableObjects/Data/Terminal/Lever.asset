@@ -13,4 +13,3 @@ MonoBehaviour:
   m_Name: Lever
   m_EditorClassIdentifier: Assembly-CSharp::TerminalData
   _type: 3
-  _buttonPressSound: {fileID: 8300000, guid: f263d3a27e8e3cd4683c23fdb1d0d669, type: 3}

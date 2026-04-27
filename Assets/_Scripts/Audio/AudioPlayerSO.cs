@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "Audio Player", menuName = "ScriptableObject/Audio/Player")]
-public class AudioPlayer : ScriptableObject, ISoundPlayer
+public class AudioPlayerSO : ScriptableObject, ISoundPlayer
 {
 	[SerializeField] AudioMixerGroup _mixerGroup;
 	[SerializeField] AudioClip[] _clips;

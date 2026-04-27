@@ -9,21 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f804a29fb7a0254e91b10a944320b07, type: 3}
-  m_Name: Drop Player
+  m_Script: {fileID: 11500000, guid: ba64dee46ecbc98449c81a9f7dccfa9d, type: 3}
+  m_Name: Drop Plank Player SO
   m_EditorClassIdentifier: Assembly-CSharp::AudioPlayer
   _mixerGroup: {fileID: 4991979802742565857, guid: 3edb22aa6c8f252489d46398a74a914b, type: 2}
   _clips:
   - {fileID: 8300000, guid: 848646c042c3a7f48a650a4b6145c35e, type: 3}
   - {fileID: 8300000, guid: 89f01dd4cf5d69e409c945427a7fe53a, type: 3}
-  - {fileID: 8300000, guid: a0a7e1399308cb447a4ccf48c27a5347, type: 3}
-  - {fileID: 8300000, guid: 3800c39ec3c344b429c1cd78c923a297, type: 3}
-  - {fileID: 8300000, guid: 49beeba50de467347a3f22b4d6a56af3, type: 3}
   _volumeRange:
-    _minValue: 0.7
-    _maxValue: 0.8
+    _minValue: 0.5857779
+    _maxValue: 0.7031113
   _pitchRange:
-    _minValue: 0.9
-    _maxValue: 1.1
+    _minValue: 0.777334
+    _maxValue: 1.218667
   _is3D: 1
   _loops: 0

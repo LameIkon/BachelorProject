@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent (typeof(AudioSource))]
 public class AudioLooper : MonoBehaviour
 {
-    [SerializeField] private AudioPlayer _player;
+    [SerializeField] private AudioPlayerSO _player;
 
     private AudioSource _source;
 
