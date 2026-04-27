@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Rigidbody), typeof(Collider))]
-public class InteractablePickup : HoverableInteractable
+[RequireComponent (typeof(Rigidbody), typeof(Collider), typeof(AudioSource))]
+public class InteractablePickup : HoverableInteractable, IPickable
 {
 	[Header("Events")]
 	[SerializeField] private StoreDataEventSO _storeDataEvent;
@@ -9,10 +9,13 @@ public class InteractablePickup : HoverableInteractable
 	[Header("Pickup Settings")]
 	[SerializeField] private PickableType _pickableType;
 	[SerializeField] private bool _disablePickupOnPlacement;
-	[SerializeField] private UIInteractionDescriptionEventSO _interactionDescriptionEvent;
+
+	[Header("Audio Player")]
+	[SerializeField] private AudioPlayer _player;
 	
 	private Transform _holdPoint;
 	private Rigidbody _rb;
+	private AudioSource _audioSource;
 
 	private bool _isPickedUp;
 	private bool _canBePickedUp = true;
@@ -32,6 +35,7 @@ public class InteractablePickup : HoverableInteractable
 		base.Awake();
 
 		_rb = GetComponent<Rigidbody>();
+		_audioSource = GetComponent<AudioSource>();
         _isPickedUp = false;      
     }
 
@@ -61,6 +65,8 @@ public class InteractablePickup : HoverableInteractable
 		{
 			Drop();
 		}
+
+		if(_player != null) _player.PlaySound(_audioSource);
 	}
 
 	private void PickUp(Transform holdPoint)

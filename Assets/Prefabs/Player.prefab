@@ -272,6 +272,7 @@ MonoBehaviour:
   _playerData: {fileID: 11400000, guid: 26b8981cec030484590c7ab34eb10690, type: 2}
   _interactDistance: 3
   _pickUpPoint: {fileID: 2258111007380512439}
+  _playerFootsteps: {fileID: 11400000, guid: 35ac67eb3391a6b44a468d98a59e6ab8, type: 2}
 --- !u!82 &6410207233324674901
 AudioSource:
   m_ObjectHideFlags: 0
