@@ -52,6 +52,7 @@ public class Terminal : MonoBehaviour
 	/// <param name="type">The type of button that was pressed.</param>
 	private void ChangeStatus(ButtonType type)
     {
+        Debug.Log($"Terminal: {gameObject.name}, Button type: {type}, Terminal type: {_data.Type}");
         _onTerminalEvent.Raise(type, _data.Type);
     }
 

@@ -16,5 +16,5 @@ MonoBehaviour:
   prompts:
   - {fileID: 11400000, guid: 69b44fe5ff326cf48adfe400d436dbf3, type: 2}
   - {fileID: 11400000, guid: 97afef72c24a8a24ca464bc9911f71cb, type: 2}
-  buttonEvent: {fileID: 11400000, guid: ab4116fc9b025c549a93be519ae6408a, type: 2}
+  buttonEvent: {fileID: 11400000, guid: c501868c0ab2fdb48a93439dde603d58, type: 2}
   buttonData: {fileID: 11400000, guid: 603e2696bef3e9945947e7c53d7e6037, type: 2}

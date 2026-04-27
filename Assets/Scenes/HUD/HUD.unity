@@ -2150,6 +2150,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 117758924030381289, guid: 69fdc991cdcacd04aab4724953202bae, type: 3}
+      propertyPath: _audioPlayer
+      value: 
+      objectReference: {fileID: 11400000, guid: 709b44000d881504a80ba3086d950c48, type: 2}
     - target: {fileID: 598780042804789379, guid: 69fdc991cdcacd04aab4724953202bae, type: 3}
       propertyPath: m_Pivot.x
       value: 0
