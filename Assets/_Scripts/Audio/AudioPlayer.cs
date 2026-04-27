@@ -11,11 +11,8 @@ public class AudioPlayer : ScriptableObject, ISoundPlayer
 	[SerializeField, RangedFloat(0,1)] RangedFloat _volumeRange;
 	[SerializeField, RangedFloat(-3,3)] RangedFloat _pitchRange;
 	[SerializeField] bool _is3D;
-<<<<<<< Updated upstream
 	[SerializeField] bool _loops;
 
-=======
->>>>>>> Stashed changes
 
 	public void PlaySound(AudioSource source) 
 	{
