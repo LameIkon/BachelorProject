@@ -10,19 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f804a29fb7a0254e91b10a944320b07, type: 3}
-  m_Name: Audio Test
+  m_Name: Drop Player
   m_EditorClassIdentifier: Assembly-CSharp::AudioPlayer
   _mixerGroup: {fileID: 4991979802742565857, guid: 3edb22aa6c8f252489d46398a74a914b, type: 2}
   _clips:
-  - {fileID: 8300000, guid: f91daeb7ff0f6b7448a7dca9d698e372, type: 3}
-  - {fileID: 8300000, guid: 23e05d0248794474e921345a0bc6f1a9, type: 3}
-  - {fileID: 8300000, guid: 4e266be837273c84d912fb9a861afc75, type: 3}
-  - {fileID: 8300000, guid: e0dd8289068c78d4eab3714ea2fa54ac, type: 3}
-  - {fileID: 8300000, guid: fd6351ae218a50a4f8f28e3e7b2d1cc8, type: 3}
-  - {fileID: 8300000, guid: ed2882ff5cf6d2a469b8d5fdac23df15, type: 3}
+  - {fileID: 8300000, guid: 848646c042c3a7f48a650a4b6145c35e, type: 3}
+  - {fileID: 8300000, guid: 89f01dd4cf5d69e409c945427a7fe53a, type: 3}
+  - {fileID: 8300000, guid: a0a7e1399308cb447a4ccf48c27a5347, type: 3}
+  - {fileID: 8300000, guid: 3800c39ec3c344b429c1cd78c923a297, type: 3}
+  - {fileID: 8300000, guid: 49beeba50de467347a3f22b4d6a56af3, type: 3}
   _volumeRange:
-    _minValue: 0.5
-    _maxValue: 0.7
+    _minValue: 0.7
+    _maxValue: 0.8
   _pitchRange:
     _minValue: 0.9
     _maxValue: 1.1

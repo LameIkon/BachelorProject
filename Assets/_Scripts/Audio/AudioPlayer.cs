@@ -11,7 +11,7 @@ public class AudioPlayer : ScriptableObject, ISoundPlayer
 	[SerializeField, Tooltip("This value goes from 0 to 1")] RangedFloat _volumeRange;
 	[SerializeField, Tooltip("This value goes from -3 to 3")] RangedFloat _pitchRange;
 	[SerializeField] bool _is3D;
-
+	[SerializeField] bool _loops;
 
 
 	public void PlaySound(AudioSource source) 
@@ -28,6 +28,8 @@ public class AudioPlayer : ScriptableObject, ISoundPlayer
 			return;
 		}
 
+		source.loop = _loops;
+
 		if (_is3D) source.spatialBlend = 1;
 		else source.spatialBlend = 0;
 
@@ -36,7 +38,6 @@ public class AudioPlayer : ScriptableObject, ISoundPlayer
 		source.pitch = _pitchRange.Value;
 
 		source.Play();
-	
 	}
 
 
@@ -57,8 +58,6 @@ public class RangedFloat
 	}
 
 }
-
-
 
 public interface ISoundPlayer 
 {

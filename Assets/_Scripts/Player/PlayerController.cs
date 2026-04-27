@@ -10,11 +10,12 @@ namespace _Scripts
 
         [SerializeField] private Transform _pickUpPoint;
 
-        [SerializeField] private AudioPlayer _player;
+        [SerializeField] private AudioPlayer _playerFootsteps;
 
         private Rigidbody _rb;
         private Camera _camera;
         private CharacterController _controller;
+        private AudioSource _audioSource;
 
         // Used for the movement.
         private Vector3 _moveDirection;
@@ -101,6 +102,7 @@ namespace _Scripts
         {
             _rb = GetComponent<Rigidbody>();
             _camera = GetComponentInChildren<Camera>();
+            _audioSource = GetComponent<AudioSource>();
 
 
             _interactionUtility = new InteractionUtility(_camera, _pickUpPoint, _interactDistance);
@@ -114,6 +116,10 @@ namespace _Scripts
             _controller.Move(Movement() * _playerData.MovementSpeed * Time.deltaTime); // Moves the player, needs to be in update else it jitters.
             _interactionUtility.OnUpdate();
             if (!_controller.isGrounded) _controller.Move(Vector3.down * _playerData.FallSpeed * Time.deltaTime); // Moves the player to the ground
+            if (!_audioSource.isPlaying && Movement() != Vector3.zero) 
+            {
+                _playerFootsteps.PlaySound(_audioSource);
+            }
 		}
 
 
