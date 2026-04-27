@@ -1,16 +1,18 @@
+using System;
 using UnityEngine;
 
-public class InteractionMenuModule
+public class InteractionMenuModule : IDisposable
 {
     //private readonly InteractionMenuHandler _interactionMenuHandler;
 
     private readonly UIToggleEventSO _uiToggleEvent;
     private readonly CompendiumPageRequestEventSO _compendiumPageEvent;
     private readonly CompendiumID _compendiumID;  
-    
+    private Action<InteractionSignal> _moduleCommunicatorEvent;
+
     private bool _isSelected;
 
-    public InteractionMenuModule(InteractionMenuModuleConfigSO config, CompendiumID id)
+    public InteractionMenuModule(InteractionMenuModuleConfigSO config, CompendiumID id, Action<InteractionSignal> moduleCommunicatorEvent)
     {
         //_interactionMenuHandler = new InteractionMenuHandler(config.uiToggleEvent, config.compendiumPageEvent, id);
 
@@ -19,6 +21,7 @@ public class InteractionMenuModule
         _compendiumID = id;
 
         InputReader.s_TogglePopUp += OnInteract;
+        _moduleCommunicatorEvent = moduleCommunicatorEvent;
     }
 
 

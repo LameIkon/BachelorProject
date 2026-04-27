@@ -1,22 +1,28 @@
+using System;
 using UnityEngine;
 
 /// <summary>
 /// This module enables highlight of objects on hovering
 /// </summary>
-public class HighlightModule
+public class HighlightModule : IDisposable
 {
     private readonly HighlightHandler _highlightHandler;
 
     private bool _canHighlight = true;
 
+    private Action<InteractionSignal> _moduleCommunicatorEvent;
 
-    public HighlightModule(GameObject owner, HighlightModuleConfigSO config)
+
+    public HighlightModule(GameObject owner, HighlightModuleConfigSO config, Action<InteractionSignal> action)
     {
         _highlightHandler = new HighlightHandler(owner, config);
+        _moduleCommunicatorEvent = action;
+        _moduleCommunicatorEvent += HandleSignal;
     }
 
     public void HandleSignal(InteractionSignal signal)
     {
+        Debug.Log("Handle interaction");
         switch (signal.InteractionAction)
         {
             case InteractionSignalType.PickedUp:
@@ -55,5 +61,10 @@ public class HighlightModule
     {
         _highlightHandler.SetHighlight(false);
 
+    }
+
+    public void Dispose()
+    {
+        _moduleCommunicatorEvent -= HandleSignal;
     }
 }

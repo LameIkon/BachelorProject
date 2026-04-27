@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -28,6 +29,9 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
     private ITickableModule _tickable;
     private ITriggerModule _triggerable;
 
+    // Dispose events
+    private List<IDisposable> _dispsables = new();
+
     // Audio Source
     private AudioSource _audioSource;
 
@@ -39,12 +43,17 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
         // Try create highlight
         if (_highlightConfig != null)
         {
-            _highlightModule = new HighlightModule(gameObject, _highlightConfig);
-            raiseModuleComunicator += _highlightModule.HandleSignal;
+            _highlightModule = new HighlightModule(gameObject, _highlightConfig, raiseModuleComunicator);
+            _dispsables.Add(_highlightModule);
+            //raiseModuleComunicator += _highlightModule.HandleSignal;
         }
 
         // Try create interaction menu
-        if (_menuConfig != null) _interactionMenuModule = new InteractionMenuModule(_menuConfig, _interactionIdentity.compendiumID);
+        if (_menuConfig != null)
+        {
+            _interactionMenuModule = new InteractionMenuModule(_menuConfig, _interactionIdentity.compendiumID, raiseModuleComunicator);
+            _dispsables.Add(_interactionMenuModule);
+        }
 
         // Try create input prompt display
         if (_interactionIdentity.prompts.Count > 0) _inputPromptModule = new InputPromptModule(_interactionIdentity.prompts, _inputPromptConfig);
@@ -65,7 +74,12 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
 
     private void OnDisable()
     {
-        if (_highlightModule != null) raiseModuleComunicator -= _highlightModule.HandleSignal;
+        foreach (IDisposable disposable in _dispsables)
+        {
+            disposable.Dispose();
+        }
+        
+        //if (_highlightModule != null) raiseModuleComunicator -= _highlightModule.HandleSignal;
     }
 
     public void Interact(Transform holdPoint = null) => _interactionAction?.Interact(holdPoint);
