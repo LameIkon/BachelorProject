@@ -50,6 +50,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnApplicationQuit()
     {
+        _mouseHandler.Dispose();
         _dataHandlerSO.DataHandler.SaveData();
     }
 
