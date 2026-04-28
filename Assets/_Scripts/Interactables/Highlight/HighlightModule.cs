@@ -10,14 +10,15 @@ public class HighlightModule : IDisposable
 
     private bool _canHighlight = true;
 
-    private Action<InteractionSignal> _moduleCommunicatorEvent;
+    private readonly IInteractionEvent _interactionEvent;
 
 
-    public HighlightModule(GameObject owner, HighlightModuleConfigSO config, Action<InteractionSignal> action)
+    public HighlightModule(GameObject owner, HighlightModuleConfigSO config, IInteractionEvent interactionEvent)
     {
         _highlightHandler = new HighlightHandler(owner, config);
-        _moduleCommunicatorEvent = action;
-        _moduleCommunicatorEvent += HandleSignal;
+        _interactionEvent = interactionEvent;
+
+        _interactionEvent.raiseModuleComunicator += HandleSignal;
     }
 
     public void HandleSignal(InteractionSignal signal)
@@ -65,6 +66,6 @@ public class HighlightModule : IDisposable
 
     public void Dispose()
     {
-        _moduleCommunicatorEvent -= HandleSignal;
+        _interactionEvent.raiseModuleComunicator -= HandleSignal;
     }
 }

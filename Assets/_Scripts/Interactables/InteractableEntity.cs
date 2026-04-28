@@ -43,7 +43,7 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
         // Try create highlight
         if (_highlightConfig != null)
         {
-            _highlightModule = new HighlightModule(gameObject, _highlightConfig, raiseModuleComunicator);
+            _highlightModule = new HighlightModule(gameObject, _highlightConfig, this);
             _dispsables.Add(_highlightModule);
             //raiseModuleComunicator += _highlightModule.HandleSignal;
         }
