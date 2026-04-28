@@ -49,7 +49,7 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
         }
 
         // Try create interaction menu
-        if (_menuConfig != null)
+        if (_menuConfig != null && _interactionIdentity != null)
         {
             _interactionMenuModule = new InteractionMenuModule(_menuConfig, _interactionIdentity.compendiumID, raiseModuleComunicator);
             _dispsables.Add(_interactionMenuModule);
