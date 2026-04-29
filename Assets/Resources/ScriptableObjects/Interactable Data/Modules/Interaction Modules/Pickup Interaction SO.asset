@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PickupModuleConfigSO
   followSpeed: 20
   linearDamping: 2
-  disablePickupOnPlacement: 0
+  _storeData: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}

@@ -1286,6 +1286,7 @@ MonoBehaviour:
   _highlightConfig: {fileID: 11400000, guid: 9d7fa875b47d61745b8b0b0868c2438d, type: 2}
   _menuConfig: {fileID: 11400000, guid: 2190a49b369f0b04dadf77d68258087a, type: 2}
   _inputPromptConfig: {fileID: 11400000, guid: 9dc86ffab7840fb4f8adea432fbfb099, type: 2}
+  _storeData: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
 --- !u!54 &238421949
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2503,6 +2504,7 @@ MonoBehaviour:
   _highlightConfig: {fileID: 11400000, guid: d6a06fcf33fc1d543a5279e84c1dac21, type: 2}
   _menuConfig: {fileID: 11400000, guid: 2190a49b369f0b04dadf77d68258087a, type: 2}
   _inputPromptConfig: {fileID: 11400000, guid: 9dc86ffab7840fb4f8adea432fbfb099, type: 2}
+  _storeData: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
 --- !u!54 &460619331
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4351,6 +4353,7 @@ MonoBehaviour:
   _highlightConfig: {fileID: 11400000, guid: d6a06fcf33fc1d543a5279e84c1dac21, type: 2}
   _menuConfig: {fileID: 11400000, guid: 2190a49b369f0b04dadf77d68258087a, type: 2}
   _inputPromptConfig: {fileID: 11400000, guid: 9dc86ffab7840fb4f8adea432fbfb099, type: 2}
+  _storeData: {fileID: 0}
 --- !u!65 &716129821
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4699,6 +4702,7 @@ MonoBehaviour:
   _highlightConfig: {fileID: 11400000, guid: d6a06fcf33fc1d543a5279e84c1dac21, type: 2}
   _menuConfig: {fileID: 11400000, guid: 2190a49b369f0b04dadf77d68258087a, type: 2}
   _inputPromptConfig: {fileID: 11400000, guid: 9dc86ffab7840fb4f8adea432fbfb099, type: 2}
+  _storeData: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
 --- !u!54 &751191616
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5702,6 +5706,7 @@ MonoBehaviour:
   _highlightConfig: {fileID: 11400000, guid: d6a06fcf33fc1d543a5279e84c1dac21, type: 2}
   _menuConfig: {fileID: 11400000, guid: 2190a49b369f0b04dadf77d68258087a, type: 2}
   _inputPromptConfig: {fileID: 11400000, guid: 9dc86ffab7840fb4f8adea432fbfb099, type: 2}
+  _storeData: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
 --- !u!54 &903971019
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6513,6 +6518,7 @@ MonoBehaviour:
   _highlightConfig: {fileID: 11400000, guid: 9d7fa875b47d61745b8b0b0868c2438d, type: 2}
   _menuConfig: {fileID: 11400000, guid: 2190a49b369f0b04dadf77d68258087a, type: 2}
   _inputPromptConfig: {fileID: 11400000, guid: 9dc86ffab7840fb4f8adea432fbfb099, type: 2}
+  _storeData: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
 --- !u!82 &1028459537
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15457,6 +15463,7 @@ MonoBehaviour:
   _highlightConfig: {fileID: 11400000, guid: 9d7fa875b47d61745b8b0b0868c2438d, type: 2}
   _menuConfig: {fileID: 11400000, guid: 2190a49b369f0b04dadf77d68258087a, type: 2}
   _inputPromptConfig: {fileID: 11400000, guid: 9dc86ffab7840fb4f8adea432fbfb099, type: 2}
+  _storeData: {fileID: 0}
 --- !u!1 &1853594485
 GameObject:
   m_ObjectHideFlags: 0
@@ -17004,6 +17011,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1425290060}
     m_Modifications:
+    - target: {fileID: 249724081591932915, guid: 5d7878bce1b795d4ba0e374b07e5122a, type: 3}
+      propertyPath: _storeData
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967151946417550132, guid: 5d7878bce1b795d4ba0e374b07e5122a, type: 3}
+      propertyPath: _storeData
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016269074909573599, guid: 5d7878bce1b795d4ba0e374b07e5122a, type: 3}
+      propertyPath: _storeData
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4916397706548868700, guid: 5d7878bce1b795d4ba0e374b07e5122a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.9
@@ -17047,6 +17066,14 @@ PrefabInstance:
     - target: {fileID: 6615398825895926429, guid: 5d7878bce1b795d4ba0e374b07e5122a, type: 3}
       propertyPath: m_Name
       value: Terminal
+      objectReference: {fileID: 0}
+    - target: {fileID: 7292731148220453432, guid: 5d7878bce1b795d4ba0e374b07e5122a, type: 3}
+      propertyPath: _storeData
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299352544236621512, guid: 5d7878bce1b795d4ba0e374b07e5122a, type: 3}
+      propertyPath: _storeData
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

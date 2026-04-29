@@ -51,12 +51,12 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
         // Try create interaction menu
         if (_menuConfig != null && _interactionIdentity != null)
         {
-            _interactionMenuModule = new InteractionMenuModule(_menuConfig, _interactionIdentity.compendiumID, raiseModuleComunicator);
+            _interactionMenuModule = new InteractionMenuModule(_menuConfig, _interactionIdentity.compendiumID);
             _dispsables.Add(_interactionMenuModule);
         }
 
         // Try create input prompt display
-        if (_interactionIdentity.prompts.Count > 0) _inputPromptModule = new InputPromptModule(_interactionIdentity.prompts, _inputPromptConfig);
+        if (_interactionIdentity.prompts.Count > 0 && _inputPromptConfig != null) _inputPromptModule = new InputPromptModule(_interactionIdentity.prompts, _inputPromptConfig);
 
         // Get AudioSource
         _audioSource = GetComponent<AudioSource>();

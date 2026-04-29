@@ -80,16 +80,16 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    /// <summary>
-    /// Create new session whenever we are done with the previous
-    /// </summary>
-    private void NewSession()
-    {
-        _dataHandlerSO.DataHandler.SaveData();
-        _dataHandlerSO.DataHandler.Dispose();
-        _dataHandlerSO.Initialize();
+    ///// <summary>
+    ///// Create new session whenever we are done with the previous
+    ///// </summary>
+    //private void NewSession()
+    //{
+    //    _dataHandlerSO.DataHandler.SaveData();
+    //    _dataHandlerSO.DataHandler.Dispose();
+    //    _dataHandlerSO.Initialize();
 
-    }
+    //}
 }
 
 

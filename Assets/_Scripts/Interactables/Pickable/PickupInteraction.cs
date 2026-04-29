@@ -7,6 +7,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 	private readonly PickupInteractionIdentitySO _identity;
 	private readonly Transform _ownerTransform;
 	private readonly Rigidbody _rb;
+	private readonly StoreDataEventSO _storeDataEvent;
 	
 	private Transform _holdPoint;
 	private bool _isPickedUp;
@@ -21,12 +22,13 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 
     public PickableType PickableType { get; }
 
-    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, PickupInteractionIdentitySO identity, IInteractionEvent interactionEvent, AudioSource source)
+    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, PickupInteractionIdentitySO identity, IInteractionEvent interactionEvent, AudioSource source, StoreDataEventSO storeData)
 	{
 		_rb = owner.GetComponent<Rigidbody>();
 		_identity = identity;
 		_ownerTransform = owner.transform;
 		_interactionEvent = interactionEvent;
+		_storeDataEvent = storeData;
 		
 		_followSpeed = config.followSpeed;
 		_linearDamping = config.linearDamping;
@@ -65,6 +67,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		_rb.linearDamping = _linearDamping;
 
 		_interactionEvent.Raise(new InteractionSignal { InteractionAction = InteractionSignalType.PickedUp });
+		StoreData(_identity.type, PickableAction.Collected);
 	}
 
 	private void Drop()
@@ -83,10 +86,12 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		{
 			_canBePickedUp = !_disablePickupOnPlacement;
 			_interactionEvent.Raise(new InteractionSignal { InteractionAction = InteractionSignalType.Placed });
+			StoreData(_identity.type, PickableAction.PlacedInSlot);
 		}
 		else // No place found
 		{
 			_interactionEvent.Raise(new InteractionSignal { InteractionAction = InteractionSignalType.Dropped });
+			StoreData(_identity.type, PickableAction.Dropped);
 		}
 	}
 
@@ -98,6 +103,21 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		_rb.linearVelocity = direction * _followSpeed;
 		
     }
+
+    #region Data Tracking
+	private void StoreData(PickableType type, PickableAction action)
+	{
+		InteractionEvent context = new InteractionEvent
+        {
+            eventType = EventType.Pickable,
+			pickableType = type,
+			pickableAction = action
+        };
+
+        _storeDataEvent?.Raise(context);
+	}
+
+    #endregion
 
     #region Placemenet logic
     private PlaceableSlot _currentSlot;

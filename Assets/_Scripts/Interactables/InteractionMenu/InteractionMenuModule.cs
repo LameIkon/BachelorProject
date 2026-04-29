@@ -7,12 +7,11 @@ public class InteractionMenuModule : IDisposable
 
     private readonly UIToggleEventSO _uiToggleEvent;
     private readonly CompendiumPageRequestEventSO _compendiumPageEvent;
-    private readonly CompendiumID _compendiumID;  
-    private Action<InteractionSignal> _moduleCommunicatorEvent;
+    private readonly CompendiumID _compendiumID;
 
     private bool _isSelected;
 
-    public InteractionMenuModule(InteractionMenuModuleConfigSO config, CompendiumID id, Action<InteractionSignal> moduleCommunicatorEvent)
+    public InteractionMenuModule(InteractionMenuModuleConfigSO config, CompendiumID id)
     {
         //_interactionMenuHandler = new InteractionMenuHandler(config.uiToggleEvent, config.compendiumPageEvent, id);
 
@@ -21,7 +20,6 @@ public class InteractionMenuModule : IDisposable
         _compendiumID = id;
 
         InputReader.s_TogglePopUp += OnInteract;
-        _moduleCommunicatorEvent = moduleCommunicatorEvent;
     }
 
 
@@ -49,6 +47,20 @@ public class InteractionMenuModule : IDisposable
             _uiToggleEvent.Raise(new UIRequest(UIType.InteractionPopUp, UIInteractionSource.Hotkey));
         }
     }
+
+ //   #region Data Tracking
+	//private void StoreData(PickableType type, PickableAction action)
+	//{
+	//	InteractionEvent context = new InteractionEvent
+ //       {
+ //           eventType = EventType.UIModule,
+
+ //       };
+
+ //       _storeDataEvent.Raise(context);
+	//}
+
+ //   #endregion
 
     #region Cleanup
     public void Dispose()

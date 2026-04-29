@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
@@ -206,16 +207,28 @@ public class UIManager : Singleton<UIManager>
         // Evaluate Overlay
         foreach (IUISystem system in _uiSystems)
         {
+            UIRequest request = new UIRequest
+            {
+                type = system.UIType,
+                source = UIInteractionSource.UIInternal
+            };
+
             if (system.RuleType == UIRuleType.Overlay)
             {
                 if (hasBlockingUI)
                 {
                     if (system.IsOpen) system.Close();
+                    request.action = UIAction.Close;
                 }
                 else if (!system.IsOpen)
                 {
                     system.Open();
+                    request.action = UIAction.Open;
                 }
+
+                // Send Data
+                DataStoring(request);
+
             }
 
             //// Evaluate PopUp

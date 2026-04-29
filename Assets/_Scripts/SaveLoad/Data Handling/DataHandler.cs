@@ -424,7 +424,7 @@ public enum QuestEventType : byte
 }
 
 /// <summary>
-/// To know what ui type we are requesting and from what source
+/// To know what ui type we are requesting and from what source. Needs type, source, and action
 /// </summary>
 public struct UIRequest 
 {

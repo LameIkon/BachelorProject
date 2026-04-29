@@ -6,6 +6,9 @@ public class PickupModuleConfigSO : InteractionBehaviourConfigSO
     public float followSpeed = 20;
     public float linearDamping = 10;
 
+    [Header("Data Tracking")]
+    [SerializeField] private StoreDataEventSO _storeData;
+
     /// <summary>
     /// Pickup module will contain the logic of interaction, tickable and trigger
     /// </summary>
@@ -19,7 +22,7 @@ public class PickupModuleConfigSO : InteractionBehaviourConfigSO
             return default;
         }
 
-        PickupInteraction module = new PickupInteraction(owner, this, pickupDef, interactionEvent, source);
+        PickupInteraction module = new PickupInteraction(owner, this, pickupDef, interactionEvent, source, _storeData);
         return new InteractionModuleResult
         {
             interaction = module,
