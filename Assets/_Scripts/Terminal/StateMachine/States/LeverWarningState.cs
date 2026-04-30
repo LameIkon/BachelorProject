@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LeverWarningState : BaseState
 {
-	public LeverWarningState(TerminalStateMachine manager) : base(manager) { }
+	public LeverWarningState(TerminalStateMachine manager, AudioSource audioSource, AudioPlayerSO audioPlayer) : base(manager, audioSource, audioPlayer) { }
 
 
 	public override bool HandleInput(ButtonType button, TerminalType terminal)

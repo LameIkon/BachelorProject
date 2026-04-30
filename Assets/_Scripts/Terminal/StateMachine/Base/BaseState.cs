@@ -1,15 +1,21 @@
 
+using UnityEngine;
+
 /// <summary>
 /// Methods to use: OnEnter, OnExit, OnFixedUpdate, and OnUpdate. use Public Override void "Name" to get it. 
 /// All are set to optional and can be used depending on the need  
 /// </summary>
 public abstract class BaseState : IState
 {
-    protected TerminalStateMachine manager;
+    protected readonly TerminalStateMachine manager;
+    protected readonly AudioSource audioSource;
+    protected readonly AudioPlayerSO audioPlayer;
 
-    protected BaseState(TerminalStateMachine manager)
+    protected BaseState(TerminalStateMachine manager, AudioSource audioSource, AudioPlayerSO audioPlayer)
     {
         this.manager = manager;
+        this.audioSource = audioSource;
+        this.audioPlayer = audioPlayer;
     }
 
 

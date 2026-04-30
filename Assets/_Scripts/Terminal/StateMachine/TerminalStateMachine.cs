@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class TerminalStateMachine : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class TerminalStateMachine : Singleton<TerminalStateMachine>
 {
     [Header("Events")]
 	[SerializeField] private StoreDataEventSO _storeDataEvent;
@@ -14,8 +13,17 @@ public class TerminalStateMachine : MonoBehaviour
     [SerializeField] private QuestGiveEventSO _questGiveEvent;
     [SerializeField] private TerminalStateEventSO _terminalStateEvent;
 
-
+    [Header("Something")]
     [SerializeField] private List<Terminal> _terminals;
+    private AudioSource _audioSource;
+
+    [Header("Audios")]
+    [SerializeField] private AudioPlayerSO _offStateAudioPlayer;
+    [SerializeField] private AudioPlayerSO _runningStateAudioPlayer;
+    [SerializeField] private AudioPlayerSO _warningStateAudioPlayer;
+    [SerializeField] private AudioPlayerSO _leverWarningStateAudioPlayer;
+
+
     //[SerializeField] private MachineStatus _machineStatus;
 
     private StateMachine _stateMachine;
@@ -29,17 +37,15 @@ public class TerminalStateMachine : MonoBehaviour
     public WarningState WarningState { get; private set; }
     public LeverWarningState LeverWarningState { get; private set; }
 
-    private void Awake() 
+    protected override void Awake() 
     {
-        //base.Awake();
-        _terminals = new List<Terminal>();
-        //_isResetTermialInWarning = false;
-        CreateStateMachine();
-    }
+        base.Awake();
 
-    private void Start()
-    {
-        
+        _audioSource = GetComponent<AudioSource>();
+        _terminals = new List<Terminal>();
+
+        CreateStateMachine();
+
     }
 
 	private void OnEnable()
@@ -105,10 +111,10 @@ public class TerminalStateMachine : MonoBehaviour
     {
         _stateMachine = new StateMachine();
 
-        RunningState = new RunningState(this);
-        OffState = new OffState(this);
-        WarningState = new WarningState(this);
-        LeverWarningState = new LeverWarningState(this);
+        RunningState = new RunningState(this, _audioSource, _runningStateAudioPlayer);
+        OffState = new OffState(this, _audioSource, _offStateAudioPlayer);
+        WarningState = new WarningState(this, _audioSource, _warningStateAudioPlayer);
+        LeverWarningState = new LeverWarningState(this, _audioSource, _leverWarningStateAudioPlayer);
     }
 
     public void SetState(TerminalState newState)

@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public class RunningState : BaseState
 {
-    public RunningState(TerminalStateMachine manager) : base(manager){}
+    public RunningState(TerminalStateMachine manager, AudioSource audioSource, AudioPlayerSO audioPlayer) : base(manager, audioSource, audioPlayer) {}
 
     public override void OnEnter()
     {

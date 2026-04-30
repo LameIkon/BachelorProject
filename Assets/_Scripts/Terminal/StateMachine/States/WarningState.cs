@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WarningState : BaseState
 {
-    public WarningState(TerminalStateMachine manager) : base(manager){}
+    public WarningState(TerminalStateMachine manager, AudioSource audioSource, AudioPlayerSO audioPlayer) : base(manager, audioSource, audioPlayer) {}
 
     private bool _isResetTerminalPressed;
 

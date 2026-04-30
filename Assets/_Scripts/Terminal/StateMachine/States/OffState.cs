@@ -1,11 +1,24 @@
+using System.Collections;
 using UnityEngine;
 
 public class OffState : BaseState
 {
-    public OffState(TerminalStateMachine manager) : base(manager){}
+    // Start Sequence variables
+    private readonly WaitForSeconds _waitForSeconds;
+    private Coroutine _startSequence;
+    private bool _canPress;
+
+
+    public OffState(TerminalStateMachine manager, AudioSource audioSource, AudioPlayerSO audioPlayer) : base(manager, audioSource, audioPlayer)
+    {
+        _waitForSeconds = new WaitForSeconds(1);
+    }
 
     public override void OnEnter()
     {
+        _startSequence = null;
+        _canPress = false;
+
         manager.TurnOffConveyor();
         manager.TryCompleteQuest(QuestID.StopMachine);
         manager.SendState(TerminalState.Off);
@@ -15,12 +28,41 @@ public class OffState : BaseState
     {
         if (terminal == TerminalType.Main && button == ButtonType.Start) 
         {
-            manager.SetState(TerminalState.Running);
-            return true;
+            if (_canPress)
+            {
+                manager.SetState(TerminalState.Running);
+                return true;
+            }
+            else if (_startSequence == null)
+            {
+                _startSequence = manager.StartCoroutine(StartSequence());
+                return true;
+            }
         }
+        Debug.Log("Cancelled coroutine");
+        manager.StopCoroutine(_startSequence);
+        _startSequence = null;
         return false;
 
     }
+
+    private IEnumerator StartSequence() 
+    {
+        for(int i = 3; i > 0; i--) 
+        {
+            Debug.Log($"Start Sequence: {i}, Coroutine: {_startSequence}");
+            yield return _waitForSeconds;
+        }
+        _canPress = true;
+		Debug.Log($"Can Start: {_canPress}, Coroutine: {_startSequence}");
+		yield return _waitForSeconds;
+        yield return _waitForSeconds;
+        yield return _waitForSeconds;
+        _canPress = false;
+		Debug.Log($"Can Start: {_canPress}, Coroutine: {_startSequence}");
+        _startSequence = null;
+	}
+
 
     public override void OnExit()
     {

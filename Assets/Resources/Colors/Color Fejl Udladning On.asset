@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a304d59a97bb6274097defd9c603c400, type: 3}
   m_Name: Color Fejl Udladning On
   m_EditorClassIdentifier: Assembly-CSharp::ColorVariableSO
-  _color: {r: 1, g: 0.2028302, b: 0.2028302, a: 1}
+  _color: {r: 1, g: 0.2028302, b: 0.2028302, a: 0.20392157}
