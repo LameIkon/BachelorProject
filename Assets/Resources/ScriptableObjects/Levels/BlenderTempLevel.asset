@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97cbbaf9fefd6f458b119d76193f078, type: 3}
+  m_Name: BlenderTempLevel
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  _scenes:
+  - m_SceneAsset: {fileID: 102900000, guid: e598c9984bf94a54c80fcbd69a834906, type: 3}
+    m_SceneName: BlenderAssets
+  - m_SceneAsset: {fileID: 102900000, guid: c52955602ba279e43b7e91ce33e602a3, type: 3}
+    m_SceneName: HUD
+  _inputState: 1
+  _levelQuest: {fileID: 11400000, guid: 4fe12e5aa2ad7d14ab8c0e4541489405, type: 2}

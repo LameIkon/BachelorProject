@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Johan/FactoryScene.unity
     guid: 2fd846c7e1c4c844e9d9c338217c98bd
+  - enabled: 1
+    path: Assets/Scenes/Johan/BlenderAssets.unity
+    guid: e598c9984bf94a54c80fcbd69a834906
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0
