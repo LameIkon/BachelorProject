@@ -8,6 +8,8 @@ public class ConveyorBelt : MonoBehaviour
     [SerializeField] private Vector2 _direction;
     [SerializeField] private List<Rigidbody> _onBelt;
 
+    private float _currentSpeed;
+
 
     private void OnEnable()
     {
@@ -53,4 +55,6 @@ public class ConveyorBelt : MonoBehaviour
 		_onBelt.Remove(rb);
 	}
     #endregion
+
+
 }
