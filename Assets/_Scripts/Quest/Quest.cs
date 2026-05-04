@@ -61,6 +61,7 @@ public class QuestPart
     [SerializeField] private bool _isComplete;
     [SerializeField] private int _howManySteps = 0;
     [SerializeField] private string _description;
+    [SerializeField] private PickupInteractionIdentitySO _itemPickup;
 
     [SerializeField] private LocalizedContentSO _content;
 
@@ -87,6 +88,7 @@ public class QuestPart
             return false;
         }
 
+
         _isComplete = true;
         return true;
     }
@@ -108,6 +110,7 @@ public class QuestPart
     public override string ToString()
     {
         if (_howManySteps > 0) return _howManySteps.ToString() + " " + _description;
+        if (_itemPickup != null) return _description + " " + _itemPickup.type.ToString(); 
 
         return _description;
     }

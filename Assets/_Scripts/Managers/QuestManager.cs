@@ -61,7 +61,7 @@ public class QuestManager : Singleton<QuestManager>
         _updateUIEvent.Raise();
         _isQuestComplete = _activeQuest.IsComplete;
 
-        if(_isQuestComplete) _toggleEvent.Raise(new UIRequest(UIType.NextLevelPopUp, UIInteractionSource.UIInternal));
+        //if(_isQuestComplete) _toggleEvent.Raise(new UIRequest(UIType.NextLevelPopUp, UIInteractionSource.UIInternal));
     }
 
     private Quest GetQuest() 

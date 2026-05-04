@@ -6,7 +6,6 @@ public class ButtonLight : MonoBehaviour
 {
 
     [SerializeField] private ColorReferece _onColor;
-    [SerializeField] private ColorReferece _offColor;
     [SerializeField] private float _intensity;
 
     private Light _light;
@@ -18,9 +17,10 @@ public class ButtonLight : MonoBehaviour
         _light = GetComponent<Light>();   
         _meshRenderer = GetComponent<MeshRenderer>();
         _light.color = _onColor;
-        TurnLight(true);
+        TurnLight(false);
         _waitForSeconds = new WaitForSeconds(3);
-        StartCoroutine(TurnOnOff());
+        //StartCoroutine(TurnOnOff());
+        _meshRenderer.material.color = new Color(_onColor.GetColor.r, _onColor.GetColor.g, _onColor.GetColor.b, 0.2f);
     }
 
 
@@ -30,13 +30,11 @@ public class ButtonLight : MonoBehaviour
         {
             _light.intensity = _intensity;
             _light.enabled = true;
-            _meshRenderer.material.color = _onColor;
         }
         else 
         {
             _light.intensity = 0;
             _light.enabled = false;
-            _meshRenderer.material.color = new Color(_onColor.GetColor.r, _onColor.GetColor.g, _onColor.GetColor.b, 0.2f);
         }
 
     }

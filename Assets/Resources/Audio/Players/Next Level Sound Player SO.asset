@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioPlayer
   _mixerGroup: {fileID: 4991979802742565857, guid: 3edb22aa6c8f252489d46398a74a914b, type: 2}
   _clips:
-  - {fileID: 8300000, guid: 9734ba03eea4f6e45bbe33a2943f989f, type: 3}
+  - {fileID: 0}
   _volumeRange:
     _minValue: 0.2568888
     _maxValue: 0.29955542
