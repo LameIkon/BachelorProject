@@ -3892,7 +3892,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1515446280}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &613595807
 MonoBehaviour:
@@ -5488,7 +5488,7 @@ GameObject:
   - component: {fileID: 791229837}
   - component: {fileID: 791229836}
   m_Layer: 3
-  m_Name: asd
+  m_Name: "Fejl K\xE6detilsp\xE6nding"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14517,7 +14517,7 @@ GameObject:
   - component: {fileID: 1482323289}
   - component: {fileID: 1482323288}
   m_Layer: 3
-  m_Name: asd
+  m_Name: Felj Udladning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15595,7 +15595,7 @@ GameObject:
   - component: {fileID: 1683137672}
   - component: {fileID: 1683137671}
   m_Layer: 3
-  m_Name: asd
+  m_Name: Oliemangel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15631,7 +15631,7 @@ MonoBehaviour:
   _onColor:
     _useConstant: 0
     _constantColor: {r: 0, g: 0, b: 0, a: 0}
-    _variable: {fileID: 11400000, guid: 02db43696dafc174cbe151f2a51ff2a1, type: 2}
+    _variable: {fileID: 11400000, guid: 8568f01555f645746b729ea444881b4f, type: 2}
   _intensity: 0.2
 --- !u!23 &1683137672
 MeshRenderer:
@@ -17138,37 +17138,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1076637731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2016811621
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2016811622}
-  m_Layer: 0
-  m_Name: ResetTerminal
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2016811622
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016811621}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.2, y: 1.4, z: -73.200005}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2025184156 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5020669909074384299, guid: 587ad7623ea5220468c99f930dcb7635, type: 3}
@@ -18509,9 +18478,7 @@ SceneRoots:
   - {fileID: 419356154}
   - {fileID: 505777290}
   - {fileID: 1365452175}
-  - {fileID: 2016811622}
   - {fileID: 464134814}
   - {fileID: 15765573}
-  - {fileID: 1515446279}
-  - {fileID: 1017499388}
   - {fileID: 665876702}
+  - {fileID: 613595806}
