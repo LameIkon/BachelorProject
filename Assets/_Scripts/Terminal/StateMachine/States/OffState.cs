@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class OffState : BaseState
@@ -39,9 +40,12 @@ public class OffState : BaseState
                 return true;
             }
         }
-        Debug.Log("Cancelled coroutine");
-        manager.StopCoroutine(_startSequence);
-        _startSequence = null;
+        if (_startSequence != null) 
+        {
+            manager.StopCoroutine(_startSequence);
+            _startSequence = null;
+            _canPress = false;
+        }
         return false;
 
     }

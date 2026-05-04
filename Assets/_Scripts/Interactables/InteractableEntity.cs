@@ -56,7 +56,7 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
         }
 
         // Try create input prompt display
-        if (_interactionIdentity.prompts.Count > 0 && _inputPromptConfig != null) _inputPromptModule = new InputPromptModule(_interactionIdentity.prompts, _inputPromptConfig);
+        if (_interactionIdentity != null && _interactionIdentity.prompts.Count > 0 && _inputPromptConfig != null) _inputPromptModule = new InputPromptModule(_interactionIdentity.prompts, _inputPromptConfig);
 
         // Get AudioSource
         _audioSource = GetComponent<AudioSource>();
