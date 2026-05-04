@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Pickup Interaction SO", menuName = "ScriptableObject/Interactable/pickup")]
+[CreateAssetMenu(fileName = "Pickup Interaction SO", menuName = "ScriptableObject/Interactable/Interaction Type/pickup")]
 public class PickupModuleConfigSO : InteractionBehaviourConfigSO
 {
     public float followSpeed = 20;

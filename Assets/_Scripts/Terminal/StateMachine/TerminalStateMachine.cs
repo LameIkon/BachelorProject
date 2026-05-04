@@ -85,7 +85,10 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
     private bool ProcessInput(ButtonType buttonType, TerminalType terminalType)
     {
         bool shouldContinue = true;
-        if (terminalType == TerminalType.Lever) { shouldContinue = HandleLever(); }
+        if (terminalType == TerminalType.Lever)
+        { 
+            shouldContinue = HandleLever(); 
+        }
 
         if (!shouldContinue) 
         {

@@ -5,5 +5,7 @@ public class ButtonInteractionIdentitySO : InteractionIdentitySO
 {
     public ButtonEventSO buttonEvent;
     public ButtonData buttonData;
+    public AnimationClip animation;
     
 }
+

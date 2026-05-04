@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a304d59a97bb6274097defd9c603c400, type: 3}
-  m_Name: Color Fejl Udladning On
-  m_EditorClassIdentifier: Assembly-CSharp::ColorVariableSO
-  _color: {r: 1, g: 1, b: 1, a: 1}
+  m_Script: {fileID: 11500000, guid: 59432ce29df02c44597fb5ff25180dd4, type: 3}
+  m_Name: Lever Interaction SO
+  m_EditorClassIdentifier: Assembly-CSharp::LeverModuleConfigSO
+  _audioPlayer: {fileID: 11400000, guid: ba0a9ecae5519c24bb1326855f4e77f3, type: 2}

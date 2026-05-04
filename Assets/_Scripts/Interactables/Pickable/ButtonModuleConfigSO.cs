@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Button Interaction SO", menuName = "ScriptableObject/Interactable/Button")]
-public class BottonModuleConfigSO : InteractionBehaviourConfigSO
+[CreateAssetMenu(fileName = "Button Interaction SO", menuName = "ScriptableObject/Interactable/Interaction Type/Button")]
+public class ButtonModuleConfigSO : InteractionBehaviourConfigSO
 {
 
     [SerializeField] private AudioPlayerSO _audioPlayer;

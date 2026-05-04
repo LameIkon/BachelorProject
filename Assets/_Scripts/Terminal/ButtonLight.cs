@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Light), typeof(MeshRenderer))]
+[RequireComponent(typeof(Light))]
 public class ButtonLight : MonoBehaviour
 {
 
@@ -9,18 +9,17 @@ public class ButtonLight : MonoBehaviour
     [SerializeField] private float _intensity;
 
     private Light _light;
-    private MeshRenderer _meshRenderer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _light = GetComponent<Light>();   
-        _meshRenderer = GetComponent<MeshRenderer>();
+        //_meshRenderer = GetComponent<MeshRenderer>();
         _light.color = _onColor;
         TurnLight(false);
         _waitForSeconds = new WaitForSeconds(3);
         //StartCoroutine(TurnOnOff());
-        _meshRenderer.material.color = new Color(_onColor.GetColor.r, _onColor.GetColor.g, _onColor.GetColor.b, 0.2f);
+        //_meshRenderer.material.color = new Color(_onColor.GetColor.r, _onColor.GetColor.g, _onColor.GetColor.b, 0.2f);
     }
 
 

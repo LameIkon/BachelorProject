@@ -18,3 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 97afef72c24a8a24ca464bc9911f71cb, type: 2}
   buttonEvent: {fileID: 11400000, guid: ab4116fc9b025c549a93be519ae6408a, type: 2}
   buttonData: {fileID: 11400000, guid: 5961ef5b9b81f8e47bc57e9765dc5e93, type: 2}
+  animation: {fileID: 7400000, guid: afdfc91e50e4f3947b44627c9edcdadf, type: 2}

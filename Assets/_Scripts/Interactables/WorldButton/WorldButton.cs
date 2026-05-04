@@ -4,42 +4,34 @@ public class WorldButton : IInteractionAction
 {
 	private readonly ButtonData _buttonData;
     private readonly ButtonEventSO _onButtonEvent;
-    private readonly MeshRenderer _lightIndicator;
 	private readonly AudioSource _audioSource;
-	private readonly BottonModuleConfigSO _config;
+	private readonly ButtonModuleConfigSO _config;
 
 	// Animations
 	private readonly Animator _animator;
-	private readonly int _animInt = Animator.StringToHash("PhysicalButton");
+	private readonly int _animInt;
 
-	public WorldButton(GameObject owner, BottonModuleConfigSO config, ButtonInteractionIdentitySO buttonDefinition, AudioSource source)
+	public WorldButton(GameObject owner, ButtonModuleConfigSO config, ButtonInteractionIdentitySO identity, AudioSource source)
 	{
-		_buttonData = buttonDefinition.buttonData;
-		_onButtonEvent = buttonDefinition.buttonEvent;
+		_buttonData = identity.buttonData;
+		_onButtonEvent = identity.buttonEvent;
+		_animInt = Animator.StringToHash(identity.animation.name);
 		_audioSource = source;
 		_config = config;
 
-		_lightIndicator = owner.GetComponentInChildren<MeshRenderer>();
 		_animator = owner.GetComponent<Animator>();
 
 		_buttonData?.SetColor(false);
-		SetColorIndicator(_buttonData.Color);
 	}
 
     public void Interact(Transform transform)
     {
 		_buttonData?.SetColor(true);
-		SetColorIndicator(_buttonData.Color);
 
 		_animator.Play(_animInt);
 
 		_onButtonEvent?.Raise(_buttonData.Type);
 
 		_config.PlaySound(_audioSource);
-	}
-
-	private void SetColorIndicator(Color color) 
-	{
-		_lightIndicator.material.color = color;
 	}
 }
