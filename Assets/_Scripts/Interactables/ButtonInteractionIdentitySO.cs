@@ -8,4 +8,3 @@ public class ButtonInteractionIdentitySO : InteractionIdentitySO
     public AnimationClip animation;
     
 }
-
