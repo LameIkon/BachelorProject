@@ -134,6 +134,9 @@ public enum InteractionSignalType
     PickedUp,
     Dropped,
 	Placed,
+    ButtonPress,
+    PressButtonIn,
+    PressButtonOut
 }
 
 public struct InteractionSignal

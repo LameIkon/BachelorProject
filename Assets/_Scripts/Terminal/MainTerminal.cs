@@ -18,13 +18,13 @@ public class MainTerminal : Terminal
 	protected override void OnEnable()
 	{
 		base.OnEnable();
-		_terminalStateEvent.OnRaise += WriteTerminalError;
+		_onTerminalStateEvent.OnRaise += WriteTerminalError;
 	}
 
 	protected override void OnDisable()
 	{
 		base.OnDisable();
-		_terminalStateEvent.OnRaise -= WriteTerminalError;
+		_onTerminalStateEvent.OnRaise -= WriteTerminalError;
 	}
 
 

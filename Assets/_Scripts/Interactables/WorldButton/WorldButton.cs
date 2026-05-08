@@ -7,17 +7,20 @@ public class WorldButton : IInteractionAction
 	private readonly AudioSource _audioSource;
 	private readonly ButtonModuleConfigSO _config;
 
+	private IInteractionEvent _interactionEvent;
+
 	// Animations
 	private readonly Animator _animator;
 	private readonly int _animInt;
 
-	public WorldButton(GameObject owner, ButtonModuleConfigSO config, ButtonInteractionIdentitySO identity, AudioSource source)
+	public WorldButton(GameObject owner, ButtonModuleConfigSO config, ButtonInteractionIdentitySO identity, AudioSource source, IInteractionEvent interactionEvent)
 	{
 		_buttonData = identity.buttonData;
 		_onButtonEvent = identity.buttonEvent;
 		_animInt = Animator.StringToHash(identity.animation.name);
 		_audioSource = source;
 		_config = config;
+		_interactionEvent = interactionEvent;
 
 		_animator = owner.GetComponent<Animator>();
 
@@ -26,6 +29,8 @@ public class WorldButton : IInteractionAction
 
     public void Interact(Transform transform)
     {
+		//_interactionEvent.Raise(new InteractionSignal{InteractionAction = InteractionSignalType.ButtonPress});
+
 		_buttonData?.SetColor(true);
 
 		_animator.Play(_animInt);

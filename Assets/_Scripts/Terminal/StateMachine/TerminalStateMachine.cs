@@ -26,6 +26,9 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 
     //[SerializeField] private MachineStatus _machineStatus;
 
+    public static Dictionary<InteractableEntity, bool> s_Issues;
+
+
     private StateMachine _stateMachine;
 
     [SerializeField] private float _machineSpeed = 0f;

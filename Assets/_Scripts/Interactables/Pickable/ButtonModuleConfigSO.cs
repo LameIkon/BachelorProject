@@ -25,7 +25,7 @@ public class ButtonModuleConfigSO : InteractionBehaviourConfigSO
             return default;
         }
 
-        WorldButton module = new WorldButton(owner, this, buttonDef, source);
+        WorldButton module = new WorldButton(owner, this, buttonDef, source, interactionEvent);
         return new InteractionModuleResult
         {
             interaction = module,
