@@ -25,6 +25,12 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 
 
     //[SerializeField] private MachineStatus _machineStatus;
+    [Header("Lights")]
+    [SerializeField] private ButtonLight _resetLight;
+    [SerializeField] private ButtonLight _leverLight;
+    [SerializeField] private ButtonLight _emergencyLightLever; 
+	[SerializeField] private ButtonLight _emergencyLightReset;
+	[SerializeField] private ButtonLight _emergencyLightEnd;
 
     public static Dictionary<InteractableEntity, bool> s_Issues;
 
@@ -39,6 +45,7 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
     public OffState OffState { get; private set; }
     public WarningState WarningState { get; private set; }
     public LeverWarningState LeverWarningState { get; private set; }
+    public EmergencyWarningState EmergencyWarningState { get; private set; }
 
     protected override void Awake() 
     {
@@ -119,8 +126,10 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 
         RunningState = new RunningState(this, _audioSource, _runningStateAudioPlayer);
         OffState = new OffState(this, _audioSource, _offStateAudioPlayer);
-        WarningState = new WarningState(this, _audioSource, _warningStateAudioPlayer);
-        LeverWarningState = new LeverWarningState(this, _audioSource, _leverWarningStateAudioPlayer);
+        WarningState = new WarningState(this, _audioSource, _warningStateAudioPlayer, _resetLight);
+        LeverWarningState = new LeverWarningState(this, _audioSource, _leverWarningStateAudioPlayer, _resetLight, _leverLight);
+        EmergencyWarningState = new EmergencyWarningState(this, _audioSource, _warningStateAudioPlayer, _resetLight, _emergencyLightLever, _emergencyLightEnd, _emergencyLightReset);
+
     }
 
     public void SetState(TerminalState newState)

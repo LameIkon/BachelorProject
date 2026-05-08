@@ -2,12 +2,18 @@ using UnityEngine;
 
 public class WarningState : BaseState
 {
-    public WarningState(TerminalStateMachine manager, AudioSource audioSource, AudioPlayerSO audioPlayer) : base(manager, audioSource, audioPlayer) {}
-
     private bool _isResetTerminalPressed;
+    private readonly ButtonLight _resetLight;
+
+    public WarningState(TerminalStateMachine manager, AudioSource audioSource, AudioPlayerSO audioPlayer, ButtonLight buttonLight) : base(manager, audioSource, audioPlayer)
+    {
+        _resetLight = buttonLight;
+    }
+
 
     public override void OnEnter()
     {
+        _resetLight.TurnLight(true);
         manager.TurnOffConveyor();
         _isResetTerminalPressed = false;
         manager.SendState(TerminalState.Warning);
@@ -26,6 +32,7 @@ public class WarningState : BaseState
         {
             if (_isResetTerminalPressed) return false; // Nothing new happened
 
+            _resetLight.TurnLight(false);
             _isResetTerminalPressed = true;
             return true;
         }

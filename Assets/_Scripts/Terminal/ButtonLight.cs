@@ -38,6 +38,11 @@ public class ButtonLight : MonoBehaviour
 
     }
 
+    public void ToggleLight()
+    {
+        _light.enabled = !_light.enabled;
+    }
+
     private WaitForSeconds _waitForSeconds;
 
     private IEnumerator TurnOnOff() 

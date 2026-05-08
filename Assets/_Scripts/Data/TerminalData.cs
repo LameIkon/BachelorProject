@@ -15,5 +15,6 @@ public enum TerminalType : byte
 	Reset1,
 	Reset2,
 	Lever,
-	Main
+	Main,
+	End
 }

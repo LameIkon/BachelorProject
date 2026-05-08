@@ -8,7 +8,6 @@ public abstract class Terminal : MonoBehaviour
     [SerializeField] private ButtonEventSO _onButtonEvent;
     [SerializeField] protected TerminalStateEventSO _onTerminalStateEvent;
 
-    protected TerminalState _currentTerminalState; 
     protected TerminalType _terminalType;
 
 
@@ -22,13 +21,11 @@ public abstract class Terminal : MonoBehaviour
     protected virtual void OnEnable()
     {
         _onButtonEvent.OnRaise += ChangeStatus;
-        _onTerminalStateEvent .OnRaise += CurrentTerminalState;
     }
 
     protected virtual void OnDisable()
     {
         _onButtonEvent.OnRaise -= ChangeStatus;
-        _onTerminalStateEvent .OnRaise -= CurrentTerminalState;
     }
 
 
@@ -42,17 +39,6 @@ public abstract class Terminal : MonoBehaviour
     {
         _onTerminalEvent.Raise(type, _terminalType);
     }
-
-    /// <summary>
-    /// Keep Memory of current terminal state
-    /// </summary>
-    private void CurrentTerminalState(TerminalState state)
-    {
-        _currentTerminalState = state;
-    }
-
-
-
 }
 
 

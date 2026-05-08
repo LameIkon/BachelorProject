@@ -28,5 +28,6 @@ public enum ButtonType : byte
 	Start,
 	Stop,
 	SpeedUp,
-	SpeedDown
+	SpeedDown,
+	Emergency
 }
