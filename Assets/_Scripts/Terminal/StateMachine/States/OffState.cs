@@ -27,7 +27,7 @@ public class OffState : BaseState
 
     public override bool HandleInput(ButtonType button, TerminalType terminal)
     {
-        if (terminal == TerminalType.Main && button == ButtonType.Start) 
+        if (terminal == TerminalType.Start && button == ButtonType.Start) 
         {
             if (_canPress)
             {
@@ -37,6 +37,7 @@ public class OffState : BaseState
             else if (_startSequence == null)
             {
                 _startSequence = manager.StartCoroutine(StartSequence());
+                Debug.Log($"{this}: {_startSequence}");
                 return true;
             }
         }
@@ -65,6 +66,7 @@ public class OffState : BaseState
         _canPress = false;
 		Debug.Log($"Can Start: {_canPress}, Coroutine: {_startSequence}");
         _startSequence = null;
+		Debug.Log($"Can Start: {_canPress}, Coroutine: {_startSequence}");
 	}
 
 

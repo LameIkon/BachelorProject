@@ -114,7 +114,6 @@ GameObject:
   - component: {fileID: 1899837822067660334}
   - component: {fileID: 5958077097092709878}
   - component: {fileID: 149157477532618533}
-  - component: {fileID: 6329787745264393515}
   - component: {fileID: 6140351893072231445}
   m_Layer: 3
   m_Name: Terminal
@@ -218,27 +217,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6329787745264393515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6523635452332190815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6538dde2cc9fa94da1f79c5da4d2ada, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Terminal
-  _interactionMenu:
-    _uiToggleEvent: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
-    _pageRequestEvent: {fileID: 11400000, guid: e461a1b09011ed44da587ced0ddeaef8, type: 2}
-    _compendiumID: 0
-  _data: {fileID: 11400000, guid: 4a973d0139e4aac44a40f46ce745f6fe, type: 2}
-  _onTerminalEvent: {fileID: 11400000, guid: 69baff98591f6dc4eb20daa0a65b1de1, type: 2}
-  _onTerminalStartEvent: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
-  _onButtonEvent: {fileID: 11400000, guid: ab4116fc9b025c549a93be519ae6408a, type: 2}
-  _terminalStateEvent: {fileID: 11400000, guid: 207ba0e936b51f54abe89f6b7514b88c, type: 2}
 --- !u!82 &6140351893072231445
 AudioSource:
   m_ObjectHideFlags: 0

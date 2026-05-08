@@ -9,11 +9,11 @@ public class TerminalData : ScriptableObject
 
 }
 
-
 public enum TerminalType : byte
 {
-	Main,
+	Start,
 	Reset1,
 	Reset2,
-	Lever
+	Lever,
+	Main
 }
