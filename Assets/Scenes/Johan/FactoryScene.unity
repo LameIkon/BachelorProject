@@ -5474,17 +5474,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7220065259417406697, guid: 0c72202acbff7b54fac22fcac1660211, type: 3}
---- !u!114 &791229836 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2516905891431541785, guid: bcd8c28278331d34180b2879e510925f, type: 3}
-  m_PrefabInstance: {fileID: 1417782157670818611}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85316d879afb1494fbef29bd29cf6d20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Light
 --- !u!1001 &807312436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14310,17 +14299,6 @@ Transform:
   - {fileID: 1125397892}
   m_Father: {fileID: 922875875}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1482323288 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8311423631662693023, guid: bcd8c28278331d34180b2879e510925f, type: 3}
-  m_PrefabInstance: {fileID: 1417782157670818611}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85316d879afb1494fbef29bd29cf6d20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Light
 --- !u!1 &1483825972
 GameObject:
   m_ObjectHideFlags: 0
@@ -15266,17 +15244,6 @@ Transform:
   - {fileID: 33842429}
   m_Father: {fileID: 1467037412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1683137671 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3578292248825575583, guid: bcd8c28278331d34180b2879e510925f, type: 3}
-  m_PrefabInstance: {fileID: 1417782157670818611}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85316d879afb1494fbef29bd29cf6d20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Light
 --- !u!1 &1699969492
 GameObject:
   m_ObjectHideFlags: 0
@@ -17346,18 +17313,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1425290060}
     m_Modifications:
-    - target: {fileID: 73562032037821004, guid: bcd8c28278331d34180b2879e510925f, type: 3}
-      propertyPath: _oliemangel
-      value: 
-      objectReference: {fileID: 1683137671}
-    - target: {fileID: 73562032037821004, guid: bcd8c28278331d34180b2879e510925f, type: 3}
-      propertyPath: _fejlUdladning
-      value: 
-      objectReference: {fileID: 1482323288}
-    - target: {fileID: 73562032037821004, guid: bcd8c28278331d34180b2879e510925f, type: 3}
-      propertyPath: "_fejlK\xE6detilsp\xE6nding"
-      value: 
-      objectReference: {fileID: 791229836}
     - target: {fileID: 2973254572078914879, guid: bcd8c28278331d34180b2879e510925f, type: 3}
       propertyPath: m_Name
       value: Reset Terminal

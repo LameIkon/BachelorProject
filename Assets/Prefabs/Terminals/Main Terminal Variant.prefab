@@ -124,5 +124,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainTerminal
   _onTerminalEvent: {fileID: 11400000, guid: 69baff98591f6dc4eb20daa0a65b1de1, type: 2}
   _onTerminalStartEvent: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
-  _onButtonEvent: {fileID: 11400000, guid: ab4116fc9b025c549a93be519ae6408a, type: 2}
+  _onButtonEvent: {fileID: 11400000, guid: eb8e545d52478e04495995c5a5cbea9b, type: 2}
   _terminalStateEvent: {fileID: 11400000, guid: 207ba0e936b51f54abe89f6b7514b88c, type: 2}

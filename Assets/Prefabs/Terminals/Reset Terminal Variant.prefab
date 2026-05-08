@@ -1720,6 +1720,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f09ce45397810f499508397a46c57f0, type: 3}
+--- !u!114 &3108819222365753663 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4441988756066900899, guid: 0f09ce45397810f499508397a46c57f0, type: 3}
+  m_PrefabInstance: {fileID: 1621757255426886300}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db41fd86ff7c27c498f932cc98f15779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableEntity
 --- !u!4 &7869225396871962107 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8913953451409987431, guid: 0f09ce45397810f499508397a46c57f0, type: 3}
@@ -2791,12 +2802,12 @@ MonoBehaviour:
   _onTerminalStartEvent: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
   _onButtonEvent: {fileID: 11400000, guid: 13254ef1d187f4443a0d83639731fe31, type: 2}
   _terminalStateEvent: {fileID: 11400000, guid: 207ba0e936b51f54abe89f6b7514b88c, type: 2}
-  _resetButton: {fileID: 0}
-  _transportStop: {fileID: 0}
+  _resetButton: {fileID: 3108819222365753663}
+  _transportStop: {fileID: 5410671361087356365}
   _flipUpDown: {fileID: 0}
-  "_fejlK\xE6detilsp\xE6nding": {fileID: 0}
-  _fejlUdladning: {fileID: 0}
-  _oliemangel: {fileID: 0}
+  "_fejlK\xE6detilsp\xE6nding": {fileID: 2516905891431541785}
+  _fejlUdladning: {fileID: 8311423631662693023}
+  _oliemangel: {fileID: 3578292248825575583}
 --- !u!4 &3942634030777905662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5007026855318143134, guid: bad7194fe89c41346a6209a26421b20e, type: 3}
