@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class LightManager 
 {
-	private readonly ButtonLight? _warningLight;
-	private readonly ButtonLight? _onLight;
+	private readonly ButtonLight _warningLight;
+	private readonly ButtonLight _onLight;
 
 	public LightManager(ButtonLight warningLight, ButtonLight onLight) 
 	{

@@ -27,7 +27,7 @@ public class OffState : BaseState
 
     public override bool HandleInput(ButtonType button, TerminalType terminal)
     {
-        if (terminal == TerminalType.Main && button == ButtonType.Start) 
+        if (terminal == TerminalType.Start && button == ButtonType.Start) 
         {
             if (_canPress)
             {

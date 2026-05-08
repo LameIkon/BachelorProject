@@ -13,7 +13,7 @@ public class RunningState : BaseState
 
     public override bool HandleInput(ButtonType button, TerminalType terminal)
     {
-        if (terminal != TerminalType.Main) return false;
+        if (terminal != TerminalType.Start) return false;
 
         switch (button)
         {
