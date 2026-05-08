@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Terminal : MonoBehaviour
+public abstract class Terminal : MonoBehaviour
 {
     [Header("Terminal Events")]
     [SerializeField] private TerminalEventSO _onTerminalEvent;
