@@ -8,6 +8,8 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 	private readonly Transform _ownerTransform;
 	private readonly Rigidbody _rb;
 	private readonly StoreDataEventSO _storeDataEvent;
+
+	private readonly PlaceableSlotToggleEventSO _placeableSlotToggleEvent;
 	
 	private Transform _holdPoint;
 	private bool _isPickedUp;
@@ -20,15 +22,17 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 
 	private IInteractionEvent _interactionEvent;
 
-    public PickableType PickableType { get; }
+    //public PickableType PickableType { get; }
 
-    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, PickupInteractionIdentitySO identity, IInteractionEvent interactionEvent, AudioSource source, StoreDataEventSO storeData)
+    public PickupInteraction(GameObject owner, PickupModuleConfigSO config, PickupInteractionIdentitySO identity, IInteractionEvent interactionEvent, AudioSource source, StoreDataEventSO storeData, PlaceableSlotToggleEventSO placeableSlotToggleEvent)
 	{
 		_rb = owner.GetComponent<Rigidbody>();
 		_identity = identity;
 		_ownerTransform = owner.transform;
 		_interactionEvent = interactionEvent;
 		_storeDataEvent = storeData;
+
+		_placeableSlotToggleEvent = placeableSlotToggleEvent;
 		
 		_followSpeed = config.followSpeed;
 		_linearDamping = config.linearDamping;
@@ -67,6 +71,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		_rb.linearDamping = _linearDamping;
 
 		_interactionEvent.Raise(new InteractionSignal { InteractionAction = InteractionSignalType.PickedUp });
+		_placeableSlotToggleEvent.Raise(_identity.type, true);
 		StoreData(_identity.type, PickableAction.Collected);
 	}
 
@@ -78,7 +83,7 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 		_rb.useGravity = true;
 		_rb.linearDamping = 0f;
 		
-
+		_placeableSlotToggleEvent.Raise(_identity.type, false);
 		bool placed = TryPlace();
 
 		// Try find a place

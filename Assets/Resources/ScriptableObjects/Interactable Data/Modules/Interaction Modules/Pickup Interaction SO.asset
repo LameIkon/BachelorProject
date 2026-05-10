@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PickupModuleConfigSO
   followSpeed: 20
   linearDamping: 2
+  _placeableSlotToggleEvent: {fileID: 11400000, guid: 5244ee453a7ad4c4c8ec20e9385d3645, type: 2}
   _storeData: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}

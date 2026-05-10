@@ -3,8 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Pickup Interaction SO", menuName = "ScriptableObject/Interactable/Interaction Type/pickup")]
 public class PickupModuleConfigSO : InteractionBehaviourConfigSO
 {
+    [Header("Settings")]
     public float followSpeed = 20;
     public float linearDamping = 10;
+    [SerializeField] private PlaceableSlotToggleEventSO _placeableSlotToggleEvent;
 
     [Header("Data Tracking")]
     [SerializeField] private StoreDataEventSO _storeData;
@@ -22,7 +24,7 @@ public class PickupModuleConfigSO : InteractionBehaviourConfigSO
             return default;
         }
 
-        PickupInteraction module = new PickupInteraction(owner, this, pickupDef, interactionEvent, source, _storeData);
+        PickupInteraction module = new PickupInteraction(owner, this, pickupDef, interactionEvent, source, _storeData, _placeableSlotToggleEvent);
         return new InteractionModuleResult
         {
             interaction = module,

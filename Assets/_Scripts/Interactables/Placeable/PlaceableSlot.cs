@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlaceableSlot : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PlaceableSlot : MonoBehaviour
     [SerializeField] private Transform _snapPoint;
     [SerializeField] private Transform _visualModel;
     [SerializeField] private float _wiggleStrenght;
+    [SerializeField] private PlaceableSlotToggleEventSO _toggleSlotHighlightEvent;
 
 
     [Header("Options")]
@@ -20,6 +22,17 @@ public class PlaceableSlot : MonoBehaviour
     private bool _canPlace;
     private Material _visualMaterial;
 
+    private void OnEnable()
+    {
+        _toggleSlotHighlightEvent.OnRaise += ToggleHighlight;
+    }
+
+    private void OnDisable()
+    {
+        _toggleSlotHighlightEvent.OnRaise -= ToggleHighlight;
+    }
+
+
     private void Awake()
     {
         if (_visualModel.TryGetComponent(out Renderer renderer))
@@ -28,6 +41,15 @@ public class PlaceableSlot : MonoBehaviour
         }
         _wiggleStrenght = 1f;
         _canPlace = true;
+
+        if (_toggleSlotHighlightEvent != null)
+        {
+            SetVisualAlpha(0f);
+        }
+        else
+        {
+            Debug.LogWarning("No toggleSlotHighlightEvent assigned. Will not hide highlight on placeable slot. It can still work without issue though!");
+        }
     }
 
 
@@ -99,6 +121,20 @@ public class PlaceableSlot : MonoBehaviour
             SetVisualAlpha(0.25f);
         }
 
+    }
+
+    /// <summary>
+    /// Called from event listener whenever an object is picked and dropped enabling the corresponding type to be placed in
+    /// </summary>
+    private void ToggleHighlight(PickableType type, bool state)
+    {
+        if (_placed) return;
+
+        if (type != _allowedType) return;
+
+        float value = state ? 0.25f : 0f; // Show or hide
+
+        SetVisualAlpha(value);
     }
 
     private void SetVisualAlpha(float value)
