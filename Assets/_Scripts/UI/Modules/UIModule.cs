@@ -28,12 +28,12 @@ public class UIModule : MonoBehaviour, IUISystem
 
     private void Awake()
     {
-        Initialize();
     }
 
 
     private void Start()
     {
+        Initialize();
         _config.registerUIEvent.Raise(this);    
     }
 

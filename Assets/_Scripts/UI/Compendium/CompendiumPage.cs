@@ -7,8 +7,7 @@ using UnityEngine.UI;
 /// </summary>
 public class CompendiumPage : MonoBehaviour, ILanguage
 {
-
-    [SerializeField] private CompendiumContentSO _compendiumData;
+    [SerializeField] private CompendiumContentSO _compendiumData; // only Serialized to be read in inspector
 
     [Header("Button UI")]
     private TextMeshProUGUI _buttonTitle;

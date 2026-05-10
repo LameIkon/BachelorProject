@@ -45,9 +45,13 @@ public class CompendiumManager : MonoBehaviour
         _compendiumProvider.Unregister(GetPage);
     }
 
-    private void Start()
+    private void Awake()
     {
         Initialize();
+    }
+
+    private void Start()
+    {
         _inputField.onValueChanged.AddListener(Search); // Listen for every time a change has occured on the input field
     }
 
@@ -143,6 +147,7 @@ public class CompendiumManager : MonoBehaviour
     #region Navigation Remembering Logic
     private void NavigateTo(PageButton pageButton)
     {
+        Debug.Log("nagivate to page");
         if (_currentPage == pageButton) return;
 
         if (!_isNavigatingFromHistory && _currentPage != null) // Only push if we made the call from the forward or back button
