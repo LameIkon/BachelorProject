@@ -16,6 +16,6 @@ MonoBehaviour:
   prompts:
   - {fileID: 11400000, guid: 97afef72c24a8a24ca464bc9911f71cb, type: 2}
   buttonEvent: {fileID: 11400000, guid: c501868c0ab2fdb48a93439dde603d58, type: 2}
-  buttonData: {fileID: 11400000, guid: 603e2696bef3e9945947e7c53d7e6037, type: 2}
+  buttonData: {fileID: 11400000, guid: 859b772be802b984db4955f04ca1e038, type: 2}
   pullLeftAnimation: {fileID: 7400000, guid: e96eb7e5b34a3204c8806603ac31cfcf, type: 2}
   pullRightAnimation: {fileID: 7400000, guid: 3f08ec69844604447bb63cb23f92c5cc, type: 2}
