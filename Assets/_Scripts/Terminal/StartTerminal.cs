@@ -17,4 +17,15 @@ public class StartTerminal : Terminal
 	}
 
 
+    protected override void Something(Quest quest)
+    {
+        foreach (TerminalAndButton tb in quest.TerminalBehavior)
+        {
+            if (tb.TType == TerminalType.End)
+            {
+
+            }
+        }
+    }
+
 }

@@ -7,6 +7,7 @@ public abstract class Terminal : MonoBehaviour
     [SerializeField] private TerminalStartEventSO _onTerminalStartEvent;
     [SerializeField] private ButtonEventSO _onButtonEvent;
     [SerializeField] protected TerminalStateEventSO _onTerminalStateEvent;
+    [SerializeField] protected QuestGiveEventSO _onQuestGiveEvent;
 
     protected TerminalType _terminalType;
 
@@ -21,12 +22,17 @@ public abstract class Terminal : MonoBehaviour
     protected virtual void OnEnable()
     {
         _onButtonEvent.OnRaise += ChangeStatus;
+        _onQuestGiveEvent.OnRaise += Something;
     }
 
     protected virtual void OnDisable()
     {
         _onButtonEvent.OnRaise -= ChangeStatus;
+        _onQuestGiveEvent.OnRaise += Something;
     }
+
+
+    protected abstract void Something(Quest quest);
 
 
     #endregion

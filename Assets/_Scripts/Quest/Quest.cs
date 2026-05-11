@@ -6,7 +6,7 @@ using UnityEngine;
 public class Quest : ScriptableObject
 {
 	[SerializeField] private List<QuestPart> _parts;
-    [SerializeField] private TerminalState _terminalState;
+    [SerializeField] private List<TerminalAndButton> _terminalBehavior;
     private int _index;
     
 
@@ -46,8 +46,7 @@ public class Quest : ScriptableObject
 		}
 	}
 
-    public TerminalState MachineState => _terminalState;
-
+    public List<TerminalAndButton> TerminalBehavior => _terminalBehavior;
 }
 
 
@@ -114,4 +113,11 @@ public class QuestPart
 
         return _description;
     }
+}
+
+[Serializable]
+public class TerminalAndButton 
+{
+    public TerminalType TType;
+    public ButtonType BType;
 }

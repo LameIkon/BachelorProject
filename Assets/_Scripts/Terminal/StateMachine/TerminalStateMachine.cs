@@ -76,14 +76,14 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 	{
         _terminalStartEvent.OnRaise += AddTerminal;
         _terminalEvent.OnRaise += ChangeStatus;
-        _questGiveEvent.OnRaise += SetLevelState;
+        //_questGiveEvent.OnRaise += SetLevelState;
 	}
 
 	private void OnDisable()
 	{
         _terminalEvent.OnRaise -= ChangeStatus;
 		_terminalStartEvent.OnRaise -= AddTerminal;
-        _questGiveEvent.OnRaise -= SetLevelState;
+        //_questGiveEvent.OnRaise -= SetLevelState;
         _terminals.Clear();
 	}
 
@@ -243,11 +243,11 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
     }
 
 
-    private void SetLevelState(Quest quest) 
-    {
-        Debug.Log($"Try set state: {quest.MachineState}");
-        SetState(quest.MachineState);
-    }
+    //private void SetLevelState(Quest quest) 
+    //{
+    //    Debug.Log($"Try set state: {quest.MachineState}");
+    //    SetState(quest.MachineState);
+    //}
 
 
 	/// <summary>

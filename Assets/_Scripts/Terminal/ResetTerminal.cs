@@ -18,4 +18,16 @@ public class ResetTerminal : Terminal
 		base.Start();
 		_terminalType = TerminalType.Reset1;
 	}
+
+
+    protected override void Something(Quest quest)
+    {
+        foreach (TerminalAndButton tb in quest.TerminalBehavior)
+        {
+            if (tb.TType == TerminalType.End)
+            {
+
+            }
+        }
+    }
 }
