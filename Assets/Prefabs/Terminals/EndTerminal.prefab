@@ -1313,7 +1313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db41fd86ff7c27c498f932cc98f15779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableEntity
-  _interactionIdentity: {fileID: 11400000, guid: 1a1e74022caef7143b20dbd39834d3c3, type: 2}
+  _interactionIdentity: {fileID: 11400000, guid: 55206d5a8e9e4cd4682b2e43cc44073d, type: 2}
   _interactionBehaviourConfig: {fileID: 11400000, guid: 045c1b62650073441b89935c62606d5b, type: 2}
   _highlightConfig: {fileID: 11400000, guid: d6a06fcf33fc1d543a5279e84c1dac21, type: 2}
   _menuConfig: {fileID: 11400000, guid: 2190a49b369f0b04dadf77d68258087a, type: 2}
