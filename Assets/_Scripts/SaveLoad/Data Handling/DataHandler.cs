@@ -61,6 +61,8 @@ public class DataHandler : IDisposable
     {
         if (!_isCapturing) return;
 
+        float sessionTime = SessionTime();
+
         foreach (LevelRecordBuilderSO builder in _recordBuilders)
         {
             builder.Apply(_currentLevel, context);
@@ -350,7 +352,7 @@ public struct InteractionEvent
     // specific event types. Only one should be used
 
     // Time
-    public float timeStamp;
+    public float timeStamp; // Autmatically handled. 
 
     // Pickable
     public PickableType? pickableType;
@@ -420,8 +422,9 @@ public enum CompendiumOpenMethod : byte
 public enum QuestEventType : byte
 {
     Started,
+    Completed,
+    PartStarted,
     PartCompleted,
-    Completed
 }
 
 /// <summary>

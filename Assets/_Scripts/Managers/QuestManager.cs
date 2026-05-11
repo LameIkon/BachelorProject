@@ -15,6 +15,7 @@ public class QuestManager : Singleton<QuestManager>
     [Header("Quests")]
     [SerializeField] private Quest _activeQuest;
     [SerializeField] private List<Quest> _quests;
+
     private int _questIndex;
 
     #region Unity Methods
@@ -53,7 +54,14 @@ public class QuestManager : Singleton<QuestManager>
         {
             _activeQuest = _quests[index];
             _activeQuest.Init();
+
             StoreData(_activeQuest, QuestEventType.Started);
+            QuestPart firstPart = _activeQuest.CurrentQuestPart;
+            if (firstPart != null)
+            {
+                StoreData(firstPart, QuestEventType.PartStarted);
+            }
+
             _updateUIEvent.Raise();
         }
     }
@@ -91,27 +99,57 @@ public class QuestManager : Singleton<QuestManager>
         });
     }
 
+    private void StoreData(QuestPart questpart, QuestEventType type)
+    {
+        if (_storeDataEvent == null) return;
+
+        if (_activeQuest == null) return;
+
+        _storeDataEvent.Raise(new InteractionEvent
+        {
+            eventType = EventType.Quest,
+            quest = _activeQuest,
+            questPart = questpart,
+            questEventType = type
+        });
+    }
+
 
     private void CompletePartQuest(QuestID questId)
     {
         if (_activeQuest == null) return; 
-        if (_activeQuest.Completed(questId)) // If we finished current quest part
-        {
-            StoreData(_activeQuest, QuestEventType.PartCompleted);
+        
+        QuestPart completedPart = _activeQuest.CurrentQuestPart;
 
-            if (_activeQuest.IsComplete && _activeQuest.SetNewQuestOnComplete)
+        if (completedPart == null) return;
+
+        
+        bool completed = _activeQuest.Completed(questId); // If we finished current quest part
+
+        if (!completed) return;
+
+        StoreData(completedPart, QuestEventType.PartCompleted);
+        
+        
+        if (_activeQuest.IsComplete)
+        {
+            if (_activeQuest.SetNewQuestOnComplete)
             {
                 FinishQuest();
-                return;
             }
+            _updateUIEvent.Raise();
+            return;
         }
+
+        // Begin track next quest part
+        QuestPart nextPart = _activeQuest.CurrentQuestPart;
+
+        if (nextPart != null)
+        {
+            StoreData(nextPart, QuestEventType.PartStarted);
+        }
+
         _updateUIEvent.Raise();
-        //_updateUIEvent.Raise();
-        //_isQuestComplete = _activeQuest.IsComplete;
-
-        //StoreData(_activeQuest, QuestEventType.PartCompleted);
-
-        //if(_isQuestComplete) _toggleEvent.Raise(new UIRequest(UIType.NextLevelPopUp, UIInteractionSource.UIInternal));
     }
 
     private Quest GetQuest() 

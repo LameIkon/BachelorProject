@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using UnityEngine;
-using System.Collections.Generic;
 
 public class SaveSystem : Singleton<SaveSystem>
 {

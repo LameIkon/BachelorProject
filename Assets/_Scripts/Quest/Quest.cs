@@ -11,6 +11,7 @@ public class Quest : ScriptableObject
     [SerializeField] private bool _setNewQuestOnComplete;
     private int _curentQuestPartIndex;
     
+    // Getters
     public string QuestCompleteDescription => _questCompleteDescription;
     public bool SetNewQuestOnComplete => _setNewQuestOnComplete;
 
@@ -51,6 +52,18 @@ public class Quest : ScriptableObject
 			return _parts;
 		}
 	}
+
+    public QuestPart CurrentQuestPart
+    {
+        get
+        {
+            if (_parts == null || _parts.Count == 0) return null;
+
+            if (_curentQuestPartIndex < 0 || _curentQuestPartIndex >= _parts.Count) return null;
+
+            return _parts[_curentQuestPartIndex];
+        }
+    }
 
     public List<TerminalAndButton> TerminalBehavior => _terminalBehavior;
 }

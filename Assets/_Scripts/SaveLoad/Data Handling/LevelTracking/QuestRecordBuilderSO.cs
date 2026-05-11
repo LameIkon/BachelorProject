@@ -30,7 +30,6 @@ public class QuestRecordBuilderSO : LevelRecordBuilderSO
             questRecord = new QuestRecord
             {
                 quest = quest,
-                timeStarted = time,
                 questParts = new List<QuestPartRecord>()
 
             };
@@ -42,6 +41,9 @@ public class QuestRecordBuilderSO : LevelRecordBuilderSO
         // Quest event
         switch (questEvent)
         {
+            case QuestEventType.Started:
+                questRecord.timeStarted = time;
+                break;
             case QuestEventType.Completed:
                 questRecord.timeFinished = time;
                 questRecord.timeDuration = questRecord.timeFinished - questRecord.timeStarted;
@@ -58,7 +60,6 @@ public class QuestRecordBuilderSO : LevelRecordBuilderSO
             partRecord = new QuestPartRecord
             {
                 part = questPart,
-                timeStarted = time
             };
 
             questRecord.questParts.Add(partRecord);
@@ -68,6 +69,9 @@ public class QuestRecordBuilderSO : LevelRecordBuilderSO
         // Quest part event
         switch (questEvent)
         {
+            case QuestEventType.PartStarted:
+                partRecord.timeStarted = time;
+                break;
             case QuestEventType.PartCompleted:
                 partRecord.timeFinished = time;
                 partRecord.timeDuration = partRecord.timeFinished - partRecord.timeStarted;
