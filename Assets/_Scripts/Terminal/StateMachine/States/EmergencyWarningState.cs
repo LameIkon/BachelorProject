@@ -8,7 +8,7 @@ public class EmergencyWarningState : BaseState
 	private readonly ButtonLight _emergencyLightReset;
 	private readonly ButtonLight _emergencyLightEnd;
 
-	private readonly Dictionary<TerminalType, ButtonLight> _issues;
+	private readonly Dictionary<TerminalType, bool> _issues;
 
 	//private readonly ButtonLight _leverLight;
 	public EmergencyWarningState(TerminalStateMachine manager, AudioSource audioSource, 
@@ -20,11 +20,11 @@ public class EmergencyWarningState : BaseState
 		_emergencyLightLever = frontLightEmerg;
 		_emergencyLightReset = resetLightEmerg;
 
-		_issues = new Dictionary<TerminalType, ButtonLight>()
+		_issues = new Dictionary<TerminalType, bool>()
 		{
-			{ TerminalType.Reset1, _emergencyLightReset },
-			{ TerminalType.Lever, _emergencyLightLever},
-			{ TerminalType.End, _emergencyLightEnd },
+			{ TerminalType.Reset1, false },
+			{ TerminalType.Lever, false },
+			{ TerminalType.End, false },
 
 		};
 	}
@@ -34,20 +34,30 @@ public class EmergencyWarningState : BaseState
 	{
 		if (button != ButtonType.Emergency) return false;
 
-		Something(terminal);
+		ChangeIssue(terminal);
+
+		Debug.Log($"Emergency: {terminal}");
 
 		//if (terminal != TerminalType.Lever) return false;
-		//manager.SetState(TerminalState.Warning);
+
+		foreach (TerminalType type in _issues.Keys) 
+		{
+			if (_issues[type] == true) return false; // Check if there are any issues.
+		}
+
+		Debug.Log("Emergency State: Issues fixed");
+		manager.SetState(TerminalState.Warning);
 		return true;
 		
 	}
 
 	public override void OnEnter()
 	{
+		Debug.Log($"Enter Emergency State");
 		_resetLight.TurnLight(true);
 		//_leverLight.TurnLight(true);
 		manager.TurnOffConveyor();
-		manager.SendState(TerminalState.LeverWarning);
+		manager.SendState(TerminalState.EmergencyWarning);
 	}
 
 	public override void OnExit()
@@ -56,12 +66,16 @@ public class EmergencyWarningState : BaseState
 		manager.TryCompleteQuest(QuestID.RemoveLeverWarning);
 	}
 
-	private void Something(TerminalType type)
+	private void ChangeIssue(TerminalType type)
 	{
-		if (_issues.ContainsKey(type))
+		_issues[type] = !_issues[type]; // Flip the bool
+
+		foreach (TerminalType t in _issues.Keys)
 		{
-			 _issues[type].ToggleLight(); // Flip the bool
+			Debug.Log($"Emergency Waring: Terminal: {t}, Issue {_issues[t]}");
 		}
+
+		if (type == TerminalType.Lever) _emergencyLightLever.ToggleLight();
 
 	}
 }

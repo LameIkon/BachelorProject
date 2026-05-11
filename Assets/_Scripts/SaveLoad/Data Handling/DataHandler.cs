@@ -391,7 +391,8 @@ public enum TerminalState : byte
     Off,
     Running,
     Warning,
-    LeverWarning
+    LeverWarning,
+    EmergencyWarning
 }
 
 public enum PickableAction : byte

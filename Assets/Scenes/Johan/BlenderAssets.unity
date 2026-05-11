@@ -3459,6 +3459,9 @@ MonoBehaviour:
   _leverWarningStateAudioPlayer: {fileID: 0}
   _resetLight: {fileID: 1417782157670818614}
   _leverLight: {fileID: 613506668}
+  _emergencyLightLever: {fileID: 613506668}
+  _emergencyLightReset: {fileID: 0}
+  _emergencyLightEnd: {fileID: 0}
   _machineSpeed: 0
 --- !u!82 &487715927
 AudioSource:
@@ -21424,7 +21427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3846055603096156297, guid: c1b42161c3934b04da0cb13e46a64f96, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4021740508668850882, guid: c1b42161c3934b04da0cb13e46a64f96, type: 3}
       propertyPath: m_Name
@@ -21444,7 +21447,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1105266197624458862, guid: c1b42161c3934b04da0cb13e46a64f96, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1459685699}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1643588736931812710, guid: c1b42161c3934b04da0cb13e46a64f96, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8500693370756154017}
   m_SourcePrefab: {fileID: 100100000, guid: c1b42161c3934b04da0cb13e46a64f96, type: 3}
 --- !u!224 &8500693370756154014 stripped
 RectTransform:
@@ -21456,6 +21462,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1113689521139368289, guid: c1b42161c3934b04da0cb13e46a64f96, type: 3}
   m_PrefabInstance: {fileID: 8500693370756154013}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8500693370756154016 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1643588736931812710, guid: c1b42161c3934b04da0cb13e46a64f96, type: 3}
+  m_PrefabInstance: {fileID: 8500693370756154013}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8500693370756154017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8500693370756154016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02b027f561a3f4f40a19532f7cf6ac29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndTerminal
+  _onTerminalEvent: {fileID: 11400000, guid: 69baff98591f6dc4eb20daa0a65b1de1, type: 2}
+  _onTerminalStartEvent: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
+  _onButtonEvent: {fileID: 11400000, guid: 25685c629085d424c855883bf1e3d150, type: 2}
+  _onTerminalStateEvent: {fileID: 11400000, guid: 207ba0e936b51f54abe89f6b7514b88c, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
