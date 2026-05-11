@@ -56,6 +56,7 @@ public class OffState : BaseState
         {
             Debug.Log($"Start Sequence: {i}, Coroutine: {_startSequence}");
             yield return _waitForSeconds;
+            audioPlayer.PlaySound(audioSource);
         }
         _canPress = true;
 		Debug.Log($"Can Start: {_canPress}, Coroutine: {_startSequence}");

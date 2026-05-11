@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba64dee46ecbc98449c81a9f7dccfa9d, type: 3}
-  m_Name: Background Player SO
+  m_Name: RunningState Player SO
   m_EditorClassIdentifier: Assembly-CSharp::AudioPlayer
   _mixerGroup: {fileID: 4991979802742565857, guid: 3edb22aa6c8f252489d46398a74a914b, type: 2}
   _clips:
-  - {fileID: 8300000, guid: 4d7143513e29a4740b1361f1494c327e, type: 3}
+  - {fileID: 8300000, guid: ca22ac423714e53409c59d584b5c144e, type: 3}
   _volumeRange:
-    _minValue: 0.120000005
-    _maxValue: 0.120000005
+    _minValue: 0.4021407
+    _maxValue: 0.4021407
   _pitchRange:
     _minValue: 1
     _maxValue: 1
   _is3D: 0
   _loops: 1
-  _stopTime: 0
+  _pitchChange: 0.0022
+  _up: 0
+  _stopTime: 0.0025

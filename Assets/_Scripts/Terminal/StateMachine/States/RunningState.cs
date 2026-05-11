@@ -7,8 +7,14 @@ public class RunningState : BaseState
     public override void OnEnter()
     {
         manager.TurnOnConveyor();
+        audioPlayer.PlaySound(audioSource);
         manager.TryCompleteQuest(QuestID.StartMachine);
         manager.SendState(TerminalState.Running);
+    }
+
+    public override void OnExit()
+    {
+        manager.StartCoroutine(audioPlayer.Fadeout());
     }
 
     public override bool HandleInput(ButtonType button, TerminalType terminal)
