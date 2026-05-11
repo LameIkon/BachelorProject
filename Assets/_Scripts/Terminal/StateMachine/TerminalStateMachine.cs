@@ -32,13 +32,18 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 	[SerializeField] private ButtonLight _emergencyLightReset;
 	[SerializeField] private ButtonLight _emergencyLightEnd;
 
-    public static Dictionary<InteractableEntity, bool> s_Issues;
-
 
     private StateMachine _stateMachine;
+    private TerminalState _currentState;
+
 
     [SerializeField] private float _machineSpeed = 0f;
 
+    // Issues tracking
+    private bool HasIssue => _activeIssues.Count > 0;
+    private readonly HashSet<MachineIssue> _activeIssues = new();
+    private readonly HashSet<TerminalType> _activeEmergencyButtons = new();
+    private Dictionary<TerminalType, ButtonLight> _emergencyIssues;
 
     // Terminal States
     public RunningState RunningState { get; private set; }
@@ -55,6 +60,13 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
         _terminals = new List<Terminal>();
 
         CreateStateMachine();
+
+        _emergencyIssues = new Dictionary<TerminalType, ButtonLight>()
+		{
+			{ TerminalType.Reset1, _emergencyLightReset },
+			{ TerminalType.Lever, _emergencyLightLever},
+			{ TerminalType.End, _emergencyLightEnd },
+		};
 
     }
 
@@ -94,32 +106,91 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 
     private bool ProcessInput(ButtonType buttonType, TerminalType terminalType)
     {
-        bool shouldContinue = true;
-        if (terminalType == TerminalType.Lever)
+        Debug.Log("process Input");
+        if (buttonType == ButtonType.Lever)
         { 
-            shouldContinue = HandleLever(); 
-        }
-
-        if (!shouldContinue) 
-        {
+            ToggleLever();
             return true;
         }
-
+        if (buttonType == ButtonType.Emergency)
+        {
+            ToggleEmergency(terminalType);
+            return true;
+        }
+        if (HasIssue) return false;
         return _stateMachine.HandleInput(buttonType, terminalType);
     }
 
-    private bool HandleLever()
-    {
-        if (_stateMachine.CurrentState != LeverWarningState)
+    #region Issues
+    private void ToggleLever()
+    {   
+        Debug.Log("Toggle Lever");
+        if (_activeIssues.Contains(MachineIssue.Lever))
         {
-            SetState(TerminalState.LeverWarning);
-            return false; 
+            _activeIssues.Remove(MachineIssue.Lever);
         }
-        return true;
+        else
+        {
+            _activeIssues.Add(MachineIssue.Lever);
+        }
+        
+        RefreshIssues();
+
+        //if (_stateMachine.CurrentState != LeverWarningState)
+        //{
+        //    SetState(TerminalState.LeverWarning);
+        //    return false; 
+        //}
+        //return true;
     }
 
+    private void ToggleEmergency(TerminalType terminal)
+    {
+        // First handle emergency list by toggling
+        if (_activeEmergencyButtons.Contains(terminal))
+        {
+            _activeEmergencyButtons.Remove(terminal);
+        }
+        else
+        {
+            _activeEmergencyButtons.Add(terminal);
+        }
 
-    # region State Machine
+        // Lastly check if we have any ongoing emergency
+        if (_activeEmergencyButtons.Count > 0)
+        {
+            _activeIssues.Add(MachineIssue.Emergency);
+        }
+        else
+        {
+            _activeIssues.Remove(MachineIssue.Emergency);
+        }
+
+        RefreshIssues();
+    }
+
+    private void RefreshIssues()
+    {
+        if (HasIssue)
+        {
+            //_resetLight.TurnLight(true);
+            SetState(TerminalState.Warning);
+        }
+
+        // Toggle light for lever
+        _leverLight.TurnLight(_activeIssues.Contains(MachineIssue.Lever));
+
+        // Toggle light for emergency buttons
+        foreach (var (terminal, light) in _emergencyIssues)
+        {
+            light?.TurnLight(_activeEmergencyButtons.Contains(terminal));
+        }
+
+        
+    }
+    #endregion
+
+    #region State Machine
     private void CreateStateMachine()
     {
         _stateMachine = new StateMachine();
@@ -127,14 +198,17 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
         RunningState = new RunningState(this, _audioSource, _runningStateAudioPlayer);
         OffState = new OffState(this, _audioSource, _offStateAudioPlayer);
         WarningState = new WarningState(this, _audioSource, _warningStateAudioPlayer, _resetLight);
-        LeverWarningState = new LeverWarningState(this, _audioSource, _leverWarningStateAudioPlayer, _resetLight, _leverLight);
-        EmergencyWarningState = new EmergencyWarningState(this, _audioSource, _warningStateAudioPlayer, _resetLight, _emergencyLightLever, _emergencyLightEnd, _emergencyLightReset);
+        //LeverWarningState = new LeverWarningState(this, _audioSource, _leverWarningStateAudioPlayer, _resetLight, _leverLight);
+        //EmergencyWarningState = new EmergencyWarningState(this, _audioSource, _warningStateAudioPlayer, _resetLight, _emergencyLightLever, _emergencyLightEnd, _emergencyLightReset);
 
     }
 
     public void SetState(TerminalState newState)
     {
         BaseState stateSwitch = null;
+
+        //if (newState == _currentState) return;
+
         switch (newState) 
         {
             case TerminalState.Off:
@@ -156,6 +230,8 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
             eventType = EventType.Terminal,
             terminalState = newState,
         };
+
+        _currentState = newState;
 
         _storeDataEvent.Raise(context);
         _stateMachine.SetState(stateSwitch);
@@ -206,5 +282,11 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
     }
 
     #endregion 
+
+    private enum MachineIssue
+    {
+        Lever,
+        Emergency
+    }
 
 }

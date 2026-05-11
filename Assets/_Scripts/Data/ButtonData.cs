@@ -29,5 +29,6 @@ public enum ButtonType : byte
 	Stop,
 	SpeedUp,
 	SpeedDown,
-	Emergency
+	Emergency,
+	Lever
 }

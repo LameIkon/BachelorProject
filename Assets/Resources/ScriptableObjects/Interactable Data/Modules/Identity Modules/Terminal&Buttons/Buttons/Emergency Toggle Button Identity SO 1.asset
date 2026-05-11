@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c56c52c249da29946a2cb2bced4a6306, type: 3}
-  m_Name: Emergency Toggle Button Identity SO
+  m_Name: Emergency Toggle Button Identity SO 1
   m_EditorClassIdentifier: Assembly-CSharp::ToggleButtonInteractionIdentitySO
   compendiumID: 0
   prompts:
   - {fileID: 11400000, guid: 97afef72c24a8a24ca464bc9911f71cb, type: 2}
-  buttonEvent: {fileID: 11400000, guid: 13254ef1d187f4443a0d83639731fe31, type: 2}
+  buttonEvent: {fileID: 11400000, guid: b738537e63c55bf4ab203fe548b8399a, type: 2}
   buttonData: {fileID: 11400000, guid: 5816902cccf589e439536b7886fafdf3, type: 2}
   pressInanimation: {fileID: 7400000, guid: 727ae10fd3f5b374a8d8fce0ed6ee1ac, type: 2}
   pressOutanimation: {fileID: 7400000, guid: 29fdd018e50c75c47a1911c0c4915978, type: 2}
