@@ -22,10 +22,10 @@ MonoBehaviour:
     ShowQuestPartOnlyOnSelection: 0
     _content: {fileID: 0}
   - _id: 1
-    _isComplete: 0
+    _isComplete: 1
     _howManySteps: 0
-    _description: Place the block on the belt
-    _itemPickup: {fileID: 0}
+    _description: Place something on the plank at the first opening
+    _itemPickup: {fileID: 11400000, guid: 4f7e7167ff4129447baeb803c02ecd52, type: 2}
     hideQuestDescription: 0
     ShowQuestPartOnlyOnSelection: 0
     _content: {fileID: 0}

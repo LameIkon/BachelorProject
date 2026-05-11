@@ -31,4 +31,4 @@ MonoBehaviour:
     _content: {fileID: 0}
   _questCompleteDescription: Get the plank to the first opening
   _terminalBehavior: []
-  _setNewQuestOnComplete: 1
+  _setNewQuestOnComplete: 0

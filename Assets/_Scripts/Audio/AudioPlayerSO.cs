@@ -18,7 +18,7 @@ public class AudioPlayerSO : ScriptableObject
 	[SerializeField, Tooltip("Should the pitch change be up or down?")] bool _up; 
 	[SerializeField] float _stopTime;
 
-	private List<AudioSource> sources = new List<AudioSource>();
+	private List<AudioSource> _sources = new List<AudioSource>(); //
 
 
 	public void PlaySound(AudioSource source) 
@@ -35,9 +35,9 @@ public class AudioPlayerSO : ScriptableObject
 			return;
 		}
 
-		if (!sources.Contains(source)) 
+		if (!_sources.Contains(source)) 
 		{
-			sources.Add(source);
+			_sources.Add(source);
 		}
 
 		source.loop = _loops;
@@ -54,21 +54,21 @@ public class AudioPlayerSO : ScriptableObject
 
 	private void StopAll() 
 	{
-		if (sources.Count > 0)
+		if (_sources.Count > 0)
 		{
-			foreach (AudioSource source in sources) 
+			foreach (AudioSource source in _sources) 
 			{
 				source.Stop();
 			}
-			sources.Clear();
+			_sources.Clear();
 		}
 	}
 
 	public IEnumerator Fadeout() 
 	{
-        if (sources.Count > 0)
+        if (_sources.Count > 0)
         {
-            foreach (AudioSource source in sources)
+            foreach (AudioSource source in _sources)
             {
 				for (float f = source.volume; f > 0; f -= _stopTime)
 				{
@@ -77,7 +77,7 @@ public class AudioPlayerSO : ScriptableObject
 					yield return null;
 				}
             }
-			sources.Clear();
+			_sources.Clear();
         }
     }
 

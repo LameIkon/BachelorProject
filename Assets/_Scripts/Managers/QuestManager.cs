@@ -49,7 +49,7 @@ public class QuestManager : Singleton<QuestManager>
 
     private void SetQuest(int index)
     {
-        if (_quests.Count > 0)
+        if (_quests.Count > 0 || index < _quests.Count - 1)
         {
             _activeQuest = _quests[index];
             _activeQuest.Init();
