@@ -6,9 +6,11 @@ using UnityEngine;
 public class Quest : ScriptableObject
 {
 	[SerializeField] private List<QuestPart> _parts;
+    [SerializeField] private string _questCompleteDescription;
     [SerializeField] private List<TerminalAndButton> _terminalBehavior;
     private int _index;
     
+    public string QuestCompleteDescription => _questCompleteDescription;
 
 	public void Init() 
 	{
@@ -61,6 +63,7 @@ public class QuestPart
     [SerializeField] private int _howManySteps = 0;
     [SerializeField] private string _description;
     [SerializeField] private PickupInteractionIdentitySO _itemPickup;
+    public bool hideQuestDescription;
 
     [SerializeField] private LocalizedContentSO _content;
 

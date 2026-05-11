@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class StartTerminal : Terminal
 {
-
 	[Header("Buttons")]
 	[SerializeField] private InteractableEntity _startButton;
 	[SerializeField] private InteractableEntity _stopButton;
@@ -15,17 +14,4 @@ public class StartTerminal : Terminal
 		base.Start();
 		_terminalType = TerminalType.Start;
 	}
-
-
-    protected override void Something(Quest quest)
-    {
-        foreach (TerminalAndButton tb in quest.TerminalBehavior)
-        {
-            if (tb.TType == TerminalType.End)
-            {
-
-            }
-        }
-    }
-
 }

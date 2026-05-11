@@ -18,23 +18,32 @@ MonoBehaviour:
     _howManySteps: 0
     _description: Get the machine to the off mode
     _itemPickup: {fileID: 0}
+    hideQuestDescription: 0
     _content: {fileID: 0}
   - _id: 0
-    _isComplete: 1
+    _isComplete: 0
     _howManySteps: 0
     _description: 'Place on belt: '
-    _itemPickup: {fileID: 11400000, guid: e3765dcbb8128334ab992f8bba266416, type: 2}
+    _itemPickup: {fileID: 0}
+    hideQuestDescription: 0
     _content: {fileID: 0}
   - _id: 1
-    _isComplete: 1
+    _isComplete: 0
     _howManySteps: 0
     _description: Place the block on the belt
     _itemPickup: {fileID: 0}
+    hideQuestDescription: 0
     _content: {fileID: 0}
   - _id: 5
-    _isComplete: 1
+    _isComplete: 0
     _howManySteps: 0
     _description: Place the block on the belt
     _itemPickup: {fileID: 0}
+    hideQuestDescription: 0
     _content: {fileID: 0}
-  _terminalState: 2
+  _questCompleteDescription: 
+  _terminalBehavior:
+  - TType: 5
+    BType: 5
+  - TType: 5
+    BType: 5

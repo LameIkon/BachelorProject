@@ -33,13 +33,22 @@ public class QuestUI : MonoBehaviour, ILanguage
         _gui.text = string.Empty;
         if (_questProvider.GetQuest().IsComplete) 
         {
-            _gui.text = "Quest Complete\n " +
-                "Go to next level";
+            if (_questProvider.GetQuest().QuestCompleteDescription != string.Empty)
+            {
+                _gui.text = _questProvider.GetQuest().QuestCompleteDescription;
+            }
+            else
+            {
+                _gui.text = "Quest Complete\n " +
+                    "Go to next level";
+            }
             return;
         }
 
         foreach (QuestPart p in _questProvider.GetQuest().Parts)
         {
+            if (p.hideQuestDescription) continue;
+
             if (!p.IsPartComplete)
             {
                 _gui.text += p.ToString() + "\n";

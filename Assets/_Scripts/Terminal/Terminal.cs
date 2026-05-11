@@ -22,17 +22,20 @@ public abstract class Terminal : MonoBehaviour
     protected virtual void OnEnable()
     {
         _onButtonEvent.OnRaise += ChangeStatus;
-        _onQuestGiveEvent.OnRaise += Something;
+        if (_onQuestGiveEvent != null) _onQuestGiveEvent.OnRaise += SetBehaviour;
     }
 
     protected virtual void OnDisable()
     {
         _onButtonEvent.OnRaise -= ChangeStatus;
-        _onQuestGiveEvent.OnRaise += Something;
+        if (_onQuestGiveEvent != null) _onQuestGiveEvent.OnRaise -= SetBehaviour;
     }
 
 
-    protected abstract void Something(Quest quest);
+    protected virtual void SetBehaviour(Quest quest)
+    {
+        // Optional implementation
+    }
 
 
     #endregion

@@ -27,18 +27,6 @@ public class MainTerminal : Terminal
 		_onTerminalStateEvent.OnRaise -= WriteTerminalError;
 	}
 
-
-    protected override void Something(Quest quest)
-    {
-        foreach (TerminalAndButton tb in quest.TerminalBehavior)
-        {
-            if (tb.TType == TerminalType.End)
-            {
-
-            }
-        }
-    }
-
     private void WriteTerminalError(TerminalState terminalState) 
 	{
 		switch (terminalState) 

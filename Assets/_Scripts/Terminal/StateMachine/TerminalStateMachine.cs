@@ -63,6 +63,8 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 
         CreateStateMachine();
 
+        SetState(TerminalState.Off);
+
         _emergencyIssues = new Dictionary<TerminalType, ButtonLight>()
 		{
 			{ TerminalType.Reset1, _emergencyLightReset },

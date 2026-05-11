@@ -37,6 +37,7 @@ public class InteractableEntity : MonoBehaviour, IInteractionEvent
 
     // Getters
     public InputPromptModule InputPromptModule => _inputPromptModule;
+    public IInteractionAction InteractionAction => _interactionAction;
 
     private void Awake()
     {
