@@ -3367,7 +3367,9 @@ MonoBehaviour:
   _onTerminalStartEvent: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
   _onButtonEvent: {fileID: 11400000, guid: c501868c0ab2fdb48a93439dde603d58, type: 2}
   _onTerminalStateEvent: {fileID: 11400000, guid: 207ba0e936b51f54abe89f6b7514b88c, type: 2}
-  _lever: {fileID: 716129820}
+  _onQuestGiveEvent: {fileID: 0}
+  _leverEntity: {fileID: 0}
+  _emergencyEntity: {fileID: 0}
 --- !u!1 &482066521
 GameObject:
   m_ObjectHideFlags: 0
@@ -3536,16 +3538,22 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _offStateAudioPlayer: {fileID: 0}
-  _runningStateAudioPlayer: {fileID: 0}
-  _warningStateAudioPlayer: {fileID: 0}
-  _leverWarningStateAudioPlayer: {fileID: 0}
+  _offStateAudioPlayer: {fileID: 11400000, guid: 4035c922659d4ef47ac5c80c265765b6, type: 2}
+  _runningStateAudioPlayer: {fileID: 11400000, guid: 1016bb8d4d576214abf34d7ebfd62a8f, type: 2}
+  _warningStateAudioPlayer: {fileID: 11400000, guid: 68f758a8ccd7d2e41a3a458c040118d2, type: 2}
+  _leverWarningStateAudioPlayer: {fileID: 11400000, guid: 23dffae5c12163e4ebd2ecb5accb576f, type: 2}
   _resetLight: {fileID: 1417782157670818614}
   _leverLight: {fileID: 613506668}
   _emergencyLightLever: {fileID: 0}
   _emergencyLightReset: {fileID: 0}
   _emergencyLightEnd: {fileID: 0}
   _machineSpeed: 0
+  _machineSpeeds:
+    _minValue: 0
+    _maxValue: 0.3
+  _adjustSpeedAmount:
+    _minValue: -0.2
+    _maxValue: 0.2
 --- !u!82 &487715927
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14700,6 +14708,7 @@ MonoBehaviour:
   _onTerminalStartEvent: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
   _onButtonEvent: {fileID: 11400000, guid: eb8e545d52478e04495995c5a5cbea9b, type: 2}
   _onTerminalStateEvent: {fileID: 11400000, guid: 207ba0e936b51f54abe89f6b7514b88c, type: 2}
+  _onQuestGiveEvent: {fileID: 0}
 --- !u!1 &1226832992
 GameObject:
   m_ObjectHideFlags: 0

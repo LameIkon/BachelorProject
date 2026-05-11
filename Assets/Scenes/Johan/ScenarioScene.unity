@@ -14915,7 +14915,7 @@ MonoBehaviour:
   _onTerminalStartEvent: {fileID: 11400000, guid: 6b77676f7de012d4a8b46a6fcd4f1074, type: 2}
   _onButtonEvent: {fileID: 11400000, guid: eb8e545d52478e04495995c5a5cbea9b, type: 2}
   _onTerminalStateEvent: {fileID: 11400000, guid: 207ba0e936b51f54abe89f6b7514b88c, type: 2}
-  _onQuestGiveEvent: {fileID: 0}
+  _onQuestGiveEvent: {fileID: 11400000, guid: 05413bab4ed2105408f95bc51eed4ac9, type: 2}
 --- !u!1 &1226832992
 GameObject:
   m_ObjectHideFlags: 0
@@ -22491,6 +22491,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: a631309c1d89ba14bbe8b7016fde2dcb, type: 2}
+    - target: {fileID: 4624161365976538413, guid: 5d7878bce1b795d4ba0e374b07e5122a, type: 3}
+      propertyPath: _onQuestGiveEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 05413bab4ed2105408f95bc51eed4ac9, type: 2}
     - target: {fileID: 4916397706548868700, guid: 5d7878bce1b795d4ba0e374b07e5122a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.405426
