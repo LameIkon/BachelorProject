@@ -6,7 +6,7 @@ public class EndTerminal : Terminal
 	protected override void Start()
 	{
 		base.Start();
-		_terminalType = TerminalType.Reset2;
+		_terminalType = TerminalType.End;
 	}
 
 

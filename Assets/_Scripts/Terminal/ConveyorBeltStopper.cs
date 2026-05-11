@@ -1,11 +1,13 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class ConveyorBeltStopper : MonoBehaviour
 {
 
     [SerializeField] private bool _hasStoped;
     [SerializeField] private TerminalStateEventSO _terminalStateEvent;
     [SerializeField] private QuestGiveEventSO _questGiveEvent;
+    [SerializeField] private Collider _collider;
     [SerializeField] private Rigidbody _rb;
 
     [SerializeField] private Quest _quest;
@@ -17,10 +19,10 @@ public class ConveyorBeltStopper : MonoBehaviour
     }
 
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnTriggerEnter(Collider other)
 	{
         Debug.Log("Stop Conveyor Enter");
-		collision.collider.TryGetComponent<Rigidbody>(out Rigidbody rb);
+		other.TryGetComponent<Rigidbody>(out Rigidbody rb);
         _rb = rb;
         if (rb != null && !_hasStoped) 
         {
@@ -30,11 +32,17 @@ public class ConveyorBeltStopper : MonoBehaviour
         }
 	}
 
-	private void OnCollisionExit(Collision collision)
+	private void OnTriggerExit(Collider other)
 	{
-        collision.collider.TryGetComponent<Rigidbody>(out Rigidbody rb);
+        other.TryGetComponent<Rigidbody>(out Rigidbody rb);
         if(rb != null && rb == _rb) _rb = null;
 
+	}
+
+	private void Reset()
+	{
+        _collider = GetComponent<Collider>();
+        _collider.isTrigger = true;
 	}
 
 }

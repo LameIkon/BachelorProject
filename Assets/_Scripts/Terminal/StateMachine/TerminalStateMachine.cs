@@ -100,6 +100,11 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
             shouldContinue = HandleLever(); 
         }
 
+        if (buttonType == ButtonType.Emergency) 
+        {
+            SetState(TerminalState.EmergencyWarning);
+        }
+
         if (!shouldContinue) 
         {
             return true;
@@ -148,7 +153,10 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
                 break;
             case TerminalState.LeverWarning:
                 stateSwitch = LeverWarningState;
-                break;                    
+                break;
+            case TerminalState.EmergencyWarning:
+                stateSwitch = EmergencyWarningState;
+                break;
         }
 
         InteractionEvent context = new InteractionEvent
