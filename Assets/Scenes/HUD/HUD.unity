@@ -472,12 +472,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestManager
   _questEvent: {fileID: 11400000, guid: 05413bab4ed2105408f95bc51eed4ac9, type: 2}
   _questCompleteEvent: {fileID: 11400000, guid: ba00323a70b2e7b4a93d33abbe7f1819, type: 2}
+  _questListEvent: {fileID: 11400000, guid: 976749bef4afe364e951afad48e9fbe8, type: 2}
   _questGiveProvider: {fileID: 11400000, guid: 6ee9389e7c8c98c42856298ec6e01407, type: 2}
-  _activeQuest: {fileID: 0}
-  _toggleEvent: {fileID: 11400000, guid: 68ae512fc6d524943a48c6bc8d4bde77, type: 2}
   _storeDataEvent: {fileID: 0}
   _updateUIEvent: {fileID: 11400000, guid: 389faa1ab6f0f2e4b82ff82a0affadba, type: 2}
-  _isQuestComplete: 0
+  _activeQuest: {fileID: 0}
+  _quests:
+  - {fileID: 11400000, guid: 4fe12e5aa2ad7d14ab8c0e4541489405, type: 2}
+  - {fileID: 11400000, guid: 09b48c74073d0774aa5784fa49bfac8b, type: 2}
 --- !u!4 &1382867790
 Transform:
   m_ObjectHideFlags: 0

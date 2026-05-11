@@ -12,10 +12,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private LevelData[] _levels;
     [SerializeField] private SceneLoadEventSO _sceneLoadEventSO;
-    [SerializeField] private QuestGiveEventSO _questGiveEventSO;
+    [SerializeField] private LevelQuestGiveEventSO _questGiveEventSO;
 
     [SerializeField] private LevelData _firstSceneToLoad;
-	[SerializeField] private LevelsData _questsData;
+	//[SerializeField] private LevelsData _questsData;
 
     [SerializeField] private DataHandlerSO _dataHandlerSO;
 
@@ -32,7 +32,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _questsData.Init();
+        //_questsData.Init();
         LoadLevel(_firstSceneToLoad);
     }
 
@@ -78,6 +78,7 @@ public class GameManager : Singleton<GameManager>
 
         _dataHandlerSO.DataHandler.TrackLevel(levelData.name); // Start tracking new level
     }
+
 
 
     ///// <summary>

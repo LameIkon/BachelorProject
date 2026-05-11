@@ -8,35 +8,39 @@ public class Quest : ScriptableObject
 	[SerializeField] private List<QuestPart> _parts;
     [SerializeField] private string _questCompleteDescription;
     [SerializeField] private List<TerminalAndButton> _terminalBehavior;
-    private int _index;
+    [SerializeField] private bool _setNewQuestOnComplete;
+    private int _curentQuestPartIndex;
     
     public string QuestCompleteDescription => _questCompleteDescription;
+    public bool SetNewQuestOnComplete => _setNewQuestOnComplete;
 
 	public void Init() 
 	{
-		_index = 0;
+		_curentQuestPartIndex = 0;
 		foreach (QuestPart p in _parts) 
 		{
 			p.Init();
 		}
 	}
 
-	public void Completed(QuestID sentId) 
+	public bool Completed(QuestID sentId) 
 	{
-		if (_index > _parts.Count - 1) return;
-		if (_parts[_index].Id != sentId) return; 
-		_parts[_index].TryCompletePart();
-		if (_parts[_index].IsPartComplete) 
+		if (_curentQuestPartIndex > _parts.Count - 1) return false;
+		if (_parts[_curentQuestPartIndex].Id != sentId) return false; 
+		_parts[_curentQuestPartIndex].TryCompletePart();
+		if (_parts[_curentQuestPartIndex].IsPartComplete) 
 		{
-			_index++;
+			_curentQuestPartIndex++;
+            return true;
 		}
+        return false;
 	}
 
 	public bool IsComplete 
 	{
 		get 
 		{
-			return _index >= _parts.Count;
+			return _curentQuestPartIndex >= _parts.Count;
 		}
 	}
 
@@ -64,6 +68,7 @@ public class QuestPart
     [SerializeField] private string _description;
     [SerializeField] private PickupInteractionIdentitySO _itemPickup;
     public bool hideQuestDescription;
+    public bool ShowQuestPartOnlyOnSelection;
 
     [SerializeField] private LocalizedContentSO _content;
 

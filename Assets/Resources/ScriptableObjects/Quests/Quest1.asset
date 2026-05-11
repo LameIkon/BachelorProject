@@ -19,6 +19,7 @@ MonoBehaviour:
     _description: Place Block on Belt
     _itemPickup: {fileID: 11400000, guid: e3765dcbb8128334ab992f8bba266416, type: 2}
     hideQuestDescription: 0
+    ShowQuestPartOnlyOnSelection: 0
     _content: {fileID: 0}
   - _id: 1
     _isComplete: 1
@@ -26,20 +27,8 @@ MonoBehaviour:
     _description: Start the machine
     _itemPickup: {fileID: 0}
     hideQuestDescription: 0
-    _content: {fileID: 0}
-  - _id: 3
-    _isComplete: 1
-    _howManySteps: 5
-    _description: Increase the speed of the machine
-    _itemPickup: {fileID: 0}
-    hideQuestDescription: 0
-    _content: {fileID: 0}
-  - _id: 4
-    _isComplete: 0
-    _howManySteps: 3
-    _description: Decrese the speed of the machine
-    _itemPickup: {fileID: 0}
-    hideQuestDescription: 0
+    ShowQuestPartOnlyOnSelection: 0
     _content: {fileID: 0}
   _questCompleteDescription: Get the plank to the first opening
   _terminalBehavior: []
+  _setNewQuestOnComplete: 1

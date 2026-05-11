@@ -18,4 +18,7 @@ MonoBehaviour:
   - m_SceneAsset: {fileID: 102900000, guid: c52955602ba279e43b7e91ce33e602a3, type: 3}
     m_SceneName: HUD
   _inputState: 1
-  _levelQuest: {fileID: 11400000, guid: 4fe12e5aa2ad7d14ab8c0e4541489405, type: 2}
+  _levelQuest:
+  - {fileID: 11400000, guid: 4fe12e5aa2ad7d14ab8c0e4541489405, type: 2}
+  - {fileID: 11400000, guid: 09b48c74073d0774aa5784fa49bfac8b, type: 2}
+  - {fileID: 11400000, guid: 94a03dfc6b93cdf43935f5140643df1c, type: 2}
