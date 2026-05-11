@@ -60,8 +60,11 @@ public class OffState : BaseState
         _canPress = true;
 		Debug.Log($"Can Start: {_canPress}, Coroutine: {_startSequence}");
 		yield return _waitForSeconds;
+        audioPlayer.PlaySound(audioSource);
         yield return _waitForSeconds;
+        audioPlayer.PlaySound(audioSource);
         yield return _waitForSeconds;
+        audioPlayer.PlaySound(audioSource);
         _canPress = false;
 		Debug.Log($"Can Start: {_canPress}, Coroutine: {_startSequence}");
         _startSequence = null;

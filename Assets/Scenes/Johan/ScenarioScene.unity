@@ -3665,10 +3665,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _offStateAudioPlayer: {fileID: 0}
-  _runningStateAudioPlayer: {fileID: 0}
-  _warningStateAudioPlayer: {fileID: 0}
-  _leverWarningStateAudioPlayer: {fileID: 0}
+  _offStateAudioPlayer: {fileID: 11400000, guid: 4035c922659d4ef47ac5c80c265765b6, type: 2}
+  _runningStateAudioPlayer: {fileID: 11400000, guid: 1016bb8d4d576214abf34d7ebfd62a8f, type: 2}
+  _warningStateAudioPlayer: {fileID: 11400000, guid: 68f758a8ccd7d2e41a3a458c040118d2, type: 2}
+  _leverWarningStateAudioPlayer: {fileID: 11400000, guid: 256b53bd9d4f1c143a691de1a43a81d0, type: 2}
   _resetLight: {fileID: 1417782157670818614}
   _leverLight: {fileID: 613506668}
   _emergencyLightLever: {fileID: 0}
