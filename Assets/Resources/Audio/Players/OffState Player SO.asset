@@ -16,10 +16,10 @@ MonoBehaviour:
   _clips:
   - {fileID: 8300000, guid: 4d7143513e29a4740b1361f1494c327e, type: 3}
   _volumeRange:
-    _minValue: 0
-    _maxValue: 0
+    _minValue: 0.80091727
+    _maxValue: 0.851682
   _pitchRange:
-    _minValue: 1
-    _maxValue: 1
-  _is3D: 0
+    _minValue: 0.95
+    _maxValue: 1.05
+  _is3D: 1
   _loops: 1
