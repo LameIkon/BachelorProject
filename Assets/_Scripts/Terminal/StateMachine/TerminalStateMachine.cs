@@ -38,6 +38,8 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 
 
     [SerializeField] private float _machineSpeed = 0f;
+    [SerializeField, RangedFloat(0,100f)] private RangedFloat _machineSpeeds;
+    [SerializeField, RangedFloat(-100f,100f)] private RangedFloat _adjustSpeedAmount;
 
     // Issues tracking
     private bool HasIssue => _activeIssues.Count > 0;
@@ -254,9 +256,9 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 	/// <param name="up"><c>True</c> for up and <c>false</c> for down</param>
 	public void ChangeSpeed(bool up)
     {
-        float amount = up ? 0.01f : -0.01f;
+        float amount = up ? _adjustSpeedAmount.Max : _adjustSpeedAmount.Min;
 
-        _machineSpeed = Mathf.Clamp(_machineSpeed + amount, 0f, 0.25f);
+        _machineSpeed = Mathf.Clamp(_machineSpeed + amount, _machineSpeeds.Min, _machineSpeeds.Max);
         Debug.Log($"Machine Speed: {_machineSpeed}");
         _ovenstateChangeEvent.Raise(_machineSpeed);
     }

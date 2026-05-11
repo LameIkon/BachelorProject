@@ -1,21 +1,24 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(BoxCollider))]
 public class ConveyorBeltStopper : MonoBehaviour
 {
 
     [SerializeField] private bool _hasStoped;
     [SerializeField] private TerminalStateEventSO _terminalStateEvent;
     [SerializeField] private QuestGiveEventSO _questGiveEvent;
-    [SerializeField] private Collider _collider;
-    [SerializeField] private Rigidbody _rb;
 
+    [Header("Next Quest")]
     [SerializeField] private Quest _quest;
+    private BoxCollider _collider;
+    private Rigidbody _rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _hasStoped = false;
+        _collider = GetComponent<BoxCollider>();
+        _collider.isTrigger = true;
     }
 
 
@@ -41,7 +44,6 @@ public class ConveyorBeltStopper : MonoBehaviour
 
 	private void Reset()
 	{
-        _collider = GetComponent<Collider>();
         _collider.isTrigger = true;
 	}
 

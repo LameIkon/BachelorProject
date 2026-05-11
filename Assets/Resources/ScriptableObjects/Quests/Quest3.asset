@@ -17,12 +17,18 @@ MonoBehaviour:
     _isComplete: 0
     _howManySteps: 0
     _description: Get machine to warning mode
+    _itemPickup: {fileID: 0}
+    _content: {fileID: 0}
   - _id: 7
     _isComplete: 0
     _howManySteps: 0
     _description: Get the machine to the off mode
+    _itemPickup: {fileID: 0}
+    _content: {fileID: 0}
   - _id: 1
     _isComplete: 0
     _howManySteps: 0
     _description: Start the machine
-  _terminalState: 3
+    _itemPickup: {fileID: 0}
+    _content: {fileID: 0}
+  _terminalState: 2
