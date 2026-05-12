@@ -28,17 +28,39 @@ public class RunningState : BaseState
                 break;
 
             case ButtonType.SpeedUp:
-                manager.ChangeSpeed(true);
                 manager.TryCompleteQuest(QuestID.IncreaseSpeed);
-                break;
+                return TryChangeSpeed(true);
 
             case ButtonType.SpeedDown:
-                manager.ChangeSpeed(false);
                 manager.TryCompleteQuest(QuestID.DecreaseSpeed);
-                break;
+                return TryChangeSpeed(false);
 
             default:
                 return false;
+        }
+
+        return true;
+    }
+
+    private bool TryChangeSpeed(bool up)
+    {
+        float currentSpeed = manager.GetSpeed();
+
+        float amount = up ? manager.AdjustSpeedAmount.Max : manager.AdjustSpeedAmount.Min;
+
+        float newSpeed = Mathf.Clamp(currentSpeed + amount, manager.MachineSpeeds.Min, manager.MachineSpeeds.Max);
+
+        if (Mathf.Approximately(currentSpeed, newSpeed)) return false;
+
+        manager.SetSpeed(newSpeed);
+
+        if (up)
+        {
+            manager.TryCompleteQuest(QuestID.IncreaseSpeed);
+        }
+        else
+        {
+            manager.TryCompleteQuest(QuestID.DecreaseSpeed);
         }
 
         return true;

@@ -40,6 +40,8 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
     [SerializeField] private float _machineSpeed = 0f;
     [SerializeField, RangedFloat(0,100f)] private RangedFloat _machineSpeeds;
     [SerializeField, RangedFloat(-100f,100f)] private RangedFloat _adjustSpeedAmount;
+    public RangedFloat MachineSpeeds => _machineSpeeds;
+    public RangedFloat AdjustSpeedAmount => _adjustSpeedAmount;
 
     // Issues tracking
     private bool HasIssue => _activeIssues.Count > 0;
@@ -266,14 +268,14 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 	/// Changes the speed up and down, though a boolean. <c>True</c> turns the speed up by one and <c>false</c> turns it down by one.
 	/// </summary>
 	/// <param name="up"><c>True</c> for up and <c>false</c> for down</param>
-	public void ChangeSpeed(bool up)
-    {
-        float amount = up ? _adjustSpeedAmount.Max : _adjustSpeedAmount.Min;
+	//public void ChangeSpeed(bool up)
+ //   {
+ //       float amount = up ? _adjustSpeedAmount.Max : _adjustSpeedAmount.Min;
 
-        _machineSpeed = Mathf.Clamp(_machineSpeed + amount, _machineSpeeds.Min, _machineSpeeds.Max);
-        Debug.Log($"Machine Speed: {_machineSpeed}");
-        _ovenstateChangeEvent.Raise(_machineSpeed);
-    }
+ //       _machineSpeed = Mathf.Clamp(_machineSpeed + amount, _machineSpeeds.Min, _machineSpeeds.Max);
+ //       Debug.Log($"Machine Speed: {_machineSpeed}");
+ //       _ovenstateChangeEvent.Raise(_machineSpeed);
+ //   }
 
     public void TurnOnConveyor()
     {
@@ -287,6 +289,15 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 
 
     public float GetSpeed() => _machineSpeed;
+    public void SetSpeed(float speed)
+    {
+        _machineSpeed = speed;
+
+        Debug.Log($"Machine Speed: {_machineSpeed}");
+
+        _ovenstateChangeEvent.Raise(_machineSpeed);
+    }
+
 
     public void TryCompleteQuest(QuestID questID) 
     {
