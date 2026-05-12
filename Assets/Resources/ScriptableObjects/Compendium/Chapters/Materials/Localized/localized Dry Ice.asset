@@ -16,3 +16,6 @@ MonoBehaviour:
   - language: 0
     title: "T\xF8r is"
     description: beskrivelse her
+  - language: 1
+    title: Dry Ice
+    description: beskrivelse her

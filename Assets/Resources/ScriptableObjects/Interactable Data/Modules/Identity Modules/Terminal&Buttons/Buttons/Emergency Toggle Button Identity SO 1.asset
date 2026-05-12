@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c56c52c249da29946a2cb2bced4a6306, type: 3}
   m_Name: Emergency Toggle Button Identity SO 1
   m_EditorClassIdentifier: Assembly-CSharp::ToggleButtonInteractionIdentitySO
-  compendiumID: 0
+  compendiumID: 30
   prompts:
   - {fileID: 11400000, guid: 97afef72c24a8a24ca464bc9911f71cb, type: 2}
   buttonEvent: {fileID: 11400000, guid: b738537e63c55bf4ab203fe548b8399a, type: 2}

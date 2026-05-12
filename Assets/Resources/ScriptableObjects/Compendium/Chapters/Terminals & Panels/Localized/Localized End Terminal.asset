@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedContentSO
   entries:
   - language: 0
-    title: End Terminal
+    title: Slut Terminal
     description: "Slutterminalen befinder sig i slutningen af den store ovn og g\xF8res
       brug af b\xE5de den store og lille ovn. Den g\xF8re brug af sensors til at
       tjekke objekter der kommer igennem ovnen.\r\n\r\n\r\nInputs:\r\nEn gr\xF8n
@@ -24,5 +24,5 @@ MonoBehaviour:
       bruges til at placere scanneren. Det er kun muligt at bruge disse input n\xE5r
       scanneren er deaktiveret.\_\r\nOp:  H\xE6ve scanneren\r\nNed: S\xE6nke scanneren\r\n"
   - language: 1
-    title: 'No title '
+    title: End Terminal
     description: Description here

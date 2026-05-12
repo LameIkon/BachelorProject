@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2931e8b9bdde8b848a59bb860d2832c9, type: 3}
   m_Name: Reset2Button
   m_EditorClassIdentifier: Assembly-CSharp::ButtonInteractionIdentitySO
-  compendiumID: 7
+  compendiumID: 6
   prompts:
   - {fileID: 11400000, guid: 69b44fe5ff326cf48adfe400d436dbf3, type: 2}
   - {fileID: 11400000, guid: 97afef72c24a8a24ca464bc9911f71cb, type: 2}

@@ -11,6 +11,7 @@ public class ToggleUIButton : MonoBehaviour
 
     private void Awake()
     {
+        if (_toggleEvent == null) return;
 
         if (_uiModule == null)
         {

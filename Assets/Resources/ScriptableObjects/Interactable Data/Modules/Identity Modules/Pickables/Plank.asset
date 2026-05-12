@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 263a5e3940f341245a52ae360819417b, type: 3}
   m_Name: Plank
   m_EditorClassIdentifier: Assembly-CSharp::PickupInteractionIdentitySO
-  compendiumID: 25
+  compendiumID: 27
   prompts:
   - {fileID: 11400000, guid: 69b44fe5ff326cf48adfe400d436dbf3, type: 2}
   - {fileID: 11400000, guid: 252b269273ad3ed4780ff3536dd6fff0, type: 2}

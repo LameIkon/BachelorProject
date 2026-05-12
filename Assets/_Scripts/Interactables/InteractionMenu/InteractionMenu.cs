@@ -17,10 +17,19 @@ public class InteractionMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _title;
     [SerializeField] private Button _toCompendiumButton;
 
+    [Header("Optional")]
+    [SerializeField] private bool _hideCompendiumButton;
+
     private CompendiumPage _currentPage;
 
     private void Awake()
     {
+        //if (_hideCompendiumButton)
+        //{
+        //    _toCompendiumButton.gameObject.SetActive(false);
+        //    return;
+        //}
+
         _toCompendiumButton.onClick.AddListener(() => GoToCompendiumPage());
     }
 

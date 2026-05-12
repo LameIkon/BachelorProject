@@ -13,7 +13,7 @@ public enum CompendiumID
     // Buttons
     StartButton,
     StopButton,
-    ResetButton1,
+    ResetButton,
     ResetButton2,
     ResetButton3,
     SpeedIncreaseButton,
@@ -25,7 +25,7 @@ public enum CompendiumID
     MainTerminal,
     EndTerminal,
     LeverTerminal,
-    RestartPanel,
+    ResetTerminal,
     ControlPanel,
 
     // Errors
@@ -39,9 +39,16 @@ public enum CompendiumID
     DryiceBlower,
     DryiceHose,
     Airhose,
+    Ladder,
 
     // Materials
     Dryice,
     Plank,
+    DebuggingBox,
+
+
+    StartTerminal,
+    EmergencyButton,
+
 
 }
