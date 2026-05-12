@@ -2372,6 +2372,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5433397840513356136, guid: 69fdc991cdcacd04aab4724953202bae, type: 3}
+      propertyPath: m_text
+      value: Title
+      objectReference: {fileID: 0}
+    - target: {fileID: 5433397840513356136, guid: 69fdc991cdcacd04aab4724953202bae, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5433397840513356136, guid: 69fdc991cdcacd04aab4724953202bae, type: 3}
+      propertyPath: m_TextWrappingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5433397840513356136, guid: 69fdc991cdcacd04aab4724953202bae, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5576091255080455742, guid: 69fdc991cdcacd04aab4724953202bae, type: 3}
       propertyPath: m_IsActive
       value: 0

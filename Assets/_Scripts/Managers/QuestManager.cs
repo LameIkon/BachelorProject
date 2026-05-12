@@ -81,6 +81,12 @@ public class QuestManager : Singleton<QuestManager>
 
     private void ForceSetQuest()
     {
+        QuestPart firstPart = _activeQuest.CurrentQuestPart;
+        if (firstPart != null)
+        {
+            StoreData(firstPart, QuestEventType.PartCompleted);
+        }
+
         FinishQuest();
         //SetQuest(int index);
         //Debug.Log($"Quest added: {quest}");

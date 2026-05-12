@@ -240,15 +240,17 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
                 break;
         }
 
-        InteractionEvent context = new InteractionEvent
+        if (_currentState != newState)
         {
-            eventType = EventType.Terminal,
-            terminalState = newState,
-        };
+            _currentState = newState;
+            InteractionEvent context = new InteractionEvent
+            {
+                eventType = EventType.Terminal,
+                terminalState = newState,
+            };
+            _storeDataEvent.Raise(context);
+        }
 
-        _currentState = newState;
-
-        _storeDataEvent.Raise(context);
         _stateMachine.SetState(stateSwitch);
     }
 
