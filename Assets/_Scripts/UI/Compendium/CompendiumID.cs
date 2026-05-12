@@ -49,6 +49,7 @@ public enum CompendiumID
 
     StartTerminal,
     EmergencyButton,
+    Junk,
 
 
 }
