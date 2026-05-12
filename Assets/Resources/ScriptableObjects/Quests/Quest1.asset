@@ -29,6 +29,14 @@ MonoBehaviour:
     hideQuestDescription: 0
     ShowQuestPartOnlyOnSelection: 0
     _content: {fileID: 0}
-  _questCompleteDescription: Get the plank to the first opening
+  - _id: 8
+    _isComplete: 1
+    _howManySteps: 0
+    _description: Get the plank to the first opening
+    _itemPickup: {fileID: 0}
+    hideQuestDescription: 0
+    ShowQuestPartOnlyOnSelection: 0
+    _content: {fileID: 0}
+  _questCompleteDescription: 
   _terminalBehavior: []
   _setNewQuestOnComplete: 0

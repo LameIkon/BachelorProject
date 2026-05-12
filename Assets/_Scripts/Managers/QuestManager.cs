@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class QuestManager : Singleton<QuestManager>
 {
-    [SerializeField] private QuestGiveEventSO _questEvent;
+    //[SerializeField] private QuestGiveEventSO _questEvent;
+    [SerializeField] private ActionEventSO _ForceSetNewQuestactionEvent;
     [SerializeField] private QuestCompleteEventSO _questCompleteEvent;
     [SerializeField] private LevelQuestGiveEventSO _questListEvent;
     [SerializeField] private QuestGiveProviderSO _questGiveProvider;
+    [SerializeField] protected QuestGiveEventSO _onQuestGiveEvent;
 
     [SerializeField] private StoreDataEventSO _storeDataEvent;  
     [SerializeField] private ActionEventSO _updateUIEvent;
@@ -23,7 +25,7 @@ public class QuestManager : Singleton<QuestManager>
 
 	void OnEnable()
     {
-        _questEvent.OnRaise += ForceSetQuest;
+        _ForceSetNewQuestactionEvent.OnRaise += ForceSetQuest;
         _questListEvent.OnRaise += CreateQuestList;
         _questCompleteEvent.OnRaise += CompletePartQuest;
         _questGiveProvider.Register(GetQuest);
@@ -33,7 +35,7 @@ public class QuestManager : Singleton<QuestManager>
 
 	private void OnDisable()
 	{
-        _questEvent.OnRaise -= ForceSetQuest;
+        _ForceSetNewQuestactionEvent.OnRaise -= ForceSetQuest;
         _questCompleteEvent.OnRaise -= CompletePartQuest;
         _questListEvent.OnRaise -= CreateQuestList;
         _questGiveProvider.Unregister(GetQuest);
@@ -56,6 +58,7 @@ public class QuestManager : Singleton<QuestManager>
             _activeQuest.Init();
 
             StoreData(_activeQuest, QuestEventType.Started);
+            _onQuestGiveEvent.Raise(_activeQuest);
             QuestPart firstPart = _activeQuest.CurrentQuestPart;
             if (firstPart != null)
             {
@@ -76,7 +79,7 @@ public class QuestManager : Singleton<QuestManager>
         SetQuest(_questIndex);
     }
 
-    private void ForceSetQuest(Quest quest)
+    private void ForceSetQuest()
     {
         FinishQuest();
         //SetQuest(int index);

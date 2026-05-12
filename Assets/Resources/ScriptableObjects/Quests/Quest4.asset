@@ -10,21 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af11e7f5d8b9d2e4681e3b5bd0aea108, type: 3}
-  m_Name: Quest2
+  m_Name: Quest4
   m_EditorClassIdentifier: Assembly-CSharp::Quest
   _parts:
-  - _id: 9
+  - _id: 1
     _isComplete: 1
-    _howManySteps: 3
-    _description: Place something on the Plank
-    _itemPickup: {fileID: 11400000, guid: 4f7e7167ff4129447baeb803c02ecd52, type: 2}
+    _howManySteps: 0
+    _description: Start the machine again quest4
+    _itemPickup: {fileID: 0}
+    hideQuestDescription: 0
+    ShowQuestPartOnlyOnSelection: 0
+    _content: {fileID: 0}
+  - _id: 8
+    _isComplete: 0
+    _howManySteps: 0
+    _description: Get the machine to the final opening
+    _itemPickup: {fileID: 0}
     hideQuestDescription: 0
     ShowQuestPartOnlyOnSelection: 0
     _content: {fileID: 0}
   _questCompleteDescription: 
   _terminalBehavior:
+  - TType: 3
+    BType: 6
   - TType: 5
     BType: 5
-  - TType: 5
-    BType: 5
-  _setNewQuestOnComplete: 1
+  _setNewQuestOnComplete: 0

@@ -6,10 +6,11 @@ public class ConveyorBeltStopper : MonoBehaviour
 
     [SerializeField] private bool _hasStoped;
     [SerializeField] private TerminalStateEventSO _terminalStateEvent;
-    [SerializeField] private QuestGiveEventSO _questGiveEvent;
+    //[SerializeField] private QuestGiveEventSO _questGiveEvent;
+    [SerializeField] private ActionEventSO _ForceSetNewQuestactionEvent;
 
     [Header("Next Quest")]
-    [SerializeField] private Quest _quest;
+    //[SerializeField] private Quest _quest;
     private BoxCollider _collider;
     private Rigidbody _rb;
 
@@ -24,23 +25,36 @@ public class ConveyorBeltStopper : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-        Debug.Log("Stop Conveyor Enter");
-		other.TryGetComponent<Rigidbody>(out Rigidbody rb);
-        _rb = rb;
-        if (rb != null && !_hasStoped) 
+
+        if (other.TryGetComponent(out InteractableEntity interactableEntity))
         {
-            Debug.Log("Stop Conveyor");
-            _questGiveEvent.Raise(_quest);
-            _hasStoped = true;
+            if (interactableEntity.InteractionAction is PickupInteraction pickupInteraction)
+            {
+
+                if (pickupInteraction.PickableType == PickableType.Plank)
+                {
+                    Debug.Log("Stop Conveyor Enter");
+		            other.TryGetComponent(out Rigidbody rb);
+                    _rb = rb;
+
+                    if (rb != null && !_hasStoped) 
+                    {
+                        Debug.Log("Stop Conveyor");
+                        _ForceSetNewQuestactionEvent.Raise();
+                        _hasStoped = true;
+                    }
+                } 
+            }
         }
-	}
-
-	private void OnTriggerExit(Collider other)
-	{
-        other.TryGetComponent<Rigidbody>(out Rigidbody rb);
-        if(rb != null && rb == _rb) _rb = null;
 
 	}
+
+	//private void OnTriggerExit(Collider other)
+	//{
+ //       other.TryGetComponent<Rigidbody>(out Rigidbody rb);
+ //       if(rb != null && rb == _rb) _rb = null;
+
+	//}
 
 	private void Reset()
 	{

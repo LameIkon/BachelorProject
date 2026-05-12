@@ -8,5 +8,6 @@ public enum QuestID
     EquipItem,
     PickUpItem,
     RemoveWarning,
-    RemoveLeverWarning
+    RemoveLeverWarning,
+    PlaceItem2,
 }

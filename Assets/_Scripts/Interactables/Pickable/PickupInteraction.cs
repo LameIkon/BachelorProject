@@ -22,7 +22,8 @@ public class PickupInteraction : IInteractionAction, ITickableModule, ITriggerMo
 
 	private IInteractionEvent _interactionEvent;
 
-    //public PickableType PickableType { get; }
+	// Getter
+    public PickableType PickableType => _identity.type;
 
     public PickupInteraction(GameObject owner, PickupModuleConfigSO config, PickupInteractionIdentitySO identity, IInteractionEvent interactionEvent, AudioSource source, StoreDataEventSO storeData, PlaceableSlotToggleEventSO placeableSlotToggleEvent)
 	{

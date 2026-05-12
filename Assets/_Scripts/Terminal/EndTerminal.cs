@@ -19,6 +19,7 @@ public class EndTerminal : Terminal
     {
         foreach (TerminalAndButton tb in quest.TerminalBehavior) 
         {
+            Debug.Log($"Endterminal has terminal:{tb.TType} and button {tb.BType}");
             if (tb.TType == TerminalType.End && tb.BType == ButtonType.Emergency) 
             {
                 _emergencyButton.Interact(null);

@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PlaceableSlot : MonoBehaviour
 {
@@ -18,6 +17,12 @@ public class PlaceableSlot : MonoBehaviour
 
     private PickupInteractionIdentitySO _currentCandidate; // An possible candidate to be placed in slot
     private Transform _placed; // Object placed in slot
+    [SerializeField] private QuestID _questID;
+
+    // Visuals
+    private float _hide = 0f;
+    private float _show = 0.25f;
+    private float _showSelection = 0.4f;
 
     private bool _canPlace;
     private Material _visualMaterial;
@@ -90,7 +95,7 @@ public class PlaceableSlot : MonoBehaviour
         }
 
         // Disable visual indication
-        SetVisualAlpha(0f);
+        SetVisualAlpha(_hide);
 
         if (_placeOnlyOnce)
         {
@@ -100,7 +105,7 @@ public class PlaceableSlot : MonoBehaviour
         _currentCandidate = null;
         Debug.Log("Assigned");
 
-        if (_questCompleteEvent != null) _questCompleteEvent.Raise(QuestID.PlaceItem);
+        if (_questCompleteEvent != null) _questCompleteEvent.Raise(_questID);
     }
     #endregion
 
@@ -118,7 +123,7 @@ public class PlaceableSlot : MonoBehaviour
         if (_placed == null)
         {
             // Dim visual indication
-            SetVisualAlpha(0.25f);
+            SetVisualAlpha(_show);
         }
 
     }
@@ -132,7 +137,7 @@ public class PlaceableSlot : MonoBehaviour
 
         if (type != _allowedType) return;
 
-        float value = state ? 0.25f : 0f; // Show or hide
+        float value = state ? _show : _hide; // Show or hide
 
         SetVisualAlpha(value);
     }
@@ -157,7 +162,7 @@ public class PlaceableSlot : MonoBehaviour
 
         if (_canPlace)
         {
-            SetVisualAlpha(0.25f);
+            SetVisualAlpha(_show);
         }
     }
 
@@ -171,7 +176,7 @@ public class PlaceableSlot : MonoBehaviour
         if (identity.type != _allowedType) return;
         
         _currentCandidate = identity;
-        SetVisualAlpha(0.4f);    
+        SetVisualAlpha(_showSelection);    
     }
 
     public void OnSlotExit(PickupInteractionIdentitySO identity, Transform target)
@@ -182,7 +187,7 @@ public class PlaceableSlot : MonoBehaviour
 
             if (_placed == null && _canPlace)
             {
-                SetVisualAlpha(0.25f);
+                SetVisualAlpha(_show);
             }
         }
 

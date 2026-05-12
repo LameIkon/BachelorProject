@@ -470,16 +470,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e731c2ebce9ec724b8be78b62949bb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestManager
-  _questEvent: {fileID: 11400000, guid: 05413bab4ed2105408f95bc51eed4ac9, type: 2}
+  _ForceSetNewQuestactionEvent: {fileID: 11400000, guid: e1ca032e405587a48bc426ae8854ab70, type: 2}
   _questCompleteEvent: {fileID: 11400000, guid: ba00323a70b2e7b4a93d33abbe7f1819, type: 2}
   _questListEvent: {fileID: 11400000, guid: 976749bef4afe364e951afad48e9fbe8, type: 2}
   _questGiveProvider: {fileID: 11400000, guid: 6ee9389e7c8c98c42856298ec6e01407, type: 2}
+  _onQuestGiveEvent: {fileID: 11400000, guid: 05413bab4ed2105408f95bc51eed4ac9, type: 2}
   _storeDataEvent: {fileID: 11400000, guid: bc01e6c67a1238b4bbd70174ba85707e, type: 2}
   _updateUIEvent: {fileID: 11400000, guid: 389faa1ab6f0f2e4b82ff82a0affadba, type: 2}
   _activeQuest: {fileID: 0}
   _quests:
   - {fileID: 11400000, guid: 4fe12e5aa2ad7d14ab8c0e4541489405, type: 2}
   - {fileID: 11400000, guid: 09b48c74073d0774aa5784fa49bfac8b, type: 2}
+  - {fileID: 11400000, guid: 94a03dfc6b93cdf43935f5140643df1c, type: 2}
+  - {fileID: 11400000, guid: 30af8b75d088b4941bbd1d68d1568fba, type: 2}
+  - {fileID: 11400000, guid: ad7cf8f85b3380c4d859e82f1415e5aa, type: 2}
 --- !u!4 &1382867790
 Transform:
   m_ObjectHideFlags: 0
