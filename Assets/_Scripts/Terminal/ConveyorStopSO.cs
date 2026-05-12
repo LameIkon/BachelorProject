@@ -4,10 +4,10 @@ using UnityEngine;
 public class ConveyorStopSO : ScriptableObject
 {
 	[SerializeField] private TerminalState _state;
-	[SerializeField] private TerminalStateEventSO _terminalStateEvent;
+	//[SerializeField] private TerminalStateEventSO _terminalStateEvent;
 
-	public void OnStop() 
-	{
-		_terminalStateEvent.Raise(_state);
-	}
+	//public void OnStop() 
+	//{
+	//	_terminalStateEvent.Raise(_state);
+	//}
 }

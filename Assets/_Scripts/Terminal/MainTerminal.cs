@@ -11,7 +11,7 @@ public class MainTerminal : Terminal
 		base.Start();
 		_terminalType = TerminalType.Main;
 		_gui = GetComponentInChildren<TextMeshProUGUI>();
-		WriteMessage(string.Empty);
+		WriteMessage("Machine is off");
 		Debug.Log($"{this}: Is on");
 	}
 
@@ -27,25 +27,36 @@ public class MainTerminal : Terminal
 		_onTerminalStateEvent.OnRaise -= WriteTerminalError;
 	}
 
-    private void WriteTerminalError(TerminalState terminalState) 
+    private void WriteTerminalError(TerminalStateData terminalData) 
 	{
-		switch (terminalState) 
+		string textToWrite = string.Empty;
+
+		switch (terminalData.state)
 		{
-			case TerminalState.LeverWarning:
-				WriteMessage("Lever Warning");
-				break;
 			case TerminalState.Warning:
-				WriteMessage("Warning");
+				textToWrite = $"Warning\n";
+
+				if (terminalData.leverIssue != string.Empty)
+				{
+					textToWrite += $"{terminalData.leverIssue}\n";
+				}
+				if (terminalData.EmergencyIssue != string.Empty)
+				{
+					textToWrite += $"{terminalData.EmergencyIssue}\n";
+				}
 				break;
 			case TerminalState.Off:
-				WriteMessage("Machine is off");
+				textToWrite = "Machine is off";
+				break;
+			case TerminalState.Running:
+				textToWrite = "Machine is running";
 				break;
 			default:
-				WriteMessage(string.Empty);
+				textToWrite = "This should never be reached";
 				break;
-		
 		}
-	
+		WriteMessage(textToWrite);
+
 	}
 
 	private void WriteMessage(string message) 

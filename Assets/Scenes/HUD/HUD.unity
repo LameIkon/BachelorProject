@@ -783,6 +783,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CompendiumCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1428430781029311864, guid: fc17a51aa87b7b64aba318f4a4ac492d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1448482913213745981, guid: fc17a51aa87b7b64aba318f4a4ac492d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

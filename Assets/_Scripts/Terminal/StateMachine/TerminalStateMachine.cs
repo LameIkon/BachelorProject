@@ -172,13 +172,21 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 
         RefreshIssues();
     }
-
+    bool _previouslyHadIssue;
     private void RefreshIssues()
     {
         if (HasIssue)
         {
-            //_resetLight.TurnLight(true);
             SetState(TerminalState.Warning);
+            _previouslyHadIssue = true;
+        }
+        if (!HasIssue)
+        {
+            if (_previouslyHadIssue)
+            {
+                SetState(TerminalState.Warning);
+                _previouslyHadIssue = false;
+            }
         }
 
         // Toggle light for lever
@@ -285,8 +293,24 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
 
     public void SendState(TerminalState state) 
     {
-        _terminalStateEvent.Raise(state);
+
+        TerminalStateData terminalStateData = new TerminalStateData
+        {
+            state = state,
+        };
+
+        if (_activeIssues.Contains(MachineIssue.Lever))
+        {
+            terminalStateData.leverIssue = "Has Lever issue";
+        }
+        if (_activeIssues.Contains(MachineIssue.Emergency))
+        {
+            terminalStateData.EmergencyIssue = "Emergency button been pressed";
+        }
+
+        _terminalStateEvent.Raise(terminalStateData);
     }
+
 
     #endregion 
 
@@ -296,4 +320,11 @@ public class TerminalStateMachine : Singleton<TerminalStateMachine>
         Emergency
     }
 
+}
+
+public struct TerminalStateData
+{
+    public TerminalState state;
+    public string leverIssue;
+    public string EmergencyIssue;
 }

@@ -16,6 +16,6 @@ MonoBehaviour:
   - language: 0
     title: Ovn
     description: tekst om ovn
-  - language: 0
-    title: 
-    description: 
+  - language: 1
+    title: Oven
+    description: Description here about oven

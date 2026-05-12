@@ -5,7 +5,7 @@ public class ConveyorBeltStopper : MonoBehaviour
 {
 
     [SerializeField] private bool _hasStoped;
-    [SerializeField] private TerminalStateEventSO _terminalStateEvent;
+    //[SerializeField] private TerminalStateEventSO _terminalStateEvent;
     //[SerializeField] private QuestGiveEventSO _questGiveEvent;
     [SerializeField] private ActionEventSO _ForceSetNewQuestactionEvent;
 

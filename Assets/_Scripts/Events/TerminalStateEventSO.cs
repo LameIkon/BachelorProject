@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Terminal State Event SO", menuName = "ScriptableObject/Events/TerminalState")]
 public class TerminalStateEventSO : ScriptableObject
 {
-	public event Action<TerminalState> OnRaise;
+	public event Action<TerminalStateData> OnRaise;
 
-	public void Raise(TerminalState state) => OnRaise?.Invoke(state);
+	public void Raise(TerminalStateData stateData) => OnRaise?.Invoke(stateData);
 }
