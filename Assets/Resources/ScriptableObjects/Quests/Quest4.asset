@@ -16,10 +16,9 @@ MonoBehaviour:
   - _id: 1
     _isComplete: 1
     _howManySteps: 0
-    _description: Start the machine again quest4
+    _description: Start the machine again
     _itemPickup: {fileID: 0}
     hideQuestDescription: 0
-    ShowQuestPartOnlyOnSelection: 0
     _content: {fileID: 0}
   - _id: 8
     _isComplete: 0
@@ -27,7 +26,6 @@ MonoBehaviour:
     _description: Get the machine to the final opening
     _itemPickup: {fileID: 0}
     hideQuestDescription: 0
-    ShowQuestPartOnlyOnSelection: 0
     _content: {fileID: 0}
   _questCompleteDescription: 
   _terminalBehavior:

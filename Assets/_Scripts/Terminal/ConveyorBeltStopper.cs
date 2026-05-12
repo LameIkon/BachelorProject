@@ -40,7 +40,7 @@ public class ConveyorBeltStopper : MonoBehaviour
                     if (rb != null && !_hasStoped) 
                     {
                         Debug.Log("Stop Conveyor");
-                        _ForceSetNewQuestactionEvent.Raise();
+                        _ForceSetNewQuestactionEvent?.Raise();
                         _hasStoped = true;
                     }
                 } 

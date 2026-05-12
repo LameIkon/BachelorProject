@@ -16,10 +16,9 @@ MonoBehaviour:
   - _id: 0
     _isComplete: 1
     _howManySteps: 0
-    _description: Place Block on Belt
+    _description: Place {} on Belt
     _itemPickup: {fileID: 11400000, guid: e3765dcbb8128334ab992f8bba266416, type: 2}
     hideQuestDescription: 0
-    ShowQuestPartOnlyOnSelection: 0
     _content: {fileID: 0}
   - _id: 1
     _isComplete: 1
@@ -27,15 +26,13 @@ MonoBehaviour:
     _description: Start the machine
     _itemPickup: {fileID: 0}
     hideQuestDescription: 0
-    ShowQuestPartOnlyOnSelection: 0
     _content: {fileID: 0}
   - _id: 8
     _isComplete: 1
     _howManySteps: 0
-    _description: Get the plank to the first opening
-    _itemPickup: {fileID: 0}
+    _description: Get the {} to the first opening
+    _itemPickup: {fileID: 11400000, guid: e3765dcbb8128334ab992f8bba266416, type: 2}
     hideQuestDescription: 0
-    ShowQuestPartOnlyOnSelection: 0
     _content: {fileID: 0}
   _questCompleteDescription: 
   _terminalBehavior: []

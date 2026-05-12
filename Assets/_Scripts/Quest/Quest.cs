@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Quest Object", menuName = "ScriptableObject/Quest")]
@@ -81,7 +82,10 @@ public class QuestPart
     [SerializeField] private string _description;
     [SerializeField] private PickupInteractionIdentitySO _itemPickup;
     public bool hideQuestDescription;
-    public bool ShowQuestPartOnlyOnSelection;
+
+    private string _replacer = "()";
+    private string _replacer2 = "{}";
+    //public bool ShowQuestPartOnlyOnSelection;
 
     [SerializeField] private LocalizedContentSO _content;
 
@@ -129,10 +133,33 @@ public class QuestPart
     /// <returns>The amount of steps plus the description, if it has any steps. Else just the description.</returns>
     public override string ToString()
     {
-        if (_howManySteps > 0) return _howManySteps.ToString() + " " + _description;
-        if (_itemPickup != null) return _description + " " + _itemPickup.type.ToString(); 
+        string result = _description;
+        if (_howManySteps > 0)
+        {
+            if (result.Contains(_replacer)) // Add step counter at _replacer location
+            {
+                result = result.Replace(_replacer, _howManySteps.ToString());
+            }
+            else // Add steps counter first
+            {
+                result = _howManySteps.ToString() + " " + _description;
+            }
+        }          
+          
+        if (_itemPickup != null)
+        {
+            if (result.Contains(_replacer2)) // Add objective name at _replacer2 location
+            {
+                result = result.Replace(_replacer2, _itemPickup.type.ToString());
+            }
+            else // Add objective name lastly
+            {
+                result = result + " " + _itemPickup.type.ToString(); 
+            }
+        }
+            
 
-        return _description;
+        return result;
     }
 }
 
