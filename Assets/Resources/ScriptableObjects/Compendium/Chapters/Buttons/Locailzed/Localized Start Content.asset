@@ -18,4 +18,8 @@ MonoBehaviour:
     description: 
   - language: 1
     title: Start Button
-    description: 
+    description: "Pressing the start button will start an sequence. \n\nThe sequence
+      will execute a sound each second, for 3 seconds. after the last sound, you
+      have to press the start button again to turn the oven on.\n\nFailing to do
+      the sequnce will result in the execution to cancel and you have to start over
+      again."

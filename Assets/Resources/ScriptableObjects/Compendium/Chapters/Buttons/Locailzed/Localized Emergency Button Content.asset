@@ -18,4 +18,7 @@ MonoBehaviour:
     description: "\t"
   - language: 1
     title: Emergency Button
-    description: 
+    description: "This button should only be pressed in case of emergency. \n\nThe
+      emergency button can be toggled on and off. Pressing the button will cause
+      the whole machine to stop and stay in warning mode until emergency button is
+      toggled off.\n\n"

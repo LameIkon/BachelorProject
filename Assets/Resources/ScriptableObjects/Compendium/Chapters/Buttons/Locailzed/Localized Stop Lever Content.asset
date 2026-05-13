@@ -18,4 +18,18 @@ MonoBehaviour:
     description: 
   - language: 1
     title: Stop Lever
-    description: 
+    description: 'Lever will stop the machine if toggled to the right.
+
+
+      A
+      light will shine besides the lever indicating it has been toggled to the right.
+
+
+      The
+      oven will not start as long as it has been toggled.
+
+
+      <b>Location</b>
+
+      -
+      The lever is located the front entry of oven '

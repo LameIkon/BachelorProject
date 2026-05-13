@@ -17,5 +17,7 @@ MonoBehaviour:
     title: "\xD8g Hastighed Knap"
     description: 
   - language: 1
-    title: "\xCDncrease Speed Button"
-    description: 
+    title: Increase Speed Button
+    description: "Pressing this button will increase the speed of the conveyor belt
+      inside the oven. \n\nEach press will increase the speed by 0.02 to a max of
+      0.6 speed"

@@ -18,4 +18,5 @@ MonoBehaviour:
     description: 
   - language: 1
     title: Stop Button
-    description: 
+    description: "Pressing the stop button will cause the oven to stop \n\n<b>Location</b>\nCan
+      be found on the start terminal"

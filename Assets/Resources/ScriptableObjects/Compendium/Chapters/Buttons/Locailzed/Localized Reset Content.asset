@@ -18,4 +18,8 @@ MonoBehaviour:
     description: "\t"
   - language: 1
     title: Reset Button
-    description: 
+    description: "The reset button will try and restart the terminal its on. \n\nWhenever
+      an terminal gets an error, it will need manual reset to let the terminal try
+      and see if the error is gone. If the error is still there, it won't do anything.
+      \n\nIf the error is gone, it will then notify the terminal that it's good to
+      go. "

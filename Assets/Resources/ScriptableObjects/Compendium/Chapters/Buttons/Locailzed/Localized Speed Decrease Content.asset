@@ -18,4 +18,5 @@ MonoBehaviour:
     description: 
   - language: 1
     title: Decrease Speed Button
-    description: 
+    description: "Pressing this button will decrease the speed of the conveyor belt
+      inside the oven. \n\nEach press will decrease the speed by 0.02."
