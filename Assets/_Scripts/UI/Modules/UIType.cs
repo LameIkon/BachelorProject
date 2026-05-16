@@ -9,4 +9,5 @@ public enum UIType
     Todo,
     NextLevelPopUp,
     ActionGuide, // To display keybinds for player
+    InspectStartTerminal,
 }

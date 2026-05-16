@@ -85,13 +85,13 @@ public class UIManager : Singleton<UIManager>
         system.Open();
         _activeSystems.Add(system);
 
-        if (system.RuleType == UIRuleType.Solo || system.RuleType == UIRuleType.Stackable)
-        {
-            InputReader.SetState(InputState.UI);
-        }
-        else if (system.RuleType == UIRuleType.GameBlocking)
+        if (system.RuleType == UIRuleType.GameBlocking)
         {
             InputReader.SetState(InputState.None);
+        }
+        else if (system.RuleType == UIRuleType.Solo || system.RuleType == UIRuleType.Stackable)
+        {
+            InputReader.SetState(InputState.UI);
         }
 
         Debug.Log("Add to active list");

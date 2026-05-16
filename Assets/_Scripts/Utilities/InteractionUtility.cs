@@ -1,10 +1,12 @@
-using System;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class InteractionUtility
 {
     // Core settings
     private readonly Camera _camera;
+    private readonly Camera _cameraInspector;
+
     private readonly LayerMask _interactionMask;
     private readonly Transform _pickUpPoint;
     private readonly float _pickUpDistance;
@@ -13,6 +15,8 @@ public class InteractionUtility
     private InteractableEntity _currentHovered;
     private InteractableEntity _newHovered;
 
+
+    private Camera _currentCamera;
 
     /// <summary>
     /// How to interact with interactables
@@ -29,12 +33,25 @@ public class InteractionUtility
         
         _interactionMask = LayerMask.GetMask("Interactable"); // Specific layer we can interact with
 
+        UniversalAdditionalCameraData data = _camera.GetUniversalAdditionalCameraData();
+
+        _cameraInspector = data.cameraStack[1]; 
+        _currentCamera = _camera;
     }
 
     public void OnUpdate()
     {
+        //if (InputReader.s_State == InputState.None)
+        //{
+        //    //CrosshairHover(InputReader.MousePos);
+        //    Debug.Log(_currentCamera.name);
+        //    if (_currentCamera != _cameraInspector) _currentCamera = _cameraInspector;
+        //}
+
         if (InputReader.s_State != InputState.Game) return;
         CrosshairHover(InputReader.MousePos);
+
+        if (_currentCamera != _camera) _currentCamera = _camera;
     }
 
 
@@ -86,7 +103,7 @@ public class InteractionUtility
     {
         entity = null;
 
-        Ray ray = _camera.ScreenPointToRay(screenPos);
+        Ray ray = _currentCamera.ScreenPointToRay(screenPos);
 
         if (Physics.Raycast(ray, out RaycastHit hit, _pickUpDistance, _interactionMask))
         {

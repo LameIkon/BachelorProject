@@ -12,6 +12,7 @@ public class InteractionMenu : MonoBehaviour
     [SerializeField] private UIToggleEventSO _toggleUI;
     [SerializeField] private CompendiumPageProviderSO _pageProvider;
     [SerializeField] private CompendiumPageRequestEventSO _request;
+    [SerializeField] private GameObject _globalVolume;
 
     [Header("Required Components")]
     [SerializeField] private TextMeshProUGUI _title;
@@ -54,8 +55,8 @@ public class InteractionMenu : MonoBehaviour
     private void GoToCompendiumPage()
     {
         Debug.Log("Try go to compendium");
-        if (_currentPage == null) return;
-        _toggleUI.Raise(new UIRequest(UIType.Compendium, UIInteractionSource.WorldButton)); // Open compendium
-        _currentPage.button?.onClick?.Invoke(); // Open compendium to the right page
+        if (_currentPage == null) return;     
+        InspectStartTerminal.Raise(true);
+        //_currentPage.button?.onClick?.Invoke(); // Open compendium to the right page
     }
 }
