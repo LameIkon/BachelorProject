@@ -105,7 +105,7 @@ public class UIManager : Singleton<UIManager>
         _activeSystems.Remove(system);
 
         // Set Game Mode if there is no solo or stackable open
-        if (!_activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable))
+        if (!_activeSystems.Any(s => s.RuleType == UIRuleType.Solo || s.RuleType == UIRuleType.Stackable || s.RuleType == UIRuleType.GameBlocking))
         {
             InputReader.SetState(InputState.Game);
         }

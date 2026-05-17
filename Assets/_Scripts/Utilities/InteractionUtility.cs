@@ -41,12 +41,13 @@ public class InteractionUtility
 
     public void OnUpdate()
     {
-        //if (InputReader.s_State == InputState.None)
-        //{
-        //    //CrosshairHover(InputReader.MousePos);
-        //    Debug.Log(_currentCamera.name);
-        //    if (_currentCamera != _cameraInspector) _currentCamera = _cameraInspector;
-        //}
+        if (InputReader.s_State == InputState.None)
+        {
+            Debug.DrawRay(_cameraInspector.ScreenPointToRay(InputReader.MousePos).origin,_cameraInspector.ScreenPointToRay(InputReader.MousePos).direction * 10f, Color.red);
+
+            CrosshairHover(InputReader.MousePos);
+            if (_currentCamera != _cameraInspector) _currentCamera = _cameraInspector;
+        }
 
         if (InputReader.s_State != InputState.Game) return;
         CrosshairHover(InputReader.MousePos);
